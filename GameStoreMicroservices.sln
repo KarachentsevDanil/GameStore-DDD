@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29926.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{2EC8A2FC-36FB-4BB2-A70C-F888B7654F0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chat", "Chat", "{8BBCDF71-EABF-4CC7-A848-4A47501566D7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{8410E23E-AC12-49CE-B476-9A71B3748E35}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{DDAD0E72-9B9B-43FB-BBAF-2A15F936B5E9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{1EE70BB4-A353-49A1-9076-1F2860BA3499}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment", "Payment", "{EEBCB8FD-3AEE-488B-B0CA-6EF3525D67EC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rate", "Rate", "{ED647BB2-D649-406E-AAD1-654F70C00B93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Domain", "Account\GSP.Account.Domain\GSP.Account.Domain.csproj", "{CED96E0A-AB2C-4740-9D04-EB5AD0A6D84C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Shared.Utils", "Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj", "{26C69179-2346-444D-B91A-4F86A70107EB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Application", "Account\GSP.Account.Application\GSP.Account.Application.csproj", "{D2378F1A-253D-43ED-9414-778A38F3E66C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Data", "GSP.Account.Data\GSP.Account.Data.csproj", "{51829F26-BAC3-4DA4-808C-37CD9149622E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.WebApi", "Account\GSP.Account.WebApi\GSP.Account.WebApi.csproj", "{E03E6ABA-9295-4517-B796-76F0073600BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Data.Migrations", "Account\GSP.Account.Data.Migrations\GSP.Account.Data.Migrations.csproj", "{3B772B30-6E67-4350-A1EB-DBF83D0FE538}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Initialization", "Account\GSP.Account.Initialization\GSP.Account.Initialization.csproj", "{EACAE274-B804-4A55-9171-A41D90DC4014}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Category", "Category", "{47C99530-4777-43D3-B02F-5B53298C111C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CED96E0A-AB2C-4740-9D04-EB5AD0A6D84C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED96E0A-AB2C-4740-9D04-EB5AD0A6D84C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED96E0A-AB2C-4740-9D04-EB5AD0A6D84C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED96E0A-AB2C-4740-9D04-EB5AD0A6D84C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26C69179-2346-444D-B91A-4F86A70107EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26C69179-2346-444D-B91A-4F86A70107EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26C69179-2346-444D-B91A-4F86A70107EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26C69179-2346-444D-B91A-4F86A70107EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2378F1A-253D-43ED-9414-778A38F3E66C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2378F1A-253D-43ED-9414-778A38F3E66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2378F1A-253D-43ED-9414-778A38F3E66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2378F1A-253D-43ED-9414-778A38F3E66C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51829F26-BAC3-4DA4-808C-37CD9149622E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51829F26-BAC3-4DA4-808C-37CD9149622E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51829F26-BAC3-4DA4-808C-37CD9149622E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51829F26-BAC3-4DA4-808C-37CD9149622E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E03E6ABA-9295-4517-B796-76F0073600BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03E6ABA-9295-4517-B796-76F0073600BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E03E6ABA-9295-4517-B796-76F0073600BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E03E6ABA-9295-4517-B796-76F0073600BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B772B30-6E67-4350-A1EB-DBF83D0FE538}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B772B30-6E67-4350-A1EB-DBF83D0FE538}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B772B30-6E67-4350-A1EB-DBF83D0FE538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B772B30-6E67-4350-A1EB-DBF83D0FE538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACAE274-B804-4A55-9171-A41D90DC4014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACAE274-B804-4A55-9171-A41D90DC4014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACAE274-B804-4A55-9171-A41D90DC4014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACAE274-B804-4A55-9171-A41D90DC4014}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CED96E0A-AB2C-4740-9D04-EB5AD0A6D84C} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
+		{26C69179-2346-444D-B91A-4F86A70107EB} = {2EC8A2FC-36FB-4BB2-A70C-F888B7654F0E}
+		{D2378F1A-253D-43ED-9414-778A38F3E66C} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
+		{51829F26-BAC3-4DA4-808C-37CD9149622E} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
+		{E03E6ABA-9295-4517-B796-76F0073600BD} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
+		{3B772B30-6E67-4350-A1EB-DBF83D0FE538} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
+		{EACAE274-B804-4A55-9171-A41D90DC4014} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCC9668D-874B-4D52-815D-104F84A56948}
+	EndGlobalSection
+EndGlobal
