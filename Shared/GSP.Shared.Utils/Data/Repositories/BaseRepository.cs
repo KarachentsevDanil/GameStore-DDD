@@ -11,39 +11,39 @@ namespace GSP.Shared.Utils.Data.Repositories
         where TEntity : BaseEntity
         where TContext : DbContext
     {
-        private readonly DbSet<TEntity> _set;
-
         public BaseRepository(TContext context)
         {
-            _set = context.Set<TEntity>();
+            Set = context.Set<TEntity>();
         }
+
+        protected DbSet<TEntity> Set { get; }
 
         public async Task<TEntity> GetAsync(long id, CancellationToken ct)
         {
-            return await _set.FindAsync(id, ct);
+            return await Set.FindAsync(id, ct);
         }
 
         public async Task<ICollection<TEntity>> GetListAsync(CancellationToken ct)
         {
-            return await _set.AsNoTracking().ToListAsync(ct);
+            return await Set.AsNoTracking().ToListAsync(ct);
         }
 
         public TEntity Create(TEntity entity)
         {
-            _set.Add(entity);
+            Set.Add(entity);
             return entity;
         }
 
         public TEntity Update(TEntity entity)
         {
-            _set.Update(entity);
+            Set.Update(entity);
             return entity;
         }
 
         public void Delete(long id)
         {
-            TEntity entity = _set.Find(id);
-            _set.Remove(entity);
+            TEntity entity = Set.Find(id);
+            Set.Remove(entity);
         }
     }
 }

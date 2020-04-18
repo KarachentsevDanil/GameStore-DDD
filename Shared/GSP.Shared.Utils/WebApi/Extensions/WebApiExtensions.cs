@@ -1,5 +1,4 @@
 ﻿using FluentValidation.AspNetCore;
-using GSP.Shared.Utils.WebApi.Attributes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -11,10 +10,8 @@ namespace GSP.Shared.Utils.WebApi.Extensions
     {
         public static IServiceCollection AddWebApi<TStartup>(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers(options =>
-            {
-                options.Filters.Add(typeof(ValidationFilterAttribute));
-            }).AddFluentValidation(options =>
+            services.AddControllers()
+                .AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<TStartup>();
             });

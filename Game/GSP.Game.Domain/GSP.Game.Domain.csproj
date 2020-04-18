@@ -12,9 +12,4 @@
     <ProjectReference Include="..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Repositories\Contracts\" />
-    <Folder Include="UnitOfWorks\Contracts\" />
-  </ItemGroup>
-
 </Project>

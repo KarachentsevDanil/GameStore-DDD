@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using GSP.Account.Application.Configurations.MapperProfiles;
-using GSP.Account.Application.Services;
-using GSP.Account.Application.Services.Contracts;
+using GSP.Account.Application.UseCases.Services;
+using GSP.Account.Application.UseCases.Services.Contracts;
 using GSP.Account.Data.UnitOfWorks;
 using GSP.Account.Domain.UnitOfWorks.Contracts;
-using GSP.Account.WebApi.Configurations.MapperProfiles;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Account.WebApi.Extensions
@@ -19,7 +18,7 @@ namespace GSP.Account.WebApi.Extensions
 
         public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddAutoMapper(typeof(ApplicationMapperProfile), typeof(WebApiProfile));
+            serviceCollection.AddAutoMapper(typeof(ApplicationMapperProfile));
             serviceCollection.AddScoped<IAccountService, AccountService>();
             return serviceCollection;
         }

@@ -1,7 +1,7 @@
-﻿using GSP.Account.Application.DTOs;
-using GSP.Account.Application.Exceptions;
-using GSP.Account.WebApi.Commands;
-using GSP.Account.WebApi.Queries;
+﻿using GSP.Account.Application.CQS.Commands;
+using GSP.Account.Application.CQS.Queries;
+using GSP.Account.Application.UseCases.DTOs;
+using GSP.Account.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

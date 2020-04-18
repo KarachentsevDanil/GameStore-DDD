@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GSP.Shared.Utils.Application.CQS.Exceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -24,6 +25,10 @@ namespace GSP.Shared.Utils.WebApi.Middleware
             try
             {
                 await _next(context);
+            }
+            catch (ValidationHandlerException ex)
+            {
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(ex.ValidationErrors));
             }
             catch (Exception exp)
             {
