@@ -39,8 +39,7 @@ namespace GSP.Game.Data.Context.EntityMappings
                 attachmentBuilder =>
                 {
                     attachmentBuilder.ToTable("GameAttachments");
-                    attachmentBuilder.HasKey("_id");
-                    attachmentBuilder.Property<long>("_id").HasColumnName("Id");
+                    attachmentBuilder.HasKey(p => p.Id);
                     attachmentBuilder.WithOwner().HasForeignKey(t => t.GameId);
 
                     attachmentBuilder.Property(t => t.Description).HasMaxLength(500);

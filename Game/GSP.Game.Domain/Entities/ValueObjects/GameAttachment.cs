@@ -3,12 +3,10 @@ using GSP.Shared.Utils.Domain.Base;
 using System;
 using System.Collections.Generic;
 
-namespace GSP.Game.Domain.Entities
+namespace GSP.Game.Domain.Entities.ValueObjects
 {
     public class GameAttachment : ValueObject<GameAttachment>
     {
-        private long _id;
-
         public GameAttachment(AttachmentType type, Uri linkUri, string description)
         {
             Type = type;
@@ -19,6 +17,8 @@ namespace GSP.Game.Domain.Entities
         private GameAttachment()
         {
         }
+
+        public int Id { get; private set; }
 
         public AttachmentType Type { get; private set; }
 

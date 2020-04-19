@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GSP.Game.Domain.Models.FilterParams
 {
-    public class GameFilterParams : BaseFilterParams<GameBase>
+    public class GameFilterParams : BaseExpressionFilterParams<GameBase>
     {
         public IEnumerable<long> GenreIds { get; set; }
 

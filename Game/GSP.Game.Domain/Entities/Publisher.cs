@@ -25,7 +25,7 @@ namespace GSP.Game.Domain.Entities
 
         public Uri WebPageUri { get; private set; }
 
-        private void Update(string name, string description, Uri logoUri, Uri webPageUri)
+        public void Update(string name, string description, Uri logoUri, Uri webPageUri)
         {
             Name = name;
             Description = description;

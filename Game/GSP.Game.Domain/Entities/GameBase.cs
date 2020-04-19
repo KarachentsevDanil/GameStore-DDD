@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.Domain.Base;
+﻿using GSP.Game.Domain.Entities.ValueObjects;
+using GSP.Shared.Utils.Domain.Base;
 using System.Collections.Generic;
 
 namespace GSP.Game.Domain.Entities

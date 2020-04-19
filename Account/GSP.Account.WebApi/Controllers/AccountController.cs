@@ -6,6 +6,7 @@ using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
@@ -33,6 +34,7 @@ namespace GSP.Account.WebApi.Controllers
         /// <response code="400">Password is not correct</response>
         /// <response code="404">Account doesn't exist</response>
         [HttpPost("login")]
+        [ProducesResponseType(typeof(TokenDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Login([FromBody] LoginToAccountCommand loginCommand)
         {
             try
@@ -60,6 +62,7 @@ namespace GSP.Account.WebApi.Controllers
         /// <response code="400">Fill all required fields</response>
         /// <response code="400">Account already exists</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetAccountDto), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create([FromBody] CreateAccountCommand createAccountCommand)
         {
             try
@@ -84,6 +87,7 @@ namespace GSP.Account.WebApi.Controllers
         /// <response code="404">User does not exist</response>
         [Authorize]
         [HttpPut]
+        [ProducesResponseType(typeof(GetAccountDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Update([FromBody] UpdateAccountCommand updateAccountCommand)
         {
             try
@@ -110,6 +114,7 @@ namespace GSP.Account.WebApi.Controllers
         /// <response code="404">User does not exist</response>
         [Authorize]
         [HttpGet]
+        [ProducesResponseType(typeof(GetAccountDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Info()
         {
             try

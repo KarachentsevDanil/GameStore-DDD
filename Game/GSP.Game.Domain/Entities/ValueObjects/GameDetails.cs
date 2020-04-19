@@ -3,7 +3,7 @@ using GSP.Shared.Utils.Domain.Base;
 using System;
 using System.Collections.Generic;
 
-namespace GSP.Game.Domain.Entities
+namespace GSP.Game.Domain.Entities.ValueObjects
 {
     public class GameDetails : ValueObject<GameDetails>
     {
