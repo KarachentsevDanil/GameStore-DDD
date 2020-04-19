@@ -1,0 +1,27 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AzureSqlConfiguration:Connection": "",
+    "AzureServiceBusConnectionString": "",
+    "MSDEPLOY_RENAME_LOCKED_FILES": 1
+  },
+  "VendorApiConfig": {
+    "BaseApiUrl": "",
+    "FunctionKey": ""
+  },
+  "FileUploadConfiguration": {
+    "SupportedExtensions": []
+  },
+  "AzureBlobConfiguration": {
+    "StorageAccount": "",
+    "StorageKey": "",
+    "ContainerName": ""
+  },
+  "AzureFileTableConfiguration": {
+    "StorageAccount": "",
+    "StorageKey": "",
+    "Table": ""
+  }
+}

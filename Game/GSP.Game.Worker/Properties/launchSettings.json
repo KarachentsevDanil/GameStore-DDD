@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "GSP.Game.Worker": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "IsLocal": "true"
+      }
+    }
+  }
+}

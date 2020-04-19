@@ -24,7 +24,9 @@ namespace GSP.Game.Domain.Entities.ValueObjects
 
         public double AverageRating { get; private set; }
 
-        public double OrderCounts { get; private set; }
+        public double ReviewCount { get; private set; }
+
+        public double OrderCount { get; private set; }
 
         public float Price { get; private set; }
 
@@ -57,14 +59,15 @@ namespace GSP.Game.Domain.Entities.ValueObjects
             PhotoUri = photo;
         }
 
-        public void UpdateRating(double rating)
+        public void UpdateRating(double rating, int count)
         {
             AverageRating = rating;
+            ReviewCount = count;
         }
 
         public void UpdateOrderCount(int count)
         {
-            OrderCounts = count;
+            OrderCount = count;
         }
 
         public override GameDetails CopyFrom(GameDetails copyFromObject)

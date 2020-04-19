@@ -9,5 +9,9 @@ namespace GSP.Game.Application.UseCases.Services.Contracts
     public interface IGameService : IBaseService<GetGameDto, AddGameDto, UpdateGameDto>
     {
         Task<PagedCollection<GetGameDto>> GetPagedListAsync(GameFilterParamsDto filterParams, CancellationToken ct = default);
+
+        Task UpdateOrdersCountAsync(UpdateGameOrdersCountDto itemDto, CancellationToken ct = default);
+
+        Task UpdateRatingAsync(UpdateGameRatingDto itemDto, CancellationToken ct = default);
     }
 }

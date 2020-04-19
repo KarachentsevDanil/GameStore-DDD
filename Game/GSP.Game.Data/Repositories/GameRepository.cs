@@ -83,7 +83,7 @@ namespace GSP.Game.Data.Repositories
                     query = query.OrderBy(x => x.GameDetails.Name).AsQueryable();
                     break;
                 case GameSortMode.ByCountOfSales:
-                    query = query.OrderByDescending(x => x.GameDetails.OrderCounts).AsQueryable();
+                    query = query.OrderByDescending(x => x.GameDetails.OrderCount).AsQueryable();
                     break;
                 case GameSortMode.ByRating:
                     query = query.OrderByDescending(x => x.GameDetails.AverageRating).AsQueryable();
