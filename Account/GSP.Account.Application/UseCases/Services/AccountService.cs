@@ -6,6 +6,7 @@ using GSP.Account.Domain.Entities;
 using GSP.Account.Domain.UnitOfWorks.Contracts;
 using GSP.Shared.Utils.Application.Configurations;
 using GSP.Shared.Utils.Application.Helpers;
+using GSP.Shared.Utils.Application.UseCases.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,109 +18,83 @@ using System.Threading.Tasks;
 
 namespace GSP.Account.Application.UseCases.Services
 {
-    public class AccountService : IAccountService
+    public class AccountService :
+        BaseService<IAccountUnitOfWork, AccountBase, GetAccountDto, CreateAccountDto, UpdateAccountDto>, IAccountService
     {
-        private readonly IAccountUnitOfWork _unitOfWork;
-
-        private readonly ILogger _logger;
-
-        private readonly IMapper _mapper;
-
         private readonly TokenConfiguration _configuration;
 
         public AccountService(
             IAccountUnitOfWork unitOfWork,
-            ILogger<AccountService> logger,
+            ILogger<AccountBase> logger,
             IMapper mapper,
             TokenConfiguration configuration)
+            : base(unitOfWork, unitOfWork.AccountRepository, mapper, logger)
         {
-            _unitOfWork = unitOfWork;
-            _logger = logger;
-            _mapper = mapper;
             _configuration = configuration;
-        }
-
-        public async Task<GetAccountDto> CreateAccountAsync(CreateAccountDto accountDto, CancellationToken ct = default)
-        {
-            _logger.LogInformation("Create account {@Account}", accountDto);
-
-            AccountBase dbAccount = await _unitOfWork.AccountRepository.GetUserAsync(accountDto.Email, ct);
-
-            if (dbAccount != null)
-            {
-                _logger.LogInformation("User with email {Email} already exists", dbAccount.Email);
-                throw new AccountAlreadyExistException();
-            }
-
-            AccountBase account =
-                new AccountBase(accountDto.FirstName, accountDto.LastName, accountDto.Email);
-
-            account.SetPassword(accountDto.Password);
-
-            _unitOfWork.AccountRepository.Create(account);
-
-            await _unitOfWork.SaveAsync(ct);
-
-            return _mapper.Map<GetAccountDto>(account);
-        }
-
-        public async Task<GetAccountDto> UpdateAccountAsync(UpdateAccountDto accountDto, CancellationToken ct = default)
-        {
-            _logger.LogInformation("Update account {@Account}", accountDto);
-
-            AccountBase dbAccount = await _unitOfWork.AccountRepository.GetAsync(accountDto.Id, ct);
-
-            if (dbAccount == null)
-            {
-                _logger.LogInformation("User with email {Id} doesn't exist", accountDto.Id);
-                throw new AccountNotFoundException();
-            }
-
-            dbAccount.Update(accountDto.FirstName, accountDto.LastName);
-
-            _unitOfWork.AccountRepository.Update(dbAccount);
-
-            await _unitOfWork.SaveAsync(ct);
-
-            return _mapper.Map<GetAccountDto>(dbAccount);
         }
 
         public async Task<GetAccountDto> GetAccountAsync(string email, CancellationToken ct = default)
         {
-            _logger.LogInformation("Get account by email {Email}", email);
+            Logger.LogInformation("Get account by email {Email}", email);
 
-            AccountBase accountBase = await _unitOfWork.AccountRepository.GetUserAsync(email, ct);
+            AccountBase accountBase = await UnitOfWork.AccountRepository.GetUserAsync(email, ct);
 
             if (accountBase == null)
             {
-                _logger.LogInformation("Account with email {Email} doesn't exist", email);
+                Logger.LogInformation("Account with email {Email} doesn't exist", email);
                 throw new AccountNotFoundException();
             }
 
-            return _mapper.Map<GetAccountDto>(accountBase);
+            return Mapper.Map<GetAccountDto>(accountBase);
         }
 
         public async Task<TokenDto> LoginAsync(LoginAccountDto accountDto, CancellationToken ct = default)
         {
-            _logger.LogInformation("Login to account {@Account}", accountDto);
+            Logger.LogInformation("Login to account {@Account}", accountDto);
 
-            AccountBase accountBase = await _unitOfWork.AccountRepository.GetUserAsync(accountDto.Email, ct);
+            AccountBase accountBase = await UnitOfWork.AccountRepository.GetUserAsync(accountDto.Email, ct);
 
             if (accountBase == null)
             {
-                _logger.LogInformation("Account with email {Email} doesn't exist", accountDto.Email);
+                Logger.LogInformation("Account with email {Email} doesn't exist", accountDto.Email);
                 throw new AccountNotFoundException();
             }
 
             if (!accountBase.IsPasswordEqual(accountDto.Password))
             {
-                _logger.LogInformation("Password for email {Email} is wrong", accountDto.Email);
+                Logger.LogInformation("Password for email {Email} is wrong", accountDto.Email);
                 throw new WrongPasswordException();
             }
 
             string token = TokenGeneratorHelper.GenerateToken(_configuration, GenerateClaims(accountBase));
 
             return new TokenDto(token, _configuration.ExpiresInDay);
+        }
+
+        protected override async Task ValidateItemAsync(CreateAccountDto addItemDto, CancellationToken ct)
+        {
+            AccountBase dbAccount = await UnitOfWork.AccountRepository.GetUserAsync(addItemDto.Email, ct);
+
+            if (dbAccount != null)
+            {
+                Logger.LogInformation("User with email {Email} already exists", dbAccount.Email);
+                throw new AccountAlreadyExistException();
+            }
+        }
+
+        protected override AccountBase MapEntity(CreateAccountDto accountDto)
+        {
+            AccountBase account =
+                new AccountBase(accountDto.FirstName, accountDto.LastName, accountDto.Email);
+
+            account.SetPassword(accountDto.Password);
+
+            return account;
+        }
+
+        protected override void UpdateEntity(UpdateAccountDto updateItemDto, AccountBase entity)
+        {
+            entity.Update(updateItemDto.FirstName, updateItemDto.LastName);
         }
 
         private IEnumerable<Claim> GenerateClaims(AccountBase accountBase)

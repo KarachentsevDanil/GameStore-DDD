@@ -31,7 +31,7 @@ namespace GSP.Account.Application.CQS.Handlers.Commands
         {
             UpdateAccountDto accountDto = _mapper.Map<UpdateAccountDto>(request);
 
-            return await _accountService.UpdateAccountAsync(accountDto, ct);
+            return await _accountService.UpdateAsync(accountDto, ct);
         }
     }
 }

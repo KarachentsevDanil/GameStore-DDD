@@ -1,5 +1,6 @@
 using GSP.Account.Data.Context;
 using GSP.Account.WebApi.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,8 @@ namespace GSP.Account.WebApi
             services.RegisterCoreDependencies();
 
             services.RegisterApplicationDependencies();
+
+            services.RegisterAzureServiceBus(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

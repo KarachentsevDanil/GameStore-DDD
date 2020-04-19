@@ -1,5 +1,6 @@
 using GSP.Game.Data.Context;
 using GSP.Game.WebApi.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +30,8 @@ namespace GSP.Game.WebApi
             services.RegisterCoreDependencies();
 
             services.RegisterApplicationDependencies();
+
+            services.RegisterAzureServiceBus(Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,11 +1,10 @@
 ﻿using GSP.Account.Domain.Enums;
+using GSP.Shared.Utils.Application.UseCases.DTOs;
 
 namespace GSP.Account.Application.UseCases.DTOs
 {
-    public class GetAccountDto
+    public class GetAccountDto : BaseGetItemDto
     {
-        public int Id { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

@@ -1,6 +1,8 @@
-﻿namespace GSP.Account.Application.UseCases.DTOs
+﻿using GSP.Shared.Utils.Application.UseCases.DTOs;
+
+namespace GSP.Account.Application.UseCases.DTOs
 {
-    public class CreateAccountDto
+    public class CreateAccountDto : BaseAddItemDto
     {
         public string FirstName { get; set; }
 

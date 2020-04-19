@@ -1,15 +1,12 @@
-﻿using System.Threading;
+﻿using GSP.Account.Application.UseCases.DTOs;
+using GSP.Shared.Utils.Application.UseCases.Services.Contracts;
+using System.Threading;
 using System.Threading.Tasks;
-using GSP.Account.Application.UseCases.DTOs;
 
 namespace GSP.Account.Application.UseCases.Services.Contracts
 {
-    public interface IAccountService
+    public interface IAccountService : IBaseService<GetAccountDto, CreateAccountDto, UpdateAccountDto>
     {
-        Task<GetAccountDto> CreateAccountAsync(CreateAccountDto accountDto, CancellationToken ct = default);
-
-        Task<GetAccountDto> UpdateAccountAsync(UpdateAccountDto accountDto, CancellationToken ct = default);
-
         Task<GetAccountDto> GetAccountAsync(string email, CancellationToken ct = default);
 
         Task<TokenDto> LoginAsync(LoginAccountDto accountDto, CancellationToken ct = default);

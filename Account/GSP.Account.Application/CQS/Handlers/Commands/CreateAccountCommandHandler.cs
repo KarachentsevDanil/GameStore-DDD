@@ -38,7 +38,7 @@ namespace GSP.Account.Application.CQS.Handlers.Commands
         {
             CreateAccountDto createAccountDto = _mapper.Map<CreateAccountDto>(request);
 
-            GetAccountDto accountDto = await _accountService.CreateAccountAsync(createAccountDto, ct);
+            GetAccountDto accountDto = await _accountService.AddAsync(createAccountDto, ct);
 
             AccountCreatedMessage accountCreatedMessage = _mapper.Map<AccountCreatedMessage>(accountDto);
 
