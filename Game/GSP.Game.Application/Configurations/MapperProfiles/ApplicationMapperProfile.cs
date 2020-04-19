@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using GSP.Game.Application.CQS.Commands.DeveloperStudios;
+using GSP.Game.Application.CQS.Commands.Games;
 using GSP.Game.Application.CQS.Commands.Genres;
 using GSP.Game.Application.CQS.Commands.Publishers;
+using GSP.Game.Application.CQS.Queries.Games;
 using GSP.Game.Application.UseCases.DTOs.DeveloperStudios;
+using GSP.Game.Application.UseCases.DTOs.Games;
 using GSP.Game.Application.UseCases.DTOs.Genres;
 using GSP.Game.Application.UseCases.DTOs.Publishers;
 using GSP.Game.Domain.Entities;
+using GSP.Game.Domain.Entities.ValueObjects;
 
 namespace GSP.Game.Application.Configurations.MapperProfiles
 {
@@ -24,6 +28,13 @@ namespace GSP.Game.Application.Configurations.MapperProfiles
             CreateMap<Publisher, GetPublisherDto>();
             CreateMap<CreatePublisherCommand, AddPublisherDto>();
             CreateMap<UpdatePublisherCommand, UpdatePublisherDto>();
+
+            CreateMap<GameBase, GetGameDto>();
+            CreateMap<GameDetails, GameDetailsDto>();
+            CreateMap<GameAttachment, GameAttachmentDto>();
+            CreateMap<CreateGameCommand, AddGameDto>();
+            CreateMap<UpdateGameCommand, UpdateGameDto>();
+            CreateMap<GetGamePagedListQuery, GameFilterParamsDto>();
         }
     }
 }

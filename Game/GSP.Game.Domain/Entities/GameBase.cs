@@ -6,7 +6,7 @@ namespace GSP.Game.Domain.Entities
 {
     public class GameBase : BaseEntity
     {
-        public GameBase(int genreId, int developerStudioId, int publisherId, GameDetails details)
+        public GameBase(long genreId, long developerStudioId, long publisherId, GameDetails details)
         {
             GameDetails = details;
             DeveloperStudioId = developerStudioId;
@@ -35,7 +35,7 @@ namespace GSP.Game.Domain.Entities
 
         public ICollection<GameAttachment> Attachments { get; private set; }
 
-        public void Update(int genreId, int developerStudioId, int publisherId)
+        public void Update(long genreId, long developerStudioId, long publisherId)
         {
             DeveloperStudioId = developerStudioId;
             PublisherId = publisherId;
