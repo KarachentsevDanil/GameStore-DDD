@@ -17,7 +17,7 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.Games
         private readonly IGameService _developerStudioService;
 
         public UpdateGameCommandHandler(
-            AbstractValidator<UpdateGameCommand> validator,
+            IValidator<UpdateGameCommand> validator,
             ILogger<UpdateGameCommand> logger,
             IMapper mapper,
             IGameService developerStudioService)

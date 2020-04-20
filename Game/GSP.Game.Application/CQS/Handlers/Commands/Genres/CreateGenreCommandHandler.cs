@@ -17,7 +17,7 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.Genres
         private readonly IGenreService _genreService;
 
         public CreateGenreCommandHandler(
-            AbstractValidator<CreateGenreCommand> validator,
+            IValidator<CreateGenreCommand> validator,
             ILogger<CreateGenreCommand> logger,
             IMapper mapper,
             IGenreService genreService)

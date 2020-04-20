@@ -22,8 +22,8 @@ namespace GSP.Game.Application.UseCases.Services
 {
     public class GameService : BaseService<IGameUnitOfWork, GameBase, GetGameDto, AddGameDto, UpdateGameDto>, IGameService
     {
-        public GameService(IGameUnitOfWork unitOfWork, IBaseRepository<GameBase> repository, IMapper mapper, ILogger<GameBase> logger)
-            : base(unitOfWork, repository, mapper, logger)
+        public GameService(IGameUnitOfWork unitOfWork, IMapper mapper, ILogger<GameBase> logger)
+            : base(unitOfWork, unitOfWork.GameRepository, mapper, logger)
         {
         }
 

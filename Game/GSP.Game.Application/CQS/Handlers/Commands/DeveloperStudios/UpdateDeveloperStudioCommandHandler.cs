@@ -17,7 +17,7 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.DeveloperStudios
         private readonly IDeveloperStudioService _developerStudioService;
 
         public UpdateDeveloperStudioCommandHandler(
-            AbstractValidator<UpdateDeveloperStudioCommand> validator,
+            IValidator<UpdateDeveloperStudioCommand> validator,
             ILogger<UpdateDeveloperStudioCommand> logger,
             IMapper mapper,
             IDeveloperStudioService developerStudioService)

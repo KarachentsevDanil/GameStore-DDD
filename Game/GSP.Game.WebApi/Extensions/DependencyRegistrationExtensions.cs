@@ -22,6 +22,7 @@ namespace GSP.Game.WebApi.Extensions
             serviceCollection.AddScoped<IGenreService, GenreService>();
             serviceCollection.AddScoped<IDeveloperStudioService, DeveloperStudioService>();
             serviceCollection.AddScoped<IPublisherService, PublisherService>();
+            serviceCollection.AddScoped<IGameService, GameService>();
             return serviceCollection;
         }
     }

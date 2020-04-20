@@ -17,7 +17,7 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.Games
         private readonly IGameService _service;
 
         public CreateGameCommandHandler(
-            AbstractValidator<CreateGameCommand> validator,
+            IValidator<CreateGameCommand> validator,
             ILogger<CreateGameCommand> logger,
             IMapper mapper,
             IGameService service)

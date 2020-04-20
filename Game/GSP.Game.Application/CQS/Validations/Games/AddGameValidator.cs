@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using GSP.Game.Application.UseCases.DTOs.Games;
+using GSP.Game.Application.CQS.Commands.Games;
 
 namespace GSP.Game.Application.CQS.Validations.Games
 {
-    public class AddGameValidator : AbstractValidator<AddGameDto>
+    public class AddGameValidator : AbstractValidator<CreateGameCommand>
     {
         public AddGameValidator()
         {

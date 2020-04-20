@@ -17,7 +17,7 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.Publishers
         private readonly IPublisherService _service;
 
         public UpdatePublisherCommandHandler(
-            AbstractValidator<UpdatePublisherCommand> validator,
+            IValidator<UpdatePublisherCommand> validator,
             ILogger<UpdatePublisherCommand> logger,
             IMapper mapper,
             IPublisherService service)
