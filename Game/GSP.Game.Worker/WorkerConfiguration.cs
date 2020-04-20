@@ -28,6 +28,8 @@ namespace GSP.Game.Worker
                     serviceCollection.RegisterApplicationDependencies();
 
                     serviceCollection.RegisterAzureServiceBus(config);
+
+                    commandRegistry.Discover<WorkerConfiguration>();
                 })
                 .Authorization(authorization => authorization
                     .AuthorizationDefault(AuthorizationTypeEnum.Function))
