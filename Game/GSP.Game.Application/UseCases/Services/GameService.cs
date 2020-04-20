@@ -38,14 +38,14 @@ namespace GSP.Game.Application.UseCases.Services
             return new PagedCollection<GetGameDto>(Mapper.Map<ICollection<GetGameDto>>(dbGames.Items).ToImmutableList(), dbGames.TotalCount);
         }
 
-        public async Task UpdateOrdersCountAsync(UpdateGameOrdersCountDto itemDto, CancellationToken ct = default)
+        public async Task<GetGameDto> UpdateOrdersCountAsync(UpdateGameOrdersCountDto itemDto, CancellationToken ct = default)
         {
-            await UpdateAsync(itemDto, UpdateOrdersCount, ct);
+            return await UpdateAsync(itemDto, UpdateOrdersCount, ct);
         }
 
-        public async Task UpdateRatingAsync(UpdateGameRatingDto itemDto, CancellationToken ct = default)
+        public async Task<GetGameDto> UpdateRatingAsync(UpdateGameRatingDto itemDto, CancellationToken ct = default)
         {
-            await UpdateAsync(itemDto, UpdateRating, ct);
+            return await UpdateAsync(itemDto, UpdateRating, ct);
         }
 
         protected override GameBase MapEntity(AddGameDto addItemDto)
@@ -69,7 +69,7 @@ namespace GSP.Game.Application.UseCases.Services
             entity.Update(updateItemDto.GenreId, updateItemDto.DeveloperStudioId, updateItemDto.PublisherId);
         }
 
-        private async Task UpdateAsync<TUpdateItem>(
+        private async Task<GetGameDto> UpdateAsync<TUpdateItem>(
             TUpdateItem item,
             Action<GameBase, TUpdateItem> updateEntity,
             CancellationToken ct)
@@ -90,6 +90,8 @@ namespace GSP.Game.Application.UseCases.Services
             EntityRepository.Update(dbEntity);
 
             await UnitOfWork.SaveAsync(ct);
+
+            return Mapper.Map<GetGameDto>(dbEntity);
         }
 
         private void UpdateOrdersCount(GameBase game, UpdateGameOrdersCountDto itemDto)

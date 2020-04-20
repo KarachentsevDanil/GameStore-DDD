@@ -10,8 +10,8 @@ namespace GSP.Game.Application.UseCases.Services.Contracts
     {
         Task<PagedCollection<GetGameDto>> GetPagedListAsync(GameFilterParamsDto filterParams, CancellationToken ct = default);
 
-        Task UpdateOrdersCountAsync(UpdateGameOrdersCountDto itemDto, CancellationToken ct = default);
+        Task<GetGameDto> UpdateOrdersCountAsync(UpdateGameOrdersCountDto itemDto, CancellationToken ct = default);
 
-        Task UpdateRatingAsync(UpdateGameRatingDto itemDto, CancellationToken ct = default);
+        Task<GetGameDto> UpdateRatingAsync(UpdateGameRatingDto itemDto, CancellationToken ct = default);
     }
 }

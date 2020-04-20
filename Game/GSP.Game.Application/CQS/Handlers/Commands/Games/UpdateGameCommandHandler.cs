@@ -14,22 +14,22 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.Games
     {
         private readonly IMapper _mapper;
 
-        private readonly IGameService _developerStudioService;
+        private readonly IGameService _service;
 
         public UpdateGameCommandHandler(
             IValidator<UpdateGameCommand> validator,
             ILogger<UpdateGameCommand> logger,
             IMapper mapper,
-            IGameService developerStudioService)
+            IGameService service)
             : base(validator, logger)
         {
             _mapper = mapper;
-            _developerStudioService = developerStudioService;
+            _service = service;
         }
 
         protected override async Task<GetGameDto> ExecuteAsync(UpdateGameCommand request, CancellationToken ct)
         {
-            return await _developerStudioService.UpdateAsync(_mapper.Map<UpdateGameDto>(request), ct);
+            return await _service.UpdateAsync(_mapper.Map<UpdateGameDto>(request), ct);
         }
     }
 }
