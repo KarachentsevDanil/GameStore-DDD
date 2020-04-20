@@ -26,7 +26,7 @@ namespace GSP.Game.Domain.Entities.ValueObjects
 
         public string Description { get; private set; }
 
-        public int GameId { get; private set; }
+        public long GameId { get; private set; }
 
         public override GameAttachment CopyFrom(GameAttachment copyFromObject)
         {

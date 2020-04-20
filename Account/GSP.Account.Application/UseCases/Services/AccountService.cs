@@ -102,7 +102,8 @@ namespace GSP.Account.Application.UseCases.Services
             var claims = new List<Claim>
             {
                 new Claim(nameof(accountBase.Id), accountBase.Id.ToString(CultureInfo.InvariantCulture)),
-                new Claim(nameof(accountBase.Email), accountBase.Email),
+                new Claim(ClaimTypes.Email, accountBase.Email),
+                new Claim(ClaimTypes.Role, accountBase.Role.ToString()),
                 new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture)),
                 new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.Now.AddDays(_configuration.ExpiresInDay)).ToUnixTimeSeconds().ToString(CultureInfo.InvariantCulture))
             };

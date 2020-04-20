@@ -18,7 +18,7 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 
         public static string GetUserEmail(this ClaimsPrincipal claimsPrincipal)
         {
-            return ((ClaimsIdentity)claimsPrincipal.Identity).FindFirst("Email")?.Value;
+            return ((ClaimsIdentity)claimsPrincipal.Identity).FindFirst(ClaimTypes.Email)?.Value;
         }
     }
 }
