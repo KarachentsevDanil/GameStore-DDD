@@ -1,6 +1,7 @@
 ﻿using GSP.Game.Data.Context;
 using GSP.Shared.Utils.Initialization.Constants;
 using GSP.Shared.Utils.Initialization.EntityFramework;
+using GSP.Shared.Utils.Initialization.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace GSP.Game.Initialization
         public static async Task Main()
         {
             IConfigurationRoot config = ConfigurationBuilder.Create(Directory.GetCurrentDirectory());
+
+            await ServiceBusInitializer.InitializeAsync(config);
 
             await EntityFrameworkInitializer.InitializeAsync<GameDbContext>(
                 config,

@@ -24,9 +24,9 @@ namespace GSP.Game.Domain.Entities.ValueObjects
 
         public double AverageRating { get; private set; }
 
-        public double ReviewCount { get; private set; }
+        public int ReviewCount { get; private set; }
 
-        public double OrderCount { get; private set; }
+        public int OrderCount { get; private set; }
 
         public float Price { get; private set; }
 
