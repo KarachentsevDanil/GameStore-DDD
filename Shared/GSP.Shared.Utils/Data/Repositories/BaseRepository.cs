@@ -24,7 +24,7 @@ namespace GSP.Shared.Utils.Data.Repositories
 
         public async Task<TEntity> GetAsync(long id, CancellationToken ct)
         {
-            return await Set.FindAsync(id, ct);
+            return await Set.FirstOrDefaultAsync(t => t.Id == id, ct);
         }
 
         public async Task<ICollection<TEntity>> GetListAsync(CancellationToken ct)
