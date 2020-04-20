@@ -12,7 +12,7 @@ namespace GSP.Shared.Utils.Common.ServiceBus.Extensions
             this IServiceCollection services, IConfiguration configuration, string connectionName = ServiceBusConstants.ConnectionName)
         {
             string serviceBusConnection =
-                configuration.GetConnectionString(connectionName);
+                configuration.GetValue<string>(connectionName);
 
             services.AddSingleton<IServiceBusPersistentConnection>(sp =>
                 new ServiceBusPersistentConnection(serviceBusConnection));

@@ -1,3 +1,4 @@
+using GSP.Account.Application.CQS.Validators;
 using GSP.Account.Data.Context;
 using GSP.Account.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.Extensions;
@@ -21,7 +22,7 @@ namespace GSP.Account.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<Startup>(Configuration);
+            services.AddWebApi<CreateAccountValidator>(Configuration);
 
             services.AddLogging();
 

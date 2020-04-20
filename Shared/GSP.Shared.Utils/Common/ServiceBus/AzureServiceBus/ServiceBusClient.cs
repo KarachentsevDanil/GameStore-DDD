@@ -17,7 +17,7 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 
         public ServiceBusClient(
             IServiceBusPersistentConnection persistentConnection,
-            ILogger logger)
+            ILogger<ServiceBusClient> logger)
         {
             _persistentConnection = Guard.Argument(persistentConnection, nameof(persistentConnection))
                 .NotNull()

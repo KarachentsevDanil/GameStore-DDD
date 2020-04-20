@@ -1,3 +1,4 @@
+using GSP.Game.Application.CQS.Validations.Genres;
 using GSP.Game.Data.Context;
 using GSP.Game.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.Extensions;
@@ -21,7 +22,7 @@ namespace GSP.Game.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<Startup>(Configuration);
+            services.AddWebApi<CreateGenreValidator>(Configuration);
 
             services.AddLogging();
 

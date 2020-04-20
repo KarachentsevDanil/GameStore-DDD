@@ -24,7 +24,7 @@ namespace GSP.Account.Application.CQS.Handlers.Commands
         public CreateAccountCommandHandler(
             IMapper mapper,
             IAccountService accountService,
-            AbstractValidator<CreateAccountCommand> validator,
+            IValidator<CreateAccountCommand> validator,
             ILogger<CreateAccountCommand> logger,
             IServiceBusClient serviceBusClient)
             : base(validator, logger)

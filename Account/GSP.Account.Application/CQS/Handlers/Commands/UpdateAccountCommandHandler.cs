@@ -19,7 +19,7 @@ namespace GSP.Account.Application.CQS.Handlers.Commands
         public UpdateAccountCommandHandler(
             IMapper mapper,
             IAccountService accountService,
-            AbstractValidator<UpdateAccountCommand> validator,
+            IValidator<UpdateAccountCommand> validator,
             ILogger<UpdateAccountCommand> logger)
             : base(validator, logger)
         {

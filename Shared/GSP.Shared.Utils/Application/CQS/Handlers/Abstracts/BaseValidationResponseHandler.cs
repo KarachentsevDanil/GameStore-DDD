@@ -13,9 +13,9 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
     public abstract class BaseValidationResponseHandler<TRequest, TResult> : BaseResponseHandler<TRequest, TResult>
         where TRequest : IRequest<TResult>
     {
-        private readonly AbstractValidator<TRequest> _validator;
+        private readonly IValidator<TRequest> _validator;
 
-        protected BaseValidationResponseHandler(AbstractValidator<TRequest> validator, ILogger<TRequest> logger)
+        protected BaseValidationResponseHandler(IValidator<TRequest> validator, ILogger<TRequest> logger)
         : base(logger)
         {
             _validator = validator;
