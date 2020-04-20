@@ -21,5 +21,7 @@ namespace GSP.Shared.Utils.Application.UseCases.Services.Contracts
         Task<IImmutableList<TGetItem>> GetAllAsync(CancellationToken ct = default);
 
         Task<PagedCollection<TGetItem>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct = default);
+
+        Task<bool> IsExistAsync(long id, CancellationToken ct = default);
     }
 }

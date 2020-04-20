@@ -32,6 +32,11 @@ namespace GSP.Shared.Utils.Data.Repositories
             return await Set.AsNoTracking().ToListAsync(ct);
         }
 
+        public Task<bool> IsExistsAsync(long id, CancellationToken ct)
+        {
+            return Set.AnyAsync(t => t.Id == id, ct);
+        }
+
         public async Task<PagedCollection<TEntity>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct)
         {
             var query = Set.AsNoTracking().AsQueryable();

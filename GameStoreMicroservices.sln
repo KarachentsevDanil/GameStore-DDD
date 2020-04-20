@@ -31,21 +31,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Data.Migrations
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Account.Initialization", "Account\GSP.Account.Initialization\GSP.Account.Initialization.csproj", "{EACAE274-B804-4A55-9171-A41D90DC4014}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Category", "Category", "{47C99530-4777-43D3-B02F-5B53298C111C}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Domain", "Game\GSP.Game.Domain\GSP.Game.Domain.csproj", "{E878CEDA-06C7-4ABB-BE6A-10DF244BE8E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Data", "Game\GSP.Game.Data\GSP.Game.Data.csproj", "{D11C9877-967D-4FD7-B5B7-37CEB17BB84B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Game.Data.Migrations", "Game\GSP.Game.Data.Migrations\GSP.Game.Data.Migrations.csproj", "{3266993A-719D-4B21-91B6-0A0F8DDD4A4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Data.Migrations", "Game\GSP.Game.Data.Migrations\GSP.Game.Data.Migrations.csproj", "{3266993A-719D-4B21-91B6-0A0F8DDD4A4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Game.Initialization", "Game\GSP.Game.Initialization\GSP.Game.Initialization.csproj", "{79F86422-9894-416B-A0C4-4543F34A9D91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Initialization", "Game\GSP.Game.Initialization\GSP.Game.Initialization.csproj", "{79F86422-9894-416B-A0C4-4543F34A9D91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Game.Application", "Game\GSP.Game.Application\GSP.Game.Application.csproj", "{8814A03B-94AD-4151-A326-FE10BCBF80A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Application", "Game\GSP.Game.Application\GSP.Game.Application.csproj", "{8814A03B-94AD-4151-A326-FE10BCBF80A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Game.WebApi", "Game\GSP.Game.WebApi\GSP.Game.WebApi.csproj", "{C5ED3130-286A-4305-B023-2856DB3CB736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.WebApi", "Game\GSP.Game.WebApi\GSP.Game.WebApi.csproj", "{C5ED3130-286A-4305-B023-2856DB3CB736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Game.Worker", "Game\GSP.Game.Worker\GSP.Game.Worker.csproj", "{9A80AE5A-F1E3-4020-B4E0-7CFD2B5ADAAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Worker", "Game\GSP.Game.Worker\GSP.Game.Worker.csproj", "{9A80AE5A-F1E3-4020-B4E0-7CFD2B5ADAAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

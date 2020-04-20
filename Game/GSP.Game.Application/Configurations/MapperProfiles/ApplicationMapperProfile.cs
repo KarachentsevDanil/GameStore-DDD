@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GSP.Game.Application.CQS.Bus.Messages;
 using GSP.Game.Application.CQS.Commands.DeveloperStudios;
 using GSP.Game.Application.CQS.Commands.Games;
 using GSP.Game.Application.CQS.Commands.Genres;
@@ -10,6 +11,7 @@ using GSP.Game.Application.UseCases.DTOs.Genres;
 using GSP.Game.Application.UseCases.DTOs.Publishers;
 using GSP.Game.Domain.Entities;
 using GSP.Game.Domain.Entities.ValueObjects;
+using GSP.Game.Domain.Events;
 
 namespace GSP.Game.Application.Configurations.MapperProfiles
 {
@@ -35,6 +37,8 @@ namespace GSP.Game.Application.Configurations.MapperProfiles
             CreateMap<CreateGameCommand, AddGameDto>();
             CreateMap<UpdateGameCommand, UpdateGameDto>();
             CreateMap<GetGamePagedListQuery, GameFilterParamsDto>();
+            CreateMap<GetGameDto, GameCreatedMessage>();
+            CreateMap<GameUpdatedEvent, GameDetailsDto>();
         }
     }
 }

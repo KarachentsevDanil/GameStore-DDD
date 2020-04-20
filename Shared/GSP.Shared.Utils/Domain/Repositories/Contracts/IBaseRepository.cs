@@ -14,6 +14,8 @@ namespace GSP.Shared.Utils.Domain.Repositories.Contracts
 
         Task<ICollection<TEntity>> GetListAsync(CancellationToken ct);
 
+        Task<bool> IsExistsAsync(long id, CancellationToken ct);
+
         Task<PagedCollection<TEntity>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct);
 
         TEntity Create(TEntity entity);

@@ -111,6 +111,12 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
             return new PagedCollection<TGetItem>(itemsDto, dbEntities.TotalCount);
         }
 
+        public async Task<bool> IsExistAsync(long id, CancellationToken ct = default)
+        {
+            Logger.LogInformation($"Is {nameof(TEntity)} with Id {id} exists.");
+            return await EntityRepository.IsExistsAsync(id, ct);
+        }
+
         protected abstract TEntity MapEntity(TAddItem addItemDto);
 
         protected abstract void UpdateEntity(TUpdateItem updateItemDto, TEntity entity);
