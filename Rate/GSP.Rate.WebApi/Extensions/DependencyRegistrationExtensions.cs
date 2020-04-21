@@ -4,6 +4,8 @@ using GSP.Rate.Application.UseCases.Services;
 using GSP.Rate.Application.UseCases.Services.Contracts;
 using GSP.Rate.Data.UnitOfWorks;
 using GSP.Rate.Domain.UnitOfWorks;
+using GSP.Shared.Utils.Application.Account.UseCases.Services;
+using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Rate.WebApi.Extensions
@@ -19,7 +21,7 @@ namespace GSP.Rate.WebApi.Extensions
         public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile));
-            serviceCollection.AddScoped<IAccountService, AccountService>();
+            serviceCollection.AddScoped<IAccountService, AccountService<RateUnitOfWork>>();
             serviceCollection.AddScoped<IRateService, RateService>();
             return serviceCollection;
         }

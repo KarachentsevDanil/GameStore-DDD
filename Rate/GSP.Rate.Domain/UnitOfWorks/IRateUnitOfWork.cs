@@ -1,12 +1,10 @@
 ﻿using GSP.Rate.Domain.Repositories;
-using GSP.Shared.Utils.Domain.UnitOfWorks.Contracts;
+using GSP.Shared.Utils.Domain.Account.UnitOfWorks.Contracts;
 
 namespace GSP.Rate.Domain.UnitOfWorks
 {
-    public interface IRateUnitOfWork : IUnitOfWork
+    public interface IRateUnitOfWork : IAccountUnitOfWork
     {
-        IAccountRepository AccountRepository { get; }
-
         IRateRepository RateRepository { get; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using GSP.Rate.Application.UseCases.DTOs.Accounts;
+﻿using GSP.Shared.Utils.Application.Account.UseCases.DTOs;
 using GSP.Shared.Utils.Application.UseCases.DTOs;
 using System;
 

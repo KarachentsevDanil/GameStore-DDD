@@ -1,4 +1,5 @@
 ﻿using GSP.Rate.Domain.Events;
+using GSP.Shared.Utils.Domain.Account.Entities;
 using GSP.Shared.Utils.Domain.Base;
 using System;
 
@@ -29,7 +30,7 @@ namespace GSP.Rate.Domain.Entities
 
         public DateTime CreatedAt { get; private set; }
 
-        public Account Account { get; private set; }
+        public SharedAccount Account { get; private set; }
 
         public static RateBase Create(long gameId, long accountId, string comment, int rating)
         {
