@@ -11,20 +11,20 @@ namespace GSP.Shared.Utils.Data.UnitOfWorks
     public class UnitOfWork<TContext> : IUnitOfWork
         where TContext : DbContext
     {
-        private readonly TContext _context;
-
-        private readonly IMediator _mediator;
-
         public UnitOfWork(TContext context, IMediator mediator)
         {
-            _context = context;
-            _mediator = mediator;
+            Context = context;
+            Mediator = mediator;
         }
+
+        protected TContext Context { get; }
+
+        protected IMediator Mediator { get; }
 
         public virtual async Task SaveAsync(CancellationToken ct)
         {
-            await _context.SaveChangesAsync(ct);
-            await _mediator.DispatchDomainEventsAsync(_context);
+            await Context.SaveChangesAsync(ct);
+            await Mediator.DispatchDomainEventsAsync(Context);
         }
 
         public void Dispose()
@@ -37,7 +37,7 @@ namespace GSP.Shared.Utils.Data.UnitOfWorks
         {
             if (disposing)
             {
-                _context?.Dispose();
+                Context?.Dispose();
             }
         }
     }

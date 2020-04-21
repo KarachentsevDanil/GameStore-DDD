@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "EntityFrameworkConfiguration:ConnectionString": "Server=(LocalDb)\\MSSQLLocalDB;Initial Catalog=GSP_Rate;Integrated Security=SSPI;Connection Timeout=30;",
+    "AzureServiceBus": "Endpoint=sb://gamestore-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=HIAFo+N2e6+kroExcp6XUUjwbT5G6OL00g8XHbnAF1k=",
+    "MSDEPLOY_RENAME_LOCKED_FILES": 1
+  }
+}
