@@ -7,6 +7,8 @@ namespace GSP.Order.Domain.UnitOfWorks.Contracts
     {
         IGameRepository GameRepository { get; }
 
+        IOrderGameRepository OrderGameRepository { get; }
+
         IOrderRepository OrderRepository { get; }
     }
 }

@@ -18,7 +18,7 @@ namespace GSP.Game.Data.Repositories
 
         public async Task<Genre> GetByNameAsync(string name, CancellationToken ct)
         {
-            return await Set.FirstOrDefaultAsync(t => EF.Functions.Like(t.Name, name), ct);
+            return await DbSet.FirstOrDefaultAsync(t => EF.Functions.Like(t.Name, name), ct);
         }
     }
 }

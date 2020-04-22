@@ -21,7 +21,7 @@ namespace GSP.Rate.Data.Repositories
 
         public async Task<PagedCollection<RateBase>> GetByFilterParamsAsync(RateFilterParams filterParams, CancellationToken ct)
         {
-            var query = Set.Where(q => q.GameId == filterParams.GameId)
+            var query = DbSet.Where(q => q.GameId == filterParams.GameId)
                 .Include(t => t.Account)
                 .OrderByDescending(q => q.CreatedAt)
                 .AsNoTracking()
@@ -39,13 +39,13 @@ namespace GSP.Rate.Data.Repositories
 
         public async ValueTask<int> GetCountByGameIdAsync(long gameId, CancellationToken ct)
         {
-            return await Set.CountAsync(q => q.GameId == gameId, ct);
+            return await DbSet.CountAsync(q => q.GameId == gameId, ct);
         }
 
         public async ValueTask<double> GetAverageRatingByGameIdAsync(long gameId, CancellationToken ct)
         {
             var countOfReviews = await GetCountByGameIdAsync(gameId, ct);
-            var sumOfReviews = await Set.Where(q => q.GameId == gameId).SumAsync(q => q.Rating, ct);
+            var sumOfReviews = await DbSet.Where(q => q.GameId == gameId).SumAsync(q => q.Rating, ct);
             return sumOfReviews / countOfReviews;
         }
     }

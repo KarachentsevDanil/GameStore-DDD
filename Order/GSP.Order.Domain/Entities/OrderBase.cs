@@ -1,5 +1,4 @@
-﻿using GSP.Order.Domain.Entities.ValueObjects;
-using GSP.Order.Domain.Enums;
+﻿using GSP.Order.Domain.Enums;
 using GSP.Order.Domain.Events;
 using GSP.Shared.Utils.Domain.Account.Entities;
 using GSP.Shared.Utils.Domain.Base;

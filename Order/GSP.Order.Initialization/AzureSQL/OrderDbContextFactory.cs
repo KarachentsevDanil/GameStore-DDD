@@ -1,22 +1,22 @@
-﻿using GSP.Game.Data.Context;
+﻿using GSP.Order.Data.Context;
 using GSP.Shared.Utils.Initialization.Constants;
 using GSP.Shared.Utils.Initialization.EntityFramework;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace GSP.Game.Initialization.AzureSQL
+namespace GSP.Order.Initialization.AzureSQL
 {
-    public class GameDbContextDbFactory : IDesignTimeDbContextFactory<GameDbContext>
+    public class OrderDbContextFactory : IDesignTimeDbContextFactory<OrderDbContext>
     {
-        public GameDbContext CreateDbContext(string[] args)
+        public OrderDbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot config = Shared.Utils.Initialization.ConfigurationBuilder
                 .Create(Directory.GetCurrentDirectory());
 
-            return DbContextBuilder.Build<GameDbContext>(
+            return DbContextBuilder.Build<OrderDbContext>(
                 config,
-                "GSP.Game.Data.Migrations",
+                "GSP.Order.Data.Migrations",
                 SettingKeyConstants.AzureSqlConnectionKey);
         }
     }

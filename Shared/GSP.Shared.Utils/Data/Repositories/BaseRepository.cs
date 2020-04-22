@@ -17,29 +17,29 @@ namespace GSP.Shared.Utils.Data.Repositories
     {
         public BaseRepository(TContext context)
         {
-            Set = context.Set<TEntity>();
+            DbSet = context.Set<TEntity>();
         }
 
-        protected DbSet<TEntity> Set { get; }
+        protected DbSet<TEntity> DbSet { get; }
 
         public async Task<TEntity> GetAsync(long id, CancellationToken ct)
         {
-            return await Set.FirstOrDefaultAsync(t => t.Id == id, ct);
+            return await DbSet.FirstOrDefaultAsync(t => t.Id == id, ct);
         }
 
         public async Task<ICollection<TEntity>> GetListAsync(CancellationToken ct)
         {
-            return await Set.AsNoTracking().ToListAsync(ct);
+            return await DbSet.AsNoTracking().ToListAsync(ct);
         }
 
         public Task<bool> IsExistsAsync(long id, CancellationToken ct)
         {
-            return Set.AnyAsync(t => t.Id == id, ct);
+            return DbSet.AnyAsync(t => t.Id == id, ct);
         }
 
         public async Task<PagedCollection<TEntity>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct)
         {
-            var query = Set.AsNoTracking().AsQueryable();
+            var query = DbSet.AsNoTracking().AsQueryable();
 
             int totalCount = query.Count();
 
@@ -54,20 +54,20 @@ namespace GSP.Shared.Utils.Data.Repositories
 
         public TEntity Create(TEntity entity)
         {
-            Set.Add(entity);
+            DbSet.Add(entity);
             return entity;
         }
 
         public TEntity Update(TEntity entity)
         {
-            Set.Update(entity);
+            DbSet.Update(entity);
             return entity;
         }
 
         public void Delete(long id)
         {
-            TEntity entity = Set.Find(id);
-            Set.Remove(entity);
+            TEntity entity = DbSet.Find(id);
+            DbSet.Remove(entity);
         }
     }
 }

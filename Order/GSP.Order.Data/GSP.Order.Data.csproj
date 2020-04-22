@@ -18,10 +18,4 @@
     <ProjectReference Include="..\GSP.Order.Domain\GSP.Order.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Context\EntityMappings\" />
-    <Folder Include="UnitOfWorks\" />
-    <Folder Include="Repositories\" />
-  </ItemGroup>
-
 </Project>

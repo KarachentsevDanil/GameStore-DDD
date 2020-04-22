@@ -61,6 +61,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Domain", "Order\G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Data", "Order\GSP.Order.Data\GSP.Order.Data.csproj", "{25357E3A-6479-47FA-A73F-E62D61A29418}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Data.Migrations", "Order\GSP.Order.Data.Migrations\GSP.Order.Data.Migrations.csproj", "{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Initialization", "Order\GSP.Order.Initialization\GSP.Order.Initialization.csproj", "{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +163,14 @@ Global
 		{25357E3A-6479-47FA-A73F-E62D61A29418}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25357E3A-6479-47FA-A73F-E62D61A29418}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25357E3A-6479-47FA-A73F-E62D61A29418}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +199,8 @@ Global
 		{F35A254A-7A44-468D-8F48-E9F55771DC09} = {ED647BB2-D649-406E-AAD1-654F70C00B93}
 		{04771302-03FE-4F96-8E44-D90A54881A03} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
 		{25357E3A-6479-47FA-A73F-E62D61A29418} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
+		{248CB4AE-AB37-41DC-AB61-133C0CEC23DC} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
+		{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC9668D-874B-4D52-815D-104F84A56948}

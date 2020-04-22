@@ -1,13 +1,10 @@
 ﻿using AutoMapper;
-using FluentValidation;
 using GSP.Rate.Application.Configurations.MapperProfiles;
-using GSP.Rate.Application.CQS.Commands.Rates;
-using GSP.Rate.Application.CQS.Handlers.Commands.Rates;
-using GSP.Rate.Application.CQS.Validations.Rates;
 using GSP.Rate.Application.UseCases.Services;
 using GSP.Rate.Application.UseCases.Services.Contracts;
 using GSP.Rate.Data.UnitOfWorks;
 using GSP.Rate.Domain.UnitOfWorks;
+using GSP.Shared.Utils.Application.Account.CQS.Commands;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Worker.Account.Configurations.MapperProfiles;
@@ -30,10 +27,7 @@ namespace GSP.Rate.Worker.Extensions
             serviceCollection.AddScoped<IAccountService, AccountService<RateUnitOfWork>>();
             serviceCollection.AddScoped<IRateService, RateService>();
 
-            serviceCollection.AddMediatR(typeof(CreateRateCommonHandler).Assembly);
-
-            serviceCollection.AddSingleton<IValidator<CreateRateCommand>, CreateRateValidator>();
-            serviceCollection.AddSingleton<IValidator<UpdateRateCommand>, UpdateRateValidator>();
+            serviceCollection.AddMediatR(typeof(CreateAccountCommand).Assembly);
 
             return serviceCollection;
         }

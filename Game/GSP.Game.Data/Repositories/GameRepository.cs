@@ -25,7 +25,7 @@ namespace GSP.Game.Data.Repositories
 
         public async Task<ICollection<GameBase>> GetByIdsAsync(IEnumerable<long> ids, CancellationToken ct)
         {
-            return await Set.Where(t => ids.Contains(t.Id)).AsNoTracking().ToListAsync(ct);
+            return await DbSet.Where(t => ids.Contains(t.Id)).AsNoTracking().ToListAsync(ct);
         }
 
         public async Task<PagedCollection<GameBase>> GetByFilterParamsAsync(GameFilterParams filterParams, CancellationToken ct)
@@ -101,7 +101,7 @@ namespace GSP.Game.Data.Repositories
 
         private IQueryable<GameBase> GetGames()
         {
-            return Set
+            return DbSet
                 .Include(x => x.GameDetails)
                 .Include(x => x.Genre)
                 .Include(x => x.DeveloperStudio)
