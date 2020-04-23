@@ -1,8 +1,7 @@
-﻿using GSP.Shared.Utils.Application.UseCases.DTOs;
-
-namespace GSP.Order.Application.UseCases.DTOs.Orders
+﻿namespace GSP.Order.Application.UseCases.DTOs.Orders
 {
-    public class CompleteOrderDto : BaseUpdateItemDto
+    public class CompleteOrderDto
     {
+        public long AccountId { get; set; }
     }
 }

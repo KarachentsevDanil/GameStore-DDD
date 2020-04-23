@@ -5,6 +5,11 @@ namespace GSP.Order.Application.CQS.Commands.Orders
 {
     public class CreateOrderCommand : BaseCreateItemCommand<GetOrderDto>
     {
+        public CreateOrderCommand(long accountId)
+        {
+            AccountId = accountId;
+        }
+
         public long AccountId { get; set; }
     }
 }

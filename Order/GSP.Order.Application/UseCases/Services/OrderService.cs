@@ -50,11 +50,11 @@ namespace GSP.Order.Application.UseCases.Services
 
         public async Task<GetOrderDto> CompleteAsync(CompleteOrderDto order, CancellationToken ct = default)
         {
-            _logger.LogInformation("Complete current order for account={AccountId}", order.Id);
+            _logger.LogInformation("Complete current order for account={AccountId}", order.AccountId);
 
-            OrderBase currentOrder = await _unitOfWork.OrderRepository.GetCurrentOrderAsync(order.Id, ct);
+            OrderBase currentOrder = await _unitOfWork.OrderRepository.GetCurrentOrderAsync(order.AccountId, ct);
 
-            ValidateCompletedOrder(currentOrder, order.Id);
+            ValidateCompletedOrder(currentOrder, order.AccountId);
 
             currentOrder.CompleteOrder();
 
@@ -103,14 +103,18 @@ namespace GSP.Order.Application.UseCases.Services
         public async Task<GetOrderDto> GetCurrentByAccountIdAsync(long accountId, CancellationToken ct = default)
         {
             _logger.LogInformation("Get current order by AccountId, {AccountId}", accountId);
+
             OrderBase currentOrder = await GetCurrentOrderAsync(accountId, ct);
+
             return _mapper.Map<GetOrderDto>(currentOrder);
         }
 
         public async Task<IImmutableList<GetOrderDto>> GetListByAccountIdAsync(long accountId, CancellationToken ct = default)
         {
             _logger.LogInformation("Get orders by AccountId {AccountId}", accountId);
+
             ICollection<OrderBase> orders = await _unitOfWork.OrderRepository.GetListByAccountId(accountId, ct);
+
             return _mapper.Map<ICollection<GetOrderDto>>(orders).ToImmutableList();
         }
 

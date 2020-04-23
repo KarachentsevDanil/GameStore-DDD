@@ -43,29 +43,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.WebApi", "Game\GSP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Game.Worker", "Game\GSP.Game.Worker\GSP.Game.Worker.csproj", "{9A80AE5A-F1E3-4020-B4E0-7CFD2B5ADAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Rate.Domain", "Rate\GSP.Rate.Domain\GSP.Rate.Domain.csproj", "{6E5E58EB-D471-42FD-9EB2-7CE316651D7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.Domain", "Rate\GSP.Rate.Domain\GSP.Rate.Domain.csproj", "{6E5E58EB-D471-42FD-9EB2-7CE316651D7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Rate.Data", "Rate\GSP.Rate.Data\GSP.Rate.Data.csproj", "{A52FA0CE-3DFF-4EAC-A3F4-CC301E1A3223}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.Data", "Rate\GSP.Rate.Data\GSP.Rate.Data.csproj", "{A52FA0CE-3DFF-4EAC-A3F4-CC301E1A3223}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Rate.Data.Migrations", "Rate\GSP.Rate.Data.Migrations\GSP.Rate.Data.Migrations.csproj", "{43960C37-54B1-4A51-8394-8C571DBBF712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.Data.Migrations", "Rate\GSP.Rate.Data.Migrations\GSP.Rate.Data.Migrations.csproj", "{43960C37-54B1-4A51-8394-8C571DBBF712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Rate.Initialization", "Rate\GSP.Rate.Initialization\GSP.Rate.Initialization.csproj", "{FA2D5BC8-3629-425A-AF4E-3C30B0C0C615}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.Initialization", "Rate\GSP.Rate.Initialization\GSP.Rate.Initialization.csproj", "{FA2D5BC8-3629-425A-AF4E-3C30B0C0C615}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Rate.Application", "Rate\GSP.Rate.Application\GSP.Rate.Application.csproj", "{C39F5A84-E366-44D6-93B8-8ABE18731880}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.Application", "Rate\GSP.Rate.Application\GSP.Rate.Application.csproj", "{C39F5A84-E366-44D6-93B8-8ABE18731880}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Rate.WebApi", "Rate\GSP.Rate.WebApi\GSP.Rate.WebApi.csproj", "{A7A47368-BE6D-4212-ABBA-6CDCEF1FEDB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.WebApi", "Rate\GSP.Rate.WebApi\GSP.Rate.WebApi.csproj", "{A7A47368-BE6D-4212-ABBA-6CDCEF1FEDB4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Rate.Worker", "Rate\GSP.Rate.Worker\GSP.Rate.Worker.csproj", "{F35A254A-7A44-468D-8F48-E9F55771DC09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Domain", "Order\GSP.Order.Domain\GSP.Order.Domain.csproj", "{04771302-03FE-4F96-8E44-D90A54881A03}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Order.Domain", "Order\GSP.Order.Domain\GSP.Order.Domain.csproj", "{04771302-03FE-4F96-8E44-D90A54881A03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Data", "Order\GSP.Order.Data\GSP.Order.Data.csproj", "{25357E3A-6479-47FA-A73F-E62D61A29418}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Order.Data", "Order\GSP.Order.Data\GSP.Order.Data.csproj", "{25357E3A-6479-47FA-A73F-E62D61A29418}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Data.Migrations", "Order\GSP.Order.Data.Migrations\GSP.Order.Data.Migrations.csproj", "{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Order.Data.Migrations", "Order\GSP.Order.Data.Migrations\GSP.Order.Data.Migrations.csproj", "{248CB4AE-AB37-41DC-AB61-133C0CEC23DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Initialization", "Order\GSP.Order.Initialization\GSP.Order.Initialization.csproj", "{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Order.Initialization", "Order\GSP.Order.Initialization\GSP.Order.Initialization.csproj", "{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Application", "Order\GSP.Order.Application\GSP.Order.Application.csproj", "{8093E2DE-348A-441D-9E01-7BB19F45E992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Order.Application", "Order\GSP.Order.Application\GSP.Order.Application.csproj", "{8093E2DE-348A-441D-9E01-7BB19F45E992}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.WebApi", "Order\GSP.Order.WebApi\GSP.Order.WebApi.csproj", "{BA0A69D6-70D4-4E8E-BCFC-DE0AD5A332D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Order.Worker", "Order\GSP.Order.Worker\GSP.Order.Worker.csproj", "{0DE3CA69-FD6D-408A-9717-A96097F82804}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -177,6 +181,14 @@ Global
 		{8093E2DE-348A-441D-9E01-7BB19F45E992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8093E2DE-348A-441D-9E01-7BB19F45E992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8093E2DE-348A-441D-9E01-7BB19F45E992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0A69D6-70D4-4E8E-BCFC-DE0AD5A332D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0A69D6-70D4-4E8E-BCFC-DE0AD5A332D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0A69D6-70D4-4E8E-BCFC-DE0AD5A332D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0A69D6-70D4-4E8E-BCFC-DE0AD5A332D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DE3CA69-FD6D-408A-9717-A96097F82804}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DE3CA69-FD6D-408A-9717-A96097F82804}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DE3CA69-FD6D-408A-9717-A96097F82804}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DE3CA69-FD6D-408A-9717-A96097F82804}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -208,6 +220,8 @@ Global
 		{248CB4AE-AB37-41DC-AB61-133C0CEC23DC} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
 		{AB2D2EAC-8043-484C-BA6C-BB22A78EE2C8} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
 		{8093E2DE-348A-441D-9E01-7BB19F45E992} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
+		{BA0A69D6-70D4-4E8E-BCFC-DE0AD5A332D7} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
+		{0DE3CA69-FD6D-408A-9717-A96097F82804} = {1EE70BB4-A353-49A1-9076-1F2860BA3499}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC9668D-874B-4D52-815D-104F84A56948}

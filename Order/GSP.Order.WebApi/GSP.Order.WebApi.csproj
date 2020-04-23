@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GSP.Order.Data\GSP.Order.Data.csproj" />
+    <ProjectReference Include="..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
+    <ProjectReference Include="..\GSP.Order.Application\GSP.Order.Application.csproj" />
+    <ProjectReference Include="..\GSP.Order.Domain\GSP.Order.Domain.csproj" />
+  </ItemGroup>
+
+
+</Project>

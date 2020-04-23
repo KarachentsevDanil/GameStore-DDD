@@ -4,11 +4,11 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 {
     public static class ClaimsIdentityExtension
     {
-        public static int GetUserId(this ClaimsPrincipal claimsPrincipal)
+        public static long GetUserId(this ClaimsPrincipal claimsPrincipal)
         {
             string idValue = ((ClaimsIdentity)claimsPrincipal.Identity).FindFirst("Id")?.Value;
 
-            if (int.TryParse(idValue, out int id))
+            if (long.TryParse(idValue, out long id))
             {
                 return id;
             }
