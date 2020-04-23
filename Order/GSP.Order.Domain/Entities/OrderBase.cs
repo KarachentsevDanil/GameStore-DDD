@@ -9,10 +9,10 @@ namespace GSP.Order.Domain.Entities
 {
     public class OrderBase : BaseEntity
     {
-        public OrderBase(OrderStatus status, long accountId)
+        public OrderBase(long accountId)
         {
-            OrderStatus = status;
             AccountId = accountId;
+            OrderStatus = OrderStatus.New;
             Games = new List<OrderGame>();
         }
 
@@ -29,9 +29,9 @@ namespace GSP.Order.Domain.Entities
 
         public SharedAccount Account { get; private set; }
 
-        public void UpdateOrderStatus(OrderStatus status)
+        public void CompleteOrder()
         {
-            OrderStatus = status;
+            OrderStatus = OrderStatus.Paid;
         }
 
         public bool AddGame(long gameId)

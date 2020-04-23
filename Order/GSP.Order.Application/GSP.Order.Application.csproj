@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GSP.Order.Domain\GSP.Order.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CQS\Commands\Games\" />
+    <Folder Include="CQS\Commands\Orders\" />
+    <Folder Include="CQS\Handlers\Commands\Games\" />
+    <Folder Include="CQS\Handlers\Commands\" />
+    <Folder Include="CQS\Handlers\Commands\Orders\" />
+    <Folder Include="CQS\Handlers\Notifications\Orders\" />
+    <Folder Include="CQS\Handlers\Queries\Games\" />
+    <Folder Include="CQS\Handlers\Queries\Orders\" />
+    <Folder Include="CQS\Queries\Games\" />
+    <Folder Include="CQS\Queries\Orders\" />
+    <Folder Include="CQS\Validations\Games\" />
+    <Folder Include="CQS\Validations\Orders\" />
+  </ItemGroup>
+
+</Project>

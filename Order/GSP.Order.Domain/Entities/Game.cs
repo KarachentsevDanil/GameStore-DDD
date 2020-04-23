@@ -28,5 +28,14 @@ namespace GSP.Order.Domain.Entities
         public Uri PhotoUri { get; private set; }
 
         public Uri IconUri { get; private set; }
+
+        public void Update(string name, string description, float price, Uri photo, Uri logo)
+        {
+            Name = name;
+            Description = description;
+            Price = price;
+            PhotoUri = photo;
+            IconUri = logo;
+        }
     }
 }

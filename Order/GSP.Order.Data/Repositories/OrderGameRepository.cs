@@ -26,5 +26,13 @@ namespace GSP.Order.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync(ct);
         }
+
+        public async Task<bool> IsExists(long accountId, long gameId, CancellationToken ct)
+        {
+            return await DbSet
+                .Include(p => p.Order)
+                .AsNoTracking()
+                .AnyAsync(q => q.GameId == gameId && q.Order.AccountId == accountId, ct);
+        }
     }
 }
