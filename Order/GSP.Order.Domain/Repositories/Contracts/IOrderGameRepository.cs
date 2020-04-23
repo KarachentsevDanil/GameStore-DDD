@@ -11,5 +11,7 @@ namespace GSP.Order.Domain.Repositories.Contracts
         Task<ICollection<OrderGame>> GetListByAccountId(long accountId, CancellationToken ct);
 
         Task<bool> IsExists(long accountId, long gameId, CancellationToken ct);
+
+        ValueTask<int> GetOrderCountByGameIdAsync(long gameId, CancellationToken ct);
     }
 }

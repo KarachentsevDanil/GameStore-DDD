@@ -10,18 +10,17 @@ using Microsoft.Extensions.Logging;
 
 namespace GSP.Shared.Utils.Application.Account.CQS.Handlers
 {
-    public class CreateAccountCommonHandler : BaseValidationResponseHandler<CreateAccountCommand, GetAccountDto>
+    public class CreateAccountCommonHandler : BaseResponseHandler<CreateAccountCommand, GetAccountDto>
     {
         private readonly IMapper _mapper;
 
         private readonly IAccountService _accountService;
 
         public CreateAccountCommonHandler(
-            IValidator<CreateAccountCommand> validator,
             ILogger<CreateAccountCommand> logger,
             IMapper mapper,
             IAccountService accountService)
-            : base(validator, logger)
+            : base(logger)
         {
             _mapper = mapper;
             _accountService = accountService;

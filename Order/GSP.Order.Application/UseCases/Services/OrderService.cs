@@ -114,6 +114,12 @@ namespace GSP.Order.Application.UseCases.Services
             return _mapper.Map<ICollection<GetOrderDto>>(orders).ToImmutableList();
         }
 
+        public async ValueTask<int> GetOrderCountByGameIdAsync(long gameId, CancellationToken ct = default)
+        {
+            _logger.LogInformation("Get order count by game id - {GameId}", gameId);
+            return await _unitOfWork.OrderGameRepository.GetOrderCountByGameIdAsync(gameId, ct);
+        }
+
         private void ValidateRemovingGameFromOrder(OrderGameDto orderGame, OrderBase currentOrder)
         {
             bool isRemoved = currentOrder.RemoveGame(orderGame.GameId);

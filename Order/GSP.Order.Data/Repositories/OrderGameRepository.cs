@@ -34,5 +34,10 @@ namespace GSP.Order.Data.Repositories
                 .AsNoTracking()
                 .AnyAsync(q => q.GameId == gameId && q.Order.AccountId == accountId, ct);
         }
+
+        public async ValueTask<int> GetOrderCountByGameIdAsync(long gameId, CancellationToken ct)
+        {
+            return await DbSet.AsNoTracking().CountAsync(t => t.GameId == gameId, ct);
+        }
     }
 }

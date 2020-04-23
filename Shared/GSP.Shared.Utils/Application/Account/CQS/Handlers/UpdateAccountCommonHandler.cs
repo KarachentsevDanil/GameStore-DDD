@@ -10,18 +10,17 @@ using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Application.Account.CQS.Handlers
 {
-    public class UpdateAccountCommonHandler : BaseValidationResponseHandler<UpdateAccountCommand, GetAccountDto>
+    public class UpdateAccountCommonHandler : BaseResponseHandler<UpdateAccountCommand, GetAccountDto>
     {
         private readonly IMapper _mapper;
 
         private readonly IAccountService _accountService;
 
         public UpdateAccountCommonHandler(
-            IValidator<UpdateAccountCommand> validator,
             ILogger<UpdateAccountCommand> logger,
             IMapper mapper,
             IAccountService accountService)
-            : base(validator, logger)
+            : base(logger)
         {
             _mapper = mapper;
             _accountService = accountService;

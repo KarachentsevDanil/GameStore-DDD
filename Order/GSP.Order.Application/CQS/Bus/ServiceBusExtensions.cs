@@ -7,7 +7,7 @@ namespace GSP.Order.Application.CQS.Bus
 {
     public static class ServiceBusExtensions
     {
-        public static async Task PublishGameRatingUpdatedAsync(
+        public static async Task PublishGameOrderCountUpdatedAsync(
             this IServiceBusClient serviceBusClient,
             GameOrderCountUpdatedMessage gameRating)
         {

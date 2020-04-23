@@ -18,5 +18,7 @@ namespace GSP.Order.Application.UseCases.Services.Contracts
         Task<GetOrderDto> GetCurrentByAccountIdAsync(long accountId, CancellationToken ct = default);
 
         Task<IImmutableList<GetOrderDto>> GetListByAccountIdAsync(long accountId, CancellationToken ct = default);
+
+        ValueTask<int> GetOrderCountByGameIdAsync(long gameId, CancellationToken ct = default);
     }
 }
