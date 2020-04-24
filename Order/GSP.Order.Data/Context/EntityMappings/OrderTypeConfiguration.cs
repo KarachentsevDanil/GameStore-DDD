@@ -16,6 +16,8 @@ namespace GSP.Order.Data.Context.EntityMappings
             builder.HasOne(p => p.Account)
                 .WithMany()
                 .HasForeignKey(p => p.AccountId);
+
+            builder.HasQueryFilter(q => !q.IsDeleted);
         }
     }
 }

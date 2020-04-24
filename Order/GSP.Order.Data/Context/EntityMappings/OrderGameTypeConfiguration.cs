@@ -17,6 +17,8 @@ namespace GSP.Order.Data.Context.EntityMappings
             builder.HasOne(p => p.Order)
                 .WithMany(p => p.Games)
                 .HasForeignKey(p => p.OrderId);
+
+            builder.HasQueryFilter(q => !q.IsDeleted);
         }
     }
 }

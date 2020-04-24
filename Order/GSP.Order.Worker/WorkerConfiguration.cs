@@ -42,6 +42,9 @@ namespace GSP.Order.Worker
                         .SubscriptionFunction<AccountUpdatedCommand>(
                             AzureServiceBusConstants.AccountTopicName,
                             AzureServiceBusConstants.AccountUpdatedSubscription)
+                        .SubscriptionFunction<OrderPaidCommand>(
+                            AzureServiceBusConstants.OrderTopicName,
+                            AzureServiceBusConstants.OrderPaidSubscription)
                         .SubscriptionFunction<GameCreatedCommand>(
                             AzureServiceBusConstants.GameTopicName,
                             AzureServiceBusConstants.GameCreatedSubscription)

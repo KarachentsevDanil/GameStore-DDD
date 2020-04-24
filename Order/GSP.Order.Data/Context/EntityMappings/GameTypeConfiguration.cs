@@ -17,6 +17,8 @@ namespace GSP.Order.Data.Context.EntityMappings
             builder.Property(p => p.IconUri).HasConversion<string>().HasMaxLength(2048);
 
             builder.Property(p => p.PhotoUri).HasConversion<string>().HasMaxLength(2048);
+
+            builder.HasQueryFilter(q => !q.IsDeleted);
         }
     }
 }

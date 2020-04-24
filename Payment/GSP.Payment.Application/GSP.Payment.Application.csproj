@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GSP.Payment.Domain\GSP.Payment.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.11.0" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CQS\Commands\PaymentHistories\" />
+    <Folder Include="CQS\Commands\PaymentMethods\" />
+    <Folder Include="CQS\Handlers\PaymentHistories\" />
+    <Folder Include="CQS\Handlers\PaymentMethods\" />
+    <Folder Include="CQS\Queries\PaymentHistories\" />
+    <Folder Include="CQS\Queries\PaymentMethods\" />
+    <Folder Include="CQS\Validations\PaymentHistories\" />
+    <Folder Include="CQS\Validations\PaymentMethods\" />
+    <Folder Include="UseCases\Exceptions\" />
+  </ItemGroup>
+
+</Project>

@@ -13,5 +13,9 @@
         public const string GameCreatedSubscription = "Order_GameCreated";
 
         public const string GameUpdatedSubscription = "Order_GameUpdated";
+
+        public const string OrderTopicName = "order";
+
+        public const string OrderPaidSubscription = "OrderPaid";
     }
 }
