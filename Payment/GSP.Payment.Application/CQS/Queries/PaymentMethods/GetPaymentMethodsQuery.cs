@@ -6,6 +6,11 @@ namespace GSP.Payment.Application.CQS.Queries.PaymentMethods
 {
     public class GetPaymentMethodsQuery : IRequest<IImmutableList<GetPaymentMethodDto>>
     {
+        public GetPaymentMethodsQuery(long accountId)
+        {
+            AccountId = accountId;
+        }
+
         public long AccountId { get; set; }
     }
 }
