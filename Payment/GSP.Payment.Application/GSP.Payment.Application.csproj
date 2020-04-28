@@ -16,15 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQS\Commands\PaymentHistories\" />
-    <Folder Include="CQS\Commands\PaymentMethods\" />
-    <Folder Include="CQS\Handlers\PaymentHistories\" />
-    <Folder Include="CQS\Handlers\PaymentMethods\" />
-    <Folder Include="CQS\Queries\PaymentHistories\" />
-    <Folder Include="CQS\Queries\PaymentMethods\" />
-    <Folder Include="CQS\Validations\PaymentHistories\" />
-    <Folder Include="CQS\Validations\PaymentMethods\" />
-    <Folder Include="UseCases\Exceptions\" />
+    <Folder Include="CQS\Handlers\Notifications\PaymentHistories\" />
   </ItemGroup>
 
 </Project>

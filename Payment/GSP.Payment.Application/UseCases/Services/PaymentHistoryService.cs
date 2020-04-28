@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using GSP.Payment.Application.UseCases.DTOs.PaymentHistories;
+using GSP.Payment.Application.UseCases.Exceptions;
 using GSP.Payment.Application.UseCases.Services.Contracts;
+using GSP.Payment.Domain.Entities;
 using GSP.Payment.Domain.Models;
 using GSP.Payment.Domain.UnitOfWorks.Contracts;
+using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.Common.Models.Collections;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,14 +29,63 @@ namespace GSP.Payment.Application.UseCases.Services
             _logger = logger;
         }
 
-        public Task<GetPaymentHistoryDto> AddAsync(AddPaymentHistoryDto addPaymentHistoryDto, CancellationToken ct = default)
+        public async Task<GetPaymentHistoryDto> AddAsync(AddPaymentHistoryDto addPaymentHistoryDto, CancellationToken ct = default)
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation(
+                "Pay order with {PaymentMethodId} for account {AccountId}",
+                addPaymentHistoryDto.PaymentMethodId,
+                addPaymentHistoryDto.AccountId);
+
+            await ValidatePaymentHistoryAddingAsync(addPaymentHistoryDto, ct);
+
+            var paymentHistory = PaymentHistory.Create(
+                addPaymentHistoryDto.AccountId,
+                addPaymentHistoryDto.OrderId,
+                addPaymentHistoryDto.PaymentMethodId,
+                addPaymentHistoryDto.Amount);
+
+            _unitOfWork.PaymentHistoryRepository.Create(paymentHistory);
+
+            await _unitOfWork.SaveAsync(ct);
+
+            return _mapper.Map<GetPaymentHistoryDto>(paymentHistory);
         }
 
-        public Task<PagedCollection<GetPaymentHistoryDto>> GetListByFilterParamsAsync(PaymentHistoryFilterParams filterParams, CancellationToken ct = default)
+        public async Task<PagedCollection<GetPaymentHistoryDto>> GetListByFilterParamsAsync(PaymentHistoryFilterParams filterParams, CancellationToken ct = default)
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Get payment histories by filter params {@FilterParams}", filterParams);
+
+            var items = await _unitOfWork.PaymentHistoryRepository.GetListByAccountIdAsync(filterParams, ct);
+
+            var result = new PagedCollection<GetPaymentHistoryDto>(
+                _mapper.Map<IEnumerable<GetPaymentHistoryDto>>(items.Items), items.TotalCount);
+
+            return result;
+        }
+
+        private async Task ValidatePaymentHistoryAddingAsync(AddPaymentHistoryDto paymentHistoryDto, CancellationToken ct)
+        {
+            var paymentMethodDto = await _unitOfWork.PaymentMethodRepository.GetAsync(paymentHistoryDto.PaymentMethodId, ct);
+
+            if (paymentMethodDto == null)
+            {
+                _logger.LogInformation("Payment method with id {PaymentMethodId} not found", paymentHistoryDto.PaymentMethodId);
+                throw new ItemNotFoundException();
+            }
+
+            if (paymentMethodDto.AccountId != paymentHistoryDto.AccountId)
+            {
+                _logger.LogInformation("Access to this payment method is not allowed for account {AccountId}", paymentHistoryDto.AccountId);
+                throw new AccessToPaymentMethodForbiddenException();
+            }
+
+            paymentMethodDto.Decrypt(paymentHistoryDto.Cvv);
+
+            if (paymentMethodDto.Cvv != paymentHistoryDto.Cvv)
+            {
+                _logger.LogInformation("Cvv code for payment method {PaymentMethodId} is wrong", paymentHistoryDto.PaymentMethodId);
+                throw new CvvIsWrongException();
+            }
         }
     }
 }

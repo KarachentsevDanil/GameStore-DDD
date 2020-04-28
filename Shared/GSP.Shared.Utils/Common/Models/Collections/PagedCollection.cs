@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Collections.Generic;
+using System.Collections.Immutable;
 
 namespace GSP.Shared.Utils.Common.Models.Collections
 {
@@ -8,6 +9,12 @@ namespace GSP.Shared.Utils.Common.Models.Collections
         public PagedCollection(IImmutableList<TEntity> items, int totalCount)
         {
             Items = items;
+            TotalCount = totalCount;
+        }
+
+        public PagedCollection(IEnumerable<TEntity> items, int totalCount)
+        {
+            Items = items.ToImmutableList();
             TotalCount = totalCount;
         }
 

@@ -1,13 +1,18 @@
 ﻿using GSP.Shared.Utils.Common.Helpers;
 using GSP.Shared.Utils.Domain.Base;
+using Microsoft.OpenApi.Writers;
 
 namespace GSP.Payment.Domain.Entities
 {
     public class PaymentMethod : BaseEntity
     {
-        public PaymentMethod(long accountId)
+        private PaymentMethod(long accountId, string cardNumber, string cardHolderFullName, string expiration, string cvv)
         {
             AccountId = accountId;
+            CardNumber = cardNumber;
+            CardHolderFullName = cardHolderFullName;
+            Expiration = expiration;
+            Cvv = cvv;
         }
 
         private PaymentMethod()
@@ -24,12 +29,21 @@ namespace GSP.Payment.Domain.Entities
 
         public string Cvv { get; private set; }
 
-        public void Encrypt(string cardNumber, string cardHolderFullName, string expiration, string cvv)
+        public static PaymentMethod Create(long accountId, string cardNumber, string cardHolderFullName, string expiration, string cvv)
         {
-            CardNumber = StringEncryptionHelper.Encrypt(cardNumber, cvv);
-            CardHolderFullName = StringEncryptionHelper.Encrypt(cardHolderFullName, cvv);
-            Expiration = StringEncryptionHelper.Encrypt(expiration, cvv);
-            Cvv = StringEncryptionHelper.Encrypt(cvv);
+            var paymentMethod = new PaymentMethod(accountId, cardNumber, cardHolderFullName, expiration, cvv);
+
+            paymentMethod.Encrypt();
+
+            return paymentMethod;
+        }
+
+        public void Encrypt()
+        {
+            CardNumber = StringEncryptionHelper.Encrypt(CardNumber, Cvv);
+            CardHolderFullName = StringEncryptionHelper.Encrypt(CardHolderFullName, Cvv);
+            Expiration = StringEncryptionHelper.Encrypt(Expiration, Cvv);
+            Cvv = StringEncryptionHelper.Encrypt(Cvv);
         }
 
         public void Decrypt(string cvv)
