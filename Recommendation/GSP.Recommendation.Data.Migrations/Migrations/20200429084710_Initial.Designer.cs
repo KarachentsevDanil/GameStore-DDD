@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GSP.Recommendation.Data.Migrations.Migrations
 {
     [DbContext(typeof(RecommendationDbContext))]
-    [Migration("20200429082729_Initial")]
+    [Migration("20200429084710_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,7 @@ namespace GSP.Recommendation.Data.Migrations.Migrations
             modelBuilder.Entity("GSP.Recommendation.Domain.Entities.CompletedOrder", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long>("AccountId")
                         .HasColumnType("bigint");
@@ -47,9 +45,7 @@ namespace GSP.Recommendation.Data.Migrations.Migrations
             modelBuilder.Entity("GSP.Recommendation.Domain.Entities.Game", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<float>("AverageRating")
                         .HasColumnType("real");

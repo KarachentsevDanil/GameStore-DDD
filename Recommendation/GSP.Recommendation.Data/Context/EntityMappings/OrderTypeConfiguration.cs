@@ -10,6 +10,8 @@ namespace GSP.Recommendation.Data.Context.EntityMappings
         {
             builder.HasKey(p => p.Id);
 
+            builder.Property(p => p.Id).ValueGeneratedNever();
+
             builder.HasIndex(p => p.AccountId);
 
             builder.OwnsMany(
@@ -24,6 +26,8 @@ namespace GSP.Recommendation.Data.Context.EntityMappings
 
                     gameBuilder.HasOne<Game>().WithMany().HasForeignKey(t => t.GameId);
                 });
+
+            builder.HasQueryFilter(q => !q.IsDeleted);
         }
     }
 }

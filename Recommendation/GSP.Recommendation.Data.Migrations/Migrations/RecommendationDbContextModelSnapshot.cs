@@ -22,9 +22,7 @@ namespace GSP.Recommendation.Data.Migrations.Migrations
             modelBuilder.Entity("GSP.Recommendation.Domain.Entities.CompletedOrder", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<long>("AccountId")
                         .HasColumnType("bigint");
@@ -45,9 +43,7 @@ namespace GSP.Recommendation.Data.Migrations.Migrations
             modelBuilder.Entity("GSP.Recommendation.Domain.Entities.Game", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<float>("AverageRating")
                         .HasColumnType("real");

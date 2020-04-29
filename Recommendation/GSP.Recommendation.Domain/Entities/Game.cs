@@ -23,7 +23,7 @@ namespace GSP.Recommendation.Domain.Entities
             CountOfOrders = countOfOrders;
         }
 
-        public void UpdateOrderCount(long countOfReviews, float averageRating)
+        public void UpdateRating(long countOfReviews, float averageRating)
         {
             CountOfReviews = countOfReviews;
             AverageRating = averageRating;

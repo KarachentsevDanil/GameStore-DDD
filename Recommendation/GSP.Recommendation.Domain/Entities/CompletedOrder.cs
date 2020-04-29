@@ -6,8 +6,9 @@ namespace GSP.Recommendation.Domain.Entities
 {
     public class CompletedOrder : BaseEntity
     {
-        public CompletedOrder(long accountId, DateTime completedAt, ICollection<OrderGame> games)
+        public CompletedOrder(long orderId, long accountId, DateTime completedAt, ICollection<OrderGame> games)
         {
+            Id = orderId;
             AccountId = accountId;
             CompletedAt = completedAt;
             Games = games;

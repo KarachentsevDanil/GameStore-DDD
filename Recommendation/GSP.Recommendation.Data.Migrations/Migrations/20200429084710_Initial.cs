@@ -11,8 +11,7 @@ namespace GSP.Recommendation.Data.Migrations.Migrations
                 name: "Games",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     GenreId = table.Column<long>(nullable: false),
                     CountOfOrders = table.Column<long>(nullable: false),
@@ -28,8 +27,7 @@ namespace GSP.Recommendation.Data.Migrations.Migrations
                 name: "Orders",
                 columns: table => new
                 {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<long>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
                     AccountId = table.Column<long>(nullable: false),
                     CompletedAt = table.Column<DateTime>(nullable: false)
