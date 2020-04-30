@@ -1,6 +1,6 @@
 ﻿namespace GSP.Recommendation.Application.UseCases.DTOs.Recommendations
 {
-    public class GetRecommendedGames
+    public class GetRecommendedGamesQueryDto
     {
         public long AccountId { get; set; }
 

@@ -1,8 +1,11 @@
-﻿using GSP.Recommendation.Application.UseCases.DTOs.Recommendations;
+﻿using Accord.MachineLearning.Rules;
+using GSP.Recommendation.Application.Configurations;
+using GSP.Recommendation.Application.UseCases.DTOs.Recommendations;
 using GSP.Recommendation.Application.UseCases.Services.Contracts;
 using GSP.Recommendation.Domain.UnitOfWorks;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,15 +17,42 @@ namespace GSP.Recommendation.Application.UseCases.Services
 
         private readonly ILogger _logger;
 
-        public RecommendationService(IRecommendationUnitOfWork unitOfWork, ILogger<RecommendationService> logger)
+        private readonly RecommendationConfiguration _recommendationConfiguration;
+
+        public RecommendationService(IRecommendationUnitOfWork unitOfWork, ILogger<RecommendationService> logger, RecommendationConfiguration recommendationConfiguration)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
+            _recommendationConfiguration = recommendationConfiguration;
         }
 
-        public Task<ICollection<long>> GetRecommendedGamesAsync(GetRecommendedGames query, CancellationToken ct = default)
+        public async Task<ICollection<long>> GetRecommendedGamesAsync(GetRecommendedGamesQueryDto query, CancellationToken ct = default)
         {
-            throw new System.NotImplementedException();
+            _logger.LogInformation("Get recommended games for game {GameId} for account {AccountId}", query.GameId);
+            var transactions = await GetGameTransactionsAsync(query, ct);
+            return GetRecommendedGames(query, transactions);
+        }
+
+        private ICollection<long> GetRecommendedGames(GetRecommendedGamesQueryDto query, long[][] transactions)
+        {
+            var transactionalPercentage =
+                transactions.Length * 100 / _recommendationConfiguration.PercentageOfTransaction;
+
+            var apriori = new Apriori<long>(transactionalPercentage, _recommendationConfiguration.Confident);
+
+            var classifier = apriori.Learn(transactions);
+
+            var matches = classifier.Decide(new SortedSet<long> { query.GameId });
+
+            return matches.SelectMany(t => t.Select(i => i)).Distinct().Take(query.Take).ToList();
+        }
+
+        private async Task<long[][]> GetGameTransactionsAsync(
+            GetRecommendedGamesQueryDto query,
+            CancellationToken ct)
+        {
+            var transactions = await _unitOfWork.OrderRepository.GetGameTransactionsByAccountAsync(query.AccountId, query.GameId, ct);
+            return transactions.Select(s => s.Select(i => i.GameId).ToArray()).ToArray();
         }
     }
 }

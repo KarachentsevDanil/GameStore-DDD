@@ -17,15 +17,28 @@ namespace GSP.Recommendation.Data.Repositories
         {
         }
 
-        public async Task<IEnumerable<long>> GetAccountGameIdsAsync(long accountId, CancellationToken ct)
+        public async Task<ICollection<ICollection<OrderGame>>> GetGameTransactionsByAccountAsync(long accountId, long gameId, CancellationToken ct)
         {
-            var accountGames = await DbSet
+            var query = await DbSet
                 .Include(i => i.Games)
                 .Where(q => q.AccountId == accountId)
                 .SelectMany(p => p.Games)
                 .ToListAsync(ct);
 
-            return accountGames.Select(t => t.GameId).ToList();
+            var accountGames = query.Select(t => t.GameId).ToList();
+
+            if (accountGames.Contains(gameId))
+            {
+                return Enumerable.Empty<ICollection<OrderGame>>().ToList();
+            }
+
+            var transactionQuery = await DbSet
+                .Include(i => i.Games)
+                .Where(q => q.Games.Any(g => g.GameId == gameId) && q.Games.All(g => !accountGames.Contains(g.GameId)))
+                .Select(s => s.Games)
+                .ToListAsync(ct);
+
+            return transactionQuery;
         }
     }
 }

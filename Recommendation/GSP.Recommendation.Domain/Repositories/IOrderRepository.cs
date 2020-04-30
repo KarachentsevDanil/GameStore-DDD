@@ -8,6 +8,6 @@ namespace GSP.Recommendation.Domain.Repositories
 {
     public interface IOrderRepository : IBaseRepository<CompletedOrder>
     {
-        Task<IEnumerable<long>> GetAccountGameIdsAsync(long accountId, CancellationToken ct);
+        Task<ICollection<ICollection<OrderGame>>> GetGameTransactionsByAccountAsync(long accountId, long gameId, CancellationToken ct);
     }
 }

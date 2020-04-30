@@ -33,13 +33,6 @@ namespace GSP.Recommendation.Data.Repositories
             return new PagedCollection<Game>(result, totalCount);
         }
 
-        public async Task<ICollection<Game>> GetAvailableGamesForAccountAsync(IEnumerable<long> accountGameIds, CancellationToken ct)
-        {
-            return await DbSet
-                .Where(q => !accountGameIds.Contains(q.Id))
-                .ToListAsync(ct);
-        }
-
         private void SortGames(GameSortingType sortingType, IQueryable<Game> query)
         {
             switch (sortingType)

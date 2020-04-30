@@ -7,6 +7,6 @@ namespace GSP.Recommendation.Application.UseCases.Services.Contracts
 {
     public interface IRecommendationService
     {
-        Task<ICollection<long>> GetRecommendedGamesAsync(GetRecommendedGames query, CancellationToken ct = default);
+        Task<ICollection<long>> GetRecommendedGamesAsync(GetRecommendedGamesQueryDto query, CancellationToken ct = default);
     }
 }
