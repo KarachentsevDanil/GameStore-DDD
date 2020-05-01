@@ -10,6 +10,8 @@ namespace GSP.Order.Data.Context.EntityMappings
         {
             builder.HasKey(t => t.Id);
 
+            builder.Property(t => t.Id).ValueGeneratedNever();
+
             builder.Property(p => p.Name).HasMaxLength(255).IsRequired();
 
             builder.Property(t => t.Description).HasMaxLength(500).IsRequired();

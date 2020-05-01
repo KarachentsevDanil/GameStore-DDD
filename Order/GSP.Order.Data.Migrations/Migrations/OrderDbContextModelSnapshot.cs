@@ -22,9 +22,7 @@ namespace GSP.Order.Data.Migrations.Migrations
             modelBuilder.Entity("GSP.Order.Domain.Entities.Game", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .IsRequired()

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GSP.Order.Data.Migrations.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20200422072243_Initial")]
+    [Migration("20200501102512_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,7 @@ namespace GSP.Order.Data.Migrations.Migrations
             modelBuilder.Entity("GSP.Order.Domain.Entities.Game", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .IsRequired()
