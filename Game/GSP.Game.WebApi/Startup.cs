@@ -1,7 +1,7 @@
 using GSP.Game.Application.CQS.Validations.Genres;
 using GSP.Game.Data.Context;
 using GSP.Game.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

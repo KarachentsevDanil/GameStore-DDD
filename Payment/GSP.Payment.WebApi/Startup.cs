@@ -1,7 +1,7 @@
 using GSP.Payment.Application.CQS.Validations.PaymentHistories;
 using GSP.Payment.Data.Context;
 using GSP.Payment.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

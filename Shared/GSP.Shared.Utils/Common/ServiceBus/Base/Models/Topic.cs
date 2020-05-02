@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GSP.Shared.Utils.Common.ServiceBus.Models
+namespace GSP.Shared.Utils.Common.ServiceBus.Base.Models
 {
     public class Topic
     {

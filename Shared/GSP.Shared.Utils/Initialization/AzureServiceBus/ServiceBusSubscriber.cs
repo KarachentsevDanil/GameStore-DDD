@@ -1,14 +1,14 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Configurations;
-using GSP.Shared.Utils.Common.ServiceBus.Models;
+﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Configurations;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
 using Microsoft.Azure.ServiceBus;
 using System;
 using System.Threading.Tasks;
 
-namespace GSP.Shared.Utils.Initialization.ServiceBus
+namespace GSP.Shared.Utils.Initialization.AzureServiceBus
 {
     public static class ServiceBusSubscriber
     {
-        public static async Task AddRulesAsync(AzureServiceBusConfiguration configuration)
+        public static async Task AddRulesAsync(ServiceBusConfiguration configuration)
         {
             ServiceBusConnectionStringBuilder connectionStringBuilder =
                 new ServiceBusConnectionStringBuilder(configuration.ConnectionString);

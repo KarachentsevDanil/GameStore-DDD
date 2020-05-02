@@ -1,6 +1,6 @@
 ﻿using Microsoft.Azure.ServiceBus;
 
-namespace GSP.Shared.Utils.Common.ServiceBus.Contracts
+namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts
 {
     public interface IServiceBusPersistentConnection
     {

@@ -1,10 +1,10 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
-using GSP.Shared.Utils.Common.ServiceBus.Constants;
-using GSP.Shared.Utils.Common.ServiceBus.Contracts;
+﻿using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Constants;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GSP.Shared.Utils.Common.ServiceBus.Extensions
+namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions
 {
     public static class DependencyRegistrationExtensions
     {

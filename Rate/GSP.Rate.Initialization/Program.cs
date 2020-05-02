@@ -1,7 +1,7 @@
 ﻿using GSP.Rate.Data.Context;
+using GSP.Shared.Utils.Initialization.AzureServiceBus;
 using GSP.Shared.Utils.Initialization.Constants;
 using GSP.Shared.Utils.Initialization.EntityFramework;
-using GSP.Shared.Utils.Initialization.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System.Threading.Tasks;

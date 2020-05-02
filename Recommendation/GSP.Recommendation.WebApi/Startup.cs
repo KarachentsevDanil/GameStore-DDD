@@ -1,7 +1,7 @@
 using GSP.Recommendation.Application.CQS.Commands.Games;
 using GSP.Recommendation.Data.Context;
 using GSP.Recommendation.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

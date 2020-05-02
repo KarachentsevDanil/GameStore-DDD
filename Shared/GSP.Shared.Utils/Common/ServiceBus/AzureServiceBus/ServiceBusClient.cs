@@ -1,6 +1,7 @@
 ﻿using Dawn;
 using GSP.Shared.Utils.Common.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;

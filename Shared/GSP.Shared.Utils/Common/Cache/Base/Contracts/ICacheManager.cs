@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace GSP.Shared.Utils.Common.Cache.Contracts
+namespace GSP.Shared.Utils.Common.Cache.Base.Contracts
 {
     public interface ICacheManager
     {

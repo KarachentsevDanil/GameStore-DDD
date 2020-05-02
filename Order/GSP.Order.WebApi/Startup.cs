@@ -1,7 +1,7 @@
 using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.Data.Context;
 using GSP.Order.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.Cache.Contracts;
+﻿using GSP.Shared.Utils.Common.Cache.Base.Contracts;
 using GSP.Shared.Utils.Common.Cache.InMemory.Configurations;
 using Microsoft.Extensions.Caching.Memory;
 using System;

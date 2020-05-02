@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.Cache.Contracts;
+﻿using GSP.Shared.Utils.Common.Cache.Base.Contracts;
 using GSP.Shared.Utils.Common.Cache.Redis.Configurations;
 using GSP.Shared.Utils.Common.Cache.Redis.Contracts;
 using Newtonsoft.Json;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Common.Cache.Redis
 {
-    public class RedisCacheManager : ICacheManager, IDisposable
+    public class RedisCacheManager : ICacheManager
     {
         private readonly IRedisCacheDatabaseProvider _databaseProvider;
 
@@ -42,20 +42,6 @@ namespace GSP.Shared.Utils.Common.Cache.Redis
         {
             var database = await _databaseProvider.GetDatabaseAsync();
             await database.KeyDeleteAsync(key);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _databaseProvider?.Dispose();
-            }
         }
     }
 }

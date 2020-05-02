@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using GSP.Shared.Utils.Common.ServiceBus.Models;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
 
-namespace GSP.Shared.Utils.Common.ServiceBus.Configurations
+namespace GSP.Shared.Utils.Common.ServiceBus.Base.Configurations
 {
-    public class AzureServiceBusConfiguration
+    public class ServiceBusConfiguration
     {
         public string ConnectionString { get; set; }
 

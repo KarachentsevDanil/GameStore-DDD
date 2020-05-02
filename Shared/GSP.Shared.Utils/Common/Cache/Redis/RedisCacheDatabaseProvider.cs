@@ -1,7 +1,6 @@
 ﻿using GSP.Shared.Utils.Common.Cache.Redis.Configurations;
 using GSP.Shared.Utils.Common.Cache.Redis.Contracts;
 using StackExchange.Redis;
-using System;
 using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Common.Cache.Redis
@@ -22,20 +21,6 @@ namespace GSP.Shared.Utils.Common.Cache.Redis
             await InitializeIfNeedAsync();
 
             return _connectionMultiplexer.GetDatabase(_redisConfiguration.DatabaseId);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _connectionMultiplexer?.Dispose();
-            }
         }
 
         private async Task InitializeIfNeedAsync()

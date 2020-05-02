@@ -1,7 +1,7 @@
 using GSP.Rate.Application.CQS.Validations.Rates;
 using GSP.Rate.Data.Context;
 using GSP.Rate.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Extensions;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

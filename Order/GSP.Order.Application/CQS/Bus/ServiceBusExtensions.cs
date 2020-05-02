@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GSP.Order.Application.CQS.Bus.Constants;
 using GSP.Order.Application.CQS.Bus.Messages;
-using GSP.Shared.Utils.Common.ServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 
 namespace GSP.Order.Application.CQS.Bus
 {

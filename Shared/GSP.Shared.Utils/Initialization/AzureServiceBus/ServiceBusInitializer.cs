@@ -1,10 +1,10 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Configurations;
+﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Configurations;
 using GSP.Shared.Utils.Initialization.Constants;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
-namespace GSP.Shared.Utils.Initialization.ServiceBus
+namespace GSP.Shared.Utils.Initialization.AzureServiceBus
 {
     public static class ServiceBusInitializer
     {
@@ -14,7 +14,7 @@ namespace GSP.Shared.Utils.Initialization.ServiceBus
         {
             Console.WriteLine("Start Azure Service Bus initialization....");
 
-            AzureServiceBusConfiguration azureServiceBusConfiguration = new AzureServiceBusConfiguration();
+            ServiceBusConfiguration azureServiceBusConfiguration = new ServiceBusConfiguration();
 
             configuration
                 .GetSection(sectionName)

@@ -6,7 +6,7 @@ using GSP.Account.Application.CQS.Commands;
 using GSP.Account.Application.UseCases.DTOs;
 using GSP.Account.Application.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.ServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;

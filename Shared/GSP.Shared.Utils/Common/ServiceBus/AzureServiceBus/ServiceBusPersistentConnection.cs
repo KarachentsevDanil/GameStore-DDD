@@ -1,5 +1,5 @@
 ﻿using Dawn;
-using GSP.Shared.Utils.Common.ServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
 using Microsoft.Azure.ServiceBus;
 using System.Collections.Generic;
 

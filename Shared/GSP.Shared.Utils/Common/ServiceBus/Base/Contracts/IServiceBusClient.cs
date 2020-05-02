@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace GSP.Shared.Utils.Common.ServiceBus.Contracts
+namespace GSP.Shared.Utils.Common.ServiceBus.Base.Contracts
 {
     public interface IServiceBusClient
     {
