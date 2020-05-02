@@ -1,6 +1,8 @@
-﻿namespace GSP.Account.Application.CQS.Bus.Messages
+﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+
+namespace GSP.Account.Application.CQS.Bus.Messages
 {
-    public abstract class BaseAccountMessage
+    public abstract class BaseAccountMessage : IntegrationEvent
     {
         public long Id { get; set; }
 

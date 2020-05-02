@@ -1,6 +1,8 @@
-﻿namespace GSP.Order.Application.CQS.Bus.Messages
+﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+
+namespace GSP.Order.Application.CQS.Bus.Messages
 {
-    public class GameOrderCountUpdatedMessage
+    public class GameOrderCountUpdatedMessage : IntegrationEvent
     {
         public GameOrderCountUpdatedMessage(long gameId, int countOfOrders)
         {

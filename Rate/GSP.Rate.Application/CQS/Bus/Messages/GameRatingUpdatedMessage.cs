@@ -1,6 +1,8 @@
-﻿namespace GSP.Rate.Application.CQS.Bus.Messages
+﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+
+namespace GSP.Rate.Application.CQS.Bus.Messages
 {
-    public class GameRatingUpdatedMessage
+    public class GameRatingUpdatedMessage : IntegrationEvent
     {
         public GameRatingUpdatedMessage(long gameId, int countOfReviews, double averageRating)
         {

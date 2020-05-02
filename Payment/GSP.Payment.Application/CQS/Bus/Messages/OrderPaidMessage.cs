@@ -1,6 +1,8 @@
-﻿namespace GSP.Payment.Application.CQS.Bus.Messages
+﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+
+namespace GSP.Payment.Application.CQS.Bus.Messages
 {
-    public class OrderPaidMessage
+    public class OrderPaidMessage : IntegrationEvent
     {
         public OrderPaidMessage(long orderId, long accountId)
         {

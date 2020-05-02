@@ -2,6 +2,7 @@
 using GSP.Shared.Utils.Common.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -10,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 {
-    public class ServiceBusClient : IServiceBusClient
+    public class AzureServiceBusClient : IServiceBusClient
     {
-        private readonly IServiceBusPersistentConnection _persistentConnection;
+        private readonly IAzureServiceBusPersistentConnection _persistentConnection;
 
         private readonly ILogger _logger;
 
-        public ServiceBusClient(
-            IServiceBusPersistentConnection persistentConnection,
-            ILogger<ServiceBusClient> logger)
+        public AzureServiceBusClient(
+            IAzureServiceBusPersistentConnection persistentConnection,
+            ILogger<AzureServiceBusClient> logger)
         {
             _persistentConnection = Guard.Argument(persistentConnection, nameof(persistentConnection))
                 .NotNull()
@@ -30,28 +31,30 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
         }
 
         /// <summary>
-        /// Publishes an event of <typeparamref name="T"/> to the Azure Service Bus
+        /// Publishes an event of <typeparamref name="TEvent"/> to the Azure Service Bus
         /// </summary>
-        /// <typeparam name="T">Type of an event</typeparam>
+        /// <typeparam name="TEvent">Type of an event</typeparam>
         /// <param name="busEvent"></param>
         /// <param name="topicName"></param>
         /// <exception cref="System.ArgumentNullException">When 'topicName' is null</exception>
         /// <exception cref="System.ArgumentException">When 'topicName' is empty</exception>
-        public async Task PublishAsync<T>(T busEvent, string topicName)
+        public async Task PublishAsync<TEvent>(TEvent busEvent, string topicName)
+            where TEvent : IntegrationEvent
         {
             await PublishAsync(busEvent, null, topicName);
         }
 
         /// <summary>
-        /// Publishes an event of <typeparamref name="T"/> to the Service Bus
+        /// Publishes an event of <typeparamref name="TEvent"/> to the Service Bus
         /// </summary>
-        /// <typeparam name="T">Type of an event</typeparam>
+        /// <typeparam name="TEvent">Type of an event</typeparam>
         /// <param name="busEvent">Event which will be sent to the service bus</param>
         /// <param name="label">Label which will be added to a message</param>
         /// <param name="topicName">Topic name</param>
         /// <exception cref="System.ArgumentNullException">When 'topicName' is null</exception>
         /// <exception cref="System.ArgumentException">When 'topicName' is empty</exception>
-        public async Task PublishAsync<T>(T busEvent, string label, string topicName)
+        public async Task PublishAsync<TEvent>(TEvent busEvent, string label, string topicName)
+            where TEvent : IntegrationEvent
         {
             _logger.LogInformation(
                 "Start sending message to '{TopicName}' topic with '{Label}' label. Data: {Data}",

@@ -14,10 +14,10 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions
             string serviceBusConnection =
                 configuration.GetValue<string>(connectionName);
 
-            services.AddSingleton<IServiceBusPersistentConnection>(sp =>
-                new ServiceBusPersistentConnection(serviceBusConnection));
+            services.AddSingleton<IAzureServiceBusPersistentConnection>(sp =>
+                new AzureServiceBusPersistentConnection(serviceBusConnection));
 
-            services.AddSingleton<IServiceBusClient, ServiceBusClient>();
+            services.AddSingleton<IServiceBusClient, AzureServiceBusClient>();
 
             return serviceBusConnection;
         }
