@@ -1,15 +1,17 @@
 ﻿using Dawn;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Models;
 using Microsoft.Azure.ServiceBus;
+using System;
 using System.Collections.Generic;
 
 namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 {
     public class AzureServiceBusPersistentConnection : IAzureServiceBusPersistentConnection
     {
-        private readonly Dictionary<string, ITopicClient> _topicClients;
+        private readonly IDictionary<string, ITopicClient> _topicClients;
 
-        private readonly Dictionary<string, ISubscriptionClient> _subscriptionClients;
+        private readonly IDictionary<string, ISubscriptionClient> _subscriptionClients;
 
         private readonly string _connectionString;
 
@@ -21,6 +23,8 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
                 .Value;
 
             _topicClients = new Dictionary<string, ITopicClient>();
+
+            _subscriptionClients = new Dictionary<string, ISubscriptionClient>();
         }
 
         /// <summary>
@@ -29,64 +33,62 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
         /// <param name="topicName"></param>
         public ITopicClient CreateTopicClient(string topicName)
         {
-            if (!_topicClients.ContainsKey(topicName) || _topicClients[topicName].IsClosedOrClosing)
-            {
-                ITopicClient topicClient = BuildTopicClient(topicName);
+            var topicClientMode = new AzureTopicClientModel(topicName);
 
-                if (_topicClients.ContainsKey(topicName))
-                {
-                    _topicClients[topicName] = topicClient;
-                }
-                else
-                {
-                    _topicClients.Add(topicName, topicClient);
-                }
-            }
-
-            return _topicClients[topicName];
+            return CreateClient(topicName, topicClientMode, _topicClients, BuildTopicClient);
         }
 
         public ISubscriptionClient CreateSubscriptionClient(string topicName, string subscriptionName)
         {
             var key = $"{topicName}_{subscriptionName}";
 
-            if (!_subscriptionClients.ContainsKey(key) || _subscriptionClients[key].IsClosedOrClosing)
-            {
-                ISubscriptionClient subscriptionClient = BuildSubscriptionClient(topicName, subscriptionName);
+            var subscriptionClientModel = new AzureSubscriptionClientModel(topicName, subscriptionName);
 
-                if (_subscriptionClients.ContainsKey(key))
+            return CreateClient(key, subscriptionClientModel, _subscriptionClients, BuildSubscriptionClient);
+        }
+
+        private TClient CreateClient<TClient, TClientModel>(
+            string key, TClientModel clientModel, IDictionary<string, TClient> clients, Func<TClientModel, TClient> getClient)
+            where TClient : IClientEntity
+            where TClientModel : BaseAzureClientModel
+        {
+            if (!clients.ContainsKey(key) || clients[key].IsClosedOrClosing)
+            {
+                TClient client = getClient(clientModel);
+
+                if (clients.ContainsKey(key))
                 {
-                    _subscriptionClients[key] = subscriptionClient;
+                    clients[key] = client;
                 }
                 else
                 {
-                    _subscriptionClients.Add(key, subscriptionClient);
+                    clients.Add(key, client);
                 }
             }
 
-            return _subscriptionClients[key];
+            return clients[key];
         }
 
-        private ITopicClient BuildTopicClient(string topicName)
+        private ITopicClient BuildTopicClient(AzureTopicClientModel model)
         {
             ServiceBusConnectionStringBuilder builder
                 = new ServiceBusConnectionStringBuilder(_connectionString)
                 {
-                    EntityPath = topicName
+                    EntityPath = model.TopicName
                 };
 
             return new TopicClient(builder, RetryPolicy.Default);
         }
 
-        private ISubscriptionClient BuildSubscriptionClient(string topicName, string subscriptionName)
+        private ISubscriptionClient BuildSubscriptionClient(AzureSubscriptionClientModel model)
         {
             ServiceBusConnectionStringBuilder builder
                 = new ServiceBusConnectionStringBuilder(_connectionString)
                 {
-                    EntityPath = topicName
+                    EntityPath = model.TopicName
                 };
 
-            return new SubscriptionClient(builder, subscriptionName, ReceiveMode.PeekLock, RetryPolicy.Default);
+            return new SubscriptionClient(builder, model.SubscriptionName, ReceiveMode.PeekLock, RetryPolicy.Default);
         }
     }
 }

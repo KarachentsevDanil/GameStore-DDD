@@ -39,11 +39,11 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 
             Guard.Argument(persistentConnection, nameof(persistentConnection)).NotNull();
 
-            _eventHandler = eventHandler;
-
             _configuration = Guard.Argument(configuration, nameof(configuration)).NotNull().Value;
-
+            
             _logger = Guard.Argument(logger, nameof(logger)).NotNull().Value;
+
+            _eventHandler = eventHandler;
 
             _subscriptionClient = persistentConnection.CreateSubscriptionClient(topicName, subscriptionName);
         }
