@@ -4,6 +4,8 @@
     {
         public int MaxConcurrentCalls { get; set; }
 
+        public int MaxRetryCount { get; set; }
+
         public bool MessageAutoComplete { get; set; }
     }
 }

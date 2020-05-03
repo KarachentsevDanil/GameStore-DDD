@@ -15,8 +15,8 @@ namespace GSP.Order.Application.UseCases.Services
 {
     public class GameService : BaseService<IOrderUnitOfWork, Game, GetGameDto, AddGameDto, UpdateGameDto>, IGameService
     {
-        public GameService(IOrderUnitOfWork unitOfWork, IBaseRepository<Game> repository, IMapper mapper, ILogger<Game> logger)
-            : base(unitOfWork, repository, mapper, logger)
+        public GameService(IOrderUnitOfWork unitOfWork, IMapper mapper, ILogger<Game> logger)
+            : base(unitOfWork, unitOfWork.GameRepository, mapper, logger)
         {
         }
 

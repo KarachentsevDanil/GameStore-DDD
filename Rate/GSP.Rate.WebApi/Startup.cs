@@ -35,12 +35,9 @@ namespace GSP.Rate.WebApi
             services.RegisterAzureServiceBus(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseApiExceptionHandler();
 
             app.UseHttpsRedirection();
 
@@ -54,8 +51,6 @@ namespace GSP.Rate.WebApi
             {
                 endpoints.MapControllers();
             });
-
-            app.UseApiExceptionHandler();
 
             app.UseSwagger();
 

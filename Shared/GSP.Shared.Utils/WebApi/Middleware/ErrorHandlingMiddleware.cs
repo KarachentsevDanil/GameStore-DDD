@@ -28,6 +28,10 @@ namespace GSP.Shared.Utils.WebApi.Middleware
             }
             catch (ValidationHandlerException ex)
             {
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                context.Response.ContentType = MediaTypeNames.Application.Json;
+
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(ex.ValidationErrors));
             }
             catch (Exception exp)

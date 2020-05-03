@@ -10,6 +10,7 @@ using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.Worker.Account.Commands;
 using GSP.Shared.Utils.Worker.Extensions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Order.Worker
 {
@@ -21,6 +22,8 @@ namespace GSP.Order.Worker
                 .SetupApplication((serviceCollection, commandRegistry, c) =>
                 {
                     IConfiguration config = (IConfiguration)c;
+
+                    serviceCollection.AddLogging();
 
                     serviceCollection.ConfigureDatabase<OrderDbContext>(config);
 

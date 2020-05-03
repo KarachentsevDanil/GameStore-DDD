@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using GSP.Order.Application.Configurations.MapperProfiles;
 using GSP.Order.Application.CQS.Commands.Games;
+using GSP.Order.Application.CQS.Commands.Orders;
+using GSP.Order.Application.CQS.Validations.Orders;
 using GSP.Order.Application.UseCases.Services;
 using GSP.Order.Application.UseCases.Services.Contracts;
 using GSP.Order.Data.UnitOfWorks;
@@ -26,9 +29,12 @@ namespace GSP.Order.Worker.Extensions
         public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile), typeof(AccountWorkerProfile), typeof(WorkerProfile));
-            serviceCollection.AddScoped<IAccountService, AccountService<OrderUnitOfWork>>();
+            serviceCollection.AddScoped<IAccountService, AccountService<IOrderUnitOfWork>>();
             serviceCollection.AddScoped<IGameService, GameService>();
             serviceCollection.AddScoped<IOrderService, OrderService>();
+
+            serviceCollection.AddSingleton<IValidator<AddOrderToGameCommand>, AddOrderToGameValidator>();
+            serviceCollection.AddSingleton<IValidator<RemoveOrderToGameCommand>, RemoveOrderToGameValidator>();
 
             serviceCollection.AddMediatR(typeof(CreateAccountCommand).Assembly, typeof(CreateGameCommand).Assembly);
 

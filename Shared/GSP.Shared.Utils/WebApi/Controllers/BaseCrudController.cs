@@ -10,7 +10,6 @@ using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
 namespace GSP.Shared.Utils.WebApi.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public abstract class BaseCrudController

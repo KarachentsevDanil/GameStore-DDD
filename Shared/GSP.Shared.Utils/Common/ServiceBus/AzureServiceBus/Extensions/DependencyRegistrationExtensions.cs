@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
+﻿using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Configurations;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Constants;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,8 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions
                 new AzureServiceBusPersistentConnection(serviceBusConnection));
 
             services.AddSingleton<IServiceBusClient, AzureServiceBusClient>();
+
+            services.Configure<AzureServiceBusSubscriptionConfiguration>(configuration.GetSection(nameof(AzureServiceBusSubscriptionConfiguration)));
 
             return serviceBusConnection;
         }

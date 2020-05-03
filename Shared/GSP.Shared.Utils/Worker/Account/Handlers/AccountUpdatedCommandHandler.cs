@@ -1,9 +1,8 @@
-﻿using AutoMapper;
-using AzureFromTheTrenches.Commanding.Abstractions;
-using GSP.Shared.Utils.Application.Account.CQS.Commands;
+﻿using AzureFromTheTrenches.Commanding.Abstractions;
+using GSP.Shared.Utils.Application.Account.UseCases.DTOs;
+using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Common.Extensions;
 using GSP.Shared.Utils.Worker.Account.Commands;
-using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
@@ -11,17 +10,14 @@ namespace GSP.Shared.Utils.Worker.Account.Handlers
 {
     public class AccountUpdatedCommandHandler : ICommandHandler<AccountUpdatedCommand>
     {
-        private readonly IMediator _mediator;
-
-        private readonly IMapper _mapper;
+        private readonly IAccountService _accountService;
 
         private readonly ILogger _logger;
 
-        public AccountUpdatedCommandHandler(IMediator mediator, IMapper mapper, ILogger logger)
+        public AccountUpdatedCommandHandler(ILogger<AccountUpdatedCommandHandler> logger, IAccountService accountService)
         {
-            _mediator = mediator;
-            _mapper = mapper;
             _logger = logger;
+            _accountService = accountService;
         }
 
         public async Task ExecuteAsync(AccountUpdatedCommand command)
@@ -29,9 +25,9 @@ namespace GSP.Shared.Utils.Worker.Account.Handlers
             _logger.LogInformation(
                 $"{nameof(AccountUpdatedCommand)} has been triggered with parameter {command.ToJsonString()}");
 
-            UpdateAccountCommand createAccount = _mapper.Map<UpdateAccountCommand>(command);
+            UpdateAccountDto accountDto = new UpdateAccountDto(command.Id, command.FirstName, command.LastName, command.Email);
 
-            await _mediator.Send(createAccount);
+            await _accountService.UpdateAsync(accountDto);
         }
     }
 }

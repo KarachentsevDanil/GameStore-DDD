@@ -8,6 +8,10 @@
             SubscriptionName = subscriptionName;
         }
 
+        public AzureSubscriptionClientModel()
+        {
+        }
+
         public string SubscriptionName { get; set; }
     }
 }

@@ -5,6 +5,16 @@ namespace GSP.Order.Application.UseCases.DTOs.Games
 {
     public class AddGameDto : BaseAddItemDto
     {
+        public AddGameDto(long id, string name, string description, float price, Uri photoUri, Uri iconUri)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            Price = price;
+            PhotoUri = photoUri;
+            IconUri = iconUri;
+        }
+
         public long Id { get; set; }
 
         public string Name { get; set; }

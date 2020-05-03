@@ -2,18 +2,25 @@
 using GSP.Shared.Utils.Common.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Configurations;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Models;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Polly;
 
 namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 {
-    public class AzureServiceBusSubscriptionClient<TEvent, TEventHandler> : IServiceBusSubscriptionClient<TEvent, TEventHandler>
+    public class AzureServiceBusSubscriptionClient<TEvent, TEventHandler> : BackgroundService, IServiceBusSubscriptionClient<TEvent, TEventHandler>
         where TEvent : IntegrationEvent
         where TEventHandler : IIntegrationEventHandler<TEvent>
     {
@@ -23,29 +30,28 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 
         private readonly AzureServiceBusSubscriptionConfiguration _configuration;
 
-        private TEventHandler _eventHandler;
+        private readonly IServiceProvider _serviceProvider;
 
         public AzureServiceBusSubscriptionClient(
             IAzureServiceBusPersistentConnection persistentConnection,
             ILogger<AzureServiceBusClient> logger,
-            string topicName,
-            string subscriptionName,
-            AzureServiceBusSubscriptionConfiguration configuration,
-            TEventHandler eventHandler)
+            IOptions<AzureServiceBusSubscriptionConfiguration> configuration,
+            IServiceProvider serviceProvider,
+            IConfiguration globalConfiguration)
         {
-            Guard.Argument(topicName, nameof(topicName)).NotNull();
-
-            Guard.Argument(subscriptionName, nameof(subscriptionName)).NotNull();
-
             Guard.Argument(persistentConnection, nameof(persistentConnection)).NotNull();
+            _serviceProvider = serviceProvider;
 
-            _configuration = Guard.Argument(configuration, nameof(configuration)).NotNull().Value;
-            
+            _configuration = Guard.Argument(configuration, nameof(configuration)).NotNull().Value.Value;
+
             _logger = Guard.Argument(logger, nameof(logger)).NotNull().Value;
 
-            _eventHandler = eventHandler;
+            _serviceProvider = Guard.Argument(serviceProvider, nameof(serviceProvider)).NotNull().Value;
 
-            _subscriptionClient = persistentConnection.CreateSubscriptionClient(topicName, subscriptionName);
+            var subscriptionInfo = new AzureSubscriptionClientModel();
+            globalConfiguration.Bind(typeof(TEvent).Name, subscriptionInfo);
+
+            _subscriptionClient = persistentConnection.CreateSubscriptionClient(subscriptionInfo.TopicName, subscriptionInfo.SubscriptionName);
         }
 
         /// <summary>
@@ -62,19 +68,64 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
             _subscriptionClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
         }
 
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            RegisterMessageHandler();
+
+            return Task.CompletedTask;
+        }
+
         private async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
+            token.ThrowIfCancellationRequested();
+
             var integrationEvent = JsonConvert.DeserializeObject<TEvent>(Encoding.UTF8.GetString(message.Body));
 
             _logger.LogInformation(
                 "Event {Event} has been triggered {EventHandler}, Message: {Message}",
-                nameof(TEvent),
-                nameof(TEventHandler),
+                typeof(TEvent).Name,
+                typeof(TEventHandler).Name,
                 integrationEvent?.ToJsonString());
 
-            await _eventHandler.Handle(integrationEvent);
+            var isSuccess = await ProcessEventAsync(integrationEvent);
 
-            await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+            if (isSuccess)
+            {
+                await _subscriptionClient.CompleteAsync(message.SystemProperties.LockToken);
+            }
+            else
+            {
+                await _subscriptionClient.DeadLetterAsync(message.SystemProperties.LockToken);
+            }
+        }
+
+        private async Task<bool> ProcessEventAsync(TEvent integrationEvent)
+        {
+            using (var scopedProvider = _serviceProvider.CreateScope())
+            {
+                try
+                {
+                    var eventHandler = scopedProvider.ServiceProvider.GetService<TEventHandler>();
+                    var policy = CreateRetryPolicy(integrationEvent);
+
+                    await policy.Execute(async () =>
+                    {
+                        await eventHandler.Handle(integrationEvent);
+                    });
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(
+                        "Error occured while executing {EventHandler} with parameters {Event}, Error Message: {ErrorMessage}",
+                        typeof(TEventHandler).Name,
+                        integrationEvent.ToJsonString(),
+                        exception.ToString());
+
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         private Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
@@ -88,6 +139,21 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
             _logger.LogDebug($"- Executing Action: {context.Action}");
 
             return Task.CompletedTask;
+        }
+
+        private Polly.Retry.RetryPolicy CreateRetryPolicy(TEvent integrationEvent)
+        {
+            return Policy.Handle<Exception>()
+                .WaitAndRetry(_configuration.MaxRetryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)), (ex, time) =>
+                {
+                    _logger.LogWarning(
+                        ex,
+                        "Could not publish event: {Event} of type {EventType} {Timeout}s ({ExceptionMessage})",
+                        integrationEvent.ToJsonString(),
+                        typeof(TEvent).Name,
+                        $"{time.TotalSeconds:n1}",
+                        ex.Message);
+                });
         }
     }
 }

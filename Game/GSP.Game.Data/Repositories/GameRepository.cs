@@ -60,7 +60,7 @@ namespace GSP.Game.Data.Repositories
             if (!string.IsNullOrEmpty(filterParams.Term))
             {
                 predicate = predicate.Extend(
-                    x => EF.Functions.Like(x.GameDetails.Name, filterParams.Term), PredicateOperator.And);
+                    x => EF.Functions.Like(x.GameDetails.Name, $"%{filterParams.Term}%"), PredicateOperator.And);
             }
 
             if (filterParams.StartPrice.HasValue && filterParams.EndPrice.HasValue)

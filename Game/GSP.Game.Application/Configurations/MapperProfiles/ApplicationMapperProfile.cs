@@ -12,6 +12,7 @@ using GSP.Game.Application.UseCases.DTOs.Publishers;
 using GSP.Game.Domain.Entities;
 using GSP.Game.Domain.Entities.ValueObjects;
 using GSP.Game.Domain.Events;
+using GSP.Game.Domain.Models.FilterParams;
 
 namespace GSP.Game.Application.Configurations.MapperProfiles
 {
@@ -38,6 +39,7 @@ namespace GSP.Game.Application.Configurations.MapperProfiles
             CreateMap<UpdateGameCommand, UpdateGameDto>();
             CreateMap<GetGamePagedListQuery, GameFilterParamsDto>();
             CreateMap<GetGameDto, GameCreatedMessage>();
+            CreateMap<GameFilterParamsDto, GameFilterParams>();
             CreateMap<GameUpdatedEvent, GameDetailsDto>();
         }
     }

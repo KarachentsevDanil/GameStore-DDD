@@ -4,7 +4,6 @@ using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Application.UseCases.Services;
 using GSP.Shared.Utils.Domain.Account.Entities;
 using GSP.Shared.Utils.Domain.Account.UnitOfWorks.Contracts;
-using GSP.Shared.Utils.Domain.Repositories.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace GSP.Shared.Utils.Application.Account.UseCases.Services
@@ -15,10 +14,9 @@ namespace GSP.Shared.Utils.Application.Account.UseCases.Services
     {
         public AccountService(
             TUnitOfWork unitOfWork,
-            IBaseRepository<SharedAccount> repository,
             IMapper mapper,
             ILogger<SharedAccount> logger)
-            : base(unitOfWork, repository, mapper, logger)
+            : base(unitOfWork, unitOfWork.AccountRepository, mapper, logger)
         {
         }
 

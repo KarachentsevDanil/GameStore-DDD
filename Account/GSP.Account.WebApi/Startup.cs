@@ -4,10 +4,8 @@ using GSP.Account.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GSP.Account.WebApi
 {
@@ -22,25 +20,22 @@ namespace GSP.Account.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<CreateAccountValidator>(Configuration);
-
-            services.AddLogging();
-
-            services.ConfigureDatabase<AccountDbContext>(Configuration);
-
             services.RegisterCoreDependencies();
 
             services.RegisterApplicationDependencies();
 
+            services.ConfigureDatabase<AccountDbContext>(Configuration);
+
+            services.AddWebApi<CreateAccountValidator>(Configuration);
+
+            services.AddLogging();
+
             services.RegisterAzureServiceBus(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseApiExceptionHandler();
 
             app.UseHttpsRedirection();
 
@@ -54,8 +49,6 @@ namespace GSP.Account.WebApi
             {
                 endpoints.MapControllers();
             });
-
-            app.UseApiExceptionHandler();
 
             app.UseSwagger();
 
