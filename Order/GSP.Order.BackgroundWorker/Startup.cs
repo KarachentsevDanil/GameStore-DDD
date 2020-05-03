@@ -1,5 +1,7 @@
 using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.BackgroundWorker.Events.Accounts;
+using GSP.Order.BackgroundWorker.Events.Games;
+using GSP.Order.BackgroundWorker.Events.Orders;
 using GSP.Order.BackgroundWorker.Extensions;
 using GSP.Order.Data.Context;
 using GSP.Shared.Utils.Application.Account.CQS.Commands;
@@ -38,6 +40,10 @@ namespace GSP.Order.BackgroundWorker
             services.RegisterAzureServiceBus(Configuration);
 
             services.AddHostedService<AzureServiceBusSubscriptionClient<AccountCreatedEvent, IIntegrationEventHandler<AccountCreatedEvent>>>();
+            services.AddHostedService<AzureServiceBusSubscriptionClient<AccountUpdatedEvent, IIntegrationEventHandler<AccountUpdatedEvent>>>();
+            services.AddHostedService<AzureServiceBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
+            services.AddHostedService<AzureServiceBusSubscriptionClient<GameUpdatedEvent, IIntegrationEventHandler<GameUpdatedEvent>>>();
+            services.AddHostedService<AzureServiceBusSubscriptionClient<OrderPaidEvent, IIntegrationEventHandler<OrderPaidEvent>>>();
         }
 
         public void Configure(IApplicationBuilder app)
