@@ -1,4 +1,5 @@
-﻿using GSP.Rate.Application.CQS.Commands.Rates;
+﻿using System;
+using GSP.Rate.Application.CQS.Commands.Rates;
 using GSP.Rate.Application.CQS.Queries.Rates;
 using GSP.Rate.Application.UseCases.DTOs.Rates;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
@@ -7,6 +8,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using GSP.Rate.Application.UseCases.Exceptions;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
 namespace GSP.Rate.WebApi.Controllers
@@ -36,9 +38,16 @@ namespace GSP.Rate.WebApi.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Create([FromBody]CreateRateCommand command)
         {
-            command.AccountId = User.GetUserId();
-            GetRateDto item = await _mediator.Send(command);
-            return CreatedAt(item);
+            try
+            {
+                command.AccountId = User.GetUserId();
+                GetRateDto item = await _mediator.Send(command);
+                return CreatedAt(item);
+            }
+            catch (RateAlreadyExistsException)
+            {
+                return BadRequest();
+            }
         }
 
         /// <summary>
@@ -84,6 +93,7 @@ namespace GSP.Rate.WebApi.Controllers
         /// <see cref="GetRateDto"/>
         /// </returns>
         [HttpGet("paged")]
+        [AllowAnonymous]
         public virtual async Task<IActionResult> GetPagedList([FromQuery]GetRateListQuery query)
         {
             var result = await _mediator.Send(query);

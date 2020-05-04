@@ -37,6 +37,11 @@ namespace GSP.Rate.Data.Repositories
             return new PagedCollection<RateBase>(rates.ToImmutableList(), totalCount);
         }
 
+        public async ValueTask<bool> IsExistsAsync(long accountId, long gameId, CancellationToken ct)
+        {
+            return await DbSet.AnyAsync(q => q.GameId == gameId && q.AccountId == accountId, ct);
+        }
+
         public async ValueTask<int> GetCountByGameIdAsync(long gameId, CancellationToken ct)
         {
             return await DbSet.CountAsync(q => q.GameId == gameId, ct);

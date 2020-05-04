@@ -12,8 +12,6 @@ namespace GSP.Rate.Application.CQS.Commands.Rates
 
         public int Rating { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
         public long AccountId { get; set; }
     }
 }

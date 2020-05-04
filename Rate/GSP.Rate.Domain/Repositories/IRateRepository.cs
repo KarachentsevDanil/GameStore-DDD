@@ -11,6 +11,8 @@ namespace GSP.Rate.Domain.Repositories
     {
         Task<PagedCollection<RateBase>> GetByFilterParamsAsync(RateFilterParams filterParams, CancellationToken ct);
 
+        ValueTask<bool> IsExistsAsync(long accountId, long gameId, CancellationToken ct);
+
         ValueTask<int> GetCountByGameIdAsync(long gameId, CancellationToken ct);
 
         ValueTask<double> GetAverageRatingByGameIdAsync(long gameId, CancellationToken ct);

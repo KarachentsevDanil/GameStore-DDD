@@ -7,19 +7,19 @@ using GSP.Rate.Domain.UnitOfWorks;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.Application.UseCases.Services;
 using GSP.Shared.Utils.Common.Models.Collections;
-using GSP.Shared.Utils.Domain.Repositories.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+using GSP.Rate.Application.UseCases.Exceptions;
 
 namespace GSP.Rate.Application.UseCases.Services
 {
     public class RateService : BaseService<IRateUnitOfWork, RateBase, GetRateDto, AddRateDto, UpdateRateDto>, IRateService
     {
-        public RateService(IRateUnitOfWork unitOfWork, IBaseRepository<RateBase> repository, IMapper mapper, ILogger<RateBase> logger)
-            : base(unitOfWork, repository, mapper, logger)
+        public RateService(IRateUnitOfWork unitOfWork, IMapper mapper, ILogger<RateBase> logger)
+            : base(unitOfWork, unitOfWork.RateRepository, mapper, logger)
         {
         }
 
@@ -56,6 +56,16 @@ namespace GSP.Rate.Application.UseCases.Services
         protected override void UpdateEntity(UpdateRateDto updateItemDto, RateBase entity)
         {
             entity.Update(updateItemDto.Comment, updateItemDto.Rating);
+        }
+
+        protected override async Task ValidateItemAsync(AddRateDto addItemDto, CancellationToken ct)
+        {
+            bool isExists = await UnitOfWork.RateRepository.IsExistsAsync(addItemDto.AccountId, addItemDto.GameId, ct);
+            if (isExists)
+            {
+                Logger.LogWarning("User {UserId} already leave feedback for {GameId}", addItemDto.AccountId, addItemDto.GameId);
+                throw new RateAlreadyExistsException();
+            }
         }
 
         protected override Task ValidateItemAsync(RateBase entity, UpdateRateDto updateItemDto, CancellationToken ct)

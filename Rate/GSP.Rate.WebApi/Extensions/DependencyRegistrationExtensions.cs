@@ -21,7 +21,7 @@ namespace GSP.Rate.WebApi.Extensions
         public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile));
-            serviceCollection.AddScoped<IAccountService, AccountService<RateUnitOfWork>>();
+            serviceCollection.AddScoped<IAccountService, AccountService<IRateUnitOfWork>>();
             serviceCollection.AddScoped<IRateService, RateService>();
             return serviceCollection;
         }
