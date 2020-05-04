@@ -4,6 +4,7 @@ using GSP.Rate.Application.UseCases.Services.Contracts;
 using GSP.Rate.Domain.Entities;
 using GSP.Rate.Domain.Models;
 using GSP.Rate.Domain.UnitOfWorks;
+using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.Application.UseCases.Services;
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Domain.Repositories.Contracts;
@@ -12,7 +13,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using GSP.Shared.Utils.Application.UseCases.Exceptions;
 
 namespace GSP.Rate.Application.UseCases.Services
 {

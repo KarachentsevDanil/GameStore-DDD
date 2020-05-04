@@ -32,6 +32,7 @@ namespace GSP.Recommendation.BackgroundWorker.Extensions
             serviceCollection.AddScoped<IGameService, GameService>();
             serviceCollection.AddScoped<IOrderService, OrderService>();
 
+            serviceCollection.AddScoped<IIntegrationEventHandler<GameCreatedEvent>, GameCreatedEventHandler>();
             serviceCollection.AddScoped<IIntegrationEventHandler<GameOrderCountUpdatedEvent>, GameOrderCountUpdatedEventHandler>();
             serviceCollection.AddScoped<IIntegrationEventHandler<GameRatingUpdatedEvent>, GameRatingUpdatedEventHandler>();
 
@@ -42,6 +43,7 @@ namespace GSP.Recommendation.BackgroundWorker.Extensions
         {
             serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameOrderCountUpdatedEvent, IIntegrationEventHandler<GameOrderCountUpdatedEvent>>>();
             serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameRatingUpdatedEvent, IIntegrationEventHandler<GameRatingUpdatedEvent>>>();
+            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
 
             return serviceCollection;
         }

@@ -2,11 +2,11 @@
 using GSP.Rate.Application.CQS.Queries.Rates;
 using GSP.Rate.Application.UseCases.DTOs.Rates;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
+using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using GSP.Shared.Utils.WebApi.Extensions;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
 namespace GSP.Rate.WebApi.Controllers
