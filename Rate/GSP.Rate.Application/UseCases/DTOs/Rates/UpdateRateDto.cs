@@ -7,5 +7,7 @@ namespace GSP.Rate.Application.UseCases.DTOs.Rates
         public string Comment { get; set; }
 
         public int Rating { get; set; }
+
+        public long AccountId { get; set; }
     }
 }

@@ -40,5 +40,16 @@ namespace GSP.Recommendation.Data.Repositories
 
             return transactionQuery;
         }
+
+        public async Task<ICollection<ICollection<OrderGame>>> GetGameTransactionsByGameAsync(long gameId, CancellationToken ct)
+        {
+            var transactionQuery = await DbSet
+                .Include(i => i.Games)
+                .Where(q => q.Games.Any(g => g.GameId == gameId))
+                .Select(s => s.Games)
+                .ToListAsync(ct);
+
+            return transactionQuery;
+        }
     }
 }

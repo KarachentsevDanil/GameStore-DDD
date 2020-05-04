@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using GSP.Shared.Utils.WebApi.Extensions;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
 namespace GSP.Rate.WebApi.Controllers
@@ -35,6 +36,7 @@ namespace GSP.Rate.WebApi.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Create([FromBody]CreateRateCommand command)
         {
+            command.AccountId = User.GetUserId();
             GetRateDto item = await _mediator.Send(command);
             return CreatedAt(item);
         }
@@ -58,12 +60,17 @@ namespace GSP.Rate.WebApi.Controllers
             try
             {
                 command.Id = id;
+                command.AccountId = User.GetUserId();
                 GetRateDto item = await _mediator.Send(command);
                 return Ok(item);
             }
             catch (ItemNotFoundException)
             {
                 return NotFound();
+            }
+            catch (AccessToItemForbiddenException)
+            {
+                return Forbid();
             }
         }
 

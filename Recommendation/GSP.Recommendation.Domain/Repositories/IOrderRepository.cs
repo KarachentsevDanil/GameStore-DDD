@@ -9,5 +9,7 @@ namespace GSP.Recommendation.Domain.Repositories
     public interface IOrderRepository : IBaseRepository<CompletedOrder>
     {
         Task<ICollection<ICollection<OrderGame>>> GetGameTransactionsByAccountAsync(long accountId, long gameId, CancellationToken ct);
+
+        Task<ICollection<ICollection<OrderGame>>> GetGameTransactionsByGameAsync(long gameId, CancellationToken ct);
     }
 }

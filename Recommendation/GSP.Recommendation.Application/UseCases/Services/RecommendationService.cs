@@ -51,7 +51,11 @@ namespace GSP.Recommendation.Application.UseCases.Services
             GetRecommendedGamesQueryDto query,
             CancellationToken ct)
         {
-            var transactions = await _unitOfWork.OrderRepository.GetGameTransactionsByAccountAsync(query.AccountId, query.GameId, ct);
+            var transactions =
+                query.AccountId.HasValue ?
+                await _unitOfWork.OrderRepository.GetGameTransactionsByAccountAsync(query.AccountId.Value, query.GameId, ct) :
+                await _unitOfWork.OrderRepository.GetGameTransactionsByGameAsync(query.GameId, ct);
+
             return transactions.Select(s => s.Select(i => i.GameId).ToArray()).ToArray();
         }
     }

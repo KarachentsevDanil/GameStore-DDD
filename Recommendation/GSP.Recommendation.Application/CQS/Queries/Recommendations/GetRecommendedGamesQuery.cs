@@ -7,7 +7,7 @@ namespace GSP.Recommendation.Application.CQS.Queries.Recommendations
     {
         public long GameId { get; set; }
 
-        public long AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         public int Take { get; set; }
     }

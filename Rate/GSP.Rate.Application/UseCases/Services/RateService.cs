@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+using GSP.Shared.Utils.Application.UseCases.Exceptions;
 
 namespace GSP.Rate.Application.UseCases.Services
 {
@@ -55,6 +56,17 @@ namespace GSP.Rate.Application.UseCases.Services
         protected override void UpdateEntity(UpdateRateDto updateItemDto, RateBase entity)
         {
             entity.Update(updateItemDto.Comment, updateItemDto.Rating);
+        }
+
+        protected override Task ValidateItemAsync(RateBase entity, UpdateRateDto updateItemDto, CancellationToken ct)
+        {
+            if (entity.AccountId != updateItemDto.AccountId)
+            {
+                Logger.LogWarning("User with {UserId} doesn't have access to Rate with Id {RateId}", updateItemDto.AccountId, entity.Id);
+                throw new AccessToItemForbiddenException();
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

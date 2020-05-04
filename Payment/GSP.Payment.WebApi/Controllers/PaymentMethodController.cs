@@ -35,6 +35,7 @@ namespace GSP.Payment.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePaymentMethodCommand command)
         {
+            command.AccountId = User.GetUserId();
             var response = await _mediator.Send(command);
             return CreatedAt(response);
         }

@@ -2,7 +2,7 @@
 {
     public class GetRecommendedGamesQueryDto
     {
-        public long AccountId { get; set; }
+        public long? AccountId { get; set; }
 
         public long GameId { get; set; }
 

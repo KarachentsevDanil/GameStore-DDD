@@ -67,6 +67,8 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
                 throw new ItemNotFoundException();
             }
 
+            await ValidateItemAsync(dbEntity, itemDto, ct);
+
             UpdateEntity(itemDto, dbEntity);
 
             EntityRepository.Update(dbEntity);
@@ -122,6 +124,11 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
         protected abstract void UpdateEntity(TUpdateItem updateItemDto, TEntity entity);
 
         protected virtual Task ValidateItemAsync(TAddItem addItemDto, CancellationToken ct)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task ValidateItemAsync(TEntity entity, TUpdateItem updateItemDto, CancellationToken ct)
         {
             return Task.CompletedTask;
         }

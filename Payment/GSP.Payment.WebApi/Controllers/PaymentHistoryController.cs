@@ -42,6 +42,7 @@ namespace GSP.Payment.WebApi.Controllers
         {
             try
             {
+                command.AccountId = User.GetUserId();
                 var response = await _mediator.Send(command);
                 return CreatedAt(response);
             }
