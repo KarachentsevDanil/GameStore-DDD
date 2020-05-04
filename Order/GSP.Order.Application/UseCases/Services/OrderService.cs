@@ -80,6 +80,8 @@ namespace GSP.Order.Application.UseCases.Services
             _unitOfWork.OrderRepository.Update(currentOrder);
             await _unitOfWork.SaveAsync(ct);
 
+            currentOrder = await GetCurrentOrderAsync(orderGame.AccountId, ct);
+
             return _mapper.Map<GetOrderDto>(currentOrder);
         }
 

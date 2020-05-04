@@ -9,6 +9,6 @@ namespace GSP.Order.Application.UseCases.DTOs.Orders
     {
         public OrderStatus Status { get; set; }
 
-        public ICollection<GetGameDto> Orders { get; set; }
+        public ICollection<GetGameDto> Games { get; set; }
     }
 }

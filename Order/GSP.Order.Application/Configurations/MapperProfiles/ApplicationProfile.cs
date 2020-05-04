@@ -20,6 +20,9 @@ namespace GSP.Order.Application.Configurations.MapperProfiles
 
             CreateMap<CreateGameCommand, AddGameDto>();
             CreateMap<UpdateGameCommand, UpdateGameDto>();
+            CreateMap<OrderGame, GetGameDto>()
+                .ForMember(p => p.Id, o => o.Ignore())
+                .ConstructUsing((m, mc) => mc.Mapper.Map<GetGameDto>(m.Game));
             CreateMap<Game, GetGameDto>();
 
             CreateMap<CreateOrderCommand, AddOrderDto>();

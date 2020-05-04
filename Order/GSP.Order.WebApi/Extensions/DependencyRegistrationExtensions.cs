@@ -21,7 +21,7 @@ namespace GSP.Order.WebApi.Extensions
         public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile));
-            serviceCollection.AddScoped<IAccountService, AccountService<OrderUnitOfWork>>();
+            serviceCollection.AddScoped<IAccountService, AccountService<IOrderUnitOfWork>>();
             serviceCollection.AddScoped<IGameService, GameService>();
             serviceCollection.AddScoped<IOrderService, OrderService>();
             return serviceCollection;

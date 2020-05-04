@@ -47,33 +47,6 @@ namespace GSP.Order.WebApi.Controllers
         }
 
         /// <summary>
-        /// Complete current order
-        /// </summary>
-        /// <returns>
-        /// <see cref="GetOrderDto"/>
-        /// </returns>
-        /// <response code="400">Validation failed</response>
-        /// <response code="400">Account doesn't have active order</response>
-        /// <response code="400">Order doesn't have games</response>
-        [HttpPut]
-        public async Task<IActionResult> Complete()
-        {
-            try
-            {
-                GetOrderDto order = await _mediator.Send(new CompleteOrderCommand(User.GetUserId()));
-                return Ok(order);
-            }
-            catch (UserDoesNotHaveActiveOrderException)
-            {
-                return BadRequest();
-            }
-            catch (OrderDoesNotHaveGamesException)
-            {
-                return BadRequest();
-            }
-        }
-
-        /// <summary>
         /// Add game to order
         /// </summary>
         /// <param name="command">
