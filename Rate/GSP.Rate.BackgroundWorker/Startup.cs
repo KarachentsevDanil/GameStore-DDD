@@ -1,11 +1,11 @@
-using GSP.Order.BackgroundWorker.Extensions;
-using GSP.Order.Data.Context;
+using GSP.Rate.BackgroundWorker.Extensions;
+using GSP.Rate.Data.Context;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GSP.Order.BackgroundWorker
+namespace GSP.Rate.BackgroundWorker
 {
     public class Startup
     {
@@ -20,7 +20,7 @@ namespace GSP.Order.BackgroundWorker
         {
             services.AddLogging();
 
-            services.ConfigureDatabase<OrderDbContext>(Configuration);
+            services.ConfigureDatabase<RateDbContext>(Configuration);
 
             services.RegisterCoreDependencies();
 

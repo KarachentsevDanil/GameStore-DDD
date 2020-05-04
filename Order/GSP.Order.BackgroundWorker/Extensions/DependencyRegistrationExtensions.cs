@@ -14,9 +14,13 @@ using GSP.Order.BackgroundWorker.Events.Games;
 using GSP.Order.BackgroundWorker.Events.Orders;
 using GSP.Order.Data.UnitOfWorks;
 using GSP.Order.Domain.UnitOfWorks.Contracts;
+using GSP.Shared.Utils.Application.Account.Configurations.MapperProfiles;
+using GSP.Shared.Utils.Application.Account.CQS.Commands;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
+using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Order.BackgroundWorker.Extensions
@@ -31,7 +35,9 @@ namespace GSP.Order.BackgroundWorker.Extensions
 
         public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddAutoMapper(typeof(ApplicationProfile), typeof(BackgroundWorkerProfile));
+            serviceCollection.AddMediatR(typeof(CreateAccountCommand).Assembly, typeof(CreateOrderCommand).Assembly);
+
+            serviceCollection.AddAutoMapper(typeof(ApplicationProfile), typeof(AccountApplicationProfile), typeof(BackgroundWorkerProfile));
 
             serviceCollection.AddScoped<IAccountService, AccountService<IOrderUnitOfWork>>();
             serviceCollection.AddScoped<IGameService, GameService>();
@@ -45,6 +51,17 @@ namespace GSP.Order.BackgroundWorker.Extensions
 
             serviceCollection.AddSingleton<IValidator<AddOrderToGameCommand>, AddOrderToGameValidator>();
             serviceCollection.AddSingleton<IValidator<RemoveOrderToGameCommand>, RemoveOrderToGameValidator>();
+
+            return serviceCollection;
+        }
+
+        public static IServiceCollection RegisterBackgroundWorkerDependencies(this IServiceCollection serviceCollection)
+        {
+            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<AccountCreatedEvent, IIntegrationEventHandler<AccountCreatedEvent>>>();
+            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<AccountUpdatedEvent, IIntegrationEventHandler<AccountUpdatedEvent>>>();
+            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
+            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameUpdatedEvent, IIntegrationEventHandler<GameUpdatedEvent>>>();
+            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<OrderPaidEvent, IIntegrationEventHandler<OrderPaidEvent>>>();
 
             return serviceCollection;
         }
