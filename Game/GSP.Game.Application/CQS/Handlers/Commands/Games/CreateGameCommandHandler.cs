@@ -37,7 +37,11 @@ namespace GSP.Game.Application.CQS.Handlers.Commands.Games
         protected override async Task<GetGameDto> ExecuteAsync(CreateGameCommand request, CancellationToken ct)
         {
             var game = await _service.AddAsync(_mapper.Map<AddGameDto>(request), ct);
-            await _serviceBusClient.PublishGameCreatedAsync(_mapper.Map<GameCreatedMessage>(game));
+
+            var message = _mapper.Map<GameCreatedMessage>(game);
+            _mapper.Map(game.GameDetails, message);
+
+            await _serviceBusClient.PublishGameCreatedAsync(message);
             return game;
         }
     }

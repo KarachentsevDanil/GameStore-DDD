@@ -39,8 +39,9 @@ namespace GSP.Game.Application.Configurations.MapperProfiles
             CreateMap<UpdateGameCommand, UpdateGameDto>();
             CreateMap<GetGamePagedListQuery, GameFilterParamsDto>();
             CreateMap<GetGameDto, GameCreatedMessage>();
+            CreateMap<GameDetailsDto, GameCreatedMessage>();
             CreateMap<GameFilterParamsDto, GameFilterParams>();
-            CreateMap<GameUpdatedEvent, GameDetailsDto>();
+            CreateMap<GameUpdatedEvent, GameUpdatedMessage>();
         }
     }
 }

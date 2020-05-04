@@ -8,6 +8,8 @@ namespace GSP.Game.Domain.Events
     {
         public long Id { get; set; }
 
+        public long GenreId { get; set; }
+
         public string Name { get; set; }
 
         public double AverageRating { get; set; }

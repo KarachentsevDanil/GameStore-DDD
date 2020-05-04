@@ -26,12 +26,7 @@ namespace GSP.Game.Application.CQS.Handlers.Notifications.Games
 
         protected override async Task ExecuteAsync(GameUpdatedEvent request, CancellationToken ct)
         {
-            GameUpdatedMessage gameUpdatedMessage = new GameUpdatedMessage
-            {
-                Id = request.Id,
-                GameDetails = _mapper.Map<GameDetailsDto>(request)
-            };
-
+            GameUpdatedMessage gameUpdatedMessage = _mapper.Map<GameUpdatedMessage>(request);
             await _serviceBusClient.PublishGameUpdatedAsync(gameUpdatedMessage);
         }
     }

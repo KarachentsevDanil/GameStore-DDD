@@ -45,6 +45,7 @@ namespace GSP.Game.Domain.Entities
             GameUpdatedEvent gameUpdated = new GameUpdatedEvent
             {
                 Id = Id,
+                GenreId = genreId,
                 Price = GameDetails.Price,
                 Description = GameDetails.Description,
                 AverageRating = GameDetails.AverageRating,
