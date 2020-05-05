@@ -19,6 +19,11 @@ namespace GSP.Payment.Data.Repositories
         {
         }
 
+        public async ValueTask<bool> IsExistsAsync(long accountId, long orderId, CancellationToken ct)
+        {
+            return await DbSet.AnyAsync(q => q.AccountId == accountId && q.OrderId == orderId, ct);
+        }
+
         public async Task<PagedCollection<PaymentHistory>> GetListByAccountIdAsync(PaymentHistoryFilterParams filterParams, CancellationToken ct)
         {
             var query = DbSet.AsNoTracking().AsQueryable();

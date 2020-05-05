@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GSP.Rate.Application.UseCases.DTOs.Rates;
+using GSP.Rate.Application.UseCases.Exceptions;
 using GSP.Rate.Application.UseCases.Services.Contracts;
 using GSP.Rate.Domain.Entities;
 using GSP.Rate.Domain.Models;
@@ -12,7 +13,6 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using GSP.Rate.Application.UseCases.Exceptions;
 
 namespace GSP.Rate.Application.UseCases.Services
 {

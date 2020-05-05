@@ -15,6 +15,11 @@ namespace GSP.Payment.Application.CQS.Validations.PaymentMethods
                 .NotEmpty()
                 .MaximumLength(500);
 
+            RuleFor(p => p.Name)
+                .NotNull()
+                .NotEmpty()
+                .MaximumLength(250);
+
             RuleFor(p => p.Expiration)
                 .NotNull()
                 .NotEmpty()

@@ -6,9 +6,10 @@ namespace GSP.Payment.Domain.Entities
 {
     public class PaymentMethod : BaseEntity
     {
-        private PaymentMethod(long accountId, string cardNumber, string cardHolderFullName, string expiration, string cvv)
+        private PaymentMethod(long accountId, string name, string cardNumber, string cardHolderFullName, string expiration, string cvv)
         {
             AccountId = accountId;
+            Name = name;
             CardNumber = cardNumber;
             CardHolderFullName = cardHolderFullName;
             Expiration = expiration;
@@ -21,6 +22,8 @@ namespace GSP.Payment.Domain.Entities
 
         public long AccountId { get; private set; }
 
+        public string Name { get; private set; }
+
         public string CardNumber { get; private set; }
 
         public string CardHolderFullName { get; private set; }
@@ -29,9 +32,9 @@ namespace GSP.Payment.Domain.Entities
 
         public string Cvv { get; private set; }
 
-        public static PaymentMethod Create(long accountId, string cardNumber, string cardHolderFullName, string expiration, string cvv)
+        public static PaymentMethod Create(long accountId, string name, string cardNumber, string cardHolderFullName, string expiration, string cvv)
         {
-            var paymentMethod = new PaymentMethod(accountId, cardNumber, cardHolderFullName, expiration, cvv);
+            var paymentMethod = new PaymentMethod(accountId, name, cardNumber, cardHolderFullName, expiration, cvv);
 
             paymentMethod.Encrypt();
 

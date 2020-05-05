@@ -4,6 +4,8 @@
     {
         public long AccountId { get; set; }
 
+        public string Name { get; set; }
+
         public string CardNumber { get; set; }
 
         public string CardHolderFullName { get; set; }

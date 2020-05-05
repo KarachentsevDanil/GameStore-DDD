@@ -88,6 +88,11 @@ namespace GSP.Payment.Data.Migrations.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");

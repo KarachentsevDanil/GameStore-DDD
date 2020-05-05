@@ -54,6 +54,10 @@ namespace GSP.Payment.WebApi.Controllers
             {
                 return BadRequest();
             }
+            catch (OrderAlreadyPaidException)
+            {
+                return BadRequest();
+            }
             catch (AccessToPaymentMethodForbiddenException)
             {
                 return BadRequest();

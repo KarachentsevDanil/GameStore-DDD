@@ -9,6 +9,8 @@ namespace GSP.Payment.Domain.Repositories.Contracts
 {
     public interface IPaymentHistoryRepository : IBaseRepository<PaymentHistory>
     {
+        ValueTask<bool> IsExistsAsync(long accountId, long orderId, CancellationToken ct);
+
         Task<PagedCollection<PaymentHistory>> GetListByAccountIdAsync(PaymentHistoryFilterParams filterParams, CancellationToken ct);
     }
 }

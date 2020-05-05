@@ -12,6 +12,8 @@ namespace GSP.Payment.Data.Context.EntityMappings
 
             builder.Property(p => p.CardHolderFullName).HasMaxLength(2048).IsRequired();
 
+            builder.Property(t => t.Name).HasMaxLength(255).IsRequired();
+
             builder.Property(t => t.CardNumber).HasMaxLength(2048).IsRequired();
 
             builder.Property(t => t.Expiration).HasMaxLength(1024).IsRequired();

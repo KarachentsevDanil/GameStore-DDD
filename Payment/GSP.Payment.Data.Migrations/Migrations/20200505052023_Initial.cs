@@ -33,6 +33,7 @@ namespace GSP.Payment.Data.Migrations.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsDeleted = table.Column<bool>(nullable: false),
                     AccountId = table.Column<long>(nullable: false),
+                    Name = table.Column<string>(maxLength: 255, nullable: false),
                     CardNumber = table.Column<string>(maxLength: 2048, nullable: false),
                     CardHolderFullName = table.Column<string>(maxLength: 2048, nullable: false),
                     Expiration = table.Column<string>(maxLength: 1024, nullable: false),

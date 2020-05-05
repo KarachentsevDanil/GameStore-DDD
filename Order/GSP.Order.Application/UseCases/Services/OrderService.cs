@@ -148,7 +148,7 @@ namespace GSP.Order.Application.UseCases.Services
                 throw new UserDoesNotHaveActiveOrderException();
             }
 
-            if (currentOrder.Games.Any())
+            if (!currentOrder.Games.Any())
             {
                 _logger.LogInformation("Order {OrderId} doesn't have games", currentOrder.Id);
                 throw new OrderDoesNotHaveGamesException();

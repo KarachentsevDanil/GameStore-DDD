@@ -32,6 +32,7 @@ namespace GSP.Payment.Application.UseCases.Services
 
             PaymentMethod paymentMethod = PaymentMethod.Create(
                 addPaymentMethodDto.AccountId,
+                addPaymentMethodDto.Name,
                 addPaymentMethodDto.CardNumber,
                 addPaymentMethodDto.CardHolderFullName,
                 addPaymentMethodDto.Expiration,

@@ -6,6 +6,7 @@ using GSP.Payment.Domain.Entities;
 using GSP.Payment.Domain.Models;
 using GSP.Payment.Domain.UnitOfWorks.Contracts;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
+using GSP.Shared.Utils.Common.Helpers;
 using GSP.Shared.Utils.Common.Models.Collections;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -79,9 +80,16 @@ namespace GSP.Payment.Application.UseCases.Services
                 throw new AccessToPaymentMethodForbiddenException();
             }
 
-            paymentMethodDto.Decrypt(paymentHistoryDto.Cvv);
+            var isAlreadyPaid =
+                await _unitOfWork.PaymentHistoryRepository.IsExistsAsync(paymentMethodDto.AccountId, paymentHistoryDto.OrderId, ct);
 
-            if (paymentMethodDto.Cvv != paymentHistoryDto.Cvv)
+            if (isAlreadyPaid)
+            {
+                _logger.LogInformation("Order with Id {OrderId} already paid", paymentHistoryDto.OrderId);
+                throw new OrderAlreadyPaidException();
+            }
+
+            if (paymentMethodDto.Cvv != StringEncryptionHelper.Encrypt(paymentHistoryDto.Cvv))
             {
                 _logger.LogInformation("Cvv code for payment method {PaymentMethodId} is wrong", paymentHistoryDto.PaymentMethodId);
                 throw new CvvIsWrongException();
