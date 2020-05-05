@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.WebApi.Configurations;
+﻿using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.WebApi.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,7 @@ namespace GSP.Shared.Utils.WebApi.Extensions
     {
         public static IServiceCollection ConfigureDatabase<TContext>(
             this IServiceCollection services, IConfiguration configuration)
-            where TContext : DbContext
+            where TContext : GspDbContext
         {
             var dbConfig = new EntityFrameworkConfiguration();
 

@@ -30,7 +30,7 @@ namespace GSP.Order.BackgroundWorker
 
             services.RegisterCoreDependencies();
 
-            services.RegisterApplicationDependencies();
+            services.RegisterApplicationDependencies(Configuration);
 
             services.RegisterAzureServiceBus(Configuration);
 

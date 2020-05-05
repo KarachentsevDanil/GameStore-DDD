@@ -1,6 +1,7 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace GSP.Shared.Utils.Initialization.EntityFramework
 {
@@ -10,7 +11,7 @@ namespace GSP.Shared.Utils.Initialization.EntityFramework
             IConfigurationRoot configuration,
             string migrationPath,
             string settingKey)
-            where T : DbContext
+            where T : GspDbContext
         {
             DbContextOptionsBuilder<T> builder = new DbContextOptionsBuilder<T>();
 

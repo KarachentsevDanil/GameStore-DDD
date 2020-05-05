@@ -1,6 +1,6 @@
-﻿using GSP.Shared.Utils.Domain.Base;
+﻿using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.Domain.Base;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +9,7 @@ namespace GSP.Shared.Utils.Data.Extensions
     public static class MediatorExtension
     {
         public static async Task DispatchDomainEventsAsync<TContext>(this IMediator mediator, TContext ctx)
-            where TContext : DbContext
+            where TContext : GspDbContext
         {
             var domainEntities = ctx.ChangeTracker
                 .Entries<BaseEntity>()

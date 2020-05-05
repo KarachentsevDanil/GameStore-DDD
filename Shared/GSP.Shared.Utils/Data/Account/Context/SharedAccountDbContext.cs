@@ -1,13 +1,13 @@
 ﻿using GSP.Shared.Utils.Data.Account.Context.EntityMappings;
+using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Domain.Account.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Shared.Utils.Data.Account.Context
 {
-    public abstract class SharedAccountDbContext<TContext> : DbContext
-        where TContext : DbContext
+    public abstract class SharedAccountDbContext : GspDbContext
     {
-        protected SharedAccountDbContext(DbContextOptions<TContext> options)
+        protected SharedAccountDbContext(DbContextOptions options)
             : base(options)
         {
         }

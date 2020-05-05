@@ -1,10 +1,11 @@
 ﻿using GSP.Payment.Data.Context.EntityMappings;
 using GSP.Payment.Domain.Entities;
+using GSP.Shared.Utils.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Payment.Data.Context
 {
-    public class PaymentDbContext : DbContext
+    public class PaymentDbContext : GspDbContext
     {
         public PaymentDbContext(DbContextOptions<PaymentDbContext> options)
             : base(options)

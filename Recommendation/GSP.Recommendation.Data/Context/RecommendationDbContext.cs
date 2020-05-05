@@ -1,10 +1,11 @@
 ﻿using GSP.Recommendation.Data.Context.EntityMappings;
 using GSP.Recommendation.Domain.Entities;
+using GSP.Shared.Utils.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Recommendation.Data.Context
 {
-    public class RecommendationDbContext : DbContext
+    public class RecommendationDbContext : GspDbContext
     {
         public RecommendationDbContext(DbContextOptions<RecommendationDbContext> options)
             : base(options)

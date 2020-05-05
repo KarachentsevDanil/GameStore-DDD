@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Order.Data.Context
 {
-    public class OrderDbContext : SharedAccountDbContext<OrderDbContext>
+    public class OrderDbContext : SharedAccountDbContext
     {
         public OrderDbContext(DbContextOptions<OrderDbContext> options)
             : base(options)

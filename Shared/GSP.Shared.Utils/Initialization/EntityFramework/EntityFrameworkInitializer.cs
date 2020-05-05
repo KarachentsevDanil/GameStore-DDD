@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.Initialization.Constants;
+﻿using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.Initialization.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,7 +14,7 @@ namespace GSP.Shared.Utils.Initialization.EntityFramework
             string migrationPath,
             string connectionKey = InitializationConstants.AzureSqlConnectionKey,
             Func<T, Task> additionalMigration = default)
-            where T : DbContext
+            where T : GspDbContext
         {
             Console.WriteLine("Start migration...");
 

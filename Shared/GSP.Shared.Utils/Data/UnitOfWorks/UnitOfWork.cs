@@ -1,7 +1,7 @@
-﻿using GSP.Shared.Utils.Data.Extensions;
+﻿using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.Data.Extensions;
 using GSP.Shared.Utils.Domain.UnitOfWorks.Contracts;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace GSP.Shared.Utils.Data.UnitOfWorks
 {
     public class UnitOfWork<TContext> : IUnitOfWork
-        where TContext : DbContext
+        where TContext : GspDbContext
     {
         public UnitOfWork(TContext context, IMediator mediator)
         {

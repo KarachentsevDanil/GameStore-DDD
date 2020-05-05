@@ -1,10 +1,11 @@
 ﻿using GSP.Game.Data.Context.EntityMappings;
 using GSP.Game.Domain.Entities;
+using GSP.Shared.Utils.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Game.Data.Context
 {
-    public class GameDbContext : DbContext
+    public class GameDbContext : GspDbContext
     {
         public GameDbContext(DbContextOptions<GameDbContext> options)
             : base(options)

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Rate.Data.Context
 {
-    public class RateDbContext : SharedAccountDbContext<RateDbContext>
+    public class RateDbContext : SharedAccountDbContext
     {
         public RateDbContext(DbContextOptions<RateDbContext> options)
             : base(options)
