@@ -11,14 +11,9 @@ namespace GSP.Shared.Utils.WebApi.Middleware
     {
         private readonly RequestDelegate _next;
 
-        private readonly IServiceProvider _serviceProvider;
-
-        public GspUserPrincipalInitializeMiddleware(
-            RequestDelegate next,
-            IServiceProvider serviceProvider)
+        public GspUserPrincipalInitializeMiddleware(RequestDelegate next)
         {
             _next = next;
-            _serviceProvider = serviceProvider;
         }
 
         private static void SetCurrentUserIfNeeded(ClaimsPrincipal userClaims, IGspUserPrincipal gspUserPrincipal)
