@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GSP.Recommendation.Application.Configurations;
 using GSP.Recommendation.Application.Configurations.MapperProfiles;
 using GSP.Recommendation.Application.CQS.Commands.Games;
 using GSP.Recommendation.Application.UseCases.Services;
@@ -11,6 +12,7 @@ using GSP.Recommendation.Domain.UnitOfWorks;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Recommendation.BackgroundWorker.Extensions
@@ -23,11 +25,13 @@ namespace GSP.Recommendation.BackgroundWorker.Extensions
             return serviceCollection;
         }
 
-        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
+        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.AddMediatR(typeof(CreateGameCommand).Assembly);
 
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile));
+
+            serviceCollection.Configure<RecommendationConfiguration>(nameof(RecommendationConfiguration), configuration);
 
             serviceCollection.AddScoped<IRecommendationService, RecommendationService>();
             serviceCollection.AddScoped<IGameService, GameService>();

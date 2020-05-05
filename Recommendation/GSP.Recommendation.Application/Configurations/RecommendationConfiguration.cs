@@ -4,6 +4,6 @@
     {
         public int PercentageOfTransaction { get; set; }
 
-        public int Confident { get; set; }
+        public double Confident { get; set; }
     }
 }

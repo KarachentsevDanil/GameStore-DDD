@@ -30,7 +30,7 @@ namespace GSP.Recommendation.WebApi
 
             services.RegisterCoreDependencies();
 
-            services.RegisterApplicationDependencies();
+            services.RegisterApplicationDependencies(Configuration);
 
             services.RegisterAzureServiceBus(Configuration);
         }

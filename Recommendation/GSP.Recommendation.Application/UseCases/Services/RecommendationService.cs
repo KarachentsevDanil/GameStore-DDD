@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace GSP.Recommendation.Application.UseCases.Services
 {
@@ -19,11 +20,11 @@ namespace GSP.Recommendation.Application.UseCases.Services
 
         private readonly RecommendationConfiguration _recommendationConfiguration;
 
-        public RecommendationService(IRecommendationUnitOfWork unitOfWork, ILogger<RecommendationService> logger, RecommendationConfiguration recommendationConfiguration)
+        public RecommendationService(IRecommendationUnitOfWork unitOfWork, ILogger<RecommendationService> logger, IOptions<RecommendationConfiguration> recommendationConfiguration)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
-            _recommendationConfiguration = recommendationConfiguration;
+            _recommendationConfiguration = recommendationConfiguration.Value;
         }
 
         public async Task<ICollection<long>> GetRecommendedGamesAsync(GetRecommendedGamesQueryDto query, CancellationToken ct = default)
