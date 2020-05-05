@@ -25,12 +25,7 @@ namespace GSP.Recommendation.Data.Repositories
                 .SelectMany(p => p.Games)
                 .ToListAsync(ct);
 
-            var accountGames = query.Select(t => t.GameId).ToList();
-
-            if (accountGames.Contains(gameId))
-            {
-                return Enumerable.Empty<ICollection<OrderGame>>().ToList();
-            }
+            var accountGames = query.Where(t => t.GameId != gameId).Select(t => t.GameId).ToList();
 
             var transactionQuery = await DbSet
                 .Include(i => i.Games)

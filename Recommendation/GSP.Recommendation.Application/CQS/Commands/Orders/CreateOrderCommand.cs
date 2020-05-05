@@ -7,6 +7,14 @@ namespace GSP.Recommendation.Application.CQS.Commands.Orders
 {
     public class CreateOrderCommand : IRequest
     {
+        public CreateOrderCommand(long id, long accountId, DateTime createdAt, ICollection<OrderGameDto> games)
+        {
+            Id = id;
+            AccountId = accountId;
+            CreatedAt = createdAt;
+            Games = games;
+        }
+
         public long Id { get; set; }
 
         public long AccountId { get; set; }

@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using GSP.Order.Application.CQS.Bus.Constants;
+﻿using GSP.Order.Application.CQS.Bus.Constants;
 using GSP.Order.Application.CQS.Bus.Messages;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using System.Threading.Tasks;
 
 namespace GSP.Order.Application.CQS.Bus
 {
@@ -15,6 +15,16 @@ namespace GSP.Order.Application.CQS.Bus
                 gameRating,
                 OrderServiceBusConstants.GameOrderCountUpdatedLabel,
                 OrderServiceBusConstants.GameTopicName);
+        }
+
+        public static async Task PublishOrderCompletedAsync(
+            this IServiceBusClient serviceBusClient,
+            OrderCompletedMessage message)
+        {
+            await serviceBusClient.PublishAsync(
+                message,
+                OrderServiceBusConstants.OrderCompletedLabel,
+                OrderServiceBusConstants.OrderTopicName);
         }
     }
 }
