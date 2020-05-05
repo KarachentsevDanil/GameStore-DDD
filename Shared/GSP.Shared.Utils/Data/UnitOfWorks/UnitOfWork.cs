@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.Data.Context;
+﻿using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
+using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Data.Extensions;
 using GSP.Shared.Utils.Domain.UnitOfWorks.Contracts;
 using MediatR;
@@ -11,10 +12,12 @@ namespace GSP.Shared.Utils.Data.UnitOfWorks
     public class UnitOfWork<TContext> : IUnitOfWork
         where TContext : GspDbContext
     {
-        public UnitOfWork(TContext context, IMediator mediator)
+        public UnitOfWork(TContext context, IMediator mediator, IGspUserPrincipal userPrincipal)
         {
             Context = context;
             Mediator = mediator;
+
+            Context.SetCurrentUserAccount(userPrincipal.User);
         }
 
         protected TContext Context { get; }

@@ -3,7 +3,7 @@ using GSP.Shared.Utils.Domain.Base;
 
 namespace GSP.Game.Domain.Entities
 {
-    public class Publisher : BaseEntity
+    public class Publisher : AuditableEntity
     {
         public Publisher(string name, string description, Uri logoUri, Uri webPageUri)
         {

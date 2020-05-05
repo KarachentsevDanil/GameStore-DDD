@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GSP.Game.Domain.Entities
 {
-    public class GameBase : BaseEntity
+    public class GameBase : AuditableEntity
     {
         public GameBase(long genreId, long developerStudioId, long publisherId, GameDetails details)
         {

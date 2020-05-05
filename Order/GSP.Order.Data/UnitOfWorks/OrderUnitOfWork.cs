@@ -2,6 +2,7 @@
 using GSP.Order.Data.Repositories;
 using GSP.Order.Domain.Repositories.Contracts;
 using GSP.Order.Domain.UnitOfWorks.Contracts;
+using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
 using GSP.Shared.Utils.Data.Account.UnitOfWorks;
 using MediatR;
 
@@ -15,8 +16,8 @@ namespace GSP.Order.Data.UnitOfWorks
 
         private IOrderRepository _orderRepository;
 
-        public OrderUnitOfWork(OrderDbContext context, IMediator mediator)
-            : base(context, mediator)
+        public OrderUnitOfWork(OrderDbContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
+            : base(context, mediator, gspUserPrincipal)
         {
         }
 

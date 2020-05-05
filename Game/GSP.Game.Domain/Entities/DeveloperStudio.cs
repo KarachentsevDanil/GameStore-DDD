@@ -3,7 +3,7 @@ using System;
 
 namespace GSP.Game.Domain.Entities
 {
-    public class DeveloperStudio : BaseEntity
+    public class DeveloperStudio : AuditableEntity
     {
         public DeveloperStudio(string name, string description, Uri logoUri, Uri webPageUri)
         {

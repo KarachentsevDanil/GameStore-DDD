@@ -52,6 +52,8 @@ namespace GSP.Rate.WebApi
                 endpoints.MapControllers();
             });
 
+            app.UseGspUserInitializer();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

@@ -2,7 +2,7 @@
 
 namespace GSP.Game.Domain.Entities
 {
-    public class Genre : BaseEntity
+    public class Genre : AuditableEntity
     {
         public Genre(string name, string description)
         {

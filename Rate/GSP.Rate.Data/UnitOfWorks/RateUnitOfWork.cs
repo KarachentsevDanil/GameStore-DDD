@@ -2,6 +2,7 @@
 using GSP.Rate.Data.Repositories;
 using GSP.Rate.Domain.Repositories;
 using GSP.Rate.Domain.UnitOfWorks;
+using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
 using GSP.Shared.Utils.Data.Account.UnitOfWorks;
 using MediatR;
 
@@ -11,8 +12,8 @@ namespace GSP.Rate.Data.UnitOfWorks
     {
         private IRateRepository _rateRepository;
 
-        public RateUnitOfWork(RateDbContext context, IMediator mediator)
-            : base(context, mediator)
+        public RateUnitOfWork(RateDbContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
+            : base(context, mediator, gspUserPrincipal)
         {
         }
 

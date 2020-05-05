@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.Data.Account.Repositories;
+﻿using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
+using GSP.Shared.Utils.Data.Account.Repositories;
 using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Data.UnitOfWorks;
 using GSP.Shared.Utils.Domain.Account.Repositories.Contracts;
@@ -12,8 +13,8 @@ namespace GSP.Shared.Utils.Data.Account.UnitOfWorks
     {
         private IAccountRepository _accountRepository;
 
-        protected AccountUnitOfWork(TContext context, IMediator mediator)
-            : base(context, mediator)
+        protected AccountUnitOfWork(TContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
+            : base(context, mediator, gspUserPrincipal)
         {
         }
 

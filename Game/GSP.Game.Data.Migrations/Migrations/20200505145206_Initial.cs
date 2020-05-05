@@ -14,6 +14,10 @@ namespace GSP.Game.Data.Migrations.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedByAccountId = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedByAccountId = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
                     Description = table.Column<string>(maxLength: 500, nullable: false),
                     LogoUri = table.Column<string>(maxLength: 2048, nullable: false),
@@ -31,6 +35,10 @@ namespace GSP.Game.Data.Migrations.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedByAccountId = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedByAccountId = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
                     Description = table.Column<string>(maxLength: 500, nullable: false)
                 },
@@ -46,6 +54,10 @@ namespace GSP.Game.Data.Migrations.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedByAccountId = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedByAccountId = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(maxLength: 255, nullable: false),
                     Description = table.Column<string>(maxLength: 500, nullable: false),
                     LogoUri = table.Column<string>(maxLength: 2048, nullable: false),
@@ -63,6 +75,10 @@ namespace GSP.Game.Data.Migrations.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsDeleted = table.Column<bool>(nullable: false),
+                    CreatedByAccountId = table.Column<long>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedByAccountId = table.Column<long>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
                     GameDetails_Name = table.Column<string>(maxLength: 255, nullable: true),
                     GameDetails_AverageRating = table.Column<double>(nullable: true),
                     GameDetails_ReviewCount = table.Column<int>(nullable: true),

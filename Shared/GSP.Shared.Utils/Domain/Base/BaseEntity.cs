@@ -5,7 +5,7 @@ namespace GSP.Shared.Utils.Domain.Base
 {
     public abstract class BaseEntity
     {
-        public long Id { get; set; }
+        public long Id { get; protected set; }
 
         public bool IsDeleted { get; private set; }
 

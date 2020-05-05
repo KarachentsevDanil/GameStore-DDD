@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GSP.Game.Data.Migrations.Migrations
 {
     [DbContext(typeof(GameDbContext))]
-    [Migration("20200420073518_Initial")]
+    [Migration("20200505145206_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("CreatedByAccountId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -46,6 +52,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UpdatedByAccountId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("WebPageUri")
                         .IsRequired()
                         .HasColumnType("nvarchar(2048)")
@@ -63,6 +75,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("CreatedByAccountId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("DeveloperStudioId")
                         .HasColumnType("bigint");
 
@@ -73,6 +91,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .HasColumnType("bit");
 
                     b.Property<long>("PublisherId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UpdatedByAccountId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -93,6 +117,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("CreatedByAccountId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(500)")
@@ -106,6 +136,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UpdatedByAccountId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
@@ -117,6 +153,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("CreatedByAccountId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -135,6 +177,12 @@ namespace GSP.Game.Data.Migrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("UpdatedByAccountId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("WebPageUri")
                         .IsRequired()
