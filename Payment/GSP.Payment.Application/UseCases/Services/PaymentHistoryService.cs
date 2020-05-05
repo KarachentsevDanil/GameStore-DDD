@@ -77,7 +77,7 @@ namespace GSP.Payment.Application.UseCases.Services
             if (paymentMethodDto.AccountId != paymentHistoryDto.AccountId)
             {
                 _logger.LogInformation("Access to this payment method is not allowed for account {AccountId}", paymentHistoryDto.AccountId);
-                throw new AccessToPaymentMethodForbiddenException();
+                throw new AccessToItemForbiddenException();
             }
 
             var isAlreadyPaid =

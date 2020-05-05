@@ -25,7 +25,11 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
 
                 await PreExecuteAsync(request, cancellationToken);
 
-                return await ExecuteAsync(request, cancellationToken);
+                var result = await ExecuteAsync(request, cancellationToken);
+
+                await PostExecuteAsync(result, cancellationToken);
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -37,6 +41,11 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
         protected abstract Task<TResult> ExecuteAsync(TRequest request, CancellationToken ct);
 
         protected virtual Task PreExecuteAsync(TRequest request, CancellationToken ct)
+        {
+            return Task.CompletedTask;
+        }
+
+        protected virtual Task PostExecuteAsync(TResult result, CancellationToken ct)
         {
             return Task.CompletedTask;
         }

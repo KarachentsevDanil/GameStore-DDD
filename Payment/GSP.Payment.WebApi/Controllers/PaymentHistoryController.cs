@@ -40,28 +40,9 @@ namespace GSP.Payment.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreatePaymentHistoryCommand command)
         {
-            try
-            {
-                command.AccountId = User.GetUserId();
-                var response = await _mediator.Send(command);
-                return CreatedAt(response);
-            }
-            catch (ItemNotFoundException)
-            {
-                return BadRequest();
-            }
-            catch (CvvIsWrongException)
-            {
-                return BadRequest();
-            }
-            catch (OrderAlreadyPaidException)
-            {
-                return BadRequest();
-            }
-            catch (AccessToPaymentMethodForbiddenException)
-            {
-                return BadRequest();
-            }
+            command.AccountId = User.GetUserId();
+            var response = await _mediator.Send(command);
+            return CreatedAt(response);
         }
 
         /// <summary>

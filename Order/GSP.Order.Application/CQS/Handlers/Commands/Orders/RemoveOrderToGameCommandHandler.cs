@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using GSP.Order.Application.CQS.Cache.Extensions;
 using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.Application.UseCases.DTOs.Orders;
 using GSP.Order.Application.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
+using GSP.Shared.Utils.Common.Cache.Base.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,20 +17,26 @@ namespace GSP.Order.Application.CQS.Handlers.Commands.Orders
 
         private readonly IOrderService _orderService;
 
+        private readonly ICacheManager _cacheManager;
+
         public RemoveOrderToGameCommandHandler(
             ILogger<RemoveOrderToGameCommand> logger,
             IMapper mapper,
-            IOrderService orderService)
+            IOrderService orderService,
+            ICacheManager cacheManager)
             : base(logger)
         {
             _mapper = mapper;
             _orderService = orderService;
+            _cacheManager = cacheManager;
         }
 
         protected override async Task<GetOrderDto> ExecuteAsync(RemoveOrderToGameCommand request, CancellationToken ct)
         {
             OrderGameDto orderDto = _mapper.Map<OrderGameDto>(request);
-            return await _orderService.DeleteOrderGameAsync(orderDto, ct);
+            var result = await _orderService.DeleteOrderGameAsync(orderDto, ct);
+            await _cacheManager.ClearAccountOrderCacheAsync(request.AccountId);
+            return result;
         }
     }
 }

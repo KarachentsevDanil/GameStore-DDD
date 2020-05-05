@@ -6,6 +6,8 @@ using GSP.Order.Data.UnitOfWorks;
 using GSP.Order.Domain.UnitOfWorks.Contracts;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
+using GSP.Shared.Utils.Common.Cache.InMemory.Extensions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Order.WebApi.Extensions
@@ -18,8 +20,9 @@ namespace GSP.Order.WebApi.Extensions
             return serviceCollection;
         }
 
-        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
+        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
+            serviceCollection.AddInMemoryCache(configuration);
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile));
             serviceCollection.AddScoped<IAccountService, AccountService<IOrderUnitOfWork>>();
             serviceCollection.AddScoped<IGameService, GameService>();

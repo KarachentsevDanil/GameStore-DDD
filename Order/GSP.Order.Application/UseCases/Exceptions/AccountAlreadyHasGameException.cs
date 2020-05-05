@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Order.Application.UseCases.Exceptions
 {
-    public class AccountAlreadyHasGameException : Exception
+    public class AccountAlreadyHasGameException : BusinessLogicException
     {
         public AccountAlreadyHasGameException()
         {
@@ -17,5 +18,9 @@ namespace GSP.Order.Application.UseCases.Exceptions
             : base(message, innerException)
         {
         }
+
+        public override string ErrorCode { get; } = "GameAlreadyBought";
+
+        public override string ErrorMessage { get; } = "This game already bought for account.";
     }
 }

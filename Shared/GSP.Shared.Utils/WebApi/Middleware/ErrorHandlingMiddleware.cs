@@ -1,4 +1,6 @@
 ﻿using GSP.Shared.Utils.Application.CQS.Exceptions;
+using GSP.Shared.Utils.Application.CQS.Models.Validations;
+using GSP.Shared.Utils.Application.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -33,6 +35,20 @@ namespace GSP.Shared.Utils.WebApi.Middleware
                 context.Response.ContentType = MediaTypeNames.Application.Json;
 
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(ex.ValidationErrors));
+            }
+            catch (BusinessLogicException ex)
+            {
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                context.Response.ContentType = MediaTypeNames.Application.Json;
+
+                var validationError = new ValidationError
+                {
+                    ErrorCode = ex.ErrorCode,
+                    Message = ex.ErrorMessage
+                };
+
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(validationError));
             }
             catch (Exception exp)
             {

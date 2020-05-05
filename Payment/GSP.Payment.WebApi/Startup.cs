@@ -4,10 +4,8 @@ using GSP.Payment.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GSP.Payment.WebApi
 {

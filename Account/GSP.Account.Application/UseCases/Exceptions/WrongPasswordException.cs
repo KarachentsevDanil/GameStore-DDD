@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Account.Application.UseCases.Exceptions
 {
-    public class WrongPasswordException : Exception
+    public class WrongPasswordException : BusinessLogicException
     {
         public WrongPasswordException()
         {
@@ -17,5 +18,9 @@ namespace GSP.Account.Application.UseCases.Exceptions
             : base(message, innerException)
         {
         }
+
+        public override string ErrorCode { get; } = "WrongPassword";
+
+        public override string ErrorMessage { get; } = "You've entered wrong password.";
     }
 }

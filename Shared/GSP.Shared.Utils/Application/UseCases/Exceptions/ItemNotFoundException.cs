@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Shared.Utils.Application.UseCases.Exceptions
 {
-    public class ItemNotFoundException : Exception
+    public class ItemNotFoundException : BusinessLogicException
     {
         public ItemNotFoundException(string message)
             : base(message)
@@ -17,5 +18,9 @@ namespace GSP.Shared.Utils.Application.UseCases.Exceptions
         public ItemNotFoundException()
         {
         }
+
+        public override string ErrorCode { get; } = "ItemNotFound";
+
+        public override string ErrorMessage { get; } = "Requested item doesn't exist.";
     }
 }

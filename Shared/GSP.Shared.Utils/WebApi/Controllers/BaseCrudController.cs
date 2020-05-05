@@ -1,9 +1,7 @@
 ﻿using GSP.Shared.Utils.Application.CQS.Commands;
 using GSP.Shared.Utils.Application.CQS.Queries;
 using GSP.Shared.Utils.Application.UseCases.DTOs;
-using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
@@ -38,21 +36,14 @@ namespace GSP.Shared.Utils.WebApi.Controllers
         [HttpGet("{id}")]
         public virtual async Task<IActionResult> Get(long id)
         {
-            try
+            TGetItemByIdQuery query = new TGetItemByIdQuery
             {
-                TGetItemByIdQuery query = new TGetItemByIdQuery
-                {
-                    Id = id
-                };
+                Id = id
+            };
 
-                TGetItemDto item = await Mediator.Send(query);
+            TGetItemDto item = await Mediator.Send(query);
 
-                return Ok(item);
-            }
-            catch (ItemNotFoundException)
-            {
-                return NotFound();
-            }
+            return Ok(item);
         }
 
         /// <summary>
@@ -88,16 +79,9 @@ namespace GSP.Shared.Utils.WebApi.Controllers
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Update(long id, [FromBody]TUpdateItemCommand command)
         {
-            try
-            {
-                command.Id = id;
-                TGetItemDto item = await Mediator.Send(command);
-                return Ok(item);
-            }
-            catch (ItemNotFoundException)
-            {
-                return NotFound();
-            }
+            command.Id = id;
+            TGetItemDto item = await Mediator.Send(command);
+            return Ok(item);
         }
 
         /// <summary>

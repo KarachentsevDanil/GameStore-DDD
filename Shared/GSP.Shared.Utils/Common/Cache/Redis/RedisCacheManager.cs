@@ -1,6 +1,7 @@
 ﻿using GSP.Shared.Utils.Common.Cache.Base.Contracts;
 using GSP.Shared.Utils.Common.Cache.Redis.Configurations;
 using GSP.Shared.Utils.Common.Cache.Redis.Contracts;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
@@ -13,10 +14,10 @@ namespace GSP.Shared.Utils.Common.Cache.Redis
 
         private readonly RedisConfiguration _configuration;
 
-        public RedisCacheManager(IRedisCacheDatabaseProvider databaseProvider, RedisConfiguration configuration)
+        public RedisCacheManager(IRedisCacheDatabaseProvider databaseProvider, IOptions<RedisConfiguration> configuration)
         {
             _databaseProvider = databaseProvider;
-            _configuration = configuration;
+            _configuration = configuration.Value;
         }
 
         public async Task AddAsync<TEntity>(TEntity entity, string key, TimeSpan? expirationTime = null)

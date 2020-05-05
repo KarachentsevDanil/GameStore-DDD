@@ -1,7 +1,6 @@
 ﻿using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.Application.CQS.Queries.Orders;
 using GSP.Order.Application.UseCases.DTOs.Orders;
-using GSP.Order.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -35,15 +34,8 @@ namespace GSP.Order.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create()
         {
-            try
-            {
-                GetOrderDto order = await _mediator.Send(new CreateOrderCommand(User.GetUserId()));
-                return CreatedAt(order);
-            }
-            catch (AccountHasUncompletedOrderException)
-            {
-                return BadRequest();
-            }
+            GetOrderDto order = await _mediator.Send(new CreateOrderCommand(User.GetUserId()));
+            return CreatedAt(order);
         }
 
         /// <summary>
@@ -61,20 +53,9 @@ namespace GSP.Order.WebApi.Controllers
         [HttpPut("addgame")]
         public async Task<IActionResult> AddGameToOrder([FromBody] AddOrderToGameCommand command)
         {
-            try
-            {
-                command.AccountId = User.GetUserId();
-                GetOrderDto order = await _mediator.Send(command);
-                return Ok(order);
-            }
-            catch (UserDoesNotHaveActiveOrderException)
-            {
-                return BadRequest();
-            }
-            catch (AccountAlreadyHasGameException)
-            {
-                return BadRequest();
-            }
+            command.AccountId = User.GetUserId();
+            GetOrderDto order = await _mediator.Send(command);
+            return Ok(order);
         }
 
         /// <summary>
@@ -92,20 +73,9 @@ namespace GSP.Order.WebApi.Controllers
         [HttpPut("removegame")]
         public async Task<IActionResult> RemoveGameFromOrder([FromBody] RemoveOrderToGameCommand command)
         {
-            try
-            {
-                command.AccountId = User.GetUserId();
-                GetOrderDto order = await _mediator.Send(command);
-                return Ok(order);
-            }
-            catch (UserDoesNotHaveActiveOrderException)
-            {
-                return BadRequest();
-            }
-            catch (AccountDoesNotHaveGameException)
-            {
-                return BadRequest();
-            }
+            command.AccountId = User.GetUserId();
+            GetOrderDto order = await _mediator.Send(command);
+            return Ok(order);
         }
 
         /// <summary>
@@ -118,15 +88,8 @@ namespace GSP.Order.WebApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCurrentOrder()
         {
-            try
-            {
-                GetOrderDto order = await _mediator.Send(new GetOrderByAccountQuery(User.GetUserId()));
-                return Ok(order);
-            }
-            catch (UserDoesNotHaveActiveOrderException)
-            {
-                return NotFound();
-            }
+            GetOrderDto order = await _mediator.Send(new GetOrderByAccountQuery(User.GetUserId()));
+            return Ok(order);
         }
 
         /// <summary>

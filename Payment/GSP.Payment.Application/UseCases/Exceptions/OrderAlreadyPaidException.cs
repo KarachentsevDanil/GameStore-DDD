@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Payment.Application.UseCases.Exceptions
 {
-    public class OrderAlreadyPaidException : Exception
+    public class OrderAlreadyPaidException : BusinessLogicException
     {
         public OrderAlreadyPaidException(string message)
             : base(message)
@@ -17,5 +18,9 @@ namespace GSP.Payment.Application.UseCases.Exceptions
         public OrderAlreadyPaidException()
         {
         }
+
+        public override string ErrorCode { get; } = "OrderAlreadyPaid";
+
+        public override string ErrorMessage { get; } = "Order already paid.";
     }
 }

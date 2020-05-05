@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Shared.Utils.Application.UseCases.Exceptions
 {
-    public class AccessToItemForbiddenException : Exception
+    public class AccessToItemForbiddenException : BusinessLogicException
     {
         public AccessToItemForbiddenException(string message)
             : base(message)
@@ -17,5 +18,9 @@ namespace GSP.Shared.Utils.Application.UseCases.Exceptions
         public AccessToItemForbiddenException()
         {
         }
+
+        public override string ErrorCode { get; } = "AccessToEntityForbidden";
+
+        public override string ErrorMessage { get; } = "Account doesn't have access to entity.";
     }
 }

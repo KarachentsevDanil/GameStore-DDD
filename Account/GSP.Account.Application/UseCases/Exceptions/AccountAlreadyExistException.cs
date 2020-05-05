@@ -1,8 +1,9 @@
 ﻿using System;
+using GSP.Shared.Utils.Application.Exceptions;
 
 namespace GSP.Account.Application.UseCases.Exceptions
 {
-    public class AccountAlreadyExistException : Exception
+    public class AccountAlreadyExistException : BusinessLogicException
     {
         public AccountAlreadyExistException()
         {
@@ -17,5 +18,9 @@ namespace GSP.Account.Application.UseCases.Exceptions
             : base(message, innerException)
         {
         }
+
+        public override string ErrorCode { get; } = "AccountAlreadyExists";
+
+        public override string ErrorMessage { get; } = "Account with this email already exists in system.";
     }
 }

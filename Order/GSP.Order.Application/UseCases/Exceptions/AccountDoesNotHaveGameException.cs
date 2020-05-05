@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Order.Application.UseCases.Exceptions
 {
-    public class AccountDoesNotHaveGameException : Exception
+    public class AccountDoesNotHaveGameException : BusinessLogicException
     {
         public AccountDoesNotHaveGameException()
         {
@@ -17,5 +18,9 @@ namespace GSP.Order.Application.UseCases.Exceptions
             : base(message, innerException)
         {
         }
+
+        public override string ErrorCode { get; } = "AccountDoesNotHaveGame";
+
+        public override string ErrorMessage { get; } = "This game is not in bucket";
     }
 }

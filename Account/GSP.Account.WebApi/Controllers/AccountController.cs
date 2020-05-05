@@ -1,7 +1,6 @@
 ﻿using GSP.Account.Application.CQS.Commands;
 using GSP.Account.Application.CQS.Queries;
 using GSP.Account.Application.UseCases.DTOs;
-using GSP.Account.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -37,19 +36,8 @@ namespace GSP.Account.WebApi.Controllers
         [ProducesResponseType(typeof(TokenDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Login([FromBody] LoginToAccountCommand loginCommand)
         {
-            try
-            {
-                var token = await _mediator.Send(loginCommand);
-                return Ok(token);
-            }
-            catch (AccountNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (WrongPasswordException)
-            {
-                return BadRequest();
-            }
+            var token = await _mediator.Send(loginCommand);
+            return Ok(token);
         }
 
         /// <summary>
@@ -65,15 +53,8 @@ namespace GSP.Account.WebApi.Controllers
         [ProducesResponseType(typeof(GetAccountDto), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create([FromBody] CreateAccountCommand createAccountCommand)
         {
-            try
-            {
-                var account = await _mediator.Send(createAccountCommand);
-                return CreatedAt(account);
-            }
-            catch (AccountAlreadyExistException)
-            {
-                return BadRequest();
-            }
+            var account = await _mediator.Send(createAccountCommand);
+            return CreatedAt(account);
         }
 
         /// <summary>
@@ -90,18 +71,11 @@ namespace GSP.Account.WebApi.Controllers
         [ProducesResponseType(typeof(GetAccountDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Update([FromBody] UpdateAccountCommand updateAccountCommand)
         {
-            try
-            {
-                updateAccountCommand.Id = User.GetUserId();
+            updateAccountCommand.Id = User.GetUserId();
 
-                var account = await _mediator.Send(updateAccountCommand);
+            var account = await _mediator.Send(updateAccountCommand);
 
-                return Ok(account);
-            }
-            catch (AccountNotFoundException)
-            {
-                return NotFound();
-            }
+            return Ok(account);
         }
 
         /// <summary>
@@ -117,15 +91,8 @@ namespace GSP.Account.WebApi.Controllers
         [ProducesResponseType(typeof(GetAccountDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Info()
         {
-            try
-            {
-                var account = await _mediator.Send(new GetAccountInfoQuery(User.GetUserEmail()));
-                return Ok(account);
-            }
-            catch (AccountNotFoundException)
-            {
-                return NotFound();
-            }
+            var account = await _mediator.Send(new GetAccountInfoQuery(User.GetUserEmail()));
+            return Ok(account);
         }
     }
 }

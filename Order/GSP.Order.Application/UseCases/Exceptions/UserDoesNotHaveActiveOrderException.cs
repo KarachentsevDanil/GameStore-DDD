@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Order.Application.UseCases.Exceptions
 {
-    public class UserDoesNotHaveActiveOrderException : Exception
+    public class UserDoesNotHaveActiveOrderException : BusinessLogicException
     {
         public UserDoesNotHaveActiveOrderException()
         {
@@ -17,5 +18,9 @@ namespace GSP.Order.Application.UseCases.Exceptions
             : base(message, innerException)
         {
         }
+
+        public override string ErrorCode { get; } = "AccountDoesNotActiveOrder";
+
+        public override string ErrorMessage { get; } = "Please create new order.";
     }
 }

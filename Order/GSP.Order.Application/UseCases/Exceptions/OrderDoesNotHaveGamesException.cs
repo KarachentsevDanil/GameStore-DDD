@@ -1,8 +1,9 @@
 ﻿using System;
+using GSP.Shared.Utils.Application.Exceptions;
 
 namespace GSP.Order.Application.UseCases.Exceptions
 {
-    public class OrderDoesNotHaveGamesException : Exception
+    public class OrderDoesNotHaveGamesException : BusinessLogicException
     {
         public OrderDoesNotHaveGamesException()
         {
@@ -17,5 +18,9 @@ namespace GSP.Order.Application.UseCases.Exceptions
             : base(message, innerException)
         {
         }
+
+        public override string ErrorCode { get; } = "BucketIsEmpty";
+
+        public override string ErrorMessage { get; } = "Bucket is empty";
     }
 }

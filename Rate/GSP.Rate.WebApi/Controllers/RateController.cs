@@ -37,16 +37,9 @@ namespace GSP.Rate.WebApi.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Create([FromBody]CreateRateCommand command)
         {
-            try
-            {
-                command.AccountId = User.GetUserId();
-                GetRateDto item = await _mediator.Send(command);
-                return CreatedAt(item);
-            }
-            catch (RateAlreadyExistsException)
-            {
-                return BadRequest();
-            }
+            command.AccountId = User.GetUserId();
+            GetRateDto item = await _mediator.Send(command);
+            return CreatedAt(item);
         }
 
         /// <summary>
@@ -65,21 +58,10 @@ namespace GSP.Rate.WebApi.Controllers
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Update(long id, [FromBody]UpdateRateCommand command)
         {
-            try
-            {
-                command.Id = id;
-                command.AccountId = User.GetUserId();
-                GetRateDto item = await _mediator.Send(command);
-                return Ok(item);
-            }
-            catch (ItemNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (AccessToItemForbiddenException)
-            {
-                return Forbid();
-            }
+            command.Id = id;
+            command.AccountId = User.GetUserId();
+            GetRateDto item = await _mediator.Send(command);
+            return Ok(item);
         }
 
         /// <summary>

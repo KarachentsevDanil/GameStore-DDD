@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GSP.Shared.Utils.Application.Exceptions;
+using System;
 
 namespace GSP.Rate.Application.UseCases.Exceptions
 {
-    public class RateAlreadyExistsException : Exception
+    public class RateAlreadyExistsException : BusinessLogicException
     {
         public RateAlreadyExistsException(string message)
             : base(message)
@@ -17,5 +18,9 @@ namespace GSP.Rate.Application.UseCases.Exceptions
         public RateAlreadyExistsException()
         {
         }
+
+        public override string ErrorCode { get; } = "RateAlreadyExists";
+
+        public override string ErrorMessage { get; } = "You have already added rating to game. You can modify it.";
     }
 }
