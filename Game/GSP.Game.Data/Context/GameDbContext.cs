@@ -1,5 +1,6 @@
 ﻿using GSP.Game.Data.Context.EntityMappings;
 using GSP.Game.Domain.Entities;
+using GSP.Shared.Utils.Common.Sessions.Contracts;
 using GSP.Shared.Utils.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +8,8 @@ namespace GSP.Game.Data.Context
 {
     public class GameDbContext : GspDbContext
     {
-        public GameDbContext(DbContextOptions<GameDbContext> options)
-            : base(options)
+        public GameDbContext(DbContextOptions<GameDbContext> options, IGspSession gspSession)
+            : base(options, gspSession)
         {
         }
 

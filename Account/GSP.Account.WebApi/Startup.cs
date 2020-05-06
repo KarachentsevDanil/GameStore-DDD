@@ -50,8 +50,6 @@ namespace GSP.Account.WebApi
                 endpoints.MapControllers();
             });
 
-            app.UseGspUserInitializer();
-
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

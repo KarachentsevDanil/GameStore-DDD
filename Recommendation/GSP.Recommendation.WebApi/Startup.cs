@@ -52,8 +52,6 @@ namespace GSP.Recommendation.WebApi
                 endpoints.MapControllers();
             });
 
-            app.UseGspUserInitializer();
-
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>

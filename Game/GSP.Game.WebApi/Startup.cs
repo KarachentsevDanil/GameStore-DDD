@@ -47,8 +47,6 @@ namespace GSP.Game.WebApi
 
             app.UseAuthorization();
 
-            app.UseGspUserInitializer();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -9,10 +9,5 @@ namespace GSP.Shared.Utils.WebApi.Extensions
         {
             return builder.UseMiddleware<ErrorHandlingMiddleware>();
         }
-
-        public static IApplicationBuilder UseGspUserInitializer(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<GspUserPrincipalInitializeMiddleware>();
-        }
     }
 }

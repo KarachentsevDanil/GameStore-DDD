@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.UserPrincipal.Models;
+﻿using GSP.Shared.Utils.Common.Sessions.Contracts;
 using GSP.Shared.Utils.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -10,17 +10,13 @@ namespace GSP.Shared.Utils.Data.Context
 {
     public abstract class GspDbContext : DbContext
     {
-        protected GspDbContext(DbContextOptions options)
+        protected GspDbContext(DbContextOptions options, IGspSession session)
             : base(options)
         {
+            Session = session;
         }
 
-        public GspUserAccountModel CurrentUserAccount { get; private set; }
-
-        public void SetCurrentUserAccount(GspUserAccountModel account)
-        {
-            CurrentUserAccount = account;
-        }
+        protected IGspSession Session { get; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -30,7 +26,7 @@ namespace GSP.Shared.Utils.Data.Context
 
         protected virtual void ProcessAuditableEntities()
         {
-            if (CurrentUserAccount == null)
+            if (Session == null)
             {
                 return;
             }
@@ -50,11 +46,11 @@ namespace GSP.Shared.Utils.Data.Context
         {
             if (auditableEntity.State == EntityState.Added)
             {
-                auditableEntity.Entity.SetCreatedInfo(CurrentUserAccount.Id);
+                auditableEntity.Entity.SetCreatedInfo(Session.AccountId);
             }
             else
             {
-                auditableEntity.Entity.SetUpdatedInfo(CurrentUserAccount.Id);
+                auditableEntity.Entity.SetUpdatedInfo(Session.AccountId);
             }
         }
     }

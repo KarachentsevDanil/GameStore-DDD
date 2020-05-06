@@ -2,7 +2,6 @@
 using GSP.Account.Data.Repositories;
 using GSP.Account.Domain.Repositories.Contracts;
 using GSP.Account.Domain.UnitOfWorks.Contracts;
-using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
 using GSP.Shared.Utils.Data.UnitOfWorks;
 using MediatR;
 
@@ -14,8 +13,8 @@ namespace GSP.Account.Data.UnitOfWorks
 
         private IAccountRepository _accountRepository;
 
-        public AccountUnitOfWork(AccountDbContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
-            : base(context, mediator, gspUserPrincipal)
+        public AccountUnitOfWork(AccountDbContext context, IMediator mediator)
+            : base(context, mediator)
         {
             _context = context;
         }

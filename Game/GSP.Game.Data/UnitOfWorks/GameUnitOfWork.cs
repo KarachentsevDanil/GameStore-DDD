@@ -2,7 +2,6 @@
 using GSP.Game.Data.Repositories;
 using GSP.Game.Domain.Repositories.Contracts;
 using GSP.Game.Domain.UnitOfWorks.Contracts;
-using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
 using GSP.Shared.Utils.Data.UnitOfWorks;
 using MediatR;
 
@@ -20,8 +19,8 @@ namespace GSP.Game.Data.UnitOfWorks
 
         private IPublisherRepository _publisherRepository;
 
-        public GameUnitOfWork(GameDbContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
-            : base(context, mediator, gspUserPrincipal)
+        public GameUnitOfWork(GameDbContext context, IMediator mediator)
+            : base(context, mediator)
         {
             _context = context;
         }

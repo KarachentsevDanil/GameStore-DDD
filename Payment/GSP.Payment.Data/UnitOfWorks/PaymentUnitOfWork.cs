@@ -2,7 +2,6 @@
 using GSP.Payment.Data.Repositories;
 using GSP.Payment.Domain.Repositories.Contracts;
 using GSP.Payment.Domain.UnitOfWorks.Contracts;
-using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
 using GSP.Shared.Utils.Data.UnitOfWorks;
 using MediatR;
 
@@ -14,8 +13,8 @@ namespace GSP.Payment.Data.UnitOfWorks
 
         private IPaymentHistoryRepository _paymentHistoryRepository;
 
-        public PaymentUnitOfWork(PaymentDbContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
-            : base(context, mediator, gspUserPrincipal)
+        public PaymentUnitOfWork(PaymentDbContext context, IMediator mediator)
+            : base(context, mediator)
         {
         }
 

@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Utils.Data.Account.Context.EntityMappings;
+﻿using GSP.Shared.Utils.Common.Sessions.Contracts;
+using GSP.Shared.Utils.Data.Account.Context.EntityMappings;
 using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Domain.Account.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -7,8 +8,8 @@ namespace GSP.Shared.Utils.Data.Account.Context
 {
     public abstract class SharedAccountDbContext : GspDbContext
     {
-        protected SharedAccountDbContext(DbContextOptions options)
-            : base(options)
+        protected SharedAccountDbContext(DbContextOptions options, IGspSession gspSession)
+            : base(options, gspSession)
         {
         }
 

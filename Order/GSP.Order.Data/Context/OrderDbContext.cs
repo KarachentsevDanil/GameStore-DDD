@@ -1,5 +1,6 @@
 ﻿using GSP.Order.Data.Context.EntityMappings;
 using GSP.Order.Domain.Entities;
+using GSP.Shared.Utils.Common.Sessions.Contracts;
 using GSP.Shared.Utils.Data.Account.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,8 +8,8 @@ namespace GSP.Order.Data.Context
 {
     public class OrderDbContext : SharedAccountDbContext
     {
-        public OrderDbContext(DbContextOptions<OrderDbContext> options)
-            : base(options)
+        public OrderDbContext(DbContextOptions<OrderDbContext> options, IGspSession gspSession)
+            : base(options, gspSession)
         {
         }
 

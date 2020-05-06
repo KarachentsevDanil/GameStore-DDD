@@ -2,7 +2,6 @@
 using GSP.Recommendation.Data.Repositories;
 using GSP.Recommendation.Domain.Repositories;
 using GSP.Recommendation.Domain.UnitOfWorks;
-using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
 using GSP.Shared.Utils.Data.UnitOfWorks;
 using MediatR;
 
@@ -14,8 +13,8 @@ namespace GSP.Recommendation.Data.UnitOfWorks
 
         private IOrderRepository _orderRepository;
 
-        public RecommendationUnitOfWork(RecommendationDbContext context, IMediator mediator, IGspUserPrincipal gspUserPrincipal)
-            : base(context, mediator, gspUserPrincipal)
+        public RecommendationUnitOfWork(RecommendationDbContext context, IMediator mediator)
+            : base(context, mediator)
         {
         }
 

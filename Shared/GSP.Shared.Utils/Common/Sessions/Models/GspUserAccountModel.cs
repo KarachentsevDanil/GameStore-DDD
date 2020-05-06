@@ -1,4 +1,4 @@
-﻿namespace GSP.Shared.Utils.Common.UserPrincipal.Models
+﻿namespace GSP.Shared.Utils.Common.Sessions.Models
 {
     public class GspUserAccountModel
     {

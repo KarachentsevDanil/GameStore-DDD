@@ -1,6 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
-using GSP.Shared.Utils.Common.UserPrincipal;
-using GSP.Shared.Utils.Common.UserPrincipal.Contracts;
+using GSP.Shared.Utils.WebApi.Sessions.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -29,8 +28,7 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 
             services.AddMediatR(typeof(TStartup).Assembly);
 
-            // TODO: Move to separated file
-            services.AddScoped<IGspUserPrincipal, GspUserPrincipal>();
+            services.AddGspSession();
 
             return services;
         }
