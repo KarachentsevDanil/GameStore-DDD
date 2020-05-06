@@ -1,3 +1,4 @@
+using GSP.Payment.Application.CQS.Commands.PaymentHistories;
 using GSP.Payment.Application.CQS.Validations.PaymentHistories;
 using GSP.Payment.Data.Context;
 using GSP.Payment.WebApi.Extensions;
@@ -18,11 +19,14 @@ namespace GSP.Payment.WebApi
 
         public IConfiguration Configuration { get; }
 
+        public static void Configure(IApplicationBuilder app)
+        {
+            app.UseGspApplicationBuilder<Startup>();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<CreatePaymentHistoryValidator>(Configuration);
-
-            services.AddLogging();
+            services.AddGspWebApi<CreatePaymentHistoryValidator, CreatePaymentHistoryCommand>(Configuration);
 
             services.ConfigureDatabase<PaymentDbContext>(Configuration);
 
@@ -31,31 +35,6 @@ namespace GSP.Payment.WebApi
             services.RegisterApplicationDependencies();
 
             services.RegisterAzureServiceBus(Configuration);
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseApiExceptionHandler();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Configuration));
-            });
         }
     }
 }

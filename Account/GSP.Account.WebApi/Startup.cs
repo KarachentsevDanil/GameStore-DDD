@@ -1,3 +1,4 @@
+using GSP.Account.Application.CQS.Handlers.Commands;
 using GSP.Account.Application.CQS.Validators;
 using GSP.Account.Data.Context;
 using GSP.Account.WebApi.Extensions;
@@ -18,6 +19,11 @@ namespace GSP.Account.WebApi
 
         public IConfiguration Configuration { get; }
 
+        public static void Configure(IApplicationBuilder app)
+        {
+            app.UseGspApplicationBuilder<Startup>();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterCoreDependencies();
@@ -26,36 +32,9 @@ namespace GSP.Account.WebApi
 
             services.ConfigureDatabase<AccountDbContext>(Configuration);
 
-            services.AddWebApi<CreateAccountValidator>(Configuration);
-
-            services.AddLogging();
+            services.AddGspWebApi<CreateAccountValidator, CreateAccountCommandHandler>(Configuration);
 
             services.RegisterAzureServiceBus(Configuration);
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseApiExceptionHandler();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Configuration));
-            });
         }
     }
 }

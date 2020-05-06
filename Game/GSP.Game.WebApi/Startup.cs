@@ -1,13 +1,12 @@
-using GSP.Game.Application.CQS.Validations.Genres;
+using GSP.Game.Application.CQS.Handlers.Commands.Games;
+using GSP.Game.Application.CQS.Validations.Games;
 using GSP.Game.Data.Context;
 using GSP.Game.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GSP.Game.WebApi
 {
@@ -20,11 +19,14 @@ namespace GSP.Game.WebApi
 
         public IConfiguration Configuration { get; }
 
+        public static void Configure(IApplicationBuilder app)
+        {
+            app.UseGspApplicationBuilder<Startup>();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<CreateGenreValidator>(Configuration);
-
-            services.AddLogging();
+            services.AddGspWebApi<AddGameValidator, CreateGameCommandHandler>(Configuration);
 
             services.ConfigureDatabase<GameDbContext>(Configuration);
 
@@ -33,31 +35,6 @@ namespace GSP.Game.WebApi
             services.RegisterApplicationDependencies();
 
             services.RegisterAzureServiceBus(Configuration);
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseApiExceptionHandler();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Configuration));
-            });
         }
     }
 }

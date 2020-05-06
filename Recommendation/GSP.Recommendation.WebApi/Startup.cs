@@ -1,13 +1,12 @@
 using GSP.Recommendation.Application.CQS.Commands.Games;
+using GSP.Recommendation.Application.CQS.Handlers.Commands.Games;
 using GSP.Recommendation.Data.Context;
 using GSP.Recommendation.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GSP.Recommendation.WebApi
 {
@@ -20,11 +19,14 @@ namespace GSP.Recommendation.WebApi
 
         public IConfiguration Configuration { get; }
 
+        public static void Configure(IApplicationBuilder app)
+        {
+            app.UseGspApplicationBuilder<Startup>();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<CreateGameCommand>(Configuration);
-
-            services.AddLogging();
+            services.AddGspWebApi<CreateGameCommand, CreateGameCommandHandler>(Configuration);
 
             services.ConfigureDatabase<RecommendationDbContext>(Configuration);
 
@@ -33,31 +35,6 @@ namespace GSP.Recommendation.WebApi
             services.RegisterApplicationDependencies(Configuration);
 
             services.RegisterAzureServiceBus(Configuration);
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseApiExceptionHandler();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Configuration));
-            });
         }
     }
 }

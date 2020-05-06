@@ -1,6 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using GSP.Shared.Utils.WebApi.Sessions.Extensions;
 using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,12 +10,14 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 {
     public static class WebApiExtensions
     {
-        public static IServiceCollection AddWebApi<TStartup>(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddGspWebApi<TValidationAssemblyType, TMediatorHandlersAssemblyType>(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddLogging();
+
             services.AddControllers()
                 .AddFluentValidation(options =>
             {
-                options.RegisterValidatorsFromAssemblyContaining<TStartup>();
+                options.RegisterValidatorsFromAssemblyContaining<TValidationAssemblyType>();
             });
 
             services.Configure<ApiBehaviorOptions>(options =>
@@ -26,11 +29,38 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 
             services.AddJwtBearerAuthentication(configuration);
 
-            services.AddMediatR(typeof(TStartup).Assembly);
+            services.AddMediatR(typeof(TMediatorHandlersAssemblyType).Assembly);
 
             services.AddGspSession();
 
             return services;
+        }
+
+        public static IApplicationBuilder UseGspApplicationBuilder<TStartup>(this IApplicationBuilder app)
+        {
+            app.UseApiExceptionHandler();
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", typeof(TStartup).AssemblyQualifiedName);
+            });
+
+            return app;
         }
     }
 }

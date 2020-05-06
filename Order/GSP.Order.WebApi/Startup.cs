@@ -1,4 +1,5 @@
 using GSP.Order.Application.CQS.Commands.Orders;
+using GSP.Order.Application.CQS.Validations.Orders;
 using GSP.Order.Data.Context;
 using GSP.Order.WebApi.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
@@ -20,11 +21,14 @@ namespace GSP.Order.WebApi
 
         public IConfiguration Configuration { get; }
 
+        public static void Configure(IApplicationBuilder app)
+        {
+            app.UseGspApplicationBuilder<Startup>();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebApi<CreateOrderCommand>(Configuration);
-
-            services.AddLogging();
+            services.AddGspWebApi<AddOrderToGameValidator, AddOrderToGameCommand>(Configuration);
 
             services.ConfigureDatabase<OrderDbContext>(Configuration);
 
@@ -33,31 +37,6 @@ namespace GSP.Order.WebApi
             services.RegisterApplicationDependencies(Configuration);
 
             services.RegisterAzureServiceBus(Configuration);
-        }
-
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseApiExceptionHandler();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Configuration));
-            });
         }
     }
 }
