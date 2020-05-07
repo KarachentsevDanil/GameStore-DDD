@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
     <ProjectReference Include="..\GSP.Account.Data.Migrations\GSP.Account.Data.Migrations.csproj" />
+    <ProjectReference Include="..\GSP.Account.Data\GSP.Account.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,9 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GSP.Account.Data\GSP.Account.Data.csproj" />
     <ProjectReference Include="..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
     <ProjectReference Include="..\GSP.Account.Application\GSP.Account.Application.csproj" />
+    <ProjectReference Include="..\GSP.Account.Data\GSP.Account.Data.csproj" />
     <ProjectReference Include="..\GSP.Account.Domain\GSP.Account.Domain.csproj" />
   </ItemGroup>
 
