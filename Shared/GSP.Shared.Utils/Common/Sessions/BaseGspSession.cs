@@ -12,15 +12,20 @@ namespace GSP.Shared.Utils.Common.Sessions
             _requestInfoAccessor = requestInfoAccessor;
         }
 
-        public abstract long AccountId { get; }
+        public abstract long? AccountId { get; }
 
         public abstract string Email { get; }
 
         public virtual GspRequestInfoModel RequestInfo => _requestInfoAccessor.RequestInfo;
 
-        public GspUserAccountModel ToUserAccountModel()
+        public GspUserAccountModel GetUserAccountOrDefault()
         {
-            return new GspUserAccountModel(AccountId, Email);
+            if (AccountId.HasValue)
+            {
+                return new GspUserAccountModel(AccountId.Value, Email);
+            }
+
+            return default;
         }
     }
 }

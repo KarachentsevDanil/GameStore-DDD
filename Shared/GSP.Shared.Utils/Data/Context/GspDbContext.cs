@@ -1,4 +1,5 @@
 ﻿using GSP.Shared.Utils.Common.Sessions.Contracts;
+using GSP.Shared.Utils.Common.Sessions.Models;
 using GSP.Shared.Utils.Domain.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -26,7 +27,9 @@ namespace GSP.Shared.Utils.Data.Context
 
         protected virtual void ProcessAuditableEntities()
         {
-            if (Session == null)
+            var userInfo = Session.GetUserAccountOrDefault();
+
+            if (userInfo == null)
             {
                 return;
             }
@@ -38,19 +41,19 @@ namespace GSP.Shared.Utils.Data.Context
 
             foreach (var auditableEntity in auditableEntities)
             {
-                ProcessAuditableEntity(auditableEntity);
+                ProcessAuditableEntity(auditableEntity, userInfo);
             }
         }
 
-        private void ProcessAuditableEntity(EntityEntry<AuditableEntity> auditableEntity)
+        private void ProcessAuditableEntity(EntityEntry<AuditableEntity> auditableEntity, GspUserAccountModel userAccountModel)
         {
             if (auditableEntity.State == EntityState.Added)
             {
-                auditableEntity.Entity.SetCreatedInfo(Session.AccountId);
+                auditableEntity.Entity.SetCreatedInfo(userAccountModel.Id);
             }
             else
             {
-                auditableEntity.Entity.SetUpdatedInfo(Session.AccountId);
+                auditableEntity.Entity.SetUpdatedInfo(userAccountModel.Id);
             }
         }
     }
