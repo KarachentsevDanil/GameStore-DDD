@@ -12,16 +12,16 @@ namespace GSP.Shared.Utils.Domain.Base
 
         public DateTime UpdatedAt { get; private set; }
 
-        public void SetCreatedInfo(long accountId)
+        public void SetCreatedInfo(long accountId, DateTime date)
         {
             CreatedByAccountId = UpdatedByAccountId = accountId;
-            CreatedAt = UpdatedAt = DateTime.UtcNow;
+            CreatedAt = UpdatedAt = date;
         }
 
-        public void SetUpdatedInfo(long accountId)
+        public void SetUpdatedInfo(long accountId, DateTime date)
         {
             UpdatedByAccountId = accountId;
-            UpdatedAt = DateTime.UtcNow;
+            UpdatedAt = date;
         }
     }
 }

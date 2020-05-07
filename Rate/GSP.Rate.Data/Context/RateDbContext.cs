@@ -2,14 +2,15 @@
 using GSP.Rate.Domain.Entities;
 using GSP.Shared.Utils.Common.Sessions.Contracts;
 using GSP.Shared.Utils.Data.Account.Context;
+using GSP.Shared.Utils.Data.Context.Audit.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Rate.Data.Context
 {
     public class RateDbContext : SharedAccountDbContext
     {
-        public RateDbContext(DbContextOptions<RateDbContext> options, IGspSession gspSession)
-            : base(options, gspSession)
+        public RateDbContext(DbContextOptions<RateDbContext> options, IGspSession gspSession, IAuditService auditService)
+            : base(options, gspSession, auditService)
         {
         }
 

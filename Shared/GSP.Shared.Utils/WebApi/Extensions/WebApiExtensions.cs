@@ -33,6 +33,10 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 
             services.AddGspSession();
 
+            services.AddAudit();
+
+            services.AddDateTimeService();
+
             return services;
         }
 

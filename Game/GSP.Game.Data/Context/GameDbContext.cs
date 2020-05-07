@@ -2,14 +2,15 @@
 using GSP.Game.Domain.Entities;
 using GSP.Shared.Utils.Common.Sessions.Contracts;
 using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.Data.Context.Audit.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Game.Data.Context
 {
     public class GameDbContext : GspDbContext
     {
-        public GameDbContext(DbContextOptions<GameDbContext> options, IGspSession gspSession)
-            : base(options, gspSession)
+        public GameDbContext(DbContextOptions<GameDbContext> options, IGspSession gspSession, IAuditService auditService)
+            : base(options, gspSession, auditService)
         {
         }
 

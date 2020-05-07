@@ -24,7 +24,7 @@ namespace GSP.Rate.BackgroundWorker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
+            services.AddGspBackgroundWorker();
 
             services.ConfigureDatabase<RateDbContext>(Configuration);
 

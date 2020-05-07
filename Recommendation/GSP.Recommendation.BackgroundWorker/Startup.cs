@@ -24,7 +24,7 @@ namespace GSP.Recommendation.BackgroundWorker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
+            services.AddGspBackgroundWorker();
 
             services.ConfigureDatabase<RecommendationDbContext>(Configuration);
 

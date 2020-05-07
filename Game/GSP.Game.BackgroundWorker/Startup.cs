@@ -24,7 +24,7 @@ namespace GSP.Game.BackgroundWorker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
+            services.AddGspBackgroundWorker();
 
             services.ConfigureDatabase<GameDbContext>(Configuration);
 

@@ -24,7 +24,7 @@ namespace GSP.Order.BackgroundWorker
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging();
+            services.AddGspBackgroundWorker();
 
             services.ConfigureDatabase<OrderDbContext>(Configuration);
 

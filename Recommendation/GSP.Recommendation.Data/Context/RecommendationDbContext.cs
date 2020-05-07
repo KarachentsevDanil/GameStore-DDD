@@ -2,14 +2,15 @@
 using GSP.Recommendation.Domain.Entities;
 using GSP.Shared.Utils.Common.Sessions.Contracts;
 using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.Data.Context.Audit.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace GSP.Recommendation.Data.Context
 {
     public class RecommendationDbContext : GspDbContext
     {
-        public RecommendationDbContext(DbContextOptions<RecommendationDbContext> options, IGspSession gspSession)
-            : base(options, gspSession)
+        public RecommendationDbContext(DbContextOptions<RecommendationDbContext> options, IGspSession gspSession, IAuditService auditService)
+            : base(options, gspSession, auditService)
         {
         }
 
