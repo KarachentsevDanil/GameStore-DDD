@@ -14,7 +14,7 @@ namespace GSP.Order.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;

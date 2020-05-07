@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GSP.Recommendation.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RecommendationController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -8,42 +8,42 @@
   },
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "UpstreamPathTemplate": "/account-api/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "SwaggerKey": "account",
       "ServiceName": "account"
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "UpstreamPathTemplate": "/game-api/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "SwaggerKey": "game",
       "ServiceName": "game"
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "UpstreamPathTemplate": "/order-api/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "SwaggerKey": "order",
       "ServiceName": "order"
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "UpstreamPathTemplate": "/payment-api/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "SwaggerKey": "payment",
       "ServiceName": "payment"
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "UpstreamPathTemplate": "/rate-api/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "SwaggerKey": "rate",
       "ServiceName": "rate"
     },
     {
-      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "UpstreamPathTemplate": "/recommendation-api/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
       "SwaggerKey": "recommendation",

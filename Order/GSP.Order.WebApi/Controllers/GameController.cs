@@ -12,7 +12,7 @@ namespace GSP.Order.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GameController : ControllerBase
     {
         private readonly IMediator _mediator;

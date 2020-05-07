@@ -12,7 +12,7 @@ using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 namespace GSP.Account.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AccountController : ControllerBase
     {
         private readonly IMediator _mediator;

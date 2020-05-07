@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace GSP.Game.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UserGameController : ControllerBase
     {
         private readonly IMediator _mediator;

@@ -13,7 +13,7 @@ namespace GSP.Payment.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class PaymentHistoryController : ControllerBase
     {
         private readonly IMediator _mediator;

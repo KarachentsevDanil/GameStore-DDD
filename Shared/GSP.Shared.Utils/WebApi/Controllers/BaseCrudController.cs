@@ -9,7 +9,7 @@ using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 namespace GSP.Shared.Utils.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public abstract class BaseCrudController
         <TGetItemDto, TCreateItemCommand, TUpdateItemCommand, TGetItemByIdQuery, TGetPagedListQuery> : ControllerBase
         where TGetItemDto : BaseGetItemDto

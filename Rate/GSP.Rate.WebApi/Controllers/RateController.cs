@@ -13,7 +13,7 @@ namespace GSP.Rate.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class RateController : ControllerBase
     {
         private readonly IMediator _mediator;
