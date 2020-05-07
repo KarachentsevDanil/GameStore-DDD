@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Immutable;
+using System.Net;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
@@ -13,7 +14,7 @@ namespace GSP.Order.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -51,6 +52,7 @@ namespace GSP.Order.WebApi.Controllers
         /// <response code="400">Account doesn't have order</response>
         /// <response code="400">Account already has game</response>
         [HttpPut("addgame")]
+        [ProducesResponseType(typeof(GetOrderDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> AddGameToOrder([FromBody] AddOrderToGameCommand command)
         {
             command.AccountId = User.GetUserId();
@@ -71,6 +73,7 @@ namespace GSP.Order.WebApi.Controllers
         /// <response code="400">Account doesn't have order</response>
         /// <response code="400">Order doesn't game</response>
         [HttpPut("removegame")]
+        [ProducesResponseType(typeof(GetOrderDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> RemoveGameFromOrder([FromBody] RemoveOrderToGameCommand command)
         {
             command.AccountId = User.GetUserId();
@@ -86,6 +89,7 @@ namespace GSP.Order.WebApi.Controllers
         /// </returns>
         /// <response code="404">Account doesn't have active order</response>
         [HttpGet]
+        [ProducesResponseType(typeof(GetOrderDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCurrentOrder()
         {
             GetOrderDto order = await _mediator.Send(new GetOrderByAccountQuery(User.GetUserId()));
@@ -99,6 +103,7 @@ namespace GSP.Order.WebApi.Controllers
         /// <see cref="GetOrderDto"/>
         /// </returns>
         [HttpGet("all")]
+        [ProducesResponseType(typeof(GetOrderDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetOrders()
         {
             IImmutableList<GetOrderDto> orders = await _mediator.Send(new GetOrdersByAccountQuery(User.GetUserId()));

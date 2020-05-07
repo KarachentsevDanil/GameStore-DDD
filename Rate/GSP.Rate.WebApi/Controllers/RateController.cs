@@ -1,12 +1,11 @@
 ﻿using GSP.Rate.Application.CQS.Commands.Rates;
 using GSP.Rate.Application.CQS.Queries.Rates;
 using GSP.Rate.Application.UseCases.DTOs.Rates;
-using GSP.Rate.Application.UseCases.Exceptions;
-using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
@@ -14,7 +13,7 @@ namespace GSP.Rate.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class RateController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -35,6 +34,7 @@ namespace GSP.Rate.WebApi.Controllers
         /// </returns>
         /// <response code="400">Validation failed</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetRateDto), (int)HttpStatusCode.Created)]
         public virtual async Task<IActionResult> Create([FromBody]CreateRateCommand command)
         {
             command.AccountId = User.GetUserId();
@@ -56,6 +56,7 @@ namespace GSP.Rate.WebApi.Controllers
         /// <response code="400">Validation failed</response>
         /// <response code="404">Item doesn't exist</response>
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(GetRateDto), (int)HttpStatusCode.OK)]
         public virtual async Task<IActionResult> Update(long id, [FromBody]UpdateRateCommand command)
         {
             command.Id = id;
@@ -74,6 +75,7 @@ namespace GSP.Rate.WebApi.Controllers
         /// <see cref="GetRateDto"/>
         /// </returns>
         [HttpGet("paged")]
+        [ProducesResponseType(typeof(GetRateDto), (int)HttpStatusCode.OK)]
         [AllowAnonymous]
         public virtual async Task<IActionResult> GetPagedList([FromQuery]GetRateListQuery query)
         {

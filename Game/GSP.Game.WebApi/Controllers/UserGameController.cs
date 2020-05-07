@@ -2,12 +2,13 @@
 using GSP.Game.Application.UseCases.DTOs.Games;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GSP.Game.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class UserGameController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -27,6 +28,7 @@ namespace GSP.Game.WebApi.Controllers
         /// <see cref="GetGameDto"/>
         /// </returns>
         [HttpGet]
+        [ProducesResponseType(typeof(GetGameDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetGames([FromQuery] GetGamePagedListQuery query)
         {
             var games = await _mediator.Send(query);

@@ -5,6 +5,7 @@ using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
@@ -12,7 +13,7 @@ namespace GSP.Payment.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class PaymentMethodController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -33,6 +34,7 @@ namespace GSP.Payment.WebApi.Controllers
         /// </returns>
         /// <response code="400">Validation failed</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetPaymentMethodDto), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create([FromBody] CreatePaymentMethodCommand command)
         {
             command.AccountId = User.GetUserId();
@@ -47,6 +49,7 @@ namespace GSP.Payment.WebApi.Controllers
         /// <see cref="GetPaymentMethodDto"/>
         /// </returns>
         [HttpGet]
+        [ProducesResponseType(typeof(GetPaymentMethodDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get()
         {
             GetPaymentMethodsQuery query = new GetPaymentMethodsQuery(User.GetUserId());

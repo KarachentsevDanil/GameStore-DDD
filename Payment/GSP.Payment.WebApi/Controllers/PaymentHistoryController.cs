@@ -1,12 +1,11 @@
 ﻿using GSP.Payment.Application.CQS.Commands.PaymentHistories;
 using GSP.Payment.Application.CQS.Queries.PaymentHistories;
 using GSP.Payment.Application.UseCases.DTOs.PaymentHistories;
-using GSP.Payment.Application.UseCases.Exceptions;
-using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.WebApi.Helpers.ActionResultHelper;
 
@@ -14,7 +13,7 @@ namespace GSP.Payment.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class PaymentHistoryController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -38,6 +37,7 @@ namespace GSP.Payment.WebApi.Controllers
         /// <response code="400">Account doesn't have access to payment method</response>
         /// <response code="400">Cvv is wrong</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetPaymentHistoryDto), (int)HttpStatusCode.Created)]
         public async Task<IActionResult> Create([FromBody] CreatePaymentHistoryCommand command)
         {
             command.AccountId = User.GetUserId();
@@ -55,6 +55,7 @@ namespace GSP.Payment.WebApi.Controllers
         /// <see cref="GetPaymentHistoryDto"/>
         /// </returns>
         [HttpGet]
+        [ProducesResponseType(typeof(GetPaymentHistoryDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Get([FromQuery] GetPaymentHistoriesQuery query)
         {
             query.AccountId = User.GetUserId();

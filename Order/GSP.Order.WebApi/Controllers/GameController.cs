@@ -5,13 +5,14 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Immutable;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace GSP.Order.WebApi.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class GameController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -28,6 +29,7 @@ namespace GSP.Order.WebApi.Controllers
         /// <see cref="GetGameDto"/>
         /// </returns>
         [HttpGet("all")]
+        [ProducesResponseType(typeof(GetGameDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetOrders()
         {
             IImmutableList<GetGameDto> games = await _mediator.Send(new GetGamesByAccountQuery(User.GetUserId()));
