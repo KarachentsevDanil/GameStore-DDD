@@ -42,7 +42,7 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
 
         public virtual async Task<TGetItem> AddAsync(TAddItem itemDto, CancellationToken ct = default)
         {
-            Logger.LogInformation($"Create {nameof(TEntity)}, data = {itemDto.ToJsonString()}");
+            Logger.LogInformation($"Create {typeof(TEntity).Name}, data = {itemDto.ToJsonString()}");
 
             await ValidateItemAsync(itemDto, ct);
 
@@ -57,13 +57,13 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
 
         public virtual async Task<TGetItem> UpdateAsync(TUpdateItem itemDto, CancellationToken ct = default)
         {
-            Logger.LogInformation($"Update {nameof(TEntity)}, data = {itemDto.ToJsonString()}");
+            Logger.LogInformation($"Update {typeof(TEntity).Name}, data = {itemDto.ToJsonString()}");
 
             TEntity dbEntity = await EntityRepository.GetAsync(itemDto.Id, ct);
 
             if (dbEntity == null)
             {
-                Logger.LogInformation($"{nameof(TEntity)} with id {itemDto.Id} doesn't exist");
+                Logger.LogInformation($"{typeof(TEntity).Name} with id {itemDto.Id} doesn't exist");
                 throw new ItemNotFoundException();
             }
 
@@ -80,13 +80,13 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
 
         public virtual async Task<TGetItem> GetByIdAsync(long id, CancellationToken ct = default)
         {
-            Logger.LogInformation($"Get {nameof(TEntity)} by id {id}");
+            Logger.LogInformation($"Get {typeof(TEntity).Name} by id {id}");
 
             TEntity dbEntity = await EntityRepository.GetAsync(id, ct);
 
             if (dbEntity == null)
             {
-                Logger.LogInformation($"{nameof(TEntity)} with id {id} doesn't exist");
+                Logger.LogInformation($"{typeof(TEntity).Name} with id {id} doesn't exist");
                 throw new ItemNotFoundException();
             }
 
@@ -95,7 +95,7 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
 
         public virtual async Task<IImmutableList<TGetItem>> GetAllAsync(CancellationToken ct = default)
         {
-            Logger.LogInformation($"Get {nameof(TEntity)} list");
+            Logger.LogInformation($"Get {typeof(TEntity).Name} list");
 
             ICollection<TEntity> dbEntities = await EntityRepository.GetListAsync(ct);
 
@@ -104,7 +104,7 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
 
         public virtual async Task<PagedCollection<TGetItem>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct = default)
         {
-            Logger.LogInformation($"Get {nameof(TEntity)} paged list with parameters {filterParams.ToJsonString()}");
+            Logger.LogInformation($"Get {typeof(TEntity).Name} paged list with parameters {filterParams.ToJsonString()}");
 
             PagedCollection<TEntity> dbEntities = await EntityRepository.GetPagedListAsync(filterParams, ct);
 
@@ -115,7 +115,7 @@ namespace GSP.Shared.Utils.Application.UseCases.Services
 
         public async Task<bool> IsExistAsync(long id, CancellationToken ct = default)
         {
-            Logger.LogInformation($"Is {nameof(TEntity)} with Id {id} exists.");
+            Logger.LogInformation($"Is {typeof(TEntity).Name} with Id {id} exists.");
             return await EntityRepository.IsExistsAsync(id, ct);
         }
 

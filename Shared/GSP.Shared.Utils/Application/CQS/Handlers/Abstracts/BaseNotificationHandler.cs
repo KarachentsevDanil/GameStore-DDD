@@ -21,13 +21,13 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
         {
             try
             {
-                Logger.LogInformation($"Execute handler {nameof(TRequest)} with parameter {request.ToJsonString()}");
+                Logger.LogInformation($"Execute handler {typeof(TRequest).Name} with parameter {request.ToJsonString()}");
 
                 await ExecuteAsync(request, cancellationToken);
             }
             catch (Exception ex)
             {
-                Logger.LogInformation($"Error occured in {nameof(TRequest)} handler", ex);
+                Logger.LogInformation($"Error occured in {typeof(TRequest).Name} handler", ex);
                 throw;
             }
         }

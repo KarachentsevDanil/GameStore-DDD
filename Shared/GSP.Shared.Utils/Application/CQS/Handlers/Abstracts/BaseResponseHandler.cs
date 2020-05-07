@@ -21,7 +21,7 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
         {
             try
             {
-                Logger.LogInformation($"Execute handler {nameof(TRequest)} with parameter {request.ToJsonString()}");
+                Logger.LogInformation($"Execute handler {typeof(TRequest).Name} with parameter {request.ToJsonString()}");
 
                 await PreExecuteAsync(request, cancellationToken);
 
@@ -33,7 +33,7 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
             }
             catch (Exception ex)
             {
-                Logger.LogError($"Error occured in {nameof(TRequest)} handler", ex);
+                Logger.LogError($"Error occured in {typeof(TRequest).Name} handler", ex);
                 throw;
             }
         }
