@@ -5,5 +5,13 @@ namespace GSP.Game.Application.CQS.Queries.Games
 {
     public class GetGameByIdQuery : BaseGetByIdQuery<GetGameDto>
     {
+        public GetGameByIdQuery(long id)
+        {
+            Id = id;
+        }
+
+        public GetGameByIdQuery()
+        {
+        }
     }
 }

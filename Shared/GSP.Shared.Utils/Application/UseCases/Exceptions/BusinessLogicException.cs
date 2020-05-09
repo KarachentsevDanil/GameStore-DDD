@@ -1,25 +1,31 @@
 ﻿using System;
 
-namespace GSP.Shared.Utils.Application.Exceptions
+namespace GSP.Shared.Utils.Application.UseCases.Exceptions
 {
-    public abstract class BusinessLogicException : Exception
+    public class BusinessLogicException : Exception
     {
-        protected BusinessLogicException(string message)
+        public BusinessLogicException(string message)
             : base(message)
         {
         }
 
-        protected BusinessLogicException(string message, Exception innerException)
+        public BusinessLogicException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected BusinessLogicException()
+        public BusinessLogicException()
         {
         }
 
-        public abstract string ErrorCode { get; }
+        public BusinessLogicException(string errorCode, string errorMessage)
+        {
+            ErrorCode = errorCode;
+            ErrorMessage = errorMessage;
+        }
 
-        public abstract string ErrorMessage { get; }
+        public virtual string ErrorCode { get; }
+
+        public virtual string ErrorMessage { get; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using System;
-using GSP.Shared.Utils.Application.Exceptions;
+﻿using GSP.Shared.Utils.Application.UseCases.Exceptions;
+using System;
 
 namespace GSP.Order.Application.UseCases.Exceptions
 {

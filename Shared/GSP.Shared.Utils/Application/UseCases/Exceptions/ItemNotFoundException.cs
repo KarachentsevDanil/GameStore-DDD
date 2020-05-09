@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Utils.Application.Exceptions;
-using System;
+﻿using System;
 
 namespace GSP.Shared.Utils.Application.UseCases.Exceptions
 {

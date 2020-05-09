@@ -1,6 +1,5 @@
 ﻿using GSP.Rate.Application.UseCases.DTOs.Rates;
 using GSP.Shared.Utils.Application.CQS.Commands;
-using System;
 
 namespace GSP.Rate.Application.CQS.Commands.Rates
 {

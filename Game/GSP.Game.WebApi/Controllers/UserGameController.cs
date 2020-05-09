@@ -19,6 +19,22 @@ namespace GSP.Game.WebApi.Controllers
         }
 
         /// <summary>
+        /// Get game by id
+        /// </summary>
+        /// <param name="id">
+        /// </param>
+        /// <returns>
+        /// <see cref="GetGameDto"/>
+        /// </returns>
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(GetGameDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetGames(long id)
+        {
+            var game = await _mediator.Send(new GetGameByIdQuery(id));
+            return Ok(game);
+        }
+
+        /// <summary>
         /// Get games by query
         /// </summary>
         /// <param name="query">
@@ -27,7 +43,7 @@ namespace GSP.Game.WebApi.Controllers
         /// <returns>
         /// <see cref="GetGameDto"/>
         /// </returns>
-        [HttpGet]
+        [HttpGet("list")]
         [ProducesResponseType(typeof(GetGameDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetGames([FromQuery] GetGamePagedListQuery query)
         {

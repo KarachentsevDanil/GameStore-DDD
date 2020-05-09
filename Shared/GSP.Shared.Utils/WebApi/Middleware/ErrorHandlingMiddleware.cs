@@ -1,6 +1,6 @@
 ﻿using GSP.Shared.Utils.Application.CQS.Exceptions;
 using GSP.Shared.Utils.Application.CQS.Models.Validations;
-using GSP.Shared.Utils.Application.Exceptions;
+using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
