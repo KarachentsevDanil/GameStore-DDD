@@ -24,7 +24,7 @@ namespace GSP.Rate.WebApi.Controllers
         }
 
         /// <summary>
-        /// Add item
+        /// Add rate item
         /// </summary>
         /// <param name="command">
         /// <see cref="CreateRateCommand"/>

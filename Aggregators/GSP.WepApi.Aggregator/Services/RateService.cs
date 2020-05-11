@@ -1,4 +1,5 @@
 ﻿using GSP.Shared.Utils.Application.UseCases.Exceptions;
+using GSP.WepApi.Aggregator.Constants;
 using GSP.WepApi.Aggregator.DTOs.Rates;
 using GSP.WepApi.Aggregator.Extensions;
 using GSP.WepApi.Aggregator.Services.Api.Contracts;
@@ -41,7 +42,7 @@ namespace GSP.WepApi.Aggregator.Services
 
             if (!isExists)
             {
-                throw new BusinessLogicException("GameId", "Game is not exists.");
+                throw new BusinessLogicException(nameof(CreateRateDto.GameId), ValidationMessageConstants.GameIsNotExists);
             }
 
             return await _rateApiClient.CreateRateAsync(_httpContextAccessor.GetAuthorizationHeaderOrDefault(), rate);

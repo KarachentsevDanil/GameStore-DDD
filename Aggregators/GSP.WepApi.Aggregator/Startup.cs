@@ -1,8 +1,8 @@
+using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.WepApi.Aggregator.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GSP.WepApi.Aggregator
 {
@@ -15,30 +15,16 @@ namespace GSP.WepApi.Aggregator
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public static void Configure(IApplicationBuilder app)
         {
-            services.AddControllers();
+            app.UseAggregatorApiExceptionHandler();
+            app.UseGspApiAggregatorApplicationBuilder<Startup>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void ConfigureServices(IServiceCollection services)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            services.AddGspWebApiAggregator(Configuration);
+            services.AddWepApiAggregator(Configuration);
         }
     }
 }

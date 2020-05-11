@@ -40,10 +40,48 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             return services;
         }
 
+        public static IServiceCollection AddGspWebApiAggregator(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddLogging();
+
+            services.AddControllers();
+
+            services.AddSwagger();
+
+            services.AddJwtBearerAuthentication(configuration);
+
+            return services;
+        }
+
         public static IApplicationBuilder UseGspApplicationBuilder<TStartup>(this IApplicationBuilder app)
         {
             app.UseApiExceptionHandler();
 
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", typeof(TStartup).AssemblyQualifiedName);
+            });
+
+            return app;
+        }
+
+        public static IApplicationBuilder UseGspApiAggregatorApplicationBuilder<TStartup>(this IApplicationBuilder app)
+        {
             app.UseHttpsRedirection();
 
             app.UseRouting();
