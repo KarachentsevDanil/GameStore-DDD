@@ -35,11 +35,7 @@ namespace GSP.WepApi.Aggregator.Middleware
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 context.Response.ContentType = MediaTypeNames.Application.Json;
 
-                if (ex.HasContent)
-                {
-                    var validationError = JsonConvert.DeserializeObject<ValidationError>(ex.Content);
-                    await context.Response.WriteAsync(JsonConvert.SerializeObject(validationError));
-                }
+                await ApplyRefitApiExceptionAsync(ex, context);
             }
             catch (BusinessLogicException ex)
             {
@@ -64,6 +60,17 @@ namespace GSP.WepApi.Aggregator.Middleware
                 context.Response.ContentType = MediaTypeNames.Application.Json;
 
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(exp));
+            }
+        }
+
+        private static async Task ApplyRefitApiExceptionAsync(ApiException apiException, HttpContext context)
+        {
+            if (apiException.HasContent)
+            {
+                object validationError = JsonConvert.DeserializeObject<ValidationErrorsResponse>(apiException.Content) ??
+                                         (object)JsonConvert.DeserializeObject<ValidationError>(apiException.Content);
+
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(validationError));
             }
         }
     }

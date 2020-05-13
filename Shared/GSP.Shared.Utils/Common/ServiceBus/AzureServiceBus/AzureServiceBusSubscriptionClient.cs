@@ -68,11 +68,14 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
             _subscriptionClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
         }
 
+        public override async Task StopAsync(CancellationToken cancellationToken)
+        {
+            await _subscriptionClient.CloseAsync();
+        }
+
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            RegisterMessageHandler();
-
-            return Task.CompletedTask;
+            return Task.Run(RegisterMessageHandler, stoppingToken);
         }
 
         private async Task ProcessMessagesAsync(Message message, CancellationToken token)
