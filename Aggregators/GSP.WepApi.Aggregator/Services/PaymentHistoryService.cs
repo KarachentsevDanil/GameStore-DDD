@@ -36,6 +36,8 @@ namespace GSP.WepApi.Aggregator.Services
 
             var order = await _orderApiClient.GetCurrentOrderAsync(authHeader);
 
+            dto.OrderId = order.Id;
+
             return await _paymentHistoryApiClient.CreatePaymentHistoryAsync(authHeader, dto);
         }
     }

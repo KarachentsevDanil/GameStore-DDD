@@ -6,10 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.4" />
     <PackageReference Include="MMLib.Ocelot.Provider.AppConfiguration" Version="1.0.0" />
     <PackageReference Include="MMLib.SwaggerForOcelot" Version="2.0.0-alpha.2" />
-    <PackageReference Include="Ocelot" Version="14.0.11" />
+    <PackageReference Include="Ocelot" Version="15.0.6" />
   </ItemGroup>
 
   <ItemGroup>

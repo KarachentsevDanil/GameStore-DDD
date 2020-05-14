@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Utils.WebApi.Middleware;
-using GSP.WepApi.Aggregator.Configurations;
+﻿using GSP.WepApi.Aggregator.Configurations;
 using GSP.WepApi.Aggregator.Middleware;
 using GSP.WepApi.Aggregator.Services;
 using GSP.WepApi.Aggregator.Services.Api.Contracts;
@@ -9,7 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Polly;
+using Polly.Extensions.Http;
 using Refit;
+using System;
 
 namespace GSP.WepApi.Aggregator.Extensions
 {
@@ -47,11 +49,16 @@ namespace GSP.WepApi.Aggregator.Extensions
                 })
             };
 
+            var retryPolicy = HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(apiClientConfiguration.RetryCount, d => TimeSpan.FromSeconds(apiClientConfiguration.WaitDuration));
+
             serviceCollection.AddRefitClient<TClient>(refitSettings)
                 .ConfigureHttpClient(c =>
                 {
                     c.BaseAddress = apiClientConfiguration.BaseUrl;
-                });
+                })
+                .AddPolicyHandler(retryPolicy);
 
             return serviceCollection;
         }

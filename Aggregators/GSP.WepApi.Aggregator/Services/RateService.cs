@@ -38,7 +38,7 @@ namespace GSP.WepApi.Aggregator.Services
         {
             _logger.LogInformation("Add rate for game {GameId}", rate.GameId);
 
-            bool isExists = await IsGameExists(rate.GameId);
+            bool isExists = await IsGameExistsAsync(rate.GameId);
 
             if (!isExists)
             {
@@ -48,7 +48,7 @@ namespace GSP.WepApi.Aggregator.Services
             return await _rateApiClient.CreateRateAsync(_httpContextAccessor.GetAuthorizationHeaderOrDefault(), rate);
         }
 
-        private async ValueTask<bool> IsGameExists(long gameId)
+        private async ValueTask<bool> IsGameExistsAsync(long gameId)
         {
             try
             {
