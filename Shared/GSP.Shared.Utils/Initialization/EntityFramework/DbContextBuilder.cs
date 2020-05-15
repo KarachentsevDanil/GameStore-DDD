@@ -21,7 +21,7 @@ namespace GSP.Shared.Utils.Initialization.EntityFramework
                 connectionString,
                 opt => opt.MigrationsAssembly(migrationPath));
 
-            return (T)Activator.CreateInstance(typeof(T), builder.Options, null);
+            return (T)Activator.CreateInstance(typeof(T), builder.Options, null, null);
         }
     }
 }
