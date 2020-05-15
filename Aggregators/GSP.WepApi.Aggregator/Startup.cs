@@ -23,7 +23,7 @@ namespace GSP.WepApi.Aggregator
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGspWebApiAggregator(Configuration);
+            services.AddGspWebApiAggregator<Startup>(Configuration);
             services.AddWepApiAggregator(Configuration);
         }
     }

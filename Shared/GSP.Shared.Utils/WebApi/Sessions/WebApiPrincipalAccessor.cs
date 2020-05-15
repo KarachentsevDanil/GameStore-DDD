@@ -13,6 +13,6 @@ namespace GSP.Shared.Utils.WebApi.Sessions
             _accessor = accessor;
         }
 
-        public ClaimsPrincipal Principal => _accessor.HttpContext.User;
+        public ClaimsPrincipal Principal => _accessor.HttpContext?.User;
     }
 }

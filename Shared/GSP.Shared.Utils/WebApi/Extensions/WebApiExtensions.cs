@@ -40,11 +40,20 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             return services;
         }
 
-        public static IServiceCollection AddGspWebApiAggregator(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddGspWebApiAggregator<TValidationAssemblyType>(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddLogging();
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddFluentValidation(options =>
+                {
+                    options.RegisterValidatorsFromAssemblyContaining<TValidationAssemblyType>();
+                });
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
 
             services.AddSwagger();
 

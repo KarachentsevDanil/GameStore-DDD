@@ -13,10 +13,15 @@ namespace GSP.Shared.Utils.WebApi.Sessions
             _accessor = accessor;
         }
 
-        public GspRequestInfoModel RequestInfo => CreateRequestInfoModel(_accessor.HttpContext.Request);
+        public GspRequestInfoModel RequestInfo => CreateRequestInfoModel(_accessor.HttpContext?.Request);
 
         private GspRequestInfoModel CreateRequestInfoModel(HttpRequest request)
         {
+            if (request == null)
+            {
+                return default;
+            }
+
             var ip = request.HttpContext.Connection.RemoteIpAddress.ToString();
             var userAgent = request.Headers["User-Agent"];
 

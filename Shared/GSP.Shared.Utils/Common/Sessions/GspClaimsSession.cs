@@ -11,9 +11,9 @@ namespace GSP.Shared.Utils.Common.Sessions
             PrincipalAccessor = principalAccessor;
         }
 
-        public override long? AccountId => PrincipalAccessor.Principal.GetUserIfOrDefaultId();
+        public override long? AccountId => PrincipalAccessor.Principal?.GetUserIfOrDefaultId();
 
-        public override string Email => PrincipalAccessor.Principal.GetUserEmail();
+        public override string Email => PrincipalAccessor.Principal?.GetUserEmail();
 
         protected IGspPrincipalAccessor PrincipalAccessor { get; }
     }

@@ -36,6 +36,16 @@ namespace GSP.Shared.Utils.WebApi.Middleware
 
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(ex.ValidationErrors));
             }
+            catch (AccessToItemForbiddenException)
+            {
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            }
+            catch (ItemNotFoundException)
+            {
+                context.Response.Clear();
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+            }
             catch (BusinessLogicException ex)
             {
                 context.Response.Clear();

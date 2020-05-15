@@ -9,6 +9,8 @@ namespace GSP.Shared.Utils.WebApi.Extensions
         {
             services.AddLogging();
 
+            services.AddHttpContextAccessor();
+
             services.AddGspSession();
 
             services.AddAudit();
