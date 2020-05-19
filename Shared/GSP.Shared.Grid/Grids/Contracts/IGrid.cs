@@ -15,6 +15,6 @@ namespace GSP.Shared.Grid.Grids.Contracts
 
         Expression<Func<TEntity, bool>> GetGridFilterExpression();
 
-        ICollection<SortingModel> GetSortingOptions();
+        IList<SortingModel> GetSortingOptions();
     }
 }

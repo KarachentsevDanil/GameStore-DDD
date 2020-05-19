@@ -33,9 +33,11 @@ namespace GSP.Shared.Grid.Grids
             return expression;
         }
 
-        public ICollection<SortingModel> GetSortingOptions()
+        public IList<SortingModel> GetSortingOptions()
         {
-            return Columns.Where(q => q.Direction.HasValue)
+            return Columns
+                .Where(q => q.Direction.HasValue)
+                .OrderBy(o => o.Order)
                 .Select(s => new SortingModel(s.PropertyName, s.Direction.Value))
                 .ToList();
         }

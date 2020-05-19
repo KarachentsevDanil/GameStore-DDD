@@ -14,6 +14,8 @@ namespace GSP.Shared.Grid.Columns
 
         public string PropertyName { get; set; }
 
+        public int Order { get; set; }
+
         public Expression<Func<TEntity, bool>> GetFilterExpression()
         {
             Filter.PropertyName = PropertyName;

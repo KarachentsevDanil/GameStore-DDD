@@ -13,5 +13,11 @@ namespace GSP.Shared.Grid.Sorting
         public string PropertyName { get; set; }
 
         public SortingDirection Direction { get; set; }
+
+        public override string ToString()
+        {
+            var sortingDirection = Direction == SortingDirection.Ascending ? "ASC" : "DESC";
+            return $"{PropertyName} {sortingDirection}";
+        }
     }
 }

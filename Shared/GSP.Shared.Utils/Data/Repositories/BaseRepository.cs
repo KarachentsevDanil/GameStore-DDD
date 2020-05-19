@@ -1,6 +1,8 @@
-﻿using GSP.Shared.Utils.Common.Models.Collections;
+﻿using GSP.Shared.Grid.Grids.Contracts;
+using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
 using GSP.Shared.Utils.Data.Context;
+using GSP.Shared.Utils.Data.Extensions;
 using GSP.Shared.Utils.Domain.Base;
 using GSP.Shared.Utils.Domain.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -42,11 +44,31 @@ namespace GSP.Shared.Utils.Data.Repositories
         {
             var query = DbSet.AsNoTracking().AsQueryable();
 
-            int totalCount = query.Count();
+            int totalCount = await query.CountAsync(ct);
 
             var items = await query
                 .Skip(filterParams.PageSize * (filterParams.PageNumber - 1))
                 .Take(filterParams.PageSize)
+                .AsNoTracking()
+                .ToListAsync(ct);
+
+            return new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
+        }
+
+        public async Task<PagedCollection<TEntity>> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct)
+        {
+            var query = DbSet.AsNoTracking().AsQueryable();
+
+            var expression = grid.GetGridFilterExpression();
+
+            query = query.Where(expression);
+
+            int totalCount = await query.CountAsync(ct);
+
+            var items = await query
+                .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
+                .Take(grid.Pagination.PageSize)
+                .Ordered(grid.GetSortingOptions())
                 .AsNoTracking()
                 .ToListAsync(ct);
 
