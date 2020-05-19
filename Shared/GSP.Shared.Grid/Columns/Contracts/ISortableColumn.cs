@@ -4,6 +4,6 @@ namespace GSP.Shared.Grid.Columns.Contracts
 {
     public interface ISortableColumn
     {
-        SortingDirection? Direction { get; }
+        SortingDirection? Direction { get; set; }
     }
 }

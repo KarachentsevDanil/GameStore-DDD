@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Grid.Filters.Enums;
-using GSP.Shared.Grid.Filters.Enums.FilterOptions;
+﻿using GSP.Shared.Grid.Filters.Enums.FilterOptions;
 
 namespace GSP.Shared.Grid.Filters.Contracts
 {

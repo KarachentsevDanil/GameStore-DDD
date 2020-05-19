@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace GSP.Shared.Utils.Data.Extensions
 {
-    public static class QueryableExtensions
+    public static class OrderedQueryableExtensions
     {
         public static IQueryable<TEntity> Ordered<TEntity>(this IQueryable<TEntity> sequence, IList<SortingModel> orderByList)
         {

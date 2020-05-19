@@ -1,10 +1,13 @@
-﻿using FluentValidation.AspNetCore;
+﻿using AutoMapper;
+using FluentValidation.AspNetCore;
 using GSP.Shared.Utils.WebApi.Sessions.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace GSP.Shared.Utils.WebApi.Extensions
 {
@@ -15,6 +18,11 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             services.AddLogging();
 
             services.AddControllers()
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
+                })
                 .AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<TValidationAssemblyType>();

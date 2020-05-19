@@ -2,7 +2,7 @@
 {
     public interface IGridColumn<TEntity> : IFilterableColumn<TEntity>, ISortableColumn
     {
-        string PropertyName { get; }
+        string PropertyName { get; set; }
 
         int Order { get; set; }
     }

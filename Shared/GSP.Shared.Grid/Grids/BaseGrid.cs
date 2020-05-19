@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public class Grid<TEntity> : IGrid<TEntity>
+    public class BaseGrid<TEntity> : IGrid<TEntity>
     {
         public ICollection<IGridColumn<TEntity>> Columns { get; set; }
 
