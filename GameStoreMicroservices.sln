@@ -107,7 +107,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.Shared.Tests", "Shared\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Aggregators", "Aggregators", "{17026C9B-1437-46AB-96B9-D8365FDC096B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.WepApi.Aggregator", "Aggregators\GSP.WepApi.Aggregator\GSP.WepApi.Aggregator.csproj", "{32A0BD5F-1960-48AC-8C94-6F50027393F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GSP.WepApi.Aggregator", "Aggregators\GSP.WepApi.Aggregator\GSP.WepApi.Aggregator.csproj", "{32A0BD5F-1960-48AC-8C94-6F50027393F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSP.Shared.Grid", "Shared\GSP.Shared.Grid\GSP.Shared.Grid.csproj", "{7C5C9108-4DE3-4F96-94A3-FA92175019AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -291,6 +293,10 @@ Global
 		{32A0BD5F-1960-48AC-8C94-6F50027393F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32A0BD5F-1960-48AC-8C94-6F50027393F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32A0BD5F-1960-48AC-8C94-6F50027393F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5C9108-4DE3-4F96-94A3-FA92175019AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5C9108-4DE3-4F96-94A3-FA92175019AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5C9108-4DE3-4F96-94A3-FA92175019AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5C9108-4DE3-4F96-94A3-FA92175019AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -340,6 +346,7 @@ Global
 		{EA2E10B0-AA47-47C5-853C-EFC46C8F03A2} = {8410E23E-AC12-49CE-B476-9A71B3748E35}
 		{9A05245D-7740-4783-8F4B-BB75FA5F55DD} = {2EC8A2FC-36FB-4BB2-A70C-F888B7654F0E}
 		{32A0BD5F-1960-48AC-8C94-6F50027393F9} = {17026C9B-1437-46AB-96B9-D8365FDC096B}
+		{7C5C9108-4DE3-4F96-94A3-FA92175019AA} = {2EC8A2FC-36FB-4BB2-A70C-F888B7654F0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCC9668D-874B-4D52-815D-104F84A56948}
