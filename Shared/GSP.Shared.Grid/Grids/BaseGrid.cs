@@ -1,5 +1,5 @@
 ﻿using GSP.Shared.Grid.Builders;
-using GSP.Shared.Grid.Columns.Contracts;
+using GSP.Shared.Grid.Columns;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Pagination.Models;
 using GSP.Shared.Grid.Sorting;
@@ -12,7 +12,7 @@ namespace GSP.Shared.Grid.Grids
 {
     public class BaseGrid<TEntity> : IGrid<TEntity>
     {
-        public ICollection<IGridColumn<TEntity>> Columns { get; set; }
+        public ICollection<GridColumn<TEntity>> Columns { get; set; }
 
         public PaginationModel Pagination { get; set; }
 

@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Filters.Contracts
 {
-    public interface IGridFilter<TEntity> : IGridTextFilter<TEntity>, IGridNumberFilter<TEntity>
+    public interface IGridFilter<TEntity> : IGridTextFilter, IGridNumberFilter, IGridBooleanFilter, IGridDateFilter, IGridListFilter
     {
         bool HasSelectedData { get; }
 

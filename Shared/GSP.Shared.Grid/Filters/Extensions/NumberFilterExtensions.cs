@@ -12,6 +12,16 @@ namespace GSP.Shared.Grid.Filters.Extensions
     {
         public static Expression<Func<TEntity, bool>> GetNumberFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
         {
+            if (gridFilter.NumberFilterOption == NumberFilterOption.Between)
+            {
+                var betweenQuery = string.Format(
+                    CultureInfo.InvariantCulture,
+                    GridNumberFilterConstants.NumberBetweenQuery,
+                    gridFilter.PropertyName);
+
+                return DynamicExpressionHelper.ParseLambda<TEntity, bool>(betweenQuery, gridFilter.FirstOperand, gridFilter.SecondOperand);
+            }
+
             var query = string.Format(
                 CultureInfo.InvariantCulture,
                 GridNumberFilterConstants.NumberQuery,
@@ -30,6 +40,14 @@ namespace GSP.Shared.Grid.Filters.Extensions
                     return GridNumberFilterConstants.EqualsOperator;
                 case NumberFilterOption.DoesNotEqual:
                     return GridNumberFilterConstants.DoesNotEqualOperator;
+                case NumberFilterOption.GreaterThan:
+                    return GridNumberFilterConstants.GreaterThanOperator;
+                case NumberFilterOption.GreaterThanOrEqual:
+                    return GridNumberFilterConstants.GreaterThanOrEqualsOperator;
+                case NumberFilterOption.LessThan:
+                    return GridNumberFilterConstants.LessThanOperator;
+                case NumberFilterOption.LessThanOrEqual:
+                    return GridNumberFilterConstants.LessThanOrEqualsOperator;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(numberFilterOption), numberFilterOption, null);
             }

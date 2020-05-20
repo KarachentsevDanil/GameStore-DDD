@@ -3,6 +3,11 @@
     public enum NumberFilterOption
     {
         Equals,
-        DoesNotEqual
+        DoesNotEqual,
+        GreaterThan,
+        GreaterThanOrEqual,
+        LessThan,
+        LessThanOrEqual,
+        Between
     }
 }

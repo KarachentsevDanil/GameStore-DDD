@@ -3,6 +3,10 @@
     public enum TextFilterOption
     {
         Contains,
-        DoesNotContains
+        DoesNotContains,
+        Blank,
+        NotBlank,
+        StartsWith,
+        EndsWith
     }
 }

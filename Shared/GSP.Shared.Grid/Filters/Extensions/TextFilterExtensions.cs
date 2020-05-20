@@ -12,32 +12,32 @@ namespace GSP.Shared.Grid.Filters.Extensions
     {
         public static Expression<Func<TEntity, bool>> GetTextFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
         {
-            var query = string.Empty;
-
-            switch (gridFilter.TextFilterOption)
-            {
-                case TextFilterOption.Contains:
-                    {
-                        query = string.Format(
-                            CultureInfo.InvariantCulture,
-                            GridTextFilterConstants.ContainsQuery,
-                            gridFilter.PropertyName,
-                            gridFilter.Value);
-                        break;
-                    }
-
-                case TextFilterOption.DoesNotContains:
-                    {
-                        query = string.Format(
-                            CultureInfo.InvariantCulture,
-                            GridTextFilterConstants.DoesNotContainQuery,
-                            gridFilter.PropertyName,
-                            gridFilter.Value);
-                        break;
-                    }
-            }
+            var query = gridFilter.TextFilterOption == TextFilterOption.Blank || gridFilter.TextFilterOption == TextFilterOption.NotBlank ?
+                string.Format(CultureInfo.InvariantCulture, gridFilter.TextFilterOption.GetTextQuery(), gridFilter.PropertyName) :
+                string.Format(CultureInfo.InvariantCulture, gridFilter.TextFilterOption.GetTextQuery(), gridFilter.PropertyName, gridFilter.Value);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);
+        }
+
+        public static string GetTextQuery(this TextFilterOption textFilterOption)
+        {
+            switch (textFilterOption)
+            {
+                case TextFilterOption.Contains:
+                    return GridTextFilterConstants.ContainsQuery;
+                case TextFilterOption.DoesNotContains:
+                    return GridTextFilterConstants.DoesNotContainQuery;
+                case TextFilterOption.Blank:
+                    return GridTextFilterConstants.BlankQuery;
+                case TextFilterOption.NotBlank:
+                    return GridTextFilterConstants.NotBlankQuery;
+                case TextFilterOption.StartsWith:
+                    return GridTextFilterConstants.StartsWithQuery;
+                case TextFilterOption.EndsWith:
+                    return GridTextFilterConstants.EndsWithQuery;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(textFilterOption), textFilterOption, null);
+            }
         }
     }
 }

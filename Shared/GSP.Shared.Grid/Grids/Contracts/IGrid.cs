@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Grid.Columns.Contracts;
+﻿using GSP.Shared.Grid.Columns;
 using GSP.Shared.Grid.Pagination.Models;
 using GSP.Shared.Grid.Sorting;
 using System;
@@ -9,7 +9,7 @@ namespace GSP.Shared.Grid.Grids.Contracts
 {
     public interface IGrid<TEntity>
     {
-        ICollection<IGridColumn<TEntity>> Columns { get; set; }
+        ICollection<GridColumn<TEntity>> Columns { get; set; }
 
         PaginationModel Pagination { get; set; }
 

@@ -6,7 +6,6 @@
         Number = 1,
         Date = 2,
         Boolean = 3,
-        Enumeration = 4,
-        List = 5
+        List = 4
     }
 }

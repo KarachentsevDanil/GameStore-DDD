@@ -2,8 +2,8 @@
 
 namespace GSP.Shared.Grid.Filters.Contracts
 {
-    public interface IGridTextFilter
+    public interface IGridBooleanFilter
     {
-        TextFilterOption TextFilterOption { get; set; }
+        BooleanFilterOption BooleanFilterOption { get; set; }
     }
 }
