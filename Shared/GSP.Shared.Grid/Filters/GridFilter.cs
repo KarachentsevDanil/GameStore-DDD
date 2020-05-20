@@ -10,25 +10,25 @@ namespace GSP.Shared.Grid.Filters
 {
     public class GridFilter<TEntity> : IGridFilter<TEntity>
     {
-        public DateFilterOption DateFilterOption { get; set; }
+        public DateFilterOption? DateFilterOption { get; set; }
 
         public DateTime? SelectedStartDate { get; set; }
 
         public DateTime? SelectedEndDate { get; set; }
 
-        public TextFilterOption TextFilterOption { get; set; }
+        public TextFilterOption? TextFilterOption { get; set; }
 
-        public ListFilterOption ListFilterOption { get; set; }
+        public ListFilterOption? ListFilterOption { get; set; }
 
         public IList<string> Values { get; set; }
 
-        public NumberFilterOption NumberFilterOption { get; set; }
+        public NumberFilterOption? NumberFilterOption { get; set; }
 
         public string FirstOperand { get; set; }
 
         public string SecondOperand { get; set; }
 
-        public BooleanFilterOption BooleanFilterOption { get; set; }
+        public BooleanFilterOption? BooleanFilterOption { get; set; }
 
         public GridFilterType Type { get; set; }
 
@@ -36,7 +36,12 @@ namespace GSP.Shared.Grid.Filters
 
         public string Value { get; set; }
 
-        public bool HasSelectedData => !string.IsNullOrWhiteSpace(Value);
+        public bool HasSelectedData =>
+            DateFilterOption.HasValue ||
+            NumberFilterOption.HasValue ||
+            BooleanFilterOption.HasValue ||
+            TextFilterOption.HasValue ||
+            ListFilterOption.HasValue;
 
         public Expression<Func<TEntity, bool>> GetFilterExpression()
         {

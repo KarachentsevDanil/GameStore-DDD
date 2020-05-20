@@ -5,7 +5,7 @@ namespace GSP.Shared.Grid.Filters.Contracts
 {
     public interface IGridDateFilter
     {
-        DateFilterOption DateFilterOption { get; set; }
+        DateFilterOption? DateFilterOption { get; set; }
 
         DateTime? SelectedStartDate { get; set; }
 

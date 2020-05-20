@@ -4,6 +4,6 @@ namespace GSP.Shared.Grid.Filters.Contracts
 {
     public interface IGridBooleanFilter
     {
-        BooleanFilterOption BooleanFilterOption { get; set; }
+        BooleanFilterOption? BooleanFilterOption { get; set; }
     }
 }

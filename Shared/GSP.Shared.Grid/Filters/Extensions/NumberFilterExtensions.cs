@@ -26,7 +26,7 @@ namespace GSP.Shared.Grid.Filters.Extensions
                 CultureInfo.InvariantCulture,
                 GridNumberFilterConstants.NumberQuery,
                 gridFilter.PropertyName,
-                gridFilter.NumberFilterOption.GetNumberOperator(),
+                gridFilter.NumberFilterOption.Value.GetNumberOperator(),
                 gridFilter.Value);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);

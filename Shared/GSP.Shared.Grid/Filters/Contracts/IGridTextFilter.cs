@@ -4,6 +4,6 @@ namespace GSP.Shared.Grid.Filters.Contracts
 {
     public interface IGridTextFilter
     {
-        TextFilterOption TextFilterOption { get; set; }
+        TextFilterOption? TextFilterOption { get; set; }
     }
 }

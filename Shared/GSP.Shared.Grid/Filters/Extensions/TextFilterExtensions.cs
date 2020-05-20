@@ -12,9 +12,11 @@ namespace GSP.Shared.Grid.Filters.Extensions
     {
         public static Expression<Func<TEntity, bool>> GetTextFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
         {
+            var textFilterOption = gridFilter.TextFilterOption.Value;
+
             var query = gridFilter.TextFilterOption == TextFilterOption.Blank || gridFilter.TextFilterOption == TextFilterOption.NotBlank ?
-                string.Format(CultureInfo.InvariantCulture, gridFilter.TextFilterOption.GetTextQuery(), gridFilter.PropertyName) :
-                string.Format(CultureInfo.InvariantCulture, gridFilter.TextFilterOption.GetTextQuery(), gridFilter.PropertyName, gridFilter.Value);
+                string.Format(CultureInfo.InvariantCulture, textFilterOption.GetTextQuery(), gridFilter.PropertyName) :
+                string.Format(CultureInfo.InvariantCulture, textFilterOption.GetTextQuery(), gridFilter.PropertyName, gridFilter.Value);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);
         }

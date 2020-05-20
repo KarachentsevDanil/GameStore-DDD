@@ -14,7 +14,7 @@ namespace GSP.Shared.Grid.Filters.Extensions
         {
             var query = string.Format(
                 CultureInfo.InvariantCulture,
-                gridFilter.BooleanFilterOption.GetBooleanQuery(),
+                gridFilter.BooleanFilterOption.Value.GetBooleanQuery(),
                 gridFilter.PropertyName);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);

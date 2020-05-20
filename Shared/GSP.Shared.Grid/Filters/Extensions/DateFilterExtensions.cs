@@ -24,7 +24,7 @@ namespace GSP.Shared.Grid.Filters.Extensions
 
             var query = string.Format(
                 CultureInfo.InvariantCulture,
-                gridFilter.DateFilterOption.GetDateQuery(),
+                gridFilter.DateFilterOption.Value.GetDateQuery(),
                 gridFilter.PropertyName);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);

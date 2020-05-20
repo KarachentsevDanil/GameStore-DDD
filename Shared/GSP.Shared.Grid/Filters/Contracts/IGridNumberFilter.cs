@@ -4,7 +4,7 @@ namespace GSP.Shared.Grid.Filters.Contracts
 {
     public interface IGridNumberFilter
     {
-        NumberFilterOption NumberFilterOption { get; set; }
+        NumberFilterOption? NumberFilterOption { get; set; }
 
         string FirstOperand { get; set; }
 

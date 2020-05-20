@@ -5,7 +5,7 @@ namespace GSP.Shared.Grid.Filters.Contracts
 {
     public interface IGridListFilter
     {
-        ListFilterOption ListFilterOption { get; set; }
+        ListFilterOption? ListFilterOption { get; set; }
 
         IList<string> Values { get; set; }
     }
