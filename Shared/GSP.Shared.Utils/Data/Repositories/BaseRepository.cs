@@ -66,9 +66,9 @@ namespace GSP.Shared.Utils.Data.Repositories
             int totalCount = await query.CountAsync(ct);
 
             var items = await query
+                .Ordered(grid.GetSortingOptions())
                 .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
                 .Take(grid.Pagination.PageSize)
-                .Ordered(grid.GetSortingOptions())
                 .AsNoTracking()
                 .ToListAsync(ct);
 
