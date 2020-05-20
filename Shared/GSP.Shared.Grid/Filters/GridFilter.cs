@@ -20,7 +20,7 @@ namespace GSP.Shared.Grid.Filters
 
         public ListFilterOption ListFilterOption { get; set; }
 
-        public ICollection<string> Values { get; set; }
+        public IList<string> Values { get; set; }
 
         public NumberFilterOption NumberFilterOption { get; set; }
 

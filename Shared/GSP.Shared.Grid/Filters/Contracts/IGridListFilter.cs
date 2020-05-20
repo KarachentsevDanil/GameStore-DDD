@@ -7,6 +7,6 @@ namespace GSP.Shared.Grid.Filters.Contracts
     {
         ListFilterOption ListFilterOption { get; set; }
 
-        ICollection<string> Values { get; set; }
+        IList<string> Values { get; set; }
     }
 }
