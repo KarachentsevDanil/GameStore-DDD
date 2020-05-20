@@ -4,6 +4,8 @@
     {
         string PropertyName { get; set; }
 
+        bool IsCalculateTotalNeeded { get; set; }
+
         int Order { get; set; }
     }
 }

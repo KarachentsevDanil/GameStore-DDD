@@ -1,6 +1,7 @@
 ﻿using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
+using GSP.Shared.Utils.Common.Models.Grids;
 using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Data.Extensions;
 using GSP.Shared.Utils.Domain.Base;
@@ -55,15 +56,21 @@ namespace GSP.Shared.Utils.Data.Repositories
             return new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
         }
 
-        public async Task<PagedCollection<TEntity>> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct)
+        public virtual async Task<GridModel<TEntity>> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct)
         {
             var query = DbSet.AsNoTracking().AsQueryable();
+
+            foreach (var include in grid.IncludeEntities)
+            {
+                query = query.Include(include);
+            }
 
             var expression = grid.GetGridFilterExpression();
 
             query = query.Where(expression);
 
             int totalCount = await query.CountAsync(ct);
+            var columnsWithTotal = GetColumnsWithTotal(grid, query);
 
             var items = await query
                 .Ordered(grid.GetSortingOptions())
@@ -72,7 +79,9 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync(ct);
 
-            return new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
+            var pagedCollection = new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
+
+            return new GridModel<TEntity>(columnsWithTotal, pagedCollection);
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -93,7 +102,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             DbSet.Remove(entity);
         }
 
-        protected IQueryable<TEntity> GetPagedQuery(IQueryable<TEntity> query, PaginationFilterParams filterParams, out int totalCount)
+        protected virtual IQueryable<TEntity> GetPagedQuery(IQueryable<TEntity> query, PaginationFilterParams filterParams, out int totalCount)
         {
             totalCount = query.Count();
 
@@ -102,6 +111,20 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .Take(filterParams.PageSize);
 
             return items;
+        }
+
+        protected virtual ICollection<GridColumnModel> GetColumnsWithTotal(IGrid<TEntity> grid, IQueryable<TEntity> query)
+        {
+            var gridColumns = new List<GridColumnModel>();
+
+            foreach (var column in grid.Columns.Where(q => q.IsCalculateTotalNeeded))
+            {
+                object total = query.SumDynamic(column.PropertyName);
+                var columnWithTotal = new GridColumnModel(column.PropertyName, total);
+                gridColumns.Add(columnWithTotal);
+            }
+
+            return gridColumns;
         }
     }
 }

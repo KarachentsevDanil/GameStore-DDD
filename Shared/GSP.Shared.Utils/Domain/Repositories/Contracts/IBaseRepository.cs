@@ -1,6 +1,7 @@
 ﻿using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
+using GSP.Shared.Utils.Common.Models.Grids;
 using GSP.Shared.Utils.Domain.Base;
 using System.Collections.Generic;
 using System.Threading;
@@ -19,7 +20,7 @@ namespace GSP.Shared.Utils.Domain.Repositories.Contracts
 
         Task<PagedCollection<TEntity>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct);
 
-        Task<PagedCollection<TEntity>> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct);
+        Task<GridModel<TEntity>> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct);
 
         TEntity Create(TEntity entity);
 

@@ -16,6 +16,8 @@ namespace GSP.Shared.Grid.Grids
 
         public PaginationModel Pagination { get; set; }
 
+        public ICollection<string> IncludeEntities { get; set; }
+
         public Expression<Func<TEntity, bool>> GetGridFilterExpression()
         {
             var expression = PredicateBuilder.True<TEntity>();

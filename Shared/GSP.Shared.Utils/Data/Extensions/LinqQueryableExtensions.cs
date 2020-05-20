@@ -4,10 +4,13 @@ using GSP.Shared.Utils.Common.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Data.Extensions
 {
-    public static class OrderedQueryableExtensions
+    public static class LinqQueryableExtensions
     {
         private const string EntitySelector = "Entity";
 
@@ -18,6 +21,8 @@ namespace GSP.Shared.Utils.Data.Extensions
         private const string ThenByMethodName = nameof(Queryable.ThenBy);
 
         private const string ThenByDescendingMethodName = nameof(Queryable.ThenByDescending);
+
+        private const string SumMethodName = nameof(Queryable.Sum);
 
         public static IQueryable<TEntity> Ordered<TEntity>(this IQueryable<TEntity> sequence, IList<SortingModel> orderByList)
         {
@@ -36,6 +41,28 @@ namespace GSP.Shared.Utils.Data.Extensions
             }
 
             return sequence.Provider.CreateQuery<TEntity>(expression);
+        }
+
+        public static object SumDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)
+        {
+            var parameterExpression = Expression.Parameter(typeof(TEntity), EntitySelector);
+            var memberExpression = ExpressionHelper.PropertyOrField(parameterExpression, propertyName);
+
+            var selector = Expression.Lambda(memberExpression, parameterExpression);
+
+            var sumMethod = typeof(Queryable).GetMethods().First(
+                m => m.Name == SumMethodName
+                     && m.ReturnType == ((PropertyInfo)memberExpression.Member).PropertyType
+                     && m.IsGenericMethod);
+
+            var genericSumMethod = sumMethod.MakeGenericMethod(source.ElementType);
+
+            var callExpression = Expression.Call(
+                null,
+                genericSumMethod,
+                new[] { source.Expression, Expression.Quote(selector) });
+
+            return source.Provider.Execute(callExpression);
         }
 
         private static MethodCallExpression CreateOrderByMethodCallExpression<TEntity>(

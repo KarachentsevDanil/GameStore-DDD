@@ -13,6 +13,8 @@ namespace GSP.Shared.Grid.Grids.Contracts
 
         PaginationModel Pagination { get; set; }
 
+        ICollection<string> IncludeEntities { get; set; }
+
         Expression<Func<TEntity, bool>> GetGridFilterExpression();
 
         IList<SortingModel> GetSortingOptions();
