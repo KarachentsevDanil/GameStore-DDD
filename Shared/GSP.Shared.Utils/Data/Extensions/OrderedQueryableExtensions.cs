@@ -44,7 +44,6 @@ namespace GSP.Shared.Utils.Data.Extensions
             Expression expression,
             bool isFirstApply)
         {
-
             var parameterExpression = Expression.Parameter(typeof(TEntity), EntitySelector);
             var memberExpression = ExpressionHelper.PropertyOrField(parameterExpression, sortingModel.PropertyName);
 
