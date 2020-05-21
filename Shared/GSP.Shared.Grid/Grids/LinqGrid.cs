@@ -1,7 +1,7 @@
 ﻿using GSP.Shared.Grid.Builders;
 using GSP.Shared.Grid.Columns;
+using GSP.Shared.Grid.Grids.Abstract;
 using GSP.Shared.Grid.Grids.Contracts;
-using GSP.Shared.Grid.Pagination.Models;
 using GSP.Shared.Grid.Sorting;
 using System;
 using System.Collections.Generic;
@@ -10,21 +10,17 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public class BaseGrid<TEntity> : IGrid<TEntity>
+    public class LinqGrid<TEntity> : BaseGrid, ILinqGrid<TEntity>
     {
-        public ICollection<GridColumn<TEntity>> Columns { get; set; }
+        public ICollection<LinqGridColumn<TEntity>> Columns { get; set; }
 
-        public PaginationModel Pagination { get; set; }
-
-        public ICollection<string> IncludeEntities { get; set; }
-
-        public Expression<Func<TEntity, bool>> GetGridFilterExpression()
+        public Expression<Func<TEntity, bool>> GetGridFiltersLinqExpression()
         {
             var expression = PredicateBuilder.True<TEntity>();
 
             foreach (var column in Columns.Where(q => q.Filter.HasSelectedData))
             {
-                var filterExpression = column.GetFilterExpression();
+                var filterExpression = column.GetFilterLinqExpression();
 
                 if (filterExpression != null)
                 {
@@ -35,7 +31,7 @@ namespace GSP.Shared.Grid.Grids
             return expression;
         }
 
-        public IList<SortingModel> GetSortingOptions()
+        public override IList<SortingModel> GetSortingOptions()
         {
             return Columns
                 .Where(q => q.Direction.HasValue)

@@ -1,6 +1,6 @@
 ﻿namespace GSP.Shared.Grid.Columns.Contracts
 {
-    public interface IGridColumn<TEntity> : IFilterableColumn<TEntity>, ISortableColumn
+    public interface IGridColumn : ISortableColumn
     {
         string PropertyName { get; set; }
 

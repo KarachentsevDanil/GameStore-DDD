@@ -6,28 +6,30 @@ using System;
 using System.Globalization;
 using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Filters.Extensions
+namespace GSP.Shared.Grid.Filters.Extensions.Linq
 {
-    public static class BooleanFilterExtensions
+    public static class BooleanFilterLinqExtensions
     {
-        public static Expression<Func<TEntity, bool>> GetBooleanFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
+        public static Expression<Func<TEntity, bool>> GetBooleanFilterLinqExpression<TEntity>(this ILinqFilter<TEntity> gridFilter)
         {
             var query = string.Format(
                 CultureInfo.InvariantCulture,
-                gridFilter.BooleanFilterOption.Value.GetBooleanQuery(),
+                gridFilter.BooleanFilterOption.Value.GetBooleanLinqQuery(),
                 gridFilter.PropertyName);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);
         }
 
-        public static string GetBooleanQuery(this BooleanFilterOption booleanFilterOption)
+        public static string GetBooleanLinqQuery(this BooleanFilterOption booleanFilterOption)
         {
             switch (booleanFilterOption)
             {
                 case BooleanFilterOption.True:
-                    return GridBooleanFilterConstants.TrueQuery;
+                    return BooleanFilterConstants.TrueLinqQuery;
+
                 case BooleanFilterOption.False:
-                    return GridBooleanFilterConstants.FalseQuery;
+                    return BooleanFilterConstants.FalseLinqQuery;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(booleanFilterOption), booleanFilterOption, null);
             }

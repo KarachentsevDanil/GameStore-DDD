@@ -1,9 +1,9 @@
 ﻿using GSP.Shared.Grid.Filters.Enums.FilterOptions;
 using System;
 
-namespace GSP.Shared.Grid.Filters.Contracts
+namespace GSP.Shared.Grid.Filters.Contracts.Types
 {
-    public interface IGridDateFilter
+    public interface IDateFilter
     {
         DateFilterOption? DateFilterOption { get; set; }
 

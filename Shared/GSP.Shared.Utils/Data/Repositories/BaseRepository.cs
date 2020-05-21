@@ -56,7 +56,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             return new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
         }
 
-        public virtual async Task<GridModel<TEntity>> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct)
+        public virtual async Task<GridModel<TEntity>> GetPagedListAsync(ILinqGrid<TEntity> grid, CancellationToken ct)
         {
             var query = DbSet.AsNoTracking().AsQueryable();
 
@@ -65,7 +65,7 @@ namespace GSP.Shared.Utils.Data.Repositories
                 query = query.Include(include);
             }
 
-            var expression = grid.GetGridFilterExpression();
+            var expression = grid.GetGridFiltersLinqExpression();
 
             query = query.Where(expression);
 
@@ -113,7 +113,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             return items;
         }
 
-        protected virtual ICollection<GridColumnModel> GetColumnsWithTotal(IGrid<TEntity> grid, IQueryable<TEntity> query)
+        protected virtual ICollection<GridColumnModel> GetColumnsWithTotal(ILinqGrid<TEntity> grid, IQueryable<TEntity> query)
         {
             var gridColumns = new List<GridColumnModel>();
 

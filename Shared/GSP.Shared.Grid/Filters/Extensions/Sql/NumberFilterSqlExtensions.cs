@@ -1,35 +1,35 @@
 ﻿using GSP.Shared.Grid.Filters.Constants;
 using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums.FilterOptions;
-using GSP.Shared.Grid.Helpers;
 using System;
 using System.Globalization;
-using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Filters.Extensions
+namespace GSP.Shared.Grid.Filters.Extensions.Sql
 {
-    public static class NumberFilterExtensions
+    public static class NumberFilterSqlExtensions
     {
-        public static Expression<Func<TEntity, bool>> GetNumberFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
+        public static string GetNumberFilterSqlQuery(this ISqlFilter gridFilter)
         {
             if (gridFilter.NumberFilterOption == NumberFilterOption.Between)
             {
                 var betweenQuery = string.Format(
                     CultureInfo.InvariantCulture,
-                    GridNumberFilterConstants.NumberBetweenQuery,
-                    gridFilter.PropertyName);
+                    NumberFilterConstants.NumberBetweenSqlQuery,
+                    gridFilter.PropertyName,
+                    gridFilter.FirstOperand,
+                    gridFilter.SecondOperand);
 
-                return DynamicExpressionHelper.ParseLambda<TEntity, bool>(betweenQuery, gridFilter.FirstOperand, gridFilter.SecondOperand);
+                return betweenQuery;
             }
 
             var query = string.Format(
                 CultureInfo.InvariantCulture,
-                GridNumberFilterConstants.NumberQuery,
+                NumberFilterConstants.NumberQuery,
                 gridFilter.PropertyName,
                 gridFilter.NumberFilterOption.Value.GetNumberOperator(),
                 gridFilter.Value);
 
-            return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);
+            return query;
         }
 
         public static string GetNumberOperator(this NumberFilterOption numberFilterOption)
@@ -37,17 +37,23 @@ namespace GSP.Shared.Grid.Filters.Extensions
             switch (numberFilterOption)
             {
                 case NumberFilterOption.Equals:
-                    return GridNumberFilterConstants.EqualsOperator;
+                    return NumberFilterConstants.EqualsSqlOperator;
+
                 case NumberFilterOption.DoesNotEqual:
-                    return GridNumberFilterConstants.DoesNotEqualOperator;
+                    return NumberFilterConstants.DoesNotEqualSqlOperator;
+
                 case NumberFilterOption.GreaterThan:
-                    return GridNumberFilterConstants.GreaterThanOperator;
+                    return NumberFilterConstants.GreaterThanOperator;
+
                 case NumberFilterOption.GreaterThanOrEqual:
-                    return GridNumberFilterConstants.GreaterThanOrEqualsOperator;
+                    return NumberFilterConstants.GreaterThanOrEqualsOperator;
+
                 case NumberFilterOption.LessThan:
-                    return GridNumberFilterConstants.LessThanOperator;
+                    return NumberFilterConstants.LessThanOperator;
+
                 case NumberFilterOption.LessThanOrEqual:
-                    return GridNumberFilterConstants.LessThanOrEqualsOperator;
+                    return NumberFilterConstants.LessThanOrEqualsOperator;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(numberFilterOption), numberFilterOption, null);
             }

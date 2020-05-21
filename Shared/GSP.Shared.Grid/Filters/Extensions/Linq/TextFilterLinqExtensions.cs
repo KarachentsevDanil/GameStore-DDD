@@ -6,37 +6,43 @@ using System;
 using System.Globalization;
 using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Filters.Extensions
+namespace GSP.Shared.Grid.Filters.Extensions.Linq
 {
-    public static class TextFilterExtensions
+    public static class TextFilterLinqExtensions
     {
-        public static Expression<Func<TEntity, bool>> GetTextFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
+        public static Expression<Func<TEntity, bool>> GetTextFilterLinqExpression<TEntity>(this ILinqFilter<TEntity> gridFilter)
         {
             var textFilterOption = gridFilter.TextFilterOption.Value;
 
             var query = gridFilter.TextFilterOption == TextFilterOption.Blank || gridFilter.TextFilterOption == TextFilterOption.NotBlank ?
-                string.Format(CultureInfo.InvariantCulture, textFilterOption.GetTextQuery(), gridFilter.PropertyName) :
-                string.Format(CultureInfo.InvariantCulture, textFilterOption.GetTextQuery(), gridFilter.PropertyName, gridFilter.Value);
+                string.Format(CultureInfo.InvariantCulture, textFilterOption.GetTextLinqQuery(), gridFilter.PropertyName) :
+                string.Format(CultureInfo.InvariantCulture, textFilterOption.GetTextLinqQuery(), gridFilter.PropertyName, gridFilter.Value);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query);
         }
 
-        public static string GetTextQuery(this TextFilterOption textFilterOption)
+        public static string GetTextLinqQuery(this TextFilterOption textFilterOption)
         {
             switch (textFilterOption)
             {
                 case TextFilterOption.Contains:
-                    return GridTextFilterConstants.ContainsQuery;
+                    return TextFilterConstants.ContainsLinqQuery;
+
                 case TextFilterOption.DoesNotContains:
-                    return GridTextFilterConstants.DoesNotContainQuery;
+                    return TextFilterConstants.DoesNotContainLinqQuery;
+
                 case TextFilterOption.Blank:
-                    return GridTextFilterConstants.BlankQuery;
+                    return TextFilterConstants.BlankLinqQuery;
+
                 case TextFilterOption.NotBlank:
-                    return GridTextFilterConstants.NotBlankQuery;
+                    return TextFilterConstants.NotBlankLinqQuery;
+
                 case TextFilterOption.StartsWith:
-                    return GridTextFilterConstants.StartsWithQuery;
+                    return TextFilterConstants.StartsWithLinqQuery;
+
                 case TextFilterOption.EndsWith:
-                    return GridTextFilterConstants.EndsWithQuery;
+                    return TextFilterConstants.EndsWithLinqQuery;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(textFilterOption), textFilterOption, null);
             }

@@ -6,28 +6,30 @@ using System;
 using System.Globalization;
 using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Filters.Extensions
+namespace GSP.Shared.Grid.Filters.Extensions.Linq
 {
-    public static class ListFilterExtensions
+    public static class ListFilterLinqExtensions
     {
-        public static Expression<Func<TEntity, bool>> GetListFilterExpression<TEntity>(this IGridFilter<TEntity> gridFilter)
+        public static Expression<Func<TEntity, bool>> GetListFilterLinqExpression<TEntity>(this ILinqFilter<TEntity> gridFilter)
         {
             var query = string.Format(
                 CultureInfo.InvariantCulture,
-                gridFilter.ListFilterOption.Value.GetListQuery(),
+                gridFilter.ListFilterOption.Value.GetListLinqQuery(),
                 gridFilter.PropertyName);
 
             return DynamicExpressionHelper.ParseLambda<TEntity, bool>(query, gridFilter.Values);
         }
 
-        public static string GetListQuery(this ListFilterOption listFilterOption)
+        public static string GetListLinqQuery(this ListFilterOption listFilterOption)
         {
             switch (listFilterOption)
             {
                 case ListFilterOption.Any:
-                    return GridListFilterConstants.AnyQuery;
+                    return ListFilterConstants.AnyLinqQuery;
+
                 case ListFilterOption.DoesNotAny:
-                    return GridListFilterConstants.DoesNotAnyQuery;
+                    return ListFilterConstants.DoesNotAnyLinqQuery;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(listFilterOption), listFilterOption, null);
             }

@@ -1,14 +1,12 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums;
 using GSP.Shared.Grid.Filters.Enums.FilterOptions;
-using GSP.Shared.Grid.Filters.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Filters
+namespace GSP.Shared.Grid.Filters.Abstract
 {
-    public class GridFilter<TEntity> : IGridFilter<TEntity>
+    public abstract class BaseFilter : IFilter
     {
         public DateFilterOption? DateFilterOption { get; set; }
 
@@ -36,34 +34,11 @@ namespace GSP.Shared.Grid.Filters
 
         public string Value { get; set; }
 
-        public bool HasSelectedData =>
+        public virtual bool HasSelectedData =>
             DateFilterOption.HasValue ||
             NumberFilterOption.HasValue ||
             BooleanFilterOption.HasValue ||
             TextFilterOption.HasValue ||
             ListFilterOption.HasValue;
-
-        public Expression<Func<TEntity, bool>> GetFilterExpression()
-        {
-            switch (Type)
-            {
-                case GridFilterType.Text:
-                    return this.GetTextFilterExpression();
-
-                case GridFilterType.Number:
-                    return this.GetNumberFilterExpression();
-
-                case GridFilterType.Date:
-                    return this.GetDateFilterExpression();
-
-                case GridFilterType.Boolean:
-                    return this.GetBooleanFilterExpression();
-
-                case GridFilterType.List:
-                    return this.GetListFilterExpression();
-            }
-
-            throw new NotImplementedException($"Filter for type {Type} not implemented");
-        }
     }
 }
