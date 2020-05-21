@@ -2,6 +2,7 @@
 using GSP.Shared.Grid.Columns;
 using GSP.Shared.Grid.Grids.Abstract;
 using GSP.Shared.Grid.Grids.Contracts;
+using GSP.Shared.Grid.Grids.Extensions.Search;
 using GSP.Shared.Grid.Sorting;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,8 @@ namespace GSP.Shared.Grid.Grids
         public Expression<Func<TEntity, bool>> GetGridFiltersLinqExpression()
         {
             var expression = PredicateBuilder.True<TEntity>();
+
+            this.ApplyLinqSearchExpression(expression);
 
             foreach (var column in Columns.Where(q => q.Filter.HasSelectedData))
             {

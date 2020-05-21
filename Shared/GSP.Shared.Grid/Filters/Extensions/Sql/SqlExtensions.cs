@@ -13,5 +13,10 @@ namespace GSP.Shared.Grid.Filters.Extensions.Sql
                 column :
                 $"{SqlFilterConstants.EntityParam}{SqlFilterConstants.Dot}'{column}'";
         }
+
+        public static string ToSqlCondition(this string condition)
+        {
+            return $"({condition})";
+        }
     }
 }
