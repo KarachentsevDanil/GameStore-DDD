@@ -2,10 +2,8 @@
 
 namespace GSP.Shared.Grid.Columns.Contracts
 {
-    public interface ISqlFilterableColumn : IGridColumn
+    public interface ISqlFilterableColumn : IGridColumn<SqlFilter>
     {
-        SqlFilter Filter { get; set; }
-
         string GetFilterSqlQuery();
     }
 }

@@ -6,10 +6,8 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Columns
 {
-    public class LinqGridColumn<TEntity> : BaseGridColumn, ILinqFilterableColumn<TEntity>
+    public class LinqGridColumn<TEntity> : BaseGridColumn<LinqFilter<TEntity>>, ILinqFilterableColumn<TEntity>
     {
-        public LinqFilter<TEntity> Filter { get; set; }
-
         public Expression<Func<TEntity, bool>> GetFilterLinqExpression()
         {
             Filter.PropertyName = PropertyName;

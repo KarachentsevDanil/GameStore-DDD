@@ -5,10 +5,8 @@ using GSP.Shared.Grid.Filters.Extensions.Sql;
 
 namespace GSP.Shared.Grid.Columns
 {
-    public class SqlGridColumn : BaseGridColumn, ISqlFilterableColumn
+    public class SqlGridColumn : BaseGridColumn<SqlFilter>, ISqlFilterableColumn
     {
-        public SqlFilter Filter { get; set; }
-
         public string GetFilterSqlQuery()
         {
             Filter.PropertyName = PropertyName.ToSqlColumn();
