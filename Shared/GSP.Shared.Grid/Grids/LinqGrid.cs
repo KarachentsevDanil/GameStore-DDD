@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public class LinqGrid<TEntity> : BaseGrid<LinqGridColumn<TEntity>, LinqFilter<TEntity>>, ILinqGrid<TEntity>
+    public abstract class LinqGrid<TEntity> : BaseGrid<LinqGridColumn<TEntity>, LinqFilter<TEntity>>, ILinqGrid<TEntity>
     {
         public Expression<Func<TEntity, bool>> GetGridFiltersLinqExpression()
         {
@@ -20,8 +20,14 @@ namespace GSP.Shared.Grid.Grids
 
             foreach (var column in Columns.Where(q => q.Filter.HasSelectedData))
             {
-                var filterExpression = column.GetFilterLinqExpression();
+                var customFilterExpression = GetCustomColumnExpression(column);
+                if (customFilterExpression != null)
+                {
+                    expression = expression.And(customFilterExpression);
+                    continue;
+                }
 
+                var filterExpression = column.GetFilterLinqExpression();
                 if (filterExpression != null)
                 {
                     expression = expression.And(filterExpression);
@@ -29,6 +35,11 @@ namespace GSP.Shared.Grid.Grids
             }
 
             return expression;
+        }
+
+        protected Expression<Func<TEntity, bool>> GetCustomColumnExpression(LinqGridColumn<TEntity> column)
+        {
+            return default;
         }
     }
 }

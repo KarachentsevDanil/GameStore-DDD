@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public class SqlGrid : BaseGrid<SqlGridColumn, SqlFilter>, ISqlGrid
+    public abstract class SqlGrid : BaseGrid<SqlGridColumn, SqlFilter>, ISqlGrid
     {
         public string GetGridFiltersSqlQuery()
         {
@@ -24,8 +24,14 @@ namespace GSP.Shared.Grid.Grids
 
             foreach (var column in Columns.Where(q => q.Filter.HasSelectedData))
             {
-                var filterQuery = column.GetFilterSqlQuery();
+                var customQueryProcessor = GetCustomColumnQuery(column);
+                if (!string.IsNullOrEmpty(customQueryProcessor))
+                {
+                    queries.Add(customQueryProcessor.ToSqlCondition());
+                    continue;
+                }
 
+                var filterQuery = column.GetFilterSqlQuery();
                 if (!string.IsNullOrEmpty(filterQuery))
                 {
                     queries.Add(filterQuery.ToSqlCondition());
@@ -33,6 +39,11 @@ namespace GSP.Shared.Grid.Grids
             }
 
             return string.Join(SqlFilterConstants.OperatorAndWithSpaces, queries);
+        }
+
+        protected virtual string GetCustomColumnQuery(SqlGridColumn column)
+        {
+            return null;
         }
     }
 }
