@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace GSP.Shared.Grid.Grids.Abstract
 {
-    public abstract class BaseGrid<TGridColumn, TFilterType> : IGrid<TGridColumn, TFilterType>
+    public abstract class BaseGrid<TEntity, TGridColumn, TFilterType> : IGrid<TEntity, TGridColumn, TFilterType>
         where TFilterType : IFilter
         where TGridColumn : IGridColumn<TFilterType>
     {

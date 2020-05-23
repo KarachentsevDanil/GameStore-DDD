@@ -3,7 +3,7 @@ using GSP.Shared.Grid.Filters;
 
 namespace GSP.Shared.Grid.Grids.Contracts
 {
-    public interface ISqlGrid : IGrid<SqlGridColumn, SqlFilter>
+    public interface ISqlGrid<TEntity> : IGrid<TEntity, SqlGridColumn, SqlFilter>
     {
         string GetGridFiltersSqlQuery();
     }

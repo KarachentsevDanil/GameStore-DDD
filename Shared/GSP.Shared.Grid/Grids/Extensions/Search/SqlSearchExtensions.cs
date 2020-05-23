@@ -7,7 +7,7 @@ namespace GSP.Shared.Grid.Grids.Extensions.Search
 {
     public static class SqlSearchExtensions
     {
-        public static string GetSqlSearchQuery(this ISqlGrid grid)
+        public static string GetSqlSearchQuery<TEntity>(this ISqlGrid<TEntity> grid)
         {
             if (string.IsNullOrEmpty(grid.Search?.Term))
             {

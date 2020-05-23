@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids.Contracts
 {
-    public interface ILinqGrid<TEntity> : IGrid<LinqGridColumn<TEntity>, LinqFilter<TEntity>>
+    public interface ILinqGrid<TEntity> : IGrid<TEntity, LinqGridColumn<TEntity>, LinqFilter<TEntity>>
     {
         Expression<Func<TEntity, bool>> GetGridFiltersLinqExpression();
     }

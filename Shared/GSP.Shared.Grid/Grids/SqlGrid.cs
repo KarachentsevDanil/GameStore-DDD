@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public abstract class SqlGrid : BaseGrid<SqlGridColumn, SqlFilter>, ISqlGrid
+    public abstract class SqlGrid<TEntity> : BaseGrid<TEntity, SqlGridColumn, SqlFilter>, ISqlGrid<TEntity>
     {
         public string GetGridFiltersSqlQuery()
         {

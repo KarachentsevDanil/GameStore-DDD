@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public abstract class LinqGrid<TEntity> : BaseGrid<LinqGridColumn<TEntity>, LinqFilter<TEntity>>, ILinqGrid<TEntity>
+    public abstract class LinqGrid<TEntity> : BaseGrid<TEntity, LinqGridColumn<TEntity>, LinqFilter<TEntity>>, ILinqGrid<TEntity>
     {
         public Expression<Func<TEntity, bool>> GetGridFiltersLinqExpression()
         {

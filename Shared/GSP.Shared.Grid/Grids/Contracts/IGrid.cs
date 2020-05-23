@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace GSP.Shared.Grid.Grids.Contracts
 {
-    public interface IGrid<TGridColumn, TFilterType>
+    public interface IGrid<TEntity, TGridColumn, TFilterType>
         where TFilterType : IFilter
         where TGridColumn : IGridColumn<TFilterType>
     {
