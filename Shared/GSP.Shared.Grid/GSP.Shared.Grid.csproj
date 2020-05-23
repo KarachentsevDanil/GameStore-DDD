@@ -8,6 +8,7 @@
     <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.1.1" />
+    <PackageReference Include="TypeSupport" Version="1.0.108" />
   </ItemGroup>
 
 </Project>

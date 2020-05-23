@@ -70,7 +70,7 @@ namespace GSP.Shared.Grid.Stores
             if (!(property.PropertyType.IsClass &&
                   property.PropertyType.Assembly.FullName == type.Assembly.FullName))
             {
-                var gridTypeProperty = new GridTypePropertyModel(property.Name);
+                var gridTypeProperty = new GridTypePropertyModel(property.Name, property.PropertyType);
                 ApplyGridPropertyAttributeIfExist(property, gridTypeProperty);
                 gridTypeProperties.Add(gridTypeProperty);
             }
@@ -84,7 +84,7 @@ namespace GSP.Shared.Grid.Stores
         {
             foreach (var property in propertyInfo.PropertyType.GetProperties())
             {
-                var gridTypeProperty = new GridTypePropertyModel(property.Name);
+                var gridTypeProperty = new GridTypePropertyModel(property.Name, property.PropertyType);
                 ApplyGridPropertyAttributeIfExist(property, gridTypeProperty);
                 propertyModels.Add(gridTypeProperty);
             }
