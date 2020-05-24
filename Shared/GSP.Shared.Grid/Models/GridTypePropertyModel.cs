@@ -15,9 +15,9 @@ namespace GSP.Shared.Grid.Models
 
         public bool IsGroupable { get; set; }
 
-        public bool IsFilterable { get; set; }
+        public bool IsFilterable { get; set; } = true;
 
-        public bool IsSortable { get; set; }
+        public bool IsSortable { get; set; } = true;
 
         public bool HasTotalCalculationSupport { get; set; }
 

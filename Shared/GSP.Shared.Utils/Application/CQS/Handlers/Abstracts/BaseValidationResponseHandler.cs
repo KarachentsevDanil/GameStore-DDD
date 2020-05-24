@@ -23,7 +23,7 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
 
         protected override async Task PreExecuteAsync(TRequest request, CancellationToken ct)
         {
-            ValidationResult validationResult = await _validator.ValidateAsync(request, ct);
+            ValidationResult validationResult = await _validator.ValidateAsync(GetObjectToValidate(request), ct);
 
             if (!validationResult.IsValid)
             {
@@ -39,6 +39,11 @@ namespace GSP.Shared.Utils.Application.CQS.Handlers.Abstracts
 
                 throw new ValidationHandlerException(validationErrors);
             }
+        }
+
+        protected virtual object GetObjectToValidate(TRequest request)
+        {
+            return request;
         }
     }
 }
