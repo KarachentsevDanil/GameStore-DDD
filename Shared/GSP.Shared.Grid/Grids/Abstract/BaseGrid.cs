@@ -1,6 +1,7 @@
 ﻿using GSP.Shared.Grid.Columns.Contracts;
 using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Grids.Contracts;
+using GSP.Shared.Grid.Groups;
 using GSP.Shared.Grid.Pagination.Models;
 using GSP.Shared.Grid.Searching;
 using GSP.Shared.Grid.Sorting;
@@ -15,6 +16,8 @@ namespace GSP.Shared.Grid.Grids.Abstract
     {
         public ICollection<TGridColumn> Columns { get; set; }
 
+        public ICollection<GroupModel> Groups { get; set; }
+
         public SearchModel Search { get; set; }
 
         public PaginationModel Pagination { get; set; }
@@ -28,6 +31,16 @@ namespace GSP.Shared.Grid.Grids.Abstract
                 .OrderBy(o => o.Order)
                 .Select(s => new SortingModel(s.PropertyName, s.Direction.Value))
                 .ToList();
+        }
+
+        public virtual ICollection<string> GetGroups()
+        {
+            if (Groups == null)
+            {
+                return new List<string>();
+            }
+
+            return Groups.OrderBy(p => p.Order).Select(p => p.PropertyName).ToList();
         }
     }
 }

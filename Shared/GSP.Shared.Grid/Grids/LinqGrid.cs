@@ -18,7 +18,7 @@ namespace GSP.Shared.Grid.Grids
 
             this.ApplyLinqSearchExpression(expression);
 
-            foreach (var column in Columns.Where(q => q.Filter.HasSelectedData))
+            foreach (var column in Columns.Where(q => q.Filter != null && q.Filter.HasSelectedData))
             {
                 var customFilterExpression = GetCustomColumnExpression(column);
                 if (customFilterExpression != null)

@@ -13,7 +13,7 @@ namespace GSP.Shared.Grid.Models
 
         public string Name { get; set; }
 
-        public bool IsGroupable { get; set; }
+        public bool IsGroupable { get; set; } = true;
 
         public bool IsFilterable { get; set; } = true;
 

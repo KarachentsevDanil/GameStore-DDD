@@ -20,6 +20,8 @@ namespace GSP.Shared.Grid.Models
 
         public ICollection<string> IncludedEntities { get; set; }
 
+        public ICollection<string> GroupablePropertyNames => Properties.Where(p => p.IsGroupable).Select(p => p.Name).ToList();
+
         public ICollection<string> FilterablePropertyNames => Properties.Where(p => p.IsFilterable).Select(p => p.Name).ToList();
 
         public ICollection<string> SortablePropertyNames => Properties.Where(p => p.IsSortable).Select(p => p.Name).ToList();

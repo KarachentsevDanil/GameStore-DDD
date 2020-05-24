@@ -56,7 +56,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             return new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
         }
 
-        public virtual async Task<GridModel<TEntity>> GetPagedListAsync(ILinqGrid<TEntity> grid, CancellationToken ct)
+        public virtual async Task<GridModel> GetPagedListAsync(ILinqGrid<TEntity> grid, CancellationToken ct)
         {
             var query = DbSet.AsNoTracking().AsQueryable();
 
@@ -79,9 +79,14 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync(ct);
 
-            var pagedCollection = new PagedCollection<TEntity>(items.ToImmutableList(), totalCount);
+            var gridGroups = grid.GetGroups();
+            if (gridGroups.Any())
+            {
+                var groupedItems = items.GroupByDynamic(gridGroups);
+                return new GridModel(columnsWithTotal, groupedItems.ToImmutableList(), totalCount);
+            }
 
-            return new GridModel<TEntity>(columnsWithTotal, pagedCollection);
+            return new GridModel(columnsWithTotal, items.Cast<dynamic>().ToImmutableList(), totalCount);
         }
 
         public virtual TEntity Create(TEntity entity)

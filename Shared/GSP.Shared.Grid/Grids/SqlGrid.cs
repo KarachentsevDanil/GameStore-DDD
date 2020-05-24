@@ -22,7 +22,7 @@ namespace GSP.Shared.Grid.Grids
                 queries.Add(searchQuery.ToSqlCondition());
             }
 
-            foreach (var column in Columns.Where(q => q.Filter.HasSelectedData))
+            foreach (var column in Columns.Where(q => q.Filter != null && q.Filter.HasSelectedData))
             {
                 var customQueryProcessor = GetCustomColumnQuery(column);
                 if (!string.IsNullOrEmpty(customQueryProcessor))

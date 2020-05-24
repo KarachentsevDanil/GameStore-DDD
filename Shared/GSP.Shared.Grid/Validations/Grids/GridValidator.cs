@@ -6,6 +6,7 @@ using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Models;
 using GSP.Shared.Grid.Stores.Contracts;
 using GSP.Shared.Grid.Validations.Columns;
+using GSP.Shared.Grid.Validations.Groups;
 using GSP.Shared.Grid.Validations.Paginations;
 using GSP.Shared.Grid.Validations.Searches;
 
@@ -32,6 +33,9 @@ namespace GSP.Shared.Grid.Validations.Grids
 
             RuleForEach(p => p.Columns)
                 .SetValidator(new ColumnValidator<TGridColumn, TFilterType>(gridTypeModel));
+
+            RuleForEach(p => p.Groups)
+                .SetValidator(new GroupValidator(gridTypeModel));
 
             RuleForEach(p => p.IncludeEntities)
                 .NotEmpty()

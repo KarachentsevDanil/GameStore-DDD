@@ -1,8 +1,10 @@
 ﻿using GSP.Shared.Grid.Sorting;
 using GSP.Shared.Grid.Sorting.Enums;
 using GSP.Shared.Utils.Common.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Threading;
@@ -22,7 +24,11 @@ namespace GSP.Shared.Utils.Data.Extensions
 
         private const string ThenByDescendingMethodName = nameof(Queryable.ThenByDescending);
 
+        private const string GroupByMethodName = nameof(Queryable.GroupBy);
+
         private const string SumMethodName = nameof(Queryable.Sum);
+
+        private const string DynamicElementSelector = "it";
 
         public static IQueryable<TEntity> Ordered<TEntity>(this IQueryable<TEntity> sequence, IList<SortingModel> orderByList)
         {
@@ -63,6 +69,31 @@ namespace GSP.Shared.Utils.Data.Extensions
                 new[] { source.Expression, Expression.Quote(selector) });
 
             return source.Provider.Execute(callExpression);
+        }
+
+        public static IQueryable GroupByDynamic(this IQueryable source, string keySelector, params object[] values)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            if (keySelector == null)
+            {
+                throw new ArgumentNullException(nameof(keySelector));
+            }
+
+            LambdaExpression keyLambda = DynamicExpressionParser.ParseLambda(source.ElementType, null, keySelector, values);
+            LambdaExpression elementLambda = DynamicExpressionParser.ParseLambda(source.ElementType, null, DynamicElementSelector, values);
+
+            return source.Provider.CreateQuery(
+                Expression.Call(
+                    typeof(Queryable),
+                    GroupByMethodName,
+                    new[] { source.ElementType, keyLambda.Body.Type, elementLambda.Body.Type },
+                    source.Expression,
+                    Expression.Quote(keyLambda),
+                    Expression.Quote(elementLambda)));
         }
 
         private static MethodCallExpression CreateOrderByMethodCallExpression<TEntity>(
