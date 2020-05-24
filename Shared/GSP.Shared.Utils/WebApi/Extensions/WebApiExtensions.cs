@@ -15,6 +15,7 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             services.AddLogging();
 
             services.AddControllers()
+                .AddNewtonsoftJson(option => { option.UseCamelCasing(true); })
                 .AddFluentValidation(options =>
             {
                 options.RegisterValidatorsFromAssemblyContaining<TValidationAssemblyType>();
