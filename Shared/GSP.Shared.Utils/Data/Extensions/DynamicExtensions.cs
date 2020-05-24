@@ -22,7 +22,7 @@ namespace GSP.Shared.Utils.Data.Extensions
         {
             var groupByField = string.Join(PropertySeparator, groupByProperties.Select(p => $"{p}"));
             var selectGroupedFields = string.Join(PropertySeparator, groupByProperties.Select(p => $"{EntityKeySelector}.{p}"));
-            
+
             var groupByExpression = string.Format(CultureInfo.CurrentCulture, GroupByExpressionFormat, groupByField);
             var selectExpression = string.Format(CultureInfo.CurrentCulture, SelectExpressionFormat, EntitySelector, selectGroupedFields);
 
