@@ -29,7 +29,7 @@ namespace GSP.Shared.Grid.Stores.Models
             IsGroupable = attribute.IsGroupable;
             IsSortable = attribute.IsSortable;
             Name = attribute.CustomName ?? Name;
-            HasSummaryCalculationSupport = attribute.HasTotalCalculationSupport;
+            HasSummaryCalculationSupport = attribute.HasSummaryCalculationSupport;
         }
     }
 }

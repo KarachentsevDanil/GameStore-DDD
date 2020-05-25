@@ -1,5 +1,5 @@
-﻿using GSP.Shared.Grid.Exceptions;
-using GSP.Shared.Grid.Filters.Contracts;
+﻿using GSP.Shared.Grid.Filters.Contracts;
+using GSP.Shared.Grid.Filters.Exceptions;
 using GSP.Shared.Grid.Filters.Strategies.Linq.Contracts;
 using System;
 using System.Linq.Expressions;

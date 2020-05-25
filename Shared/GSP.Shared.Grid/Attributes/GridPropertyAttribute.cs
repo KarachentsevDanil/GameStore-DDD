@@ -11,7 +11,7 @@ namespace GSP.Shared.Grid.Attributes
 
         public bool IsFilterable { get; set; } = true;
 
-        public bool HasTotalCalculationSupport { get; set; }
+        public bool HasSummaryCalculationSupport { get; set; }
 
         public string CustomName { get; set; }
     }

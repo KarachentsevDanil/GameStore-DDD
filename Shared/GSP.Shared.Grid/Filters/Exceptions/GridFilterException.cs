@@ -1,8 +1,7 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts;
-using GSP.Shared.Grid.Filters.Enums;
 using System;
 
-namespace GSP.Shared.Grid.Exceptions
+namespace GSP.Shared.Grid.Filters.Exceptions
 {
     public class GridFilterException : Exception
     {

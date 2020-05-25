@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Grid.Exceptions;
+﻿using GSP.Shared.Grid.Filters.Exceptions;
 using GSP.Shared.Utils.Application.CQS.Exceptions;
 using GSP.Shared.Utils.Application.CQS.Models.Validations;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
