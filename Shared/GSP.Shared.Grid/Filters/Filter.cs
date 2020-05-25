@@ -1,8 +1,8 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums;
 using GSP.Shared.Grid.Filters.Enums.FilterOptions;
-using GSP.Shared.Grid.Filters.Strategies;
-using GSP.Shared.Grid.Filters.Strategies.Contracts;
+using GSP.Shared.Grid.Filters.Strategies.Stores;
+using GSP.Shared.Grid.Filters.Strategies.Stores.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -11,13 +11,8 @@ namespace GSP.Shared.Grid.Filters
 {
     public class Filter<TEntity> : IFilter<TEntity>
     {
-        private static readonly IDictionary<GridFilterType, IExpressionGeneratorStrategy<TEntity>> LinqExpressionGeneratorStrategies
-            = new Dictionary<GridFilterType, IExpressionGeneratorStrategy<TEntity>>();
-
-        static Filter()
-        {
-            InitializeLinqExpressionGenerator();
-        }
+        private static readonly IFilterExpressionGeneratorStore<TEntity> FilterExpressionGeneratorStore
+            = new FilterExpressionGeneratorStore<TEntity>();
 
         public DateFilterOption? DateFilterOption { get; set; }
 
@@ -54,16 +49,7 @@ namespace GSP.Shared.Grid.Filters
 
         public Expression<Func<TEntity, bool>> GetExpression()
         {
-            return LinqExpressionGeneratorStrategies[Type].GetFilterLinqExpression(this);
-        }
-
-        private static void InitializeLinqExpressionGenerator()
-        {
-            LinqExpressionGeneratorStrategies.Add(GridFilterType.Boolean, new BooleanExpressionGeneratorStrategy<TEntity>());
-            LinqExpressionGeneratorStrategies.Add(GridFilterType.Date, new DateExpressionGeneratorStrategy<TEntity>());
-            LinqExpressionGeneratorStrategies.Add(GridFilterType.List, new ListExpressionGeneratorStrategy<TEntity>());
-            LinqExpressionGeneratorStrategies.Add(GridFilterType.Number, new NumberExpressionGeneratorStrategy<TEntity>());
-            LinqExpressionGeneratorStrategies.Add(GridFilterType.Text, new TextExpressionGeneratorStrategy<TEntity>());
+            return FilterExpressionGeneratorStore.FilterExpressionGeneratorStrategies[Type].GetFilterLinqExpression(this);
         }
     }
 }
