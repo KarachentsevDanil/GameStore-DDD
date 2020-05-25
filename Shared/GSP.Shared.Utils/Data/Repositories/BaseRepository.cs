@@ -59,16 +59,11 @@ namespace GSP.Shared.Utils.Data.Repositories
 
         public virtual async Task<GridModel> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct)
         {
-            var query = DbSet.AsNoTracking().AsQueryable();
-
-            foreach (var include in grid.IncludeEntities)
-            {
-                query = query.Include(include);
-            }
-
-            var expression = grid.GetFiltersExpression();
-
-            query = query.Where(expression);
+            var query = DbSet
+                .AsNoTracking()
+                .AsQueryable()
+                .Include(grid.IncludeEntities)
+                .Where(grid.GetFiltersExpression());
 
             int totalCount = await query.CountAsync(ct);
             var summaries = GetGridSummaries(grid, query);
@@ -77,7 +72,6 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .Ordered(grid.GetSortedSortingOptions())
                 .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
                 .Take(grid.Pagination.PageSize)
-                .AsNoTracking()
                 .ToListAsync(ct);
 
             var gridGroups = grid.GetGroupNames();

@@ -146,6 +146,16 @@ namespace GSP.Shared.Utils.Data.Extensions
                     Expression.Quote(elementLambda)));
         }
 
+        public static IQueryable<TEntity> Include<TEntity>(this IQueryable<TEntity> query, ICollection<string> includeEntities)
+        {
+            foreach (var include in includeEntities)
+            {
+                query = query.Include(includeEntities);
+            }
+
+            return query;
+        }
+
         private static MethodCallExpression CreateOrderByMethodCallExpression<TEntity>(
             IQueryable<TEntity> sequence,
             SortingModel sortingModel,
