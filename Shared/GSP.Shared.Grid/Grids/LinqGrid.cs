@@ -1,4 +1,5 @@
 ﻿using GSP.Shared.Grid.Builders;
+using GSP.Shared.Grid.Exceptions;
 using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Grids.Abstract;
 using GSP.Shared.Grid.Grids.Contracts;
@@ -19,17 +20,27 @@ namespace GSP.Shared.Grid.Grids
 
             foreach (var filter in Filters.Where(q => q.HasSelectedData))
             {
-                var customFilterExpression = GetCustomFilterExpression(filter);
-                if (customFilterExpression != null)
+                try
                 {
-                    expression = expression.And(customFilterExpression);
-                    continue;
-                }
+                    var customFilterExpression = GetCustomFilterExpression(filter);
+                    if (customFilterExpression != null)
+                    {
+                        expression = expression.And(customFilterExpression);
+                        continue;
+                    }
 
-                var filterExpression = filter.GetLinqExpression();
-                if (filterExpression != null)
+                    var filterExpression = filter.GetLinqExpression();
+                    if (filterExpression != null)
+                    {
+                        expression = expression.And(filterExpression);
+                    }
+                }
+                catch (Exception exception)
                 {
-                    expression = expression.And(filterExpression);
+                    var message =
+                        $"Error occured while creating expression for {filter.PropertyName}, Filter Type: {filter.Type}, Error: {exception}";
+
+                    throw new GridFilterException(filter, message);
                 }
             }
 

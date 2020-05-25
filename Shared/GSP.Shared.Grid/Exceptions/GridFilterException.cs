@@ -20,10 +20,12 @@ namespace GSP.Shared.Grid.Exceptions
         {
         }
 
-        public GridFilterType FilterType { get; set; }
+        public GridFilterException(IFilter filter, string message)
+            : base(message)
+        {
+            Filter = filter;
+        }
 
-        public string PropertyName { get; set; }
-
-        public IFilter Filter { get; set; }
+        public IFilter Filter { get; }
     }
 }
