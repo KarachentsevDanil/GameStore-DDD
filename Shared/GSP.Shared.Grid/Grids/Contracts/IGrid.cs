@@ -9,11 +9,12 @@ using System.Collections.Generic;
 
 namespace GSP.Shared.Grid.Grids.Contracts
 {
-    public interface IGrid<TEntity, TGridColumn, TFilterType>
+    public interface IGrid<TEntity, TFilterType>
         where TFilterType : IFilter
-        where TGridColumn : IGridColumn<TFilterType>
     {
-        ICollection<TGridColumn> Columns { get; set; }
+        ICollection<TFilterType> Filters { get; set; }
+
+        ICollection<SortingModel> SortingOptions { get; set; }
 
         ICollection<GroupModel> Groups { get; set; }
 
@@ -27,7 +28,7 @@ namespace GSP.Shared.Grid.Grids.Contracts
 
         ICollection<string> IncludeEntities { get; set; }
 
-        IList<SortingModel> GetSortingOptions();
+        IList<SortingModel> GetSortedSortingOptions();
 
         ICollection<string> GetGroupNames();
     }

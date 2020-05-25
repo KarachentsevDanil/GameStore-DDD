@@ -74,7 +74,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             var summaries = GetGridSummaries(grid, query);
 
             var items = await query
-                .Ordered(grid.GetSortingOptions())
+                .Ordered(grid.GetSortedSortingOptions())
                 .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
                 .Take(grid.Pagination.PageSize)
                 .AsNoTracking()

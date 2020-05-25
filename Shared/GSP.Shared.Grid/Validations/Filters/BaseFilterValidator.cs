@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using GSP.Shared.Grid.Extensions;
 using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums;
 using GSP.Shared.Grid.Models;
@@ -12,6 +13,11 @@ namespace GSP.Shared.Grid.Validations.Filters
         {
             RuleFor(p => p.Type)
                 .IsInEnum();
+
+            RuleFor(p => p.PropertyName)
+                .NotEmpty()
+                .Must(p => IsFilteringAllowed(gridTypeModel, p))
+                .WithMessage($"You can use only {gridTypeModel.PropertyNames.ToStringList()} properties for column.");
 
             RuleFor(p => p)
                 .SetValidator(new BooleanFilterValidator<TFilter>(gridTypeModel))
@@ -32,6 +38,11 @@ namespace GSP.Shared.Grid.Validations.Filters
             RuleFor(p => p)
                 .SetValidator(new TextFilterValidator<TFilter>(gridTypeModel))
                 .When(t => t.Type == GridFilterType.Text);
+        }
+
+        private bool IsFilteringAllowed(GridTypeModel gridTypeModel, string propertyName)
+        {
+            return gridTypeModel.FilterablePropertyNames.Contains(propertyName);
         }
     }
 }

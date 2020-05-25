@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Grid.Columns.Contracts;
-using GSP.Shared.Grid.Filters.Contracts;
+﻿using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Groups;
 using GSP.Shared.Grid.Pagination.Models;
@@ -11,9 +10,8 @@ using System.Linq;
 
 namespace GSP.Shared.Grid.Grids.Abstract
 {
-    public abstract class BaseGrid<TEntity, TGridColumn, TFilterType> : IGrid<TEntity, TGridColumn, TFilterType>
+    public abstract class BaseGrid<TEntity, TFilterType> : IGrid<TEntity, TFilterType>
         where TFilterType : IFilter
-        where TGridColumn : IGridColumn<TFilterType>
     {
         protected BaseGrid()
         {
@@ -21,9 +19,13 @@ namespace GSP.Shared.Grid.Grids.Abstract
             Summaries = new List<SummaryModel>();
             GroupSummaries = new List<GroupSummaryModel>();
             IncludeEntities = new List<string>();
+            SortingOptions = new List<SortingModel>();
+            Filters = new List<TFilterType>();
         }
 
-        public ICollection<TGridColumn> Columns { get; set; }
+        public ICollection<TFilterType> Filters { get; set; }
+
+        public ICollection<SortingModel> SortingOptions { get; set; }
 
         public ICollection<GroupModel> Groups { get; set; }
 
@@ -37,12 +39,10 @@ namespace GSP.Shared.Grid.Grids.Abstract
 
         public ICollection<string> IncludeEntities { get; set; }
 
-        public virtual IList<SortingModel> GetSortingOptions()
+        public virtual IList<SortingModel> GetSortedSortingOptions()
         {
-            return Columns
-                .Where(q => q.Direction.HasValue)
+            return SortingOptions
                 .OrderBy(o => o.Order)
-                .Select(s => new SortingModel(s.PropertyName, s.Direction.Value))
                 .ToList();
         }
 

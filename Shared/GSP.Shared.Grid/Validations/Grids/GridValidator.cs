@@ -1,21 +1,20 @@
 ﻿using FluentValidation;
-using GSP.Shared.Grid.Columns.Contracts;
 using GSP.Shared.Grid.Extensions;
 using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Models;
 using GSP.Shared.Grid.Stores.Contracts;
-using GSP.Shared.Grid.Validations.Columns;
+using GSP.Shared.Grid.Validations.Filters;
 using GSP.Shared.Grid.Validations.Groups;
 using GSP.Shared.Grid.Validations.Paginations;
 using GSP.Shared.Grid.Validations.Searches;
+using GSP.Shared.Grid.Validations.Sorting;
 using GSP.Shared.Grid.Validations.Summaries;
 
 namespace GSP.Shared.Grid.Validations.Grids
 {
-    public class GridValidator<TGrid, TEntity, TGridColumn, TFilterType> : AbstractValidator<TGrid>
-        where TGrid : IGrid<TEntity, TGridColumn, TFilterType>
-        where TGridColumn : IGridColumn<TFilterType>
+    public class GridValidator<TGrid, TEntity, TFilterType> : AbstractValidator<TGrid>
+        where TGrid : IGrid<TEntity, TFilterType>
         where TFilterType : IFilter
     {
         public GridValidator(IGridTypeStore gridTypeStore)
@@ -29,11 +28,11 @@ namespace GSP.Shared.Grid.Validations.Grids
             RuleFor(p => p.Search)
                 .SetValidator(new SearchValidator(gridTypeModel));
 
-            RuleFor(p => p.Columns)
-                .NotNull();
+            RuleForEach(p => p.Filters)
+                .SetValidator(new BaseFilterValidator<TFilterType>(gridTypeModel));
 
-            RuleForEach(p => p.Columns)
-                .SetValidator(new ColumnValidator<TGridColumn, TFilterType>(gridTypeModel));
+            RuleForEach(p => p.SortingOptions)
+                .SetValidator(new SortingValidator(gridTypeModel));
 
             RuleForEach(p => p.Summaries)
                 .SetValidator(new SummaryValidator(gridTypeModel));

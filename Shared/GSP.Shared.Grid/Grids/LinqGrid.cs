@@ -1,5 +1,4 @@
 ﻿using GSP.Shared.Grid.Builders;
-using GSP.Shared.Grid.Columns;
 using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Grids.Abstract;
 using GSP.Shared.Grid.Grids.Contracts;
@@ -10,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public abstract class LinqGrid<TEntity> : BaseGrid<TEntity, LinqGridColumn<TEntity>, LinqFilter<TEntity>>, ILinqGrid<TEntity>
+    public abstract class LinqGrid<TEntity> : BaseGrid<TEntity, LinqFilter<TEntity>>, ILinqGrid<TEntity>
     {
         public Expression<Func<TEntity, bool>> GetGridFiltersLinqExpression()
         {
@@ -18,16 +17,16 @@ namespace GSP.Shared.Grid.Grids
 
             this.ApplyLinqSearchExpression(expression);
 
-            foreach (var column in Columns.Where(q => q.Filter != null && q.Filter.HasSelectedData))
+            foreach (var filter in Filters.Where(q => q.HasSelectedData))
             {
-                var customFilterExpression = GetCustomColumnExpression(column);
+                var customFilterExpression = GetCustomFilterExpression(filter);
                 if (customFilterExpression != null)
                 {
                     expression = expression.And(customFilterExpression);
                     continue;
                 }
 
-                var filterExpression = column.GetFilterLinqExpression();
+                var filterExpression = filter.GetLinqExpression();
                 if (filterExpression != null)
                 {
                     expression = expression.And(filterExpression);
@@ -37,7 +36,7 @@ namespace GSP.Shared.Grid.Grids
             return expression;
         }
 
-        protected Expression<Func<TEntity, bool>> GetCustomColumnExpression(LinqGridColumn<TEntity> column)
+        protected Expression<Func<TEntity, bool>> GetCustomFilterExpression(LinqFilter<TEntity> filter)
         {
             return default;
         }

@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Grid.Columns;
-using GSP.Shared.Grid.Filters;
+﻿using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Filters.Constants;
 using GSP.Shared.Grid.Filters.Extensions.Sql;
 using GSP.Shared.Grid.Grids.Abstract;
@@ -10,7 +9,7 @@ using System.Linq;
 
 namespace GSP.Shared.Grid.Grids
 {
-    public abstract class SqlGrid<TEntity> : BaseGrid<TEntity, SqlGridColumn, SqlFilter>, ISqlGrid<TEntity>
+    public abstract class SqlGrid<TEntity> : BaseGrid<TEntity, SqlFilter>, ISqlGrid<TEntity>
     {
         public string GetGridFiltersSqlQuery()
         {
@@ -22,16 +21,16 @@ namespace GSP.Shared.Grid.Grids
                 queries.Add(searchQuery.ToSqlCondition());
             }
 
-            foreach (var column in Columns.Where(q => q.Filter != null && q.Filter.HasSelectedData))
+            foreach (var filter in Filters.Where(q => q.HasSelectedData))
             {
-                var customQueryProcessor = GetCustomColumnQuery(column);
+                var customQueryProcessor = GetCustomFilterQuery(filter);
                 if (!string.IsNullOrEmpty(customQueryProcessor))
                 {
                     queries.Add(customQueryProcessor.ToSqlCondition());
                     continue;
                 }
 
-                var filterQuery = column.GetFilterSqlQuery();
+                var filterQuery = filter.GetSqlQuery();
                 if (!string.IsNullOrEmpty(filterQuery))
                 {
                     queries.Add(filterQuery.ToSqlCondition());
@@ -41,7 +40,7 @@ namespace GSP.Shared.Grid.Grids
             return string.Join(SqlFilterConstants.OperatorAndWithSpaces, queries);
         }
 
-        protected virtual string GetCustomColumnQuery(SqlGridColumn column)
+        protected virtual string GetCustomFilterQuery(SqlFilter filter)
         {
             return null;
         }
