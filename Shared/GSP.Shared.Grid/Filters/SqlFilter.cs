@@ -6,7 +6,7 @@ using System;
 
 namespace GSP.Shared.Grid.Filters
 {
-    public abstract class SqlFilter : BaseFilter, ISqlFilter
+    public class SqlFilter : BaseFilter, ISqlFilter
     {
         public string GetSqlQuery()
         {
