@@ -1,10 +1,9 @@
-﻿using GSP.Shared.Grid.Columns.Contracts;
-using GSP.Shared.Grid.Filters.Contracts;
-using GSP.Shared.Grid.Groups;
-using GSP.Shared.Grid.Pagination.Models;
-using GSP.Shared.Grid.Searching;
-using GSP.Shared.Grid.Sorting;
-using GSP.Shared.Grid.Summaries;
+﻿using GSP.Shared.Grid.Filters.Contracts;
+using GSP.Shared.Grid.Models.Groups;
+using GSP.Shared.Grid.Models.Pagination;
+using GSP.Shared.Grid.Models.Searching;
+using GSP.Shared.Grid.Models.Sorting;
+using GSP.Shared.Grid.Models.Summaries;
 using System.Collections.Generic;
 
 namespace GSP.Shared.Grid.Grids.Contracts

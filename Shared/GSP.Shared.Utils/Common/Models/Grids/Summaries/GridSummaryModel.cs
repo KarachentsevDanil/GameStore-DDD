@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Grid.Summaries.Enums;
+﻿using GSP.Shared.Grid.Models.Summaries.Enums;
 
 namespace GSP.Shared.Utils.Common.Models.Grids.Summaries
 {

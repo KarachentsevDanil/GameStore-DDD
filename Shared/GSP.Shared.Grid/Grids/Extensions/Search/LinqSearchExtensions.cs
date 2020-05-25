@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Grid.Builders;
-using GSP.Shared.Grid.Filters.Constants;
+﻿using GSP.Shared.Grid.Filters.Constants;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Helpers;
 using System;
@@ -17,7 +16,7 @@ namespace GSP.Shared.Grid.Grids.Extensions.Search
                 return;
             }
 
-            var expression = PredicateBuilder.True<TEntity>();
+            var expression = PredicateHelper.True<TEntity>();
 
             foreach (var property in grid.Search.SearchFields)
             {
@@ -25,7 +24,7 @@ namespace GSP.Shared.Grid.Grids.Extensions.Search
                 expression = expression.Or(DynamicExpressionHelper.ParseLambda<TEntity, bool>(query));
             }
 
-            gridExpression = gridExpression.And(expression);
+            gridExpression.And(expression);
         }
     }
 }

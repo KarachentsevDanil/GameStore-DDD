@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Models;
-using GSP.Shared.Grid.Summaries;
+using GSP.Shared.Grid.Models.Summaries;
+using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Summaries
 {

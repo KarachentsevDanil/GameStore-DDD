@@ -2,7 +2,7 @@
 using GSP.Shared.Grid.Extensions;
 using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums;
-using GSP.Shared.Grid.Models;
+using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Filters
 {

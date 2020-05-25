@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Grid.Filters.Constants;
+﻿using GSP.Shared.Grid.Extensions;
+using GSP.Shared.Grid.Filters.Constants;
 using GSP.Shared.Grid.Filters.Extensions.Sql;
 using GSP.Shared.Grid.Grids.Contracts;
 using System.Globalization;

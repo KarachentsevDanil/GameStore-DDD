@@ -1,6 +1,6 @@
-﻿using GSP.Shared.Grid.Sorting;
-using GSP.Shared.Grid.Sorting.Enums;
-using GSP.Shared.Grid.Summaries.Enums;
+﻿using GSP.Shared.Grid.Models.Sorting;
+using GSP.Shared.Grid.Models.Sorting.Enums;
+using GSP.Shared.Grid.Models.Summaries.Enums;
 using GSP.Shared.Utils.Common.Helpers;
 using System;
 using System.Collections.Generic;

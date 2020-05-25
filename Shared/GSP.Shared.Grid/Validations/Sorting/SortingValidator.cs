@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Models;
-using GSP.Shared.Grid.Sorting;
+using GSP.Shared.Grid.Models.Sorting;
+using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Sorting
 {

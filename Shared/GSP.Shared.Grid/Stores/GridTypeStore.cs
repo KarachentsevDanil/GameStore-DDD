@@ -1,7 +1,7 @@
 ﻿using GSP.Shared.Grid.Attributes;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Models;
 using GSP.Shared.Grid.Stores.Contracts;
+using GSP.Shared.Grid.Stores.Models;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;

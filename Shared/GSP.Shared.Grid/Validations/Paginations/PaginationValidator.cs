@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using GSP.Shared.Grid.Pagination.Models;
+using GSP.Shared.Grid.Models.Pagination;
 
 namespace GSP.Shared.Grid.Validations.Paginations
 {
