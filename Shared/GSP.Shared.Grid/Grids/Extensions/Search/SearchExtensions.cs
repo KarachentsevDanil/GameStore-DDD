@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids.Extensions.Search
 {
-    public static class LinqSearchExtensions
+    public static class SearchExtensions
     {
-        public static void ApplyLinqSearchExpression<TEntity>(this ILinqGrid<TEntity> grid, Expression<Func<TEntity, bool>> gridExpression)
+        public static void ApplyLinqSearchExpression<TEntity>(this IGrid<TEntity> grid, Expression<Func<TEntity, bool>> gridExpression)
         {
             if (string.IsNullOrEmpty(grid.Search?.Term))
             {

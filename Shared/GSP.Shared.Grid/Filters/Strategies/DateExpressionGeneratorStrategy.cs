@@ -1,17 +1,17 @@
 ﻿using GSP.Shared.Grid.Filters.Constants;
 using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums.FilterOptions;
-using GSP.Shared.Grid.Filters.Strategies.Linq.Abstract;
+using GSP.Shared.Grid.Filters.Strategies.Abstract;
 using GSP.Shared.Grid.Helpers;
 using System;
 using System.Globalization;
 using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Filters.Strategies.Linq
+namespace GSP.Shared.Grid.Filters.Strategies
 {
-    public class DateLinqExpressionGeneratorStrategy<TEntity> : BaseLinqExpressionGeneratorStrategy<TEntity>
+    public class DateExpressionGeneratorStrategy<TEntity> : BaseExpressionGeneratorStrategy<TEntity>
     {
-        protected override Expression<Func<TEntity, bool>> GenerateFilterLinqExpression(ILinqFilter<TEntity> gridFilter)
+        protected override Expression<Func<TEntity, bool>> GenerateFilterLinqExpression(IFilter<TEntity> gridFilter)
         {
             if (gridFilter.DateFilterOption == DateFilterOption.DateRange)
             {

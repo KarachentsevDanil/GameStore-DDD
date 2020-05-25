@@ -1,5 +1,4 @@
-﻿using GSP.Shared.Grid.Filters.Contracts;
-using System;
+﻿using System;
 
 namespace GSP.Shared.Grid.Filters.Exceptions
 {
@@ -18,13 +17,5 @@ namespace GSP.Shared.Grid.Filters.Exceptions
         public GridFilterException()
         {
         }
-
-        public GridFilterException(IFilter filter, string message)
-            : base(message)
-        {
-            Filter = filter;
-        }
-
-        public IFilter Filter { get; }
     }
 }

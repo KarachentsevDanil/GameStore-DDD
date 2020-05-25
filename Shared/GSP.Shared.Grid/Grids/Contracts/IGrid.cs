@@ -4,14 +4,15 @@ using GSP.Shared.Grid.Models.Pagination;
 using GSP.Shared.Grid.Models.Searching;
 using GSP.Shared.Grid.Models.Sorting;
 using GSP.Shared.Grid.Models.Summaries;
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Grids.Contracts
 {
-    public interface IGrid<TEntity, TFilterType>
-        where TFilterType : IFilter
+    public interface IGrid<TEntity>
     {
-        ICollection<TFilterType> Filters { get; set; }
+        ICollection<IFilter<TEntity>> Filters { get; set; }
 
         ICollection<SortingModel> SortingOptions { get; set; }
 
@@ -30,5 +31,7 @@ namespace GSP.Shared.Grid.Grids.Contracts
         IList<SortingModel> GetSortedSortingOptions();
 
         ICollection<string> GetGroupNames();
+
+        Expression<Func<TEntity, bool>> GetFiltersExpression();
     }
 }

@@ -1,9 +1,11 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts.Types;
 using GSP.Shared.Grid.Filters.Enums;
+using System;
+using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Filters.Contracts
 {
-    public interface IFilter : ITextFilter, INumberFilter, IBooleanFilter, IDateFilter, IListFilter
+    public interface IFilter<TEntity> : ITextFilter, INumberFilter, IBooleanFilter, IDateFilter, IListFilter
     {
         bool HasSelectedData { get; }
 
@@ -12,5 +14,7 @@ namespace GSP.Shared.Grid.Filters.Contracts
         string PropertyName { get; set; }
 
         string Value { get; set; }
+
+        Expression<Func<TEntity, bool>> GetExpression();
     }
 }

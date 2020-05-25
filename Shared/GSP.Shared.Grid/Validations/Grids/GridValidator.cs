@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Stores.Contracts;
 using GSP.Shared.Grid.Stores.Models;
@@ -13,9 +12,8 @@ using GSP.Shared.Grid.Validations.Summaries;
 
 namespace GSP.Shared.Grid.Validations.Grids
 {
-    public class GridValidator<TGrid, TEntity, TFilterType> : AbstractValidator<TGrid>
-        where TGrid : IGrid<TEntity, TFilterType>
-        where TFilterType : IFilter
+    public class GridValidator<TGrid, TEntity> : AbstractValidator<TGrid>
+        where TGrid : IGrid<TEntity>
     {
         public GridValidator(IGridTypeStore gridTypeStore)
         {
@@ -29,7 +27,7 @@ namespace GSP.Shared.Grid.Validations.Grids
                 .SetValidator(new SearchValidator(gridTypeModel));
 
             RuleForEach(p => p.Filters)
-                .SetValidator(new BaseFilterValidator<TFilterType>(gridTypeModel));
+                .SetValidator(new BaseFilterValidator<TEntity>(gridTypeModel));
 
             RuleForEach(p => p.SortingOptions)
                 .SetValidator(new SortingValidator(gridTypeModel));

@@ -10,12 +10,6 @@
 
         public const string DoesNotEqualLinqOperator = "!=";
 
-        public const string NumberBetweenSqlQuery = @"{0} between {1} and {2}";
-
-        public const string EqualsSqlOperator = "=";
-
-        public const string DoesNotEqualSqlOperator = "<>";
-
         public const string GreaterThanOperator = ">";
 
         public const string GreaterThanOrEqualsOperator = ">=";

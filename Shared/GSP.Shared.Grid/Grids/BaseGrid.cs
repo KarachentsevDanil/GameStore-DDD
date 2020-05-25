@@ -1,17 +1,20 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Grids.Contracts;
+using GSP.Shared.Grid.Grids.Extensions.Search;
+using GSP.Shared.Grid.Helpers;
 using GSP.Shared.Grid.Models.Groups;
 using GSP.Shared.Grid.Models.Pagination;
 using GSP.Shared.Grid.Models.Searching;
 using GSP.Shared.Grid.Models.Sorting;
 using GSP.Shared.Grid.Models.Summaries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Grids.Abstract
+namespace GSP.Shared.Grid.Grids
 {
-    public abstract class BaseGrid<TEntity, TFilterType> : IGrid<TEntity, TFilterType>
-        where TFilterType : IFilter
+    public abstract class BaseGrid<TEntity> : IGrid<TEntity>
     {
         protected BaseGrid()
         {
@@ -20,10 +23,10 @@ namespace GSP.Shared.Grid.Grids.Abstract
             GroupSummaries = new List<GroupSummaryModel>();
             IncludeEntities = new List<string>();
             SortingOptions = new List<SortingModel>();
-            Filters = new List<TFilterType>();
+            Filters = new List<IFilter<TEntity>>();
         }
 
-        public ICollection<TFilterType> Filters { get; set; }
+        public ICollection<IFilter<TEntity>> Filters { get; set; }
 
         public ICollection<SortingModel> SortingOptions { get; set; }
 
@@ -49,6 +52,36 @@ namespace GSP.Shared.Grid.Grids.Abstract
         public virtual ICollection<string> GetGroupNames()
         {
             return Groups.OrderBy(p => p.Order).Select(p => p.PropertyName).ToList();
+        }
+
+        public Expression<Func<TEntity, bool>> GetFiltersExpression()
+        {
+            var expression = PredicateHelper.True<TEntity>();
+
+            this.ApplyLinqSearchExpression(expression);
+
+            foreach (var filter in Filters.Where(q => q.HasSelectedData))
+            {
+                var customFilterExpression = GetCustomFilterExpression(filter);
+                if (customFilterExpression != null)
+                {
+                    expression = expression.And(customFilterExpression);
+                    continue;
+                }
+
+                var filterExpression = filter.GetExpression();
+                if (filterExpression != null)
+                {
+                    expression = expression.And(filterExpression);
+                }
+            }
+
+            return expression;
+        }
+
+        protected Expression<Func<TEntity, bool>> GetCustomFilterExpression(IFilter<TEntity> filter)
+        {
+            return default;
         }
     }
 }

@@ -5,8 +5,7 @@ using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Filters
 {
-    public class ListFilterValidator<TFilter> : AbstractValidator<TFilter>
-        where TFilter : IFilter
+    public class ListFilterValidator<TEntity> : AbstractValidator<IFilter<TEntity>>
     {
         public ListFilterValidator(GridTypeModel gridTypeModel)
         {

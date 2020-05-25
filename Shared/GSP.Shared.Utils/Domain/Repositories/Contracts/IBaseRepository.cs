@@ -20,7 +20,7 @@ namespace GSP.Shared.Utils.Domain.Repositories.Contracts
 
         Task<PagedCollection<TEntity>> GetPagedListAsync(PaginationFilterParams filterParams, CancellationToken ct);
 
-        Task<GridModel> GetPagedListAsync(ILinqGrid<TEntity> grid, CancellationToken ct);
+        Task<GridModel> GetPagedListAsync(IGrid<TEntity> grid, CancellationToken ct);
 
         TEntity Create(TEntity entity);
 
