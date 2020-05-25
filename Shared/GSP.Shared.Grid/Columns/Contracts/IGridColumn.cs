@@ -7,8 +7,6 @@ namespace GSP.Shared.Grid.Columns.Contracts
     {
         string PropertyName { get; set; }
 
-        bool IsCalculateTotalNeeded { get; set; }
-
         int Order { get; set; }
 
         TFilterType Filter { get; set; }

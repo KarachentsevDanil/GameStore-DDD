@@ -9,6 +9,7 @@ using GSP.Shared.Grid.Validations.Columns;
 using GSP.Shared.Grid.Validations.Groups;
 using GSP.Shared.Grid.Validations.Paginations;
 using GSP.Shared.Grid.Validations.Searches;
+using GSP.Shared.Grid.Validations.Summaries;
 
 namespace GSP.Shared.Grid.Validations.Grids
 {
@@ -33,6 +34,12 @@ namespace GSP.Shared.Grid.Validations.Grids
 
             RuleForEach(p => p.Columns)
                 .SetValidator(new ColumnValidator<TGridColumn, TFilterType>(gridTypeModel));
+
+            RuleForEach(p => p.Summaries)
+                .SetValidator(new SummaryValidator(gridTypeModel));
+
+            RuleForEach(p => p.GroupSummaries)
+                .SetValidator(new GroupSummaryValidator(gridTypeModel));
 
             RuleForEach(p => p.Groups)
                 .SetValidator(new GroupValidator(gridTypeModel));

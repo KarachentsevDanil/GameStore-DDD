@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.Models.Collections;
+﻿using GSP.Shared.Utils.Common.Models.Grids.Summaries;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 
@@ -6,23 +6,24 @@ namespace GSP.Shared.Utils.Common.Models.Grids
 {
     public class GridModel
     {
-        public GridModel(ICollection<GridColumnModel> columnsWithTotal, IImmutableList<dynamic> items, int totalCount)
+        public GridModel(ICollection<GridSummaryModel> summaries, IImmutableList<dynamic> items, int totalCount)
         {
-            ColumnsWithTotal = columnsWithTotal;
+            Summaries = summaries;
             Items = items;
             TotalCount = totalCount;
         }
 
-        public GridModel(ICollection<GridGroupColumnModel> groupedColumnsWithTotal, IImmutableList<dynamic> items, int totalCount)
+        public GridModel(ICollection<GridSummaryModel> summaries, ICollection<GridGroupSummaryModel> groupSummaries, IImmutableList<dynamic> items, int totalCount)
         {
-            GroupedColumnsWithTotal = groupedColumnsWithTotal;
+            Summaries = summaries;
+            GroupSummaries = groupSummaries;
             Items = items;
             TotalCount = totalCount;
         }
 
-        public ICollection<GridColumnModel> ColumnsWithTotal { get; set; }
+        public ICollection<GridSummaryModel> Summaries { get; }
 
-        public ICollection<GridGroupColumnModel> GroupedColumnsWithTotal { get; set; }
+        public ICollection<GridGroupSummaryModel> GroupSummaries { get; }
 
         public IImmutableList<dynamic> Items { get; set; }
 

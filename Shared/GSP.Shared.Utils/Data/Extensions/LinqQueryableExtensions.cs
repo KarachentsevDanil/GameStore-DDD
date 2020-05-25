@@ -1,5 +1,6 @@
 ﻿using GSP.Shared.Grid.Sorting;
 using GSP.Shared.Grid.Sorting.Enums;
+using GSP.Shared.Grid.Summaries.Enums;
 using GSP.Shared.Utils.Common.Helpers;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,6 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Data.Extensions
 {
@@ -27,6 +26,14 @@ namespace GSP.Shared.Utils.Data.Extensions
         private const string GroupByMethodName = nameof(Queryable.GroupBy);
 
         private const string SumMethodName = nameof(Queryable.Sum);
+
+        private const string MinMethodName = nameof(Queryable.Min);
+
+        private const string MaxMethodName = nameof(Queryable.Max);
+
+        private const string AverageMethodName = nameof(Queryable.Average);
+
+        private const string CountMethodName = nameof(Queryable.Count);
 
         private const string DynamicElementSelector = "it";
 
@@ -49,26 +56,69 @@ namespace GSP.Shared.Utils.Data.Extensions
             return sequence.Provider.CreateQuery<TEntity>(expression);
         }
 
+        public static object SummaryDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName, SummaryType summaryType)
+        {
+            switch (summaryType)
+            {
+                case SummaryType.Count:
+                {
+                    return source.CountDynamic(propertyName);
+                }
+
+                case SummaryType.Sum:
+                {
+                    return source.SumDynamic(propertyName);
+                }
+
+                case SummaryType.Min:
+                {
+                    return source.MinDynamic(propertyName);
+                }
+
+                case SummaryType.Max:
+                {
+                    return source.MaxDynamic(propertyName);
+                }
+
+                case SummaryType.Average:
+                {
+                    return source.AverageDynamic(propertyName);
+                }
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(summaryType), summaryType, "This type of summary haven't implemented yet.");
+            }
+        }
+
         public static object SumDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)
         {
             var parameterExpression = Expression.Parameter(typeof(TEntity), EntitySelector);
             var memberExpression = ExpressionHelper.PropertyOrField(parameterExpression, propertyName);
+            return source.AggregateQueryDynamic(propertyName, SumMethodName, ((PropertyInfo)memberExpression.Member).PropertyType);
+        }
 
-            var selector = Expression.Lambda(memberExpression, parameterExpression);
+        public static object MinDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)
+        {
+            var parameterExpression = Expression.Parameter(typeof(TEntity), EntitySelector);
+            var memberExpression = ExpressionHelper.PropertyOrField(parameterExpression, propertyName);
+            return source.AggregateQueryDynamic(propertyName, MinMethodName, ((PropertyInfo)memberExpression.Member).PropertyType);
+        }
 
-            var sumMethod = typeof(Queryable).GetMethods().First(
-                m => m.Name == SumMethodName
-                     && m.ReturnType == ((PropertyInfo)memberExpression.Member).PropertyType
-                     && m.IsGenericMethod);
+        public static object MaxDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)
+        {
+            var parameterExpression = Expression.Parameter(typeof(TEntity), EntitySelector);
+            var memberExpression = ExpressionHelper.PropertyOrField(parameterExpression, propertyName);
+            return source.AggregateQueryDynamic(propertyName, MaxMethodName, ((PropertyInfo)memberExpression.Member).PropertyType);
+        }
 
-            var genericSumMethod = sumMethod.MakeGenericMethod(source.ElementType);
+        public static object CountDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)
+        {
+            return source.AggregateQueryDynamic(propertyName, CountMethodName, typeof(int));
+        }
 
-            var callExpression = Expression.Call(
-                null,
-                genericSumMethod,
-                new[] { source.Expression, Expression.Quote(selector) });
-
-            return source.Provider.Execute(callExpression);
+        public static object AverageDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)
+        {
+            return source.AggregateQueryDynamic(propertyName, AverageMethodName, typeof(double));
         }
 
         public static IQueryable GroupByDynamic(this IQueryable source, string keySelector, params object[] values)
@@ -115,6 +165,32 @@ namespace GSP.Shared.Utils.Data.Extensions
                 new[] { sequence.ElementType, memberExpression.Type },
                 expression,
                 Expression.Quote(Expression.Lambda(memberExpression, parameterExpression)));
+        }
+
+        private static object AggregateQueryDynamic<TEntity>(
+            this IQueryable<TEntity> source,
+            string propertyName,
+            string aggregateMethodName,
+            Type returnType)
+        {
+            var parameterExpression = Expression.Parameter(typeof(TEntity), EntitySelector);
+            var memberExpression = ExpressionHelper.PropertyOrField(parameterExpression, propertyName);
+
+            var selector = Expression.Lambda(memberExpression, parameterExpression);
+
+            var method = typeof(Queryable).GetMethods().First(
+                m => m.Name == aggregateMethodName
+                     && m.ReturnType == returnType
+                     && m.IsGenericMethod);
+
+            var genericSumMethod = method.MakeGenericMethod(source.ElementType);
+
+            var callExpression = Expression.Call(
+                null,
+                genericSumMethod,
+                new[] { source.Expression, Expression.Quote(selector) });
+
+            return source.Provider.Execute(callExpression);
         }
     }
 }

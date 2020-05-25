@@ -26,7 +26,7 @@ namespace GSP.Shared.Grid.Models
 
         public ICollection<string> SortablePropertyNames => Properties.Where(p => p.IsSortable).Select(p => p.Name).ToList();
 
-        public ICollection<string> CalculablePropertyNames => Properties.Where(p => p.HasTotalCalculationSupport).Select(p => p.Name).ToList();
+        public ICollection<string> SummarizablePropertyNames => Properties.Where(p => p.HasSummaryCalculationSupport).Select(p => p.Name).ToList();
 
         public ICollection<string> PropertyNames => Properties.Select(p => p.Name).ToList();
 

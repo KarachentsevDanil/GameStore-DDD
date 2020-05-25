@@ -18,11 +18,6 @@ namespace GSP.Shared.Grid.Validations.Columns
                 .Must(p => IsPropertyNameExists(gridTypeModel, p))
                 .WithMessage($"You can use only {gridTypeModel.PropertyNames.ToStringList()} properties for column.");
 
-            RuleFor(p => p)
-                .Must(p => IsTotalCalculationAllowed(gridTypeModel, p.PropertyName))
-                .When(p => p.IsCalculateTotalNeeded)
-                .WithMessage($"Total calculation allowed only for {gridTypeModel.CalculablePropertyNames.ToStringList()} properties.");
-
             RuleFor(p => p.Direction)
                 .IsInEnum()
                 .When(p => p.Direction.HasValue);
@@ -43,11 +38,6 @@ namespace GSP.Shared.Grid.Validations.Columns
         }
 
         private bool IsPropertyNameExists(GridTypeModel gridTypeModel, string propertyName)
-        {
-            return gridTypeModel.PropertyNames.Contains(propertyName);
-        }
-
-        private bool IsTotalCalculationAllowed(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.PropertyNames.Contains(propertyName);
         }

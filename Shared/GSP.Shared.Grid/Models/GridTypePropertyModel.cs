@@ -19,7 +19,7 @@ namespace GSP.Shared.Grid.Models
 
         public bool IsSortable { get; set; } = true;
 
-        public bool HasTotalCalculationSupport { get; set; }
+        public bool HasSummaryCalculationSupport { get; set; }
 
         public Type Type { get; set; }
 
@@ -29,7 +29,7 @@ namespace GSP.Shared.Grid.Models
             IsGroupable = attribute.IsGroupable;
             IsSortable = attribute.IsSortable;
             Name = attribute.CustomName ?? Name;
-            HasTotalCalculationSupport = attribute.HasTotalCalculationSupport;
+            HasSummaryCalculationSupport = attribute.HasTotalCalculationSupport;
         }
     }
 }

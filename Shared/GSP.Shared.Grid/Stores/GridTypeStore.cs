@@ -61,7 +61,7 @@ namespace GSP.Shared.Grid.Stores
             {
                 var gridTypeProperty = new GridTypePropertyModel(property.Name, property.PropertyType)
                 {
-                    HasTotalCalculationSupport = property.PropertyType.IsNumericType()
+                    HasSummaryCalculationSupport = property.PropertyType.IsNumericType()
                 };
 
                 ApplyGridPropertyAttributeIfExist(property, gridTypeProperty);
@@ -79,7 +79,7 @@ namespace GSP.Shared.Grid.Stores
             {
                 var gridTypeProperty = new GridTypePropertyModel($"{propertyInfo.Name}.{property.Name}", property.PropertyType)
                 {
-                    HasTotalCalculationSupport = property.PropertyType.IsNumericType()
+                    HasSummaryCalculationSupport = property.PropertyType.IsNumericType()
                 };
 
                 ApplyGridPropertyAttributeIfExist(property, gridTypeProperty);

@@ -5,6 +5,7 @@ using GSP.Shared.Grid.Groups;
 using GSP.Shared.Grid.Pagination.Models;
 using GSP.Shared.Grid.Searching;
 using GSP.Shared.Grid.Sorting;
+using GSP.Shared.Grid.Summaries;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,9 +15,21 @@ namespace GSP.Shared.Grid.Grids.Abstract
         where TFilterType : IFilter
         where TGridColumn : IGridColumn<TFilterType>
     {
+        protected BaseGrid()
+        {
+            Groups = new List<GroupModel>();
+            Summaries = new List<SummaryModel>();
+            GroupSummaries = new List<GroupSummaryModel>();
+            IncludeEntities = new List<string>();
+        }
+
         public ICollection<TGridColumn> Columns { get; set; }
 
         public ICollection<GroupModel> Groups { get; set; }
+
+        public ICollection<SummaryModel> Summaries { get; set; }
+
+        public ICollection<GroupSummaryModel> GroupSummaries { get; set; }
 
         public SearchModel Search { get; set; }
 
@@ -33,7 +46,7 @@ namespace GSP.Shared.Grid.Grids.Abstract
                 .ToList();
         }
 
-        public virtual ICollection<string> GetGroups()
+        public virtual ICollection<string> GetGroupNames()
         {
             if (Groups == null)
             {

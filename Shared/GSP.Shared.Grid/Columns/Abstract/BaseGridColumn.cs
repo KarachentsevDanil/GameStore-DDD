@@ -11,8 +11,6 @@ namespace GSP.Shared.Grid.Columns.Abstract
 
         public string PropertyName { get; set; }
 
-        public bool IsCalculateTotalNeeded { get; set; }
-
         public int Order { get; set; }
 
         public TFilterType Filter { get; set; }

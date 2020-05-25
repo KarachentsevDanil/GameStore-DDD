@@ -4,6 +4,7 @@ using GSP.Shared.Grid.Groups;
 using GSP.Shared.Grid.Pagination.Models;
 using GSP.Shared.Grid.Searching;
 using GSP.Shared.Grid.Sorting;
+using GSP.Shared.Grid.Summaries;
 using System.Collections.Generic;
 
 namespace GSP.Shared.Grid.Grids.Contracts
@@ -16,6 +17,10 @@ namespace GSP.Shared.Grid.Grids.Contracts
 
         ICollection<GroupModel> Groups { get; set; }
 
+        ICollection<SummaryModel> Summaries { get; set; }
+
+        ICollection<GroupSummaryModel> GroupSummaries { get; set; }
+
         SearchModel Search { get; set; }
 
         PaginationModel Pagination { get; set; }
@@ -24,6 +29,6 @@ namespace GSP.Shared.Grid.Grids.Contracts
 
         IList<SortingModel> GetSortingOptions();
 
-        ICollection<string> GetGroups();
+        ICollection<string> GetGroupNames();
     }
 }

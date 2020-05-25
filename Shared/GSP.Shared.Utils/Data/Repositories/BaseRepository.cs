@@ -2,6 +2,7 @@
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
 using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Common.Models.Grids.Summaries;
 using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Data.Extensions;
 using GSP.Shared.Utils.Domain.Base;
@@ -70,7 +71,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             query = query.Where(expression);
 
             int totalCount = await query.CountAsync(ct);
-            var columnsWithTotal = GetColumnsWithTotal(grid, query);
+            var summaries = GetGridSummaries(grid, query);
 
             var items = await query
                 .Ordered(grid.GetSortingOptions())
@@ -79,14 +80,14 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .AsNoTracking()
                 .ToListAsync(ct);
 
-            var gridGroups = grid.GetGroups();
+            var gridGroups = grid.GetGroupNames();
             if (gridGroups.Any())
             {
                 var groupedItems = items.GroupByDynamic(gridGroups);
-                return new GridModel(columnsWithTotal, groupedItems.ToImmutableList(), totalCount);
+                return new GridModel(summaries, groupedItems.ToImmutableList(), totalCount);
             }
 
-            return new GridModel(columnsWithTotal, items.Cast<dynamic>().ToImmutableList(), totalCount);
+            return new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -118,15 +119,15 @@ namespace GSP.Shared.Utils.Data.Repositories
             return items;
         }
 
-        protected virtual ICollection<GridColumnModel> GetColumnsWithTotal(ILinqGrid<TEntity> grid, IQueryable<TEntity> query)
+        protected virtual ICollection<GridSummaryModel> GetGridSummaries(ILinqGrid<TEntity> grid, IQueryable<TEntity> query)
         {
-            var gridColumns = new List<GridColumnModel>();
+            var gridColumns = new List<GridSummaryModel>();
 
-            foreach (var column in grid.Columns.Where(q => q.IsCalculateTotalNeeded))
+            foreach (var summary in grid.Summaries)
             {
-                object total = query.SumDynamic(column.PropertyName);
-                var columnWithTotal = new GridColumnModel(column.PropertyName, total);
-                gridColumns.Add(columnWithTotal);
+                object value = query.SummaryDynamic(summary.PropertyName, summary.Type);
+                var summaryModel = new GridSummaryModel(summary.PropertyName, summary.Type, value);
+                gridColumns.Add(summaryModel);
             }
 
             return gridColumns;
