@@ -1,4 +1,5 @@
-﻿using GSP.Shared.Grid.Filters.Contracts;
+﻿using GSP.Shared.Grid.Filters;
+using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Grids.Extensions.Search;
 using GSP.Shared.Grid.Helpers;
@@ -23,10 +24,10 @@ namespace GSP.Shared.Grid.Grids
             GroupSummaries = new List<GroupSummaryModel>();
             IncludeEntities = new List<string>();
             SortingOptions = new List<SortingModel>();
-            Filters = new List<IFilter<TEntity>>();
+            Filters = new List<Filter<TEntity>>();
         }
 
-        public ICollection<IFilter<TEntity>> Filters { get; set; }
+        public ICollection<Filter<TEntity>> Filters { get; set; }
 
         public ICollection<SortingModel> SortingOptions { get; set; }
 
@@ -58,17 +59,16 @@ namespace GSP.Shared.Grid.Grids
         {
             var expression = PredicateHelper.True<TEntity>();
 
+            var customFilterExpression = GetCustomFilterExpression();
+            if (customFilterExpression != null)
+            {
+                expression = expression.And(customFilterExpression);
+            }
+
             this.ApplyLinqSearchExpression(expression);
 
             foreach (var filter in Filters.Where(q => q.HasSelectedData))
             {
-                var customFilterExpression = GetCustomFilterExpression(filter);
-                if (customFilterExpression != null)
-                {
-                    expression = expression.And(customFilterExpression);
-                    continue;
-                }
-
                 var filterExpression = filter.GetExpression();
                 if (filterExpression != null)
                 {
@@ -79,7 +79,7 @@ namespace GSP.Shared.Grid.Grids
             return expression;
         }
 
-        protected Expression<Func<TEntity, bool>> GetCustomFilterExpression(IFilter<TEntity> filter)
+        protected Expression<Func<TEntity, bool>> GetCustomFilterExpression()
         {
             return default;
         }
