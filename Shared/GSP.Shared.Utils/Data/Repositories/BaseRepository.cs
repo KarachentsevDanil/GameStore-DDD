@@ -13,6 +13,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using static GSP.Shared.Utils.Data.Extensions.DynamicExtensions;
 
 namespace GSP.Shared.Utils.Data.Repositories
 {
@@ -63,25 +64,20 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .AsNoTracking()
                 .AsQueryable()
                 .Include(grid.IncludeEntities)
-                .Where(grid.GetFiltersExpression());
+                .Where(grid.GetFiltersExpression())
+                .Ordered(grid.GetSortedSortingOptions());
 
             int totalCount = await query.CountAsync(ct);
             var summaries = GetGridSummaries(grid, query);
 
             var items = await query
-                .Ordered(grid.GetSortedSortingOptions())
                 .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
                 .Take(grid.Pagination.PageSize)
                 .ToListAsync(ct);
 
-            var gridGroups = grid.GetGroupNames();
-            if (gridGroups.Any())
-            {
-                var groupedItems = items.GroupByDynamic(gridGroups);
-                return new GridModel(summaries, groupedItems.ToImmutableList(), totalCount);
-            }
+            var groupedResult = GetGroupedGridItems(grid, items, summaries, totalCount);
 
-            return new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
+            return groupedResult ?? new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -115,16 +111,56 @@ namespace GSP.Shared.Utils.Data.Repositories
 
         protected virtual ICollection<GridSummaryModel> GetGridSummaries(IGrid<TEntity> grid, IQueryable<TEntity> query)
         {
-            var gridColumns = new List<GridSummaryModel>();
+            var summaries = new List<GridSummaryModel>();
 
             foreach (var summary in grid.Summaries)
             {
                 object value = query.SummaryDynamic(summary.PropertyName, summary.Type);
                 var summaryModel = new GridSummaryModel(summary.PropertyName, summary.Type, value);
-                gridColumns.Add(summaryModel);
+                summaries.Add(summaryModel);
             }
 
-            return gridColumns;
+            return summaries;
+        }
+
+        protected virtual GridModel GetGroupedGridItems(
+            IGrid<TEntity> grid,
+            List<TEntity> dbItems,
+            ICollection<GridSummaryModel> gridSummaries,
+            int totalCount)
+        {
+            var gridGroups = grid.GetGroupNames();
+
+            if (!gridGroups.Any())
+            {
+                return default;
+            }
+
+            var groupedItems = dbItems.GroupByDynamic(gridGroups);
+
+            return new GridModel(
+                gridSummaries, GetGridGroupSummaries(grid, groupedItems, gridGroups), groupedItems.ToImmutableList(), totalCount);
+        }
+
+        protected virtual ICollection<GridGroupSummaryModel> GetGridGroupSummaries(
+            IGrid<TEntity> grid, List<dynamic> list, ICollection<string> groupedProperties)
+        {
+            var summaries = new List<GridGroupSummaryModel>();
+
+            foreach (var groupSummary in grid.GroupSummaries)
+            {
+                foreach (var group in list)
+                {
+                    ICollection<TEntity> groupedItems = GetCollection<TEntity>(group);
+                    string groupKey = GetGroupKey(group, groupedProperties);
+
+                    object value = groupedItems.AsQueryable().SummaryDynamic(groupSummary.PropertyName, groupSummary.Type);
+                    var summaryModel = new GridGroupSummaryModel(groupSummary.PropertyName, groupSummary.Type, value, groupKey);
+                    summaries.Add(summaryModel);
+                }
+            }
+
+            return summaries;
         }
     }
 }
