@@ -63,7 +63,7 @@ namespace GSP.Shared.Utils.Data.Repositories
             var query = DbSet
                 .AsNoTracking()
                 .AsQueryable()
-                .IncludeMany(grid.IncludeEntities)
+                .IncludeMany(grid.GetIncludedEntities())
                 .Where(grid.GetFiltersExpression())
                 .Ordered(grid.GetSortedSortingOptions());
 

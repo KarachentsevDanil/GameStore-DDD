@@ -12,15 +12,15 @@ namespace GSP.Shared.Grid.Grids.Contracts
 {
     public interface IGrid<TEntity>
     {
-        ICollection<Filter<TEntity>> Filters { get; set; }
+        List<Filter<TEntity>> Filters { get; set; }
 
-        ICollection<SortingModel> SortingOptions { get; set; }
+        List<SortingModel> SortingOptions { get; set; }
 
-        ICollection<GroupModel> Groups { get; set; }
+        List<GroupModel> Groups { get; set; }
 
-        ICollection<SummaryModel> Summaries { get; set; }
+        List<SummaryModel> Summaries { get; set; }
 
-        ICollection<GroupSummaryModel> GroupSummaries { get; set; }
+        List<GroupSummaryModel> GroupSummaries { get; set; }
 
         SearchModel Search { get; set; }
 
@@ -31,6 +31,8 @@ namespace GSP.Shared.Grid.Grids.Contracts
         IList<SortingModel> GetSortedSortingOptions();
 
         ICollection<string> GetGroupNames();
+
+        ICollection<string> GetIncludedEntities();
 
         Expression<Func<TEntity, bool>> GetFiltersExpression();
     }

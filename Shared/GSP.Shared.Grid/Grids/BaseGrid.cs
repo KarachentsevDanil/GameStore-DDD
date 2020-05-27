@@ -1,5 +1,5 @@
-﻿using GSP.Shared.Grid.Filters;
-using GSP.Shared.Grid.Filters.Contracts;
+﻿using GSP.Shared.Grid.Extensions;
+using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Grids.Extensions.Search;
 using GSP.Shared.Grid.Helpers;
@@ -27,15 +27,15 @@ namespace GSP.Shared.Grid.Grids
             Filters = new List<Filter<TEntity>>();
         }
 
-        public ICollection<Filter<TEntity>> Filters { get; set; }
+        public List<Filter<TEntity>> Filters { get; set; }
 
-        public ICollection<SortingModel> SortingOptions { get; set; }
+        public List<SortingModel> SortingOptions { get; set; }
 
-        public ICollection<GroupModel> Groups { get; set; }
+        public List<GroupModel> Groups { get; set; }
 
-        public ICollection<SummaryModel> Summaries { get; set; }
+        public List<SummaryModel> Summaries { get; set; }
 
-        public ICollection<GroupSummaryModel> GroupSummaries { get; set; }
+        public List<GroupSummaryModel> GroupSummaries { get; set; }
 
         public SearchModel Search { get; set; }
 
@@ -53,6 +53,17 @@ namespace GSP.Shared.Grid.Grids
         public virtual ICollection<string> GetGroupNames()
         {
             return Groups.OrderBy(p => p.Order).Select(p => p.PropertyName).ToList();
+        }
+
+        public virtual ICollection<string> GetIncludedEntities()
+        {
+            Groups.ForEach(g => AddNavigationPropertyIfNeeded(g.PropertyName));
+            GroupSummaries.ForEach(g => AddNavigationPropertyIfNeeded(g.PropertyName));
+            Filters.ForEach(g => AddNavigationPropertyIfNeeded(g.PropertyName));
+            SortingOptions.ForEach(g => AddNavigationPropertyIfNeeded(g.PropertyName));
+            Summaries.ForEach(g => AddNavigationPropertyIfNeeded(g.PropertyName));
+
+            return IncludeEntities;
         }
 
         public Expression<Func<TEntity, bool>> GetFiltersExpression()
@@ -86,6 +97,18 @@ namespace GSP.Shared.Grid.Grids
         protected Expression<Func<TEntity, bool>> GetCustomFilterExpression()
         {
             return default;
+        }
+
+        private void AddNavigationPropertyIfNeeded(string propertyName)
+        {
+            if (propertyName.IsNavigationProperty())
+            {
+                var navigationPropertyName = propertyName.GetNavigationProperty();
+                if (!IncludeEntities.Contains(navigationPropertyName))
+                {
+                    IncludeEntities.Add(navigationPropertyName);
+                }
+            }
         }
     }
 }
