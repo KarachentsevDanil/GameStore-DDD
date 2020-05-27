@@ -9,11 +9,11 @@ namespace GSP.Shared.Grid.Grids.Extensions.Search
 {
     public static class SearchExtensions
     {
-        public static void ApplyLinqSearchExpression<TEntity>(this IGrid<TEntity> grid, Expression<Func<TEntity, bool>> gridExpression)
+        public static Expression<Func<TEntity, bool>> GetSearchExpression<TEntity>(this IGrid<TEntity> grid)
         {
             if (string.IsNullOrEmpty(grid.Search?.Term))
             {
-                return;
+                return default;
             }
 
             var expression = PredicateHelper.True<TEntity>();
@@ -24,7 +24,7 @@ namespace GSP.Shared.Grid.Grids.Extensions.Search
                 expression = expression.Or(DynamicExpressionHelper.ParseLambda<TEntity, bool>(query));
             }
 
-            gridExpression.And(expression);
+            return expression;
         }
     }
 }

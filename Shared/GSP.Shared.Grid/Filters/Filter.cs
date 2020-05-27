@@ -11,8 +11,12 @@ namespace GSP.Shared.Grid.Filters
 {
     public class Filter<TEntity> : IFilter<TEntity>
     {
-        private static readonly IFilterExpressionGeneratorStore<TEntity> FilterExpressionGeneratorStore
-            = new FilterExpressionGeneratorStore<TEntity>();
+        private static IFilterExpressionGeneratorStore<TEntity> _filterExpressionGeneratorStore;
+
+        static Filter()
+        {
+            InitializeFilterExpressionStore();
+        }
 
         public DateFilterOption? DateFilterOption { get; set; }
 
@@ -49,7 +53,12 @@ namespace GSP.Shared.Grid.Filters
 
         public Expression<Func<TEntity, bool>> GetExpression()
         {
-            return FilterExpressionGeneratorStore.FilterExpressionGeneratorStrategies[Type].GetFilterLinqExpression(this);
+            return _filterExpressionGeneratorStore.FilterExpressionGeneratorStrategies[Type].GetFilterLinqExpression(this);
+        }
+
+        private static void InitializeFilterExpressionStore()
+        {
+            _filterExpressionGeneratorStore = new FilterExpressionGeneratorStore<TEntity>();
         }
     }
 }

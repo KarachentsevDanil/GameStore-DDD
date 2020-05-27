@@ -65,7 +65,11 @@ namespace GSP.Shared.Grid.Grids
                 expression = expression.And(customFilterExpression);
             }
 
-            this.ApplyLinqSearchExpression(expression);
+            var searchExpression = this.GetSearchExpression();
+            if (searchExpression != null)
+            {
+                expression = expression.And(searchExpression);
+            }
 
             foreach (var filter in Filters.Where(q => q.HasSelectedData))
             {

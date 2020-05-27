@@ -12,16 +12,19 @@ namespace GSP.Shared.Grid.Filters.Strategies.Stores
             InitializeExpressionGenerator();
         }
 
-        public IDictionary<GridFilterType, IExpressionGeneratorStrategy<TEntity>> FilterExpressionGeneratorStrategies =>
-            new Dictionary<GridFilterType, IExpressionGeneratorStrategy<TEntity>>();
+        public IDictionary<GridFilterType, IExpressionGeneratorStrategy<TEntity>> FilterExpressionGeneratorStrategies { get; set; }
 
         private void InitializeExpressionGenerator()
         {
-            FilterExpressionGeneratorStrategies.Add(GridFilterType.Boolean, new BooleanExpressionGeneratorStrategy<TEntity>());
-            FilterExpressionGeneratorStrategies.Add(GridFilterType.Date, new DateExpressionGeneratorStrategy<TEntity>());
-            FilterExpressionGeneratorStrategies.Add(GridFilterType.List, new ListExpressionGeneratorStrategy<TEntity>());
-            FilterExpressionGeneratorStrategies.Add(GridFilterType.Number, new NumberExpressionGeneratorStrategy<TEntity>());
-            FilterExpressionGeneratorStrategies.Add(GridFilterType.Text, new TextExpressionGeneratorStrategy<TEntity>());
+            FilterExpressionGeneratorStrategies =
+                new Dictionary<GridFilterType, IExpressionGeneratorStrategy<TEntity>>
+                {
+                    { GridFilterType.Boolean, new BooleanExpressionGeneratorStrategy<TEntity>() },
+                    { GridFilterType.Date, new DateExpressionGeneratorStrategy<TEntity>() },
+                    { GridFilterType.List, new ListExpressionGeneratorStrategy<TEntity>() },
+                    { GridFilterType.Number, new NumberExpressionGeneratorStrategy<TEntity>() },
+                    { GridFilterType.Text, new TextExpressionGeneratorStrategy<TEntity>() }
+                };
         }
     }
 }
