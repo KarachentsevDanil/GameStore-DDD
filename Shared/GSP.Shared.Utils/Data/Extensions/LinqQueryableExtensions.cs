@@ -2,6 +2,7 @@
 using GSP.Shared.Grid.Models.Sorting.Enums;
 using GSP.Shared.Grid.Models.Summaries.Enums;
 using GSP.Shared.Utils.Common.Helpers;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,29 +62,29 @@ namespace GSP.Shared.Utils.Data.Extensions
             switch (summaryType)
             {
                 case SummaryType.Count:
-                {
-                    return source.CountDynamic(propertyName);
-                }
+                    {
+                        return source.CountDynamic(propertyName);
+                    }
 
                 case SummaryType.Sum:
-                {
-                    return source.SumDynamic(propertyName);
-                }
+                    {
+                        return source.SumDynamic(propertyName);
+                    }
 
                 case SummaryType.Min:
-                {
-                    return source.MinDynamic(propertyName);
-                }
+                    {
+                        return source.MinDynamic(propertyName);
+                    }
 
                 case SummaryType.Max:
-                {
-                    return source.MaxDynamic(propertyName);
-                }
+                    {
+                        return source.MaxDynamic(propertyName);
+                    }
 
                 case SummaryType.Average:
-                {
-                    return source.AverageDynamic(propertyName);
-                }
+                    {
+                        return source.AverageDynamic(propertyName);
+                    }
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(summaryType), summaryType, "This type of summary haven't implemented yet.");
@@ -146,11 +147,12 @@ namespace GSP.Shared.Utils.Data.Extensions
                     Expression.Quote(elementLambda)));
         }
 
-        public static IQueryable<TEntity> Include<TEntity>(this IQueryable<TEntity> query, ICollection<string> includeEntities)
+        public static IQueryable<TEntity> IncludeMany<TEntity>(this IQueryable<TEntity> query, ICollection<string> includeEntities)
+            where TEntity : class
         {
             foreach (var include in includeEntities)
             {
-                query = query.Include(includeEntities);
+                query = query.Include(include);
             }
 
             return query;

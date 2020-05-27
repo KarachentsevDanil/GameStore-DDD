@@ -48,7 +48,7 @@ namespace GSP.Shared.Utils.Data.Extensions
         {
             return string.Join(
                 GroupSeparator,
-                groupedProperties.Select(p => ObjectHelper.GetPropertyValue(groupedItem, p)));
+                groupedProperties.Select(p => ObjectHelper.GetPropertyValue(groupedItem, ProcessNavigationPropertyInSelector(p))));
         }
 
         private static string ProcessNavigationProperty(string propertyName)

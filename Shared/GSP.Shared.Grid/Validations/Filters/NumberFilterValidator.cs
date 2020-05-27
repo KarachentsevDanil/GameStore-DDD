@@ -36,7 +36,7 @@ namespace GSP.Shared.Grid.Validations.Filters
 
         private bool IsNumericProperty(GridTypeModel gridTypeModel, string propertyName)
         {
-            return gridTypeModel.DateTimeProperties.Contains(propertyName);
+            return gridTypeModel.NumericProperties.Contains(propertyName);
         }
     }
 }
