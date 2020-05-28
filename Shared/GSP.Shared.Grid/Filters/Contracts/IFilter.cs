@@ -1,7 +1,5 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts.Types;
 using GSP.Shared.Grid.Filters.Enums;
-using System;
-using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Filters.Contracts
 {
@@ -14,7 +12,5 @@ namespace GSP.Shared.Grid.Filters.Contracts
         string PropertyName { get; set; }
 
         string Value { get; set; }
-
-        Expression<Func<TEntity, bool>> GetExpression();
     }
 }

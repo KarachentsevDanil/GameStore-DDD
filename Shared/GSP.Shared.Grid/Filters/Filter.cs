@@ -1,23 +1,13 @@
 ﻿using GSP.Shared.Grid.Filters.Contracts;
 using GSP.Shared.Grid.Filters.Enums;
 using GSP.Shared.Grid.Filters.Enums.FilterOptions;
-using GSP.Shared.Grid.Filters.Strategies.Stores;
-using GSP.Shared.Grid.Filters.Strategies.Stores.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Filters
 {
     public class Filter<TEntity> : IFilter<TEntity>
     {
-        private static IFilterExpressionGeneratorStore<TEntity> _filterExpressionGeneratorStore;
-
-        static Filter()
-        {
-            InitializeFilterExpressionStore();
-        }
-
         public DateFilterOption? DateFilterOption { get; set; }
 
         public DateTime? SelectedStartDate { get; set; }
@@ -50,15 +40,5 @@ namespace GSP.Shared.Grid.Filters
             BooleanFilterOption.HasValue ||
             TextFilterOption.HasValue ||
             ListFilterOption.HasValue;
-
-        public Expression<Func<TEntity, bool>> GetExpression()
-        {
-            return _filterExpressionGeneratorStore.FilterExpressionGeneratorStrategies[Type].GetFilterLinqExpression(this);
-        }
-
-        private static void InitializeFilterExpressionStore()
-        {
-            _filterExpressionGeneratorStore = new FilterExpressionGeneratorStore<TEntity>();
-        }
     }
 }

@@ -7,6 +7,8 @@
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.6.2" />
     <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.4" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.1.1" />
     <PackageReference Include="TypeSupport" Version="1.0.108" />
   </ItemGroup>

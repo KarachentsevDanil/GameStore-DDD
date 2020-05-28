@@ -33,7 +33,5 @@ namespace GSP.Shared.Grid.Grids.Contracts
         ICollection<string> GetGroupNames();
 
         ICollection<string> GetIncludedEntities();
-
-        Expression<Func<TEntity, bool>> GetFiltersExpression();
     }
 }

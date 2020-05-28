@@ -1,8 +1,6 @@
 ﻿using GSP.Shared.Grid.Extensions;
 using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Grids.Contracts;
-using GSP.Shared.Grid.Grids.Extensions.Search;
-using GSP.Shared.Grid.Helpers;
 using GSP.Shared.Grid.Models.Groups;
 using GSP.Shared.Grid.Models.Pagination;
 using GSP.Shared.Grid.Models.Searching;
@@ -66,35 +64,7 @@ namespace GSP.Shared.Grid.Grids
             return IncludeEntities;
         }
 
-        public Expression<Func<TEntity, bool>> GetFiltersExpression()
-        {
-            var expression = PredicateHelper.True<TEntity>();
-
-            var customFilterExpression = GetCustomFilterExpression();
-            if (customFilterExpression != null)
-            {
-                expression = expression.And(customFilterExpression);
-            }
-
-            var searchExpression = this.GetSearchExpression();
-            if (searchExpression != null)
-            {
-                expression = expression.And(searchExpression);
-            }
-
-            foreach (var filter in Filters.Where(q => q.HasSelectedData))
-            {
-                var filterExpression = filter.GetExpression();
-                if (filterExpression != null)
-                {
-                    expression = expression.And(filterExpression);
-                }
-            }
-
-            return expression;
-        }
-
-        protected Expression<Func<TEntity, bool>> GetCustomFilterExpression()
+        public virtual Expression<Func<TEntity, bool>> GetCustomFilterExpression()
         {
             return default;
         }

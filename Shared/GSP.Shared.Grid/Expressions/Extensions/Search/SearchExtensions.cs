@@ -5,7 +5,7 @@ using System;
 using System.Globalization;
 using System.Linq.Expressions;
 
-namespace GSP.Shared.Grid.Grids.Extensions.Search
+namespace GSP.Shared.Grid.Expressions.Extensions.Search
 {
     public static class SearchExtensions
     {
