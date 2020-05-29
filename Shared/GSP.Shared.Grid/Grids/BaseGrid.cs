@@ -1,5 +1,4 @@
 ﻿using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Models.Filters;
 using GSP.Shared.Grid.Models.Groups;
