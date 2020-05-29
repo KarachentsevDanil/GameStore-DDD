@@ -1,6 +1,6 @@
 ﻿using GSP.Shared.Grid.Expressions.Contracts;
 using GSP.Shared.Grid.Expressions.Extensions.Search;
-using GSP.Shared.Grid.Filters.Strategies.Stores.Contracts;
+using GSP.Shared.Grid.Expressions.Filters.Strategies.Stores.Contracts;
 using GSP.Shared.Grid.Grids;
 using GSP.Shared.Grid.Helpers;
 using System;

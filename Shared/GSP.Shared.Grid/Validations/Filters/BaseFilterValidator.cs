@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Filters.Contracts;
-using GSP.Shared.Grid.Filters.Enums;
+using GSP.Shared.Grid.Models.Filters;
+using GSP.Shared.Grid.Models.Filters.Enums;
 using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Filters
 {
-    public class BaseFilterValidator<TEntity> : AbstractValidator<IFilter<TEntity>>
+    public class BaseFilterValidator : AbstractValidator<Filter>
     {
         public BaseFilterValidator(GridTypeModel gridTypeModel)
         {
@@ -19,23 +19,23 @@ namespace GSP.Shared.Grid.Validations.Filters
                 .WithMessage($"You can use only {gridTypeModel.PropertyNames.ToStringList()} properties for column.");
 
             RuleFor(p => p)
-                .SetValidator(new BooleanFilterValidator<TEntity>(gridTypeModel))
+                .SetValidator(new BooleanFilterValidator(gridTypeModel))
                 .When(t => t.Type == GridFilterType.Boolean);
 
             RuleFor(p => p)
-                .SetValidator(new DateFilterValidator<TEntity>(gridTypeModel))
+                .SetValidator(new DateFilterValidator(gridTypeModel))
                 .When(t => t.Type == GridFilterType.Date);
 
             RuleFor(p => p)
-                .SetValidator(new ListFilterValidator<TEntity>(gridTypeModel))
+                .SetValidator(new ListFilterValidator(gridTypeModel))
                 .When(t => t.Type == GridFilterType.List);
 
             RuleFor(p => p)
-                .SetValidator(new NumberFilterValidator<TEntity>(gridTypeModel))
+                .SetValidator(new NumberFilterValidator(gridTypeModel))
                 .When(t => t.Type == GridFilterType.Number);
 
             RuleFor(p => p)
-                .SetValidator(new TextFilterValidator<TEntity>(gridTypeModel))
+                .SetValidator(new TextFilterValidator(gridTypeModel))
                 .When(t => t.Type == GridFilterType.Text);
         }
 

@@ -1,6 +1,7 @@
 ﻿using GSP.Shared.Grid.Extensions;
 using GSP.Shared.Grid.Filters;
 using GSP.Shared.Grid.Grids.Contracts;
+using GSP.Shared.Grid.Models.Filters;
 using GSP.Shared.Grid.Models.Groups;
 using GSP.Shared.Grid.Models.Pagination;
 using GSP.Shared.Grid.Models.Searching;
@@ -22,10 +23,10 @@ namespace GSP.Shared.Grid.Grids
             GroupSummaries = new List<GroupSummaryModel>();
             IncludeEntities = new List<string>();
             SortingOptions = new List<SortingModel>();
-            Filters = new List<Filter<TEntity>>();
+            Filters = new List<Filter>();
         }
 
-        public List<Filter<TEntity>> Filters { get; set; }
+        public List<Filter> Filters { get; set; }
 
         public List<SortingModel> SortingOptions { get; set; }
 

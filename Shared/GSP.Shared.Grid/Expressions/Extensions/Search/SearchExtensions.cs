@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Grid.Filters.Constants;
+﻿using GSP.Shared.Grid.Expressions.Filters.Constants;
 using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Helpers;
 using System;

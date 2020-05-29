@@ -5,7 +5,7 @@ using GSP.Shared.Grid.Stores.Contracts;
 using GSP.Shared.Grid.Stores.Models;
 using GSP.Shared.Grid.Validations.Filters;
 using GSP.Shared.Grid.Validations.Groups;
-using GSP.Shared.Grid.Validations.Paginations;
+using GSP.Shared.Grid.Validations.Pagination;
 using GSP.Shared.Grid.Validations.Searches;
 using GSP.Shared.Grid.Validations.Sorting;
 using GSP.Shared.Grid.Validations.Summaries;
@@ -27,7 +27,7 @@ namespace GSP.Shared.Grid.Validations.Grids
                 .SetValidator(new SearchValidator(gridTypeModel));
 
             RuleForEach(p => p.Filters)
-                .SetValidator(new BaseFilterValidator<TEntity>(gridTypeModel));
+                .SetValidator(new BaseFilterValidator(gridTypeModel));
 
             RuleForEach(p => p.SortingOptions)
                 .SetValidator(new SortingValidator(gridTypeModel));

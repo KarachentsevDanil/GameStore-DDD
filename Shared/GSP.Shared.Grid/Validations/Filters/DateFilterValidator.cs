@@ -1,12 +1,12 @@
 ﻿using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Filters.Contracts;
-using GSP.Shared.Grid.Filters.Enums.FilterOptions;
+using GSP.Shared.Grid.Models.Filters;
+using GSP.Shared.Grid.Models.Filters.Enums.FilterOptions;
 using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Filters
 {
-    public class DateFilterValidator<TEntity> : AbstractValidator<IFilter<TEntity>>
+    public class DateFilterValidator : AbstractValidator<Filter>
     {
         public DateFilterValidator(GridTypeModel gridTypeModel)
         {

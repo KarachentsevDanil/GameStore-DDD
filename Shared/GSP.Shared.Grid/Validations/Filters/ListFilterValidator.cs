@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Grid.Filters.Contracts;
+using GSP.Shared.Grid.Models.Filters;
 using GSP.Shared.Grid.Stores.Models;
 
 namespace GSP.Shared.Grid.Validations.Filters
 {
-    public class ListFilterValidator<TEntity> : AbstractValidator<IFilter<TEntity>>
+    public class ListFilterValidator : AbstractValidator<Filter>
     {
         public ListFilterValidator(GridTypeModel gridTypeModel)
         {

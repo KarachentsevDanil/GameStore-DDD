@@ -1,4 +1,5 @@
 ﻿using GSP.Shared.Grid.Filters;
+using GSP.Shared.Grid.Models.Filters;
 using GSP.Shared.Grid.Models.Groups;
 using GSP.Shared.Grid.Models.Pagination;
 using GSP.Shared.Grid.Models.Searching;
@@ -12,7 +13,7 @@ namespace GSP.Shared.Grid.Grids.Contracts
 {
     public interface IGrid<TEntity>
     {
-        List<Filter<TEntity>> Filters { get; set; }
+        List<Filter> Filters { get; set; }
 
         List<SortingModel> SortingOptions { get; set; }
 
