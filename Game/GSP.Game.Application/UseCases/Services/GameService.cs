@@ -5,10 +5,13 @@ using GSP.Game.Domain.Entities;
 using GSP.Game.Domain.Entities.ValueObjects;
 using GSP.Game.Domain.Models.FilterParams;
 using GSP.Game.Domain.UnitOfWorks.Contracts;
+using GSP.Shared.Grid.Expressions.Contracts;
+using GSP.Shared.Grid.Grids;
 using GSP.Shared.Utils.Application.UseCases.DTOs;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.Application.UseCases.Services;
 using GSP.Shared.Utils.Common.Models.Collections;
+using GSP.Shared.Utils.Common.Models.Grids;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,9 +24,12 @@ namespace GSP.Game.Application.UseCases.Services
 {
     public class GameService : BaseService<IGameUnitOfWork, GameBase, GetGameDto, AddGameDto, UpdateGameDto>, IGameService
     {
-        public GameService(IGameUnitOfWork unitOfWork, IMapper mapper, ILogger<GameBase> logger)
+        private readonly IGridExpressionGenerator<GameBase> _gameGridExpressionGenerator;
+
+        public GameService(IGameUnitOfWork unitOfWork, IMapper mapper, ILogger<GameBase> logger, IGridExpressionGenerator<GameBase> gameGridExpressionGenerator)
             : base(unitOfWork, unitOfWork.GameRepository, mapper, logger)
         {
+            _gameGridExpressionGenerator = gameGridExpressionGenerator;
         }
 
         public async Task<PagedCollection<GetGameDto>> GetPagedListAsync(GameFilterParamsDto filterParams, CancellationToken ct = default)
@@ -36,6 +42,16 @@ namespace GSP.Game.Application.UseCases.Services
                 await UnitOfWork.GameRepository.GetByFilterParamsAsync(dbFilterParams, ct);
 
             return new PagedCollection<GetGameDto>(Mapper.Map<ICollection<GetGameDto>>(dbGames.Items).ToImmutableList(), dbGames.TotalCount);
+        }
+
+        public async Task<GridModel> GetGridAsync(BaseGrid<GameBase> baseGrid, CancellationToken ct = default)
+        {
+            Logger.LogInformation("Game games by grid {Grid}", baseGrid);
+
+            GridModel grid =
+                await UnitOfWork.GameRepository.GetPagedListAsync(_gameGridExpressionGenerator, baseGrid, ct);
+
+            return grid;
         }
 
         public async Task<GetGameDto> UpdateOrdersCountAsync(UpdateGameOrdersCountDto itemDto, CancellationToken ct = default)
