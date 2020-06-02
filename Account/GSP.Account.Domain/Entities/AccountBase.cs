@@ -21,15 +21,15 @@ namespace GSP.Account.Domain.Entities
         {
         }
 
-        public string FirstName { get; set; }
+        public string FirstName { get; private set; }
 
-        public string LastName { get; set; }
+        public string LastName { get; private set; }
 
-        public string Email { get; set; }
+        public string Email { get; private set; }
 
         public string HashedPassword { get; private set; }
 
-        public RoleType Role { get; set; }
+        public RoleType Role { get; private set; }
 
         public void SetPassword(string password)
         {

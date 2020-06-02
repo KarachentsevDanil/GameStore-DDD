@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MHC.Ruleset" Version="1.0.0" />
+    <PackageReference Include="GSP.Ruleset" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

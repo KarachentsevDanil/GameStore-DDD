@@ -50,5 +50,22 @@ namespace GSP.Game.WebApi.Controllers
             var games = await _mediator.Send(query);
             return Ok(games);
         }
+
+        /// <summary>
+        /// Get games by query
+        /// </summary>
+        /// <param name="query">
+        /// <see cref="GetGamePagedListQuery"/>
+        /// </param>
+        /// <returns>
+        /// <see cref="GetGameDto"/>
+        /// </returns>
+        [HttpPost("grid")]
+        [ProducesResponseType(typeof(GetGameDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetGamesGrid([FromBody] GetGameGridQuery query)
+        {
+            var games = await _mediator.Send(query);
+            return Ok(games);
+        }
     }
 }
