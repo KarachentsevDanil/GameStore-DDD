@@ -7,13 +7,14 @@ namespace GSP.Game.Domain.Entities
 {
     public class GameBase : AuditableEntity
     {
+        private readonly List<GameAttachment> _attachments = new List<GameAttachment>();
+
         public GameBase(long genreId, long developerStudioId, long publisherId, GameDetails details)
         {
             GameDetails = details;
             DeveloperStudioId = developerStudioId;
             PublisherId = publisherId;
             GenreId = genreId;
-            Attachments = new List<GameAttachment>();
         }
 
         private GameBase()
@@ -34,7 +35,7 @@ namespace GSP.Game.Domain.Entities
 
         public Publisher Publisher { get; private set; }
 
-        public ICollection<GameAttachment> Attachments { get; private set; }
+        public IReadOnlyCollection<GameAttachment> Attachments => _attachments;
 
         public void Update(long genreId, long developerStudioId, long publisherId)
         {
@@ -63,7 +64,7 @@ namespace GSP.Game.Domain.Entities
 
         public void AddAttachments(List<GameAttachment> attachments)
         {
-            attachments.ForEach(attachment => Attachments.Add(attachment));
+            attachments.ForEach(attachment => _attachments.Add(attachment));
         }
     }
 }

@@ -17,6 +17,11 @@ namespace GSP.Order.Data.Context.EntityMappings
                 .WithMany()
                 .HasForeignKey(p => p.AccountId);
 
+            builder
+                .Metadata
+                .FindNavigation(nameof(OrderBase.Games))
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
+
             builder.HasQueryFilter(q => !q.IsDeleted);
         }
     }

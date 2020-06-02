@@ -9,23 +9,23 @@ namespace GSP.Order.Domain.Entities
 {
     public class OrderBase : BaseEntity
     {
+        private readonly List<OrderGame> _games = new List<OrderGame>();
+
         public OrderBase(long accountId)
         {
             AccountId = accountId;
             OrderStatus = OrderStatus.New;
-            Games = new List<OrderGame>();
         }
 
         private OrderBase()
         {
-            Games = new List<OrderGame>();
         }
 
         public OrderStatus OrderStatus { get; private set; }
 
         public long AccountId { get; private set; }
 
-        public ICollection<OrderGame> Games { get; private set; }
+        public IReadOnlyCollection<OrderGame> Games => _games;
 
         public SharedAccount Account { get; private set; }
 
@@ -41,24 +41,21 @@ namespace GSP.Order.Domain.Entities
                 return false;
             }
 
-            Games.Add(new OrderGame(gameId));
+            _games.Add(new OrderGame(gameId));
             DomainEvents.Add(new GameRemovedFromOrderEvent(Id, gameId));
-
             return true;
         }
 
         public bool RemoveGame(long gameId)
         {
             OrderGame orderGame = Games.FirstOrDefault(q => q.GameId == gameId);
-
             if (orderGame == null)
             {
                 return false;
             }
 
-            Games.Remove(orderGame);
+            _games.Remove(orderGame);
             DomainEvents.Add(new GameRemovedFromOrderEvent(Id, gameId));
-
             return true;
         }
     }

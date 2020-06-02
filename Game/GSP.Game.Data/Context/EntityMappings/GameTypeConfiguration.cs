@@ -46,6 +46,11 @@ namespace GSP.Game.Data.Context.EntityMappings
                     attachmentBuilder.Property(t => t.LinkUri).HasConversion<string>().HasMaxLength(2048).IsRequired();
                 });
 
+            builder
+                .Metadata
+                .FindNavigation(nameof(GameBase.Attachments))
+                .SetPropertyAccessMode(PropertyAccessMode.Field);
+
             builder.HasQueryFilter(q => !q.IsDeleted);
         }
     }
