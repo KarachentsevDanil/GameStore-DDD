@@ -11,9 +11,11 @@ namespace GSP.Shared.Utils.Common.Cache.InMemory.Extensions
             this IServiceCollection serviceCollection,
             IConfiguration configuration)
         {
+            var memoryCache = new MemoryCacheConfiguration();
             serviceCollection.AddMemoryCache();
-            serviceCollection.Configure<MemoryCacheConfiguration>(nameof(MemoryCacheConfiguration), configuration);
             serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+            configuration.Bind(nameof(MemoryCacheConfiguration), memoryCache);
+            serviceCollection.AddSingleton(memoryCache);
             return serviceCollection;
         }
     }

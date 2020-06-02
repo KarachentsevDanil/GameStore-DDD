@@ -1,7 +1,6 @@
 ﻿using GSP.Shared.Utils.Common.Cache.Base.Contracts;
 using GSP.Shared.Utils.Common.Cache.InMemory.Configurations;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
 
@@ -13,10 +12,10 @@ namespace GSP.Shared.Utils.Common.Cache.InMemory
 
         private readonly MemoryCacheConfiguration _configuration;
 
-        public MemoryCacheManager(IMemoryCache memoryCache, IOptions<MemoryCacheConfiguration> configuration)
+        public MemoryCacheManager(IMemoryCache memoryCache, MemoryCacheConfiguration configuration)
         {
             _memoryCache = memoryCache;
-            _configuration = configuration.Value;
+            _configuration = configuration;
         }
 
         public Task AddAsync<TEntity>(TEntity entity, string key, TimeSpan? expirationTime = null)
