@@ -25,7 +25,7 @@ namespace GSP.Shared.Utils.Common.Models.Grids
 
         public ICollection<GridGroupSummaryModel> GroupSummaries { get; }
 
-        public IImmutableList<dynamic> Items { get; set; }
+        public IImmutableList<dynamic> Items { get; }
 
         public int TotalCount { get; set; }
     }

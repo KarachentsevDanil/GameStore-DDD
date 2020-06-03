@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Linq.Dynamic.Core;
 using System.Threading;
 using System.Threading.Tasks;
 using static GSP.Shared.Utils.Data.Extensions.DynamicExtensions;
@@ -73,14 +72,14 @@ namespace GSP.Shared.Utils.Data.Repositories
             int totalCount = await query.CountAsync(ct);
             var summaries = GetGridSummaries(grid, query);
 
-            var items = await query
+            query = query
                 .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
-                .Take(grid.Pagination.PageSize)
-                .ToListAsync(ct);
+                .Take(grid.Pagination.PageSize);
 
-            var groupedResult = GetGroupedGridItems(grid, items, summaries, totalCount);
+            var items = await query.ToListAsync(ct);
 
-            return groupedResult ?? new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
+            return GetGroupedGridItems(grid, query, summaries, totalCount) ??
+                   new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -128,7 +127,7 @@ namespace GSP.Shared.Utils.Data.Repositories
 
         protected virtual GridModel GetGroupedGridItems(
             IGrid<TEntity> grid,
-            List<TEntity> dbItems,
+            IQueryable<TEntity> dbItems,
             ICollection<GridSummaryModel> gridSummaries,
             int totalCount)
         {

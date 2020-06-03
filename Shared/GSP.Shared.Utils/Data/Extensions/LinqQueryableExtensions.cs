@@ -124,16 +124,6 @@ namespace GSP.Shared.Utils.Data.Extensions
 
         public static IQueryable GroupByDynamic(this IQueryable source, string keySelector, params object[] values)
         {
-            if (source == null)
-            {
-                throw new ArgumentNullException(nameof(source));
-            }
-
-            if (keySelector == null)
-            {
-                throw new ArgumentNullException(nameof(keySelector));
-            }
-
             LambdaExpression keyLambda = DynamicExpressionParser.ParseLambda(source.ElementType, null, keySelector, values);
             LambdaExpression elementLambda = DynamicExpressionParser.ParseLambda(source.ElementType, null, DynamicElementSelector, values);
 

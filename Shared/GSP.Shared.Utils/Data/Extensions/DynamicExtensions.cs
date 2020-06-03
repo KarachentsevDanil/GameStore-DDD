@@ -25,7 +25,7 @@ namespace GSP.Shared.Utils.Data.Extensions
 
         private const string SelectExpressionFormat = "{0} => new {{ {1}, Items = {0} }}";
 
-        public static List<dynamic> GroupByDynamic<TEntity>(this List<TEntity> list, ICollection<string> groupByProperties)
+        public static List<dynamic> GroupByDynamic<TEntity>(this IQueryable<TEntity> list, ICollection<string> groupByProperties)
         {
             var groupByField = string.Join(PropertySeparator, groupByProperties.Select(ProcessNavigationProperty));
             var selectGroupedFields = string.Join(PropertySeparator, groupByProperties.Select(ProcessNavigationPropertyInSelector));
@@ -33,7 +33,7 @@ namespace GSP.Shared.Utils.Data.Extensions
             var groupByExpression = string.Format(CultureInfo.CurrentCulture, GroupByExpressionFormat, groupByField);
             var selectExpression = string.Format(CultureInfo.CurrentCulture, SelectExpressionFormat, EntitySelector, selectGroupedFields);
 
-            return list.AsQueryable()
+            return list
                 .GroupByDynamic(groupByExpression)
                 .SelectDynamic(selectExpression)
                 .ToDynamicList();
