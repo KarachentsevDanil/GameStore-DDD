@@ -50,7 +50,7 @@ namespace GSP.Shared.Utils.Data.Context.Audit
             }
         }
 
-        private void ProcessAuditableEntity(EntityEntry<AuditableEntity> auditableEntity, GspUserAccountModel userAccountModel, DateTime currentDate)
+        private static void ProcessAuditableEntity(EntityEntry<AuditableEntity> auditableEntity, GspUserAccountModel userAccountModel, DateTime currentDate)
         {
             if (auditableEntity.State == EntityState.Added)
             {

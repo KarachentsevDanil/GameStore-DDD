@@ -17,20 +17,21 @@ namespace GSP.Shared.Utils.Common.Helpers
 
             using (var encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, Salt);
-
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                using (var memoryStream = new MemoryStream())
+                using (Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, Salt))
                 {
-                    using (var cryptoStream = new CryptoStream(memoryStream, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
-                        cryptoStream.Write(unencryptedBytes, 0, unencryptedBytes.Length);
-                        cryptoStream.Close();
-                    }
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
 
-                    clearText = Convert.ToBase64String(memoryStream.ToArray());
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        using (var cryptoStream = new CryptoStream(memoryStream, encryptor.CreateEncryptor(), CryptoStreamMode.Write))
+                        {
+                            cryptoStream.Write(unencryptedBytes, 0, unencryptedBytes.Length);
+                            cryptoStream.Close();
+                        }
+
+                        clearText = Convert.ToBase64String(memoryStream.ToArray());
+                    }
                 }
             }
 
@@ -45,20 +46,21 @@ namespace GSP.Shared.Utils.Common.Helpers
 
             using (Aes encryptor = Aes.Create())
             {
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, Salt);
-
-                encryptor.Key = pdb.GetBytes(32);
-                encryptor.IV = pdb.GetBytes(16);
-
-                using (MemoryStream memoryStream = new MemoryStream())
+                using (Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(encryptionKey, Salt))
                 {
-                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
-                        cryptoStream.Write(cryptedBytes, 0, cryptedBytes.Length);
-                        cryptoStream.Close();
-                    }
+                    encryptor.Key = pdb.GetBytes(32);
+                    encryptor.IV = pdb.GetBytes(16);
 
-                    text = Encoding.Unicode.GetString(memoryStream.ToArray());
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor.CreateDecryptor(), CryptoStreamMode.Write))
+                        {
+                            cryptoStream.Write(cryptedBytes, 0, cryptedBytes.Length);
+                            cryptoStream.Close();
+                        }
+
+                        text = Encoding.Unicode.GetString(memoryStream.ToArray());
+                    }
                 }
             }
 

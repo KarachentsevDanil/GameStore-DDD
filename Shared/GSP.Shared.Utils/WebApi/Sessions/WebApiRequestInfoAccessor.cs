@@ -15,7 +15,7 @@ namespace GSP.Shared.Utils.WebApi.Sessions
 
         public GspRequestInfoModel RequestInfo => CreateRequestInfoModel(_accessor.HttpContext?.Request);
 
-        private GspRequestInfoModel CreateRequestInfoModel(HttpRequest request)
+        private static GspRequestInfoModel CreateRequestInfoModel(HttpRequest request)
         {
             if (request == null)
             {

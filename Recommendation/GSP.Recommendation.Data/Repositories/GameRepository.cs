@@ -33,7 +33,7 @@ namespace GSP.Recommendation.Data.Repositories
             return new PagedCollection<Game>(result, totalCount);
         }
 
-        private void SortGames(GameSortingType sortingType, IQueryable<Game> query)
+        private static void SortGames(GameSortingType sortingType, IQueryable<Game> query)
         {
             switch (sortingType)
             {

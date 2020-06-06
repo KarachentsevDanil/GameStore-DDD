@@ -18,7 +18,7 @@ namespace GSP.Shared.Grid.Validations.Sorting
                 .WithMessage($"Sorting allowed only for {gridTypeModel.SortablePropertyNames.ToStringList()} properties.");
         }
 
-        private bool IsSortingAllowed(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsSortingAllowed(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.SortablePropertyNames.Contains(propertyName);
         }
