@@ -1,4 +1,4 @@
-﻿namespace GSP.Shared.Utils.Common.ServiceBus.Base.Constants
+﻿namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Constants
 {
     public static class ServiceBusConstants
     {

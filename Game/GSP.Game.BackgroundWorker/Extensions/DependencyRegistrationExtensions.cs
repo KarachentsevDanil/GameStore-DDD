@@ -15,7 +15,7 @@ using GSP.Game.BackgroundWorker.EventHandlers.Games;
 using GSP.Game.BackgroundWorker.Events.Games;
 using GSP.Game.Data.UnitOfWorks;
 using GSP.Game.Domain.UnitOfWorks.Contracts;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
+using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,8 +58,8 @@ namespace GSP.Game.BackgroundWorker.Extensions
 
         public static IServiceCollection RegisterBackgroundWorkerDependencies(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameOrderCountUpdatedEvent, IIntegrationEventHandler<GameOrderCountUpdatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameRatingUpdatedEvent, IIntegrationEventHandler<GameRatingUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameOrderCountUpdatedEvent, IIntegrationEventHandler<GameOrderCountUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameRatingUpdatedEvent, IIntegrationEventHandler<GameRatingUpdatedEvent>>>();
 
             return serviceCollection;
         }

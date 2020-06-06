@@ -15,7 +15,7 @@ namespace GSP.Shared.Grid.Validations.Searches
                 .WithMessage($"You can search only by these {gridTypeModel.TextProperties.ToStringList()} properties.");
         }
 
-        private bool IsSearchFieldValid(string field, GridTypeModel gridTypeModel)
+        private static bool IsSearchFieldValid(string field, GridTypeModel gridTypeModel)
         {
             return gridTypeModel.TextProperties.Contains(field);
         }

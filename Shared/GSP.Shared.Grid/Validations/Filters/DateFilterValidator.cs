@@ -27,7 +27,7 @@ namespace GSP.Shared.Grid.Validations.Filters
                 .WithMessage($"Only date time properties are allowed for this type of filer {gridTypeModel.DateTimeProperties.ToStringList()}.");
         }
 
-        private bool IsDateTimeProperty(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsDateTimeProperty(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.DateTimeProperties.Contains(propertyName);
         }

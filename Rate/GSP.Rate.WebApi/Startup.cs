@@ -2,8 +2,8 @@ using GSP.Rate.Application.CQS.Handlers.Commands.Rates;
 using GSP.Rate.Application.CQS.Validations.Rates;
 using GSP.Rate.Data.Context;
 using GSP.Rate.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +34,7 @@ namespace GSP.Rate.WebApi
 
             services.RegisterApplicationDependencies();
 
-            services.RegisterAzureServiceBus(Configuration);
+            services.AddEventBus(Configuration);
         }
     }
 }

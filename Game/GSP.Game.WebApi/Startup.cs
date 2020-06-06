@@ -2,8 +2,8 @@ using GSP.Game.Application.CQS.Handlers.Commands.Games;
 using GSP.Game.Application.CQS.Validations.Games;
 using GSP.Game.Data.Context;
 using GSP.Game.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +34,7 @@ namespace GSP.Game.WebApi
 
             services.RegisterApplicationDependencies();
 
-            services.RegisterAzureServiceBus(Configuration);
+            services.AddEventBus(Configuration);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace GSP.Shared.Grid.Validations.Filters
                 .WithMessage($"Only numeric properties are allowed for this type of filer {gridTypeModel.NumericProperties.ToStringList()}.");
         }
 
-        private bool IsNumericProperty(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsNumericProperty(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.NumericProperties.Contains(propertyName);
         }

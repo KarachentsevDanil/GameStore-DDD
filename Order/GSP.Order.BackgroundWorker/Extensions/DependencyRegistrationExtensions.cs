@@ -19,7 +19,7 @@ using GSP.Shared.Utils.Application.Account.CQS.Commands;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Common.Cache.InMemory.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
+using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -61,11 +61,11 @@ namespace GSP.Order.BackgroundWorker.Extensions
 
         public static IServiceCollection RegisterBackgroundWorkerDependencies(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<AccountCreatedEvent, IIntegrationEventHandler<AccountCreatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<AccountUpdatedEvent, IIntegrationEventHandler<AccountUpdatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameUpdatedEvent, IIntegrationEventHandler<GameUpdatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<OrderPaidEvent, IIntegrationEventHandler<OrderPaidEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<AccountCreatedEvent, IIntegrationEventHandler<AccountCreatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<AccountUpdatedEvent, IIntegrationEventHandler<AccountUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameUpdatedEvent, IIntegrationEventHandler<GameUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<OrderPaidEvent, IIntegrationEventHandler<OrderPaidEvent>>>();
 
             return serviceCollection;
         }

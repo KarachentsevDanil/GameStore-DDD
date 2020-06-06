@@ -1,7 +1,7 @@
 using GSP.Game.BackgroundWorker.Extensions;
 using GSP.Game.Data.Context;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +32,7 @@ namespace GSP.Game.BackgroundWorker
 
             services.RegisterApplicationDependencies();
 
-            services.RegisterAzureServiceBus(Configuration);
+            services.AddEventBus(Configuration);
 
             services.RegisterBackgroundWorkerDependencies();
         }

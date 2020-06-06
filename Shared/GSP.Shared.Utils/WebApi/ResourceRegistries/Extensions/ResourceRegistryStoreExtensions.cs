@@ -1,4 +1,5 @@
 ﻿using GSP.Shared.Utils.WebApi.ResourceRegistries.Attributes;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.Constants;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,8 +20,11 @@ namespace GSP.Shared.Utils.WebApi.ResourceRegistries.Extensions
 
         public static ResourceRegistryStore GetResourceRegistryStore(this IConfiguration configuration)
         {
-            var features = configuration.GetSection("Resources").GetChildren().ToDictionary(x => x.Key, x => x.Value);
-            return new ResourceRegistryStore(features);
+            var resources = configuration.GetSection(ResourceConstants.ResourceSectionName)
+                .GetChildren()
+                .ToDictionary(x => x.Key, x => x.Value);
+
+            return new ResourceRegistryStore(resources);
         }
 
         public static Type FindResourceType<TResource>(

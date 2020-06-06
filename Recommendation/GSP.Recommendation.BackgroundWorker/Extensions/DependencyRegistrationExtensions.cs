@@ -9,7 +9,7 @@ using GSP.Recommendation.BackgroundWorker.Events.Games;
 using GSP.Recommendation.BackgroundWorker.Events.Orders;
 using GSP.Recommendation.Data.UnitOfWorks;
 using GSP.Recommendation.Domain.UnitOfWorks;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
+using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -46,10 +46,10 @@ namespace GSP.Recommendation.BackgroundWorker.Extensions
 
         public static IServiceCollection RegisterBackgroundWorkerDependencies(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameOrderCountUpdatedEvent, IIntegrationEventHandler<GameOrderCountUpdatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameRatingUpdatedEvent, IIntegrationEventHandler<GameRatingUpdatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<OrderCompletedEvent, IIntegrationEventHandler<OrderCompletedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameOrderCountUpdatedEvent, IIntegrationEventHandler<GameOrderCountUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameRatingUpdatedEvent, IIntegrationEventHandler<GameRatingUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<GameCreatedEvent, IIntegrationEventHandler<GameCreatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<OrderCompletedEvent, IIntegrationEventHandler<OrderCompletedEvent>>>();
 
             return serviceCollection;
         }

@@ -15,7 +15,7 @@ namespace GSP.Shared.Grid.Validations.Groups
                 .WithMessage($"Grouping is not allowed for this property, you can use only {gridTypeModel.PropertyNames.ToStringList()} properties for grouping.");
         }
 
-        private bool IsGroupingAllowed(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsGroupingAllowed(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.GroupablePropertyNames.Contains(propertyName);
         }

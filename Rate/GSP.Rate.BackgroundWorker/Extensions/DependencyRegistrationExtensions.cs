@@ -8,7 +8,7 @@ using GSP.Shared.Utils.Application.Account.Configurations.MapperProfiles;
 using GSP.Shared.Utils.Application.Account.CQS.Commands;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus;
+using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,8 +39,8 @@ namespace GSP.Rate.BackgroundWorker.Extensions
 
         public static IServiceCollection RegisterBackgroundWorkerDependencies(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<AccountCreatedEvent, IIntegrationEventHandler<AccountCreatedEvent>>>();
-            serviceCollection.AddHostedService<AzureServiceBusSubscriptionClient<AccountUpdatedEvent, IIntegrationEventHandler<AccountUpdatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<AccountCreatedEvent, IIntegrationEventHandler<AccountCreatedEvent>>>();
+            serviceCollection.AddHostedService<EventBusSubscriptionClient<AccountUpdatedEvent, IIntegrationEventHandler<AccountUpdatedEvent>>>();
 
             return serviceCollection;
         }

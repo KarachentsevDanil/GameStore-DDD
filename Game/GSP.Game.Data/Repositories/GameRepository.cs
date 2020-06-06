@@ -48,7 +48,7 @@ namespace GSP.Game.Data.Repositories
             return result;
         }
 
-        private void FillGamesQueryFilterParams(GameFilterParams filterParams)
+        private static void FillGamesQueryFilterParams(GameFilterParams filterParams)
         {
             var predicate = PredicateBuilder.New<GameBase>(x => !x.IsDeleted);
 
@@ -73,7 +73,7 @@ namespace GSP.Game.Data.Repositories
             filterParams.Expression = predicate;
         }
 
-        private IQueryable<GameBase> FillSortParams(IQueryable<GameBase> query, GameFilterParams filterParams)
+        private static IQueryable<GameBase> FillSortParams(IQueryable<GameBase> query, GameFilterParams filterParams)
         {
             query = query.Where(filterParams.Expression);
 

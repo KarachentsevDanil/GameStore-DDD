@@ -2,13 +2,11 @@ using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.Application.CQS.Validations.Orders;
 using GSP.Order.Data.Context;
 using GSP.Order.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace GSP.Order.WebApi
 {
@@ -36,7 +34,7 @@ namespace GSP.Order.WebApi
 
             services.RegisterApplicationDependencies(Configuration);
 
-            services.RegisterAzureServiceBus(Configuration);
+            services.AddEventBus(Configuration);
         }
     }
 }

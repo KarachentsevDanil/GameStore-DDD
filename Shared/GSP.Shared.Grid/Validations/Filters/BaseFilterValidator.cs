@@ -39,7 +39,7 @@ namespace GSP.Shared.Grid.Validations.Filters
                 .When(t => t.Type == GridFilterType.Text);
         }
 
-        private bool IsFilteringAllowed(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsFilteringAllowed(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.FilterablePropertyNames.Contains(propertyName);
         }

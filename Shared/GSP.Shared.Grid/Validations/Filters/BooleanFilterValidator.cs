@@ -18,7 +18,7 @@ namespace GSP.Shared.Grid.Validations.Filters
                 .WithMessage($"Only boolean properties are allowed for this type of filer {gridTypeModel.BooleanProperties.ToStringList()}.");
         }
 
-        private bool IsBooleanProperty(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsBooleanProperty(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.BooleanProperties.Contains(propertyName);
         }

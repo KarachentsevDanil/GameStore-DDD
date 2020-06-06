@@ -47,7 +47,7 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
             return CreateClient(key, subscriptionClientModel, _subscriptionClients, BuildSubscriptionClient);
         }
 
-        private TClient CreateClient<TClient, TClientModel>(
+        private static TClient CreateClient<TClient, TClientModel>(
             string key, TClientModel clientModel, IDictionary<string, TClient> clients, Func<TClientModel, TClient> getClient)
             where TClient : IClientEntity
             where TClientModel : BaseAzureClientModel

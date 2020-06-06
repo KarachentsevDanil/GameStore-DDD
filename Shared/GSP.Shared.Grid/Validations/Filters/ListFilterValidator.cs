@@ -22,7 +22,7 @@ namespace GSP.Shared.Grid.Validations.Filters
                 .WithMessage($"Only text properties are allowed for this type of filer {gridTypeModel.TextProperties.ToStringList()}.");
         }
 
-        private bool IsTextProperty(GridTypeModel gridTypeModel, string propertyName)
+        private static bool IsTextProperty(GridTypeModel gridTypeModel, string propertyName)
         {
             return gridTypeModel.TextProperties.Contains(propertyName);
         }

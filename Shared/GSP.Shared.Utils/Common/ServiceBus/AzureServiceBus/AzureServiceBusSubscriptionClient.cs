@@ -8,7 +8,6 @@ using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -20,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
 {
-    public class AzureServiceBusSubscriptionClient<TEvent, TEventHandler> : BackgroundService, IServiceBusSubscriptionClient<TEvent, TEventHandler>
+    public class AzureServiceBusSubscriptionClient<TEvent, TEventHandler> : IServiceBusSubscriptionClient<TEvent, TEventHandler>
         where TEvent : IntegrationEvent
         where TEventHandler : IIntegrationEventHandler<TEvent>
     {
@@ -66,16 +65,6 @@ namespace GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus
             };
 
             _subscriptionClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
-        }
-
-        public override async Task StopAsync(CancellationToken cancellationToken)
-        {
-            await _subscriptionClient.CloseAsync();
-        }
-
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            return Task.Run(RegisterMessageHandler, stoppingToken);
         }
 
         private async Task ProcessMessagesAsync(Message message, CancellationToken token)

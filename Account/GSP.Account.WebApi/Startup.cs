@@ -2,8 +2,8 @@ using GSP.Account.Application.CQS.Handlers.Commands;
 using GSP.Account.Application.CQS.Validators;
 using GSP.Account.Data.Context;
 using GSP.Account.WebApi.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.AzureServiceBus.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,7 +34,7 @@ namespace GSP.Account.WebApi
 
             services.AddGspWebApi<CreateAccountValidator, CreateAccountCommandHandler>(Configuration);
 
-            services.RegisterAzureServiceBus(Configuration);
+            services.AddEventBus(Configuration);
         }
     }
 }

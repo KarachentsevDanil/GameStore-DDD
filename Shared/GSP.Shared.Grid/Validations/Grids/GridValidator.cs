@@ -47,7 +47,7 @@ namespace GSP.Shared.Grid.Validations.Grids
                 .WithMessage($"You can include only {gridTypeModel.IncludedEntities.ToStringList()} entities.");
         }
 
-        private bool IsIncludedEntityValid(GridTypeModel gridTypeModel, string includedEntity)
+        private static bool IsIncludedEntityValid(GridTypeModel gridTypeModel, string includedEntity)
         {
             return gridTypeModel.IncludedEntities.Contains(includedEntity);
         }
