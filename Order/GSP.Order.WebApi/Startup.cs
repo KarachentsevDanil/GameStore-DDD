@@ -3,6 +3,7 @@ using GSP.Order.Application.CQS.Validations.Orders;
 using GSP.Order.Data.Context;
 using GSP.Order.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.Cache.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,8 @@ namespace GSP.Order.WebApi
             services.RegisterApplicationDependencies(Configuration);
 
             services.AddEventBus(Configuration);
+
+            services.AddCache(Configuration);
         }
     }
 }
