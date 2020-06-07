@@ -1,19 +1,32 @@
 ﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Configurations;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+using GSP.Shared.Utils.Initialization.Constants;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.Attributes;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.Enums;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Contracts;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Enums;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
-namespace GSP.Shared.Utils.Initialization.AzureServiceBus
+namespace GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.AzureServiceBus
 {
-    public static class ServiceBusSubscriber
+    [ResourceMap(nameof(ResourceType.EventBus), nameof(EventBusType.AzureServiceBus))]
+    public class AzureServiceBusResourceInitialization : IEventBusResourceInitialization
     {
-        public static async Task AddRulesAsync(ServiceBusConfiguration configuration)
+        public async Task InitializeEventBusAsync(IConfiguration configuration)
         {
-            ServiceBusConnectionStringBuilder connectionStringBuilder =
-                new ServiceBusConnectionStringBuilder(configuration.ConnectionString);
+            ServiceBusConfiguration azureServiceBusConfiguration = new ServiceBusConfiguration();
 
-            foreach (Topic topic in configuration.Topics)
+            configuration
+                .GetSection(SettingKeyConstants.ServiceBusConfigurationKey)
+                .Bind(azureServiceBusConfiguration);
+
+            ServiceBusConnectionStringBuilder connectionStringBuilder =
+                new ServiceBusConnectionStringBuilder(azureServiceBusConfiguration.ConnectionString);
+
+            foreach (Topic topic in azureServiceBusConfiguration.Topics)
             {
                 Console.WriteLine($"Topic: {topic.Name}. Start");
 
