@@ -1,4 +1,5 @@
 ﻿using FluentValidation.AspNetCore;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.Extensions;
 using GSP.Shared.Utils.WebApi.Sessions.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -37,6 +38,8 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             services.AddAudit();
 
             services.AddDateTimeService();
+
+            services.AddResourceRegistryStore(configuration);
 
             return services;
         }
