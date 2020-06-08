@@ -1,8 +1,10 @@
 ﻿using FluentValidation.AspNetCore;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.Extensions;
 using GSP.Shared.Utils.WebApi.Sessions.Extensions;
+using HealthChecks.UI.Client;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,6 +42,8 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             services.AddDateTimeService();
 
             services.AddResourceRegistryStore(configuration);
+
+            services.AddHealthChecksUI().AddInMemoryStorage();
 
             return services;
         }
@@ -81,6 +85,12 @@ namespace GSP.Shared.Utils.WebApi.Extensions
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecksUI();
+                endpoints.MapHealthChecks("health-check-api", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
 
             app.UseSwagger();

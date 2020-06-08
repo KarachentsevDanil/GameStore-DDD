@@ -17,16 +17,16 @@ namespace GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.AzureServiceBus
     {
         public async Task InitializeEventBusAsync(IConfiguration configuration)
         {
-            ServiceBusConfiguration azureServiceBusConfiguration = new ServiceBusConfiguration();
+            AzureServiceBusConfiguration azureAzureServiceBusConfiguration = new AzureServiceBusConfiguration();
 
             configuration
                 .GetSection(SettingKeyConstants.ServiceBusConfigurationKey)
-                .Bind(azureServiceBusConfiguration);
+                .Bind(azureAzureServiceBusConfiguration);
 
             ServiceBusConnectionStringBuilder connectionStringBuilder =
-                new ServiceBusConnectionStringBuilder(azureServiceBusConfiguration.ConnectionString);
+                new ServiceBusConnectionStringBuilder(azureAzureServiceBusConfiguration.ConnectionString);
 
-            foreach (Topic topic in azureServiceBusConfiguration.Topics)
+            foreach (Topic topic in azureAzureServiceBusConfiguration.Topics)
             {
                 Console.WriteLine($"Topic: {topic.Name}. Start");
 

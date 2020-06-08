@@ -6,7 +6,6 @@ using GSP.Order.Data.UnitOfWorks;
 using GSP.Order.Domain.UnitOfWorks.Contracts;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Order.WebApi.Extensions
@@ -19,7 +18,7 @@ namespace GSP.Order.WebApi.Extensions
             return serviceCollection;
         }
 
-        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection, IConfiguration configuration)
+        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile));
             serviceCollection.AddScoped<IAccountService, AccountService<IOrderUnitOfWork>>();

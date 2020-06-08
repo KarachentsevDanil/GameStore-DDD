@@ -33,7 +33,7 @@ namespace GSP.Order.WebApi
 
             services.RegisterCoreDependencies();
 
-            services.RegisterApplicationDependencies(Configuration);
+            services.RegisterApplicationDependencies();
 
             services.AddEventBus(Configuration);
 

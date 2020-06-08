@@ -18,9 +18,9 @@ using GSP.Shared.Utils.Application.Account.Configurations.MapperProfiles;
 using GSP.Shared.Utils.Application.Account.CQS.Commands;
 using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
-using GSP.Shared.Utils.Common.Cache.InMemory.Extensions;
 using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.WebApi.ResourceRegistries.Cache.Extensions;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,7 +41,7 @@ namespace GSP.Order.BackgroundWorker.Extensions
 
             serviceCollection.AddAutoMapper(typeof(ApplicationProfile), typeof(AccountApplicationProfile), typeof(BackgroundWorkerProfile));
 
-            serviceCollection.AddInMemoryCache(configuration);
+            serviceCollection.AddCache(configuration);
 
             serviceCollection.AddScoped<IAccountService, AccountService<IOrderUnitOfWork>>();
             serviceCollection.AddScoped<IGameService, GameService>();

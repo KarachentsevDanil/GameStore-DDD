@@ -7,13 +7,13 @@ namespace GSP.Shared.Utils.Initialization.EntityFramework
 {
     public static class DbContextBuilder
     {
-        public static T Build<T>(
+        public static TContext Build<TContext>(
             IConfigurationRoot configuration,
             string migrationPath,
             string settingKey)
-            where T : GspDbContext
+            where TContext : GspDbContext
         {
-            DbContextOptionsBuilder<T> builder = new DbContextOptionsBuilder<T>();
+            DbContextOptionsBuilder<TContext> builder = new DbContextOptionsBuilder<TContext>();
 
             string connectionString = configuration.GetConnectionString(settingKey);
 
@@ -21,7 +21,7 @@ namespace GSP.Shared.Utils.Initialization.EntityFramework
                 connectionString,
                 opt => opt.MigrationsAssembly(migrationPath));
 
-            return (T)Activator.CreateInstance(typeof(T), builder.Options, null, null);
+            return (TContext)Activator.CreateInstance(typeof(TContext), builder.Options, null, null);
         }
     }
 }

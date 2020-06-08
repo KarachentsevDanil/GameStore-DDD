@@ -26,13 +26,15 @@ namespace GSP.Account.WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddGspWebApi<CreateAccountValidator, CreateAccountCommandHandler>(Configuration);
 
             services.ConfigureDatabase<AccountDbContext>(Configuration);
 
-            services.AddGspWebApi<CreateAccountValidator, CreateAccountCommandHandler>(Configuration);
+            services.AddAccountHealthChecks(Configuration);
+
+            services.RegisterCoreDependencies();
+
+            services.RegisterApplicationDependencies();
 
             services.AddEventBus(Configuration);
         }
