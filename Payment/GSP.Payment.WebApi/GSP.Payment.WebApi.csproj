@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GSP.Payment.Data.Migrations\GSP.Payment.Data.Migrations.csproj" />
     <ProjectReference Include="..\GSP.Payment.Data\GSP.Payment.Data.csproj" />
     <ProjectReference Include="..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
     <ProjectReference Include="..\GSP.Payment.Application\GSP.Payment.Application.csproj" />

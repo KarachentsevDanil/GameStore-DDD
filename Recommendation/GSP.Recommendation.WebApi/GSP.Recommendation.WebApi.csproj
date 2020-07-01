@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GSP.Recommendation.Data.Migrations\GSP.Recommendation.Data.Migrations.csproj" />
     <ProjectReference Include="..\GSP.Recommendation.Data\GSP.Recommendation.Data.csproj" />
     <ProjectReference Include="..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
     <ProjectReference Include="..\GSP.Recommendation.Application\GSP.Recommendation.Application.csproj" />
