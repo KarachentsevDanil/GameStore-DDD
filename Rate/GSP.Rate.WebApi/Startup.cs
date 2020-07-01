@@ -34,6 +34,8 @@ namespace GSP.Rate.WebApi
 
             services.RegisterApplicationDependencies();
 
+            services.AddRateHealthChecks(Configuration);
+
             services.AddEventBus(Configuration);
         }
     }

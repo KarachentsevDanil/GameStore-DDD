@@ -19,7 +19,7 @@ namespace GSP.Rate.BackgroundWorker
 
         public static void Configure(IApplicationBuilder app)
         {
-            app.UseApiExceptionHandler();
+            app.UseGspBackgroundWorkerBuilder();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -33,6 +33,8 @@ namespace GSP.Rate.BackgroundWorker
             services.RegisterApplicationDependencies();
 
             services.AddEventBus(Configuration);
+
+            services.AddRateHealthChecks(Configuration);
 
             services.RegisterBackgroundWorkerDependencies();
         }

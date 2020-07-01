@@ -19,7 +19,7 @@ namespace GSP.Game.BackgroundWorker
 
         public static void Configure(IApplicationBuilder app)
         {
-            app.UseApiExceptionHandler();
+            app.UseGspBackgroundWorkerBuilder();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -31,6 +31,8 @@ namespace GSP.Game.BackgroundWorker
             services.RegisterCoreDependencies();
 
             services.RegisterApplicationDependencies();
+
+            services.AddGameHealthChecks(Configuration);
 
             services.AddEventBus(Configuration);
 

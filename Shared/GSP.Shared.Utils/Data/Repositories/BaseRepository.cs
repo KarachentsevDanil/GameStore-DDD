@@ -78,8 +78,12 @@ namespace GSP.Shared.Utils.Data.Repositories
 
             var items = await query.ToListAsync(ct);
 
-            return GetGroupedGridItems(grid, items, summaries, totalCount) ??
-                   new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
+            if (!grid.IsGroupable)
+            {
+                return new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
+            }
+
+            return GetGroupedGridItems(grid, items, summaries, totalCount);
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -132,11 +136,6 @@ namespace GSP.Shared.Utils.Data.Repositories
             int totalCount)
         {
             var gridGroups = grid.GetGroupNames();
-
-            if (!gridGroups.Any())
-            {
-                return default;
-            }
 
             var groupedItems = dbItems.GroupByDynamic(gridGroups);
 

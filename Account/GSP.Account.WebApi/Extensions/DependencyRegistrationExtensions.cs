@@ -18,14 +18,9 @@ namespace GSP.Account.WebApi.Extensions
 
         public static IServiceCollection AddAccountHealthChecks(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
-            var entityFrameworkConfiguration = configuration
-                .GetSection(nameof(EntityFrameworkConfiguration))
-                .Get<EntityFrameworkConfiguration>();
-
             serviceCollection
                 .AddHealthChecks()
-                .AddDbContextCheck<AccountDbContext>()
-                .AddMigrationSqlServerCheck<AccountDbContext>(entityFrameworkConfiguration, AccountMigrationAssemblyName)
+                .AddGspDbHealthCheck<AccountDbContext>(configuration, AccountMigrationAssemblyName)
                 .AddEventBusCheck(serviceCollection, configuration);
 
             return serviceCollection;

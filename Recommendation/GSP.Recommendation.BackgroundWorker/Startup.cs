@@ -19,7 +19,7 @@ namespace GSP.Recommendation.BackgroundWorker
 
         public static void Configure(IApplicationBuilder app)
         {
-            app.UseApiExceptionHandler();
+            app.UseGspBackgroundWorkerBuilder();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -33,6 +33,8 @@ namespace GSP.Recommendation.BackgroundWorker
             services.RegisterApplicationDependencies(Configuration);
 
             services.AddEventBus(Configuration);
+
+            services.AddRecommendationHealthChecks(Configuration);
 
             services.RegisterBackgroundWorkerDependencies();
         }

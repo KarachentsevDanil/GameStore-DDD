@@ -12,6 +12,7 @@ using GSP.Order.BackgroundWorker.EventHandlers.Orders;
 using GSP.Order.BackgroundWorker.Events.Accounts;
 using GSP.Order.BackgroundWorker.Events.Games;
 using GSP.Order.BackgroundWorker.Events.Orders;
+using GSP.Order.Data.Context;
 using GSP.Order.Data.UnitOfWorks;
 using GSP.Order.Domain.UnitOfWorks.Contracts;
 using GSP.Shared.Utils.Application.Account.Configurations.MapperProfiles;
@@ -20,6 +21,7 @@ using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.Cache.Extensions;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,18 @@ namespace GSP.Order.BackgroundWorker.Extensions
 {
     public static class DependencyRegistrationExtensions
     {
+        private const string OrderMigrationAssemblyName = "GSP.Order.Data.Migrations";
+
+        public static IServiceCollection AddOrderHealthChecks(this IServiceCollection serviceCollection, IConfiguration configuration)
+        {
+            serviceCollection
+                .AddHealthChecks()
+                .AddGspDbHealthCheck<OrderDbContext>(configuration, OrderMigrationAssemblyName)
+                .AddEventBusCheck(serviceCollection, configuration);
+
+            return serviceCollection;
+        }
+
         public static IServiceCollection RegisterCoreDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IOrderUnitOfWork, OrderUnitOfWork>();

@@ -14,6 +14,20 @@ namespace GSP.Shared.Utils.WebApi.HealthChecks.Extensions
 {
     public static class HealthCheckRegistrationExtensions
     {
+        public static IHealthChecksBuilder AddGspDbHealthCheck<TContext>(
+            this IHealthChecksBuilder builder,
+            IConfiguration configuration,
+            string migrationAssemblyName)
+            where TContext : GspDbContext
+        {
+            var entityFrameworkConfiguration = configuration
+                .GetSection(nameof(EntityFrameworkConfiguration))
+                .Get<EntityFrameworkConfiguration>();
+
+            return builder.AddDbContextCheck<TContext>()
+                .AddMigrationSqlServerCheck<TContext>(entityFrameworkConfiguration, migrationAssemblyName);
+        }
+
         public static IHealthChecksBuilder AddMigrationSqlServerCheck<TContext>(
             this IHealthChecksBuilder builder,
             EntityFrameworkConfiguration dbConfiguration,

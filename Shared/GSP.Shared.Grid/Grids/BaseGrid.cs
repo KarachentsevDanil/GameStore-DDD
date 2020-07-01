@@ -41,6 +41,8 @@ namespace GSP.Shared.Grid.Grids
 
         public ICollection<string> IncludeEntities { get; set; }
 
+        public bool IsGroupable => Groups.Any();
+
         public virtual IList<SortingModel> GetSortedSortingOptions()
         {
             return SortingOptions

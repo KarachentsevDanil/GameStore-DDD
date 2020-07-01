@@ -34,6 +34,8 @@ namespace GSP.Game.WebApi
 
             services.RegisterApplicationDependencies();
 
+            services.AddGameHealthChecks(Configuration);
+
             services.AddEventBus(Configuration);
         }
     }

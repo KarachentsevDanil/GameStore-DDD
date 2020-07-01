@@ -2,6 +2,7 @@
 using GSP.Rate.BackgroundWorker.Configurations.MapperProfiles;
 using GSP.Rate.BackgroundWorker.EventHandlers.Accounts;
 using GSP.Rate.BackgroundWorker.Events.Accounts;
+using GSP.Rate.Data.Context;
 using GSP.Rate.Data.UnitOfWorks;
 using GSP.Rate.Domain.UnitOfWorks;
 using GSP.Shared.Utils.Application.Account.Configurations.MapperProfiles;
@@ -10,13 +11,27 @@ using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Rate.BackgroundWorker.Extensions
 {
     public static class DependencyRegistrationExtensions
     {
+        private const string RateMigrationAssemblyName = "GSP.Rate.Data.Migrations";
+
+        public static IServiceCollection AddRateHealthChecks(this IServiceCollection serviceCollection, IConfiguration configuration)
+        {
+            serviceCollection
+                .AddHealthChecks()
+                .AddGspDbHealthCheck<RateDbContext>(configuration, RateMigrationAssemblyName)
+                .AddEventBusCheck(serviceCollection, configuration);
+
+            return serviceCollection;
+        }
+
         public static IServiceCollection RegisterCoreDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IRateUnitOfWork, RateUnitOfWork>();

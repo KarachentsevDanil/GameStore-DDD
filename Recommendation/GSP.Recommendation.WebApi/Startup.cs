@@ -34,6 +34,8 @@ namespace GSP.Recommendation.WebApi
 
             services.RegisterApplicationDependencies(Configuration);
 
+            services.AddRecommendationHealthChecks(Configuration);
+
             services.AddEventBus(Configuration);
         }
     }

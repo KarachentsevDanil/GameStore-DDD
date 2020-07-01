@@ -13,17 +13,32 @@ using GSP.Game.Application.UseCases.Services;
 using GSP.Game.Application.UseCases.Services.Contracts;
 using GSP.Game.BackgroundWorker.EventHandlers.Games;
 using GSP.Game.BackgroundWorker.Events.Games;
+using GSP.Game.Data.Context;
 using GSP.Game.Data.UnitOfWorks;
 using GSP.Game.Domain.UnitOfWorks.Contracts;
 using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Game.BackgroundWorker.Extensions
 {
     public static class DependencyRegistrationExtensions
     {
+        private const string GameMigrationAssemblyName = "GSP.Game.Data.Migrations";
+
+        public static IServiceCollection AddGameHealthChecks(this IServiceCollection serviceCollection, IConfiguration configuration)
+        {
+            serviceCollection
+                .AddHealthChecks()
+                .AddGspDbHealthCheck<GameDbContext>(configuration, GameMigrationAssemblyName)
+                .AddEventBusCheck(serviceCollection, configuration);
+
+            return serviceCollection;
+        }
+
         public static IServiceCollection RegisterCoreDependencies(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IGameUnitOfWork, GameUnitOfWork>();

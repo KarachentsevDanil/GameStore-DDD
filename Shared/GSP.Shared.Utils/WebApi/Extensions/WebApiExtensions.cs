@@ -13,7 +13,8 @@ namespace GSP.Shared.Utils.WebApi.Extensions
 {
     public static class WebApiExtensions
     {
-        public static IServiceCollection AddGspWebApi<TValidationAssemblyType, TMediatorHandlersAssemblyType>(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddGspWebApi<TValidationAssemblyType, TMediatorHandlersAssemblyType>(
+            this IServiceCollection services, IConfiguration configuration)
         {
             services.AddLogging();
 

@@ -19,7 +19,7 @@ namespace GSP.Order.BackgroundWorker
 
         public static void Configure(IApplicationBuilder app)
         {
-            app.UseApiExceptionHandler();
+            app.UseGspBackgroundWorkerBuilder();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -33,6 +33,8 @@ namespace GSP.Order.BackgroundWorker
             services.RegisterApplicationDependencies(Configuration);
 
             services.AddEventBus(Configuration);
+
+            services.AddOrderHealthChecks(Configuration);
 
             services.RegisterBackgroundWorkerDependencies();
         }

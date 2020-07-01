@@ -34,6 +34,8 @@ namespace GSP.Payment.WebApi
 
             services.RegisterApplicationDependencies();
 
+            services.AddPaymentHealthChecks(Configuration);
+
             services.AddEventBus(Configuration);
         }
     }

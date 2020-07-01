@@ -37,6 +37,8 @@ namespace GSP.Order.WebApi
 
             services.AddEventBus(Configuration);
 
+            services.AddOrderHealthChecks(Configuration);
+
             services.AddCache(Configuration);
         }
     }
