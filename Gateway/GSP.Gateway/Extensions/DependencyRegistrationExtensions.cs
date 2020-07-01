@@ -31,12 +31,11 @@ namespace GSP.Gateway.Extensions
 
         public static IApplicationBuilder UseGspGateway(
             this IApplicationBuilder applicationBuilder,
-            IConfiguration configuration,
             OcelotConfiguration ocelotConfiguration)
         {
             if (ocelotConfiguration.IsOcelotSwaggerEnabled)
             {
-                applicationBuilder.UseSwaggerForOcelotUI(configuration);
+                applicationBuilder.UseSwaggerForOcelotUI();
             }
 
             applicationBuilder.UseAuthentication();

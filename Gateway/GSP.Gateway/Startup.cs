@@ -25,7 +25,7 @@ namespace GSP.Gateway
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseGspGateway(Configuration, _ocelotConfiguration);
+            app.UseGspGateway(_ocelotConfiguration);
         }
     }
 }

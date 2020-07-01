@@ -78,7 +78,7 @@ namespace GSP.Shared.Utils.Data.Repositories
 
             var items = await query.ToListAsync(ct);
 
-            return GetGroupedGridItems(grid, query, summaries, totalCount) ??
+            return GetGroupedGridItems(grid, items, summaries, totalCount) ??
                    new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
         }
 
@@ -127,7 +127,7 @@ namespace GSP.Shared.Utils.Data.Repositories
 
         protected virtual GridModel GetGroupedGridItems(
             IGrid<TEntity> grid,
-            IQueryable<TEntity> dbItems,
+            List<TEntity> dbItems,
             ICollection<GridSummaryModel> gridSummaries,
             int totalCount)
         {
