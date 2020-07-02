@@ -6,7 +6,8 @@ namespace GSP.Shared.Utils.Common.Helpers
     {
         public static object GetPropertyValue(object dynamicObject, string member)
         {
-            return dynamicObject.GetType().GetProperty(member, BindingFlags.Public | BindingFlags.Instance)?.GetValue(dynamicObject, null);
+            var value = dynamicObject.GetType().GetProperty(member, BindingFlags.Public | BindingFlags.Instance)?.GetValue(dynamicObject, null);
+            return value;
         }
     }
 }

@@ -48,7 +48,7 @@ namespace GSP.Shared.Utils.Data.Extensions
         {
             return string.Join(
                 GroupSeparator,
-                groupedProperties.Select(p => ObjectHelper.GetPropertyValue(groupedItem, ProcessNavigationPropertyInSelector(p))));
+                groupedProperties.Select(p => ObjectHelper.GetPropertyValue(groupedItem, ProcessNavigationPropertyForGroupKey(p))));
         }
 
         private static string ProcessNavigationProperty(string propertyName)
@@ -63,6 +63,13 @@ namespace GSP.Shared.Utils.Data.Extensions
             return propertyName.Contains(NavigationSeparator, StringComparison.InvariantCultureIgnoreCase) ?
                 $"{EntityKeySelector}.{propertyName.Replace(NavigationSeparator, string.Empty, StringComparison.InvariantCultureIgnoreCase)}" :
                 $"{EntityKeySelector}.{propertyName}";
+        }
+
+        private static string ProcessNavigationPropertyForGroupKey(string propertyName)
+        {
+            return propertyName.Contains(NavigationSeparator, StringComparison.InvariantCultureIgnoreCase) ?
+                propertyName.Replace(NavigationSeparator, string.Empty, StringComparison.InvariantCultureIgnoreCase) :
+                propertyName;
         }
     }
 }

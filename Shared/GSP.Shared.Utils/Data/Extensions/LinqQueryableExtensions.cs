@@ -59,36 +59,20 @@ namespace GSP.Shared.Utils.Data.Extensions
 
         public static object SummaryDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName, SummaryType summaryType)
         {
-            switch (summaryType)
+            return summaryType switch
             {
-                case SummaryType.Count:
-                    {
-                        return source.CountDynamic(propertyName);
-                    }
+                SummaryType.Count => source.CountDynamic(propertyName),
 
-                case SummaryType.Sum:
-                    {
-                        return source.SumDynamic(propertyName);
-                    }
+                SummaryType.Sum => source.SumDynamic(propertyName),
 
-                case SummaryType.Min:
-                    {
-                        return source.MinDynamic(propertyName);
-                    }
+                SummaryType.Min => source.MinDynamic(propertyName),
 
-                case SummaryType.Max:
-                    {
-                        return source.MaxDynamic(propertyName);
-                    }
+                SummaryType.Max => source.MaxDynamic(propertyName),
 
-                case SummaryType.Average:
-                    {
-                        return source.AverageDynamic(propertyName);
-                    }
+                SummaryType.Average => source.AverageDynamic(propertyName),
 
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(summaryType), summaryType, "This type of summary haven't implemented yet.");
-            }
+                _ => throw new ArgumentOutOfRangeException(nameof(summaryType), summaryType, "This type of summary haven't implemented yet."),
+            };
         }
 
         public static object SumDynamic<TEntity>(this IQueryable<TEntity> source, string propertyName)

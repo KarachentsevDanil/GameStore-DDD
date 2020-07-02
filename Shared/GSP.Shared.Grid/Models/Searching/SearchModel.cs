@@ -6,6 +6,6 @@ namespace GSP.Shared.Grid.Models.Searching
     {
         public string Term { get; set; }
 
-        public ICollection<string> SearchFields { get; set; }
+        public List<string> SearchFields { get; set; }
     }
 }

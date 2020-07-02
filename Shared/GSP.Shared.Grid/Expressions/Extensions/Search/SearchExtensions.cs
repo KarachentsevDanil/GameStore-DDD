@@ -3,6 +3,7 @@ using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Grid.Helpers;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace GSP.Shared.Grid.Expressions.Extensions.Search
@@ -11,20 +12,31 @@ namespace GSP.Shared.Grid.Expressions.Extensions.Search
     {
         public static Expression<Func<TEntity, bool>> GetSearchExpression<TEntity>(this IGrid<TEntity> grid)
         {
-            if (string.IsNullOrEmpty(grid.Search?.Term))
+            if (string.IsNullOrEmpty(grid.Search?.Term) || !grid.Search.SearchFields.Any())
             {
                 return default;
             }
 
-            var expression = PredicateHelper.True<TEntity>();
+            var expression = GenerateExpression<TEntity>(grid.Search.SearchFields[0], grid.Search.Term);
 
-            foreach (var property in grid.Search.SearchFields)
+            for (int i = 1; i < grid.Search.SearchFields.Count; i++)
             {
-                var query = string.Format(CultureInfo.InvariantCulture, TextFilterConstants.ContainsLinqQuery, property, grid.Search.Term);
-                expression = expression.Or(DynamicExpressionHelper.ParseLambda<TEntity, bool>(query));
+                var searchExpression = GenerateExpression<TEntity>(grid.Search.SearchFields[i], grid.Search.Term);
+                expression = expression.Or(searchExpression);
             }
 
             return expression;
+        }
+
+        private static Expression<Func<TEntity, bool>> GenerateExpression<TEntity>(string property, string term)
+        {
+            var queryTemplate = string.Format(
+                CultureInfo.InvariantCulture,
+                TextFilterConstants.ContainsLinqQuery,
+                property,
+                term);
+
+            return DynamicExpressionHelper.ParseLambda<TEntity, bool>(queryTemplate);
         }
     }
 }

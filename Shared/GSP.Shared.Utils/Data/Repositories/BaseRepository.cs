@@ -1,10 +1,8 @@
 ﻿using GSP.Shared.Grid.Expressions.Contracts;
 using GSP.Shared.Grid.Grids;
-using GSP.Shared.Grid.Grids.Contracts;
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
 using GSP.Shared.Utils.Common.Models.Grids;
-using GSP.Shared.Utils.Common.Models.Grids.Summaries;
 using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Data.Extensions;
 using GSP.Shared.Utils.Domain.Base;
@@ -15,7 +13,6 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using static GSP.Shared.Utils.Data.Extensions.DynamicExtensions;
 
 namespace GSP.Shared.Utils.Data.Repositories
 {
@@ -70,7 +67,7 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .Ordered(grid.GetSortedSortingOptions());
 
             int totalCount = await query.CountAsync(ct);
-            var summaries = GetGridSummaries(grid, query);
+            var summaries = grid.GetGridSummaries(query);
 
             query = query
                 .Skip(grid.Pagination.PageSize * (grid.Pagination.PageNumber - 1))
@@ -83,7 +80,7 @@ namespace GSP.Shared.Utils.Data.Repositories
                 return new GridModel(summaries, items.Cast<dynamic>().ToImmutableList(), totalCount);
             }
 
-            return GetGroupedGridItems(grid, items, summaries, totalCount);
+            return grid.GetGroupedGridItems(items, summaries, totalCount);
         }
 
         public virtual TEntity Create(TEntity entity)
@@ -113,55 +110,6 @@ namespace GSP.Shared.Utils.Data.Repositories
                 .Take(filterParams.PageSize);
 
             return items;
-        }
-
-        protected virtual ICollection<GridSummaryModel> GetGridSummaries(IGrid<TEntity> grid, IQueryable<TEntity> query)
-        {
-            var summaries = new List<GridSummaryModel>();
-
-            foreach (var summary in grid.Summaries)
-            {
-                object value = query.SummaryDynamic(summary.PropertyName, summary.Type);
-                var summaryModel = new GridSummaryModel(summary.PropertyName, summary.Type, value);
-                summaries.Add(summaryModel);
-            }
-
-            return summaries;
-        }
-
-        protected virtual GridModel GetGroupedGridItems(
-            IGrid<TEntity> grid,
-            List<TEntity> dbItems,
-            ICollection<GridSummaryModel> gridSummaries,
-            int totalCount)
-        {
-            var gridGroups = grid.GetGroupNames();
-
-            var groupedItems = dbItems.GroupByDynamic(gridGroups);
-
-            return new GridModel(
-                gridSummaries, GetGridGroupSummaries(grid, groupedItems, gridGroups), groupedItems.ToImmutableList(), totalCount);
-        }
-
-        protected virtual ICollection<GridGroupSummaryModel> GetGridGroupSummaries(
-            IGrid<TEntity> grid, List<dynamic> list, ICollection<string> groupedProperties)
-        {
-            var summaries = new List<GridGroupSummaryModel>();
-
-            foreach (var groupSummary in grid.GroupSummaries)
-            {
-                foreach (var group in list)
-                {
-                    ICollection<TEntity> groupedItems = GetCollection<TEntity>(group);
-                    string groupKey = GetGroupKey(group, groupedProperties);
-
-                    object value = groupedItems.AsQueryable().SummaryDynamic(groupSummary.PropertyName, groupSummary.Type);
-                    var summaryModel = new GridGroupSummaryModel(groupSummary.PropertyName, groupSummary.Type, value, groupKey);
-                    summaries.Add(summaryModel);
-                }
-            }
-
-            return summaries;
         }
     }
 }
