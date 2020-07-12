@@ -21,7 +21,6 @@ using GSP.Shared.Utils.Application.Account.UseCases.Services;
 using GSP.Shared.Utils.Application.Account.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Common.EventBus.Base;
 using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
-using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.Cache.Extensions;
 using MediatR;

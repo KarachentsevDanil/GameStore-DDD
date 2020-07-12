@@ -12,7 +12,6 @@ using GSP.Recommendation.Data.UnitOfWorks;
 using GSP.Recommendation.Domain.UnitOfWorks;
 using GSP.Shared.Utils.Common.EventBus.Base;
 using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
-using GSP.Shared.Utils.Common.ServiceBus.Base;
 using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;
 using MediatR;
 using Microsoft.Extensions.Configuration;
