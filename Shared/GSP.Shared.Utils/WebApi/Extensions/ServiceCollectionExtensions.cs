@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Shared.Utils.WebApi.Extensions
 {
-    public static class CommonDependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddAudit(this IServiceCollection service)
         {

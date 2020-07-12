@@ -29,7 +29,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Order.BackgroundWorker.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string OrderMigrationAssemblyName = "GSP.Order.Data.Migrations";
 

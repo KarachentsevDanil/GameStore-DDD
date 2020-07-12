@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Shared.Utils.WebApi.Sessions.Extensions
 {
-    public static class SessionDependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddGspSession(this IServiceCollection serviceCollection)
         {

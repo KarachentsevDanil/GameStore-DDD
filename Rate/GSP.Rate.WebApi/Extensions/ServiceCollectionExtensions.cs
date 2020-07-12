@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Rate.WebApi.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string RateMigrationAssemblyName = "GSP.Rate.Data.Migrations";
 

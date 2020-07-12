@@ -25,7 +25,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Game.BackgroundWorker.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string GameMigrationAssemblyName = "GSP.Game.Data.Migrations";
 

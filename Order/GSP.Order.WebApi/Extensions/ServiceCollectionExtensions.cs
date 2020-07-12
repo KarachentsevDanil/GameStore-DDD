@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Order.WebApi.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string OrderMigrationAssemblyName = "GSP.Order.Data.Migrations";
 

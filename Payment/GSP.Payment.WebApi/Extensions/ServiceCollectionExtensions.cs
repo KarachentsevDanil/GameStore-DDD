@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Payment.WebApi.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string PaymentMigrationAssemblyName = "GSP.Payment.Data.Migrations";
 

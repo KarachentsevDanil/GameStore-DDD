@@ -15,7 +15,7 @@ using System;
 
 namespace GSP.WepApi.Aggregator.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddWepApiAggregator(
             this IServiceCollection serviceCollection,

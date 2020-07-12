@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddEventBus(
             this IServiceCollection serviceCollection,

@@ -18,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Rate.BackgroundWorker.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string RateMigrationAssemblyName = "GSP.Rate.Data.Migrations";
 

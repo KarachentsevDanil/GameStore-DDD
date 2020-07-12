@@ -9,7 +9,7 @@ using Ocelot.Middleware;
 
 namespace GSP.Gateway.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddGspGateway(
             this IServiceCollection services,

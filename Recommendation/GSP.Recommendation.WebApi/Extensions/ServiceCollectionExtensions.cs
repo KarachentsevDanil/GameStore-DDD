@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Recommendation.WebApi.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         private const string RecommendationMigrationAssemblyName = "GSP.Recommendation.Data.Migrations";
 

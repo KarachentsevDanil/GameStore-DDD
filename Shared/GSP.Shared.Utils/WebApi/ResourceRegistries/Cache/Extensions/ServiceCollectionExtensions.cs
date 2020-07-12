@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace GSP.Shared.Utils.WebApi.ResourceRegistries.Cache.Extensions
 {
-    public static class DependencyRegistrationExtensions
+    public static class ServiceCollectionExtensions
     {
         public static IServiceCollection AddCache(
             this IServiceCollection serviceCollection,
