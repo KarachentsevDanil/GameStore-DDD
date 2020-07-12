@@ -1,5 +1,7 @@
+using GSP.Game.Application.Extensions;
 using GSP.Game.BackgroundWorker.Extensions;
 using GSP.Game.Data.Context;
+using GSP.Game.Data.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -26,17 +28,15 @@ namespace GSP.Game.BackgroundWorker
         {
             services.AddGspBackgroundWorker();
 
-            services.ConfigureDatabase<GameDbContext>(Configuration);
+            services.AddGameDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddGameApplicationLayer();
 
             services.AddGameHealthChecks(Configuration);
 
             services.AddEventBus(Configuration);
 
-            services.RegisterBackgroundWorkerDependencies();
+            services.AddGameBackgroundWorker();
         }
     }
 }

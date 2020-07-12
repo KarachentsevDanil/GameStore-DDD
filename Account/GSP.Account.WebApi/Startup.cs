@@ -1,6 +1,7 @@
 using GSP.Account.Application.CQS.Handlers.Commands;
 using GSP.Account.Application.CQS.Validators;
-using GSP.Account.Data.Context;
+using GSP.Account.Application.Extensions;
+using GSP.Account.Data.Extensions;
 using GSP.Account.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
@@ -28,13 +29,11 @@ namespace GSP.Account.WebApi
         {
             services.AddGspWebApi<CreateAccountValidator, CreateAccountCommandHandler>(Configuration);
 
-            services.ConfigureDatabase<AccountDbContext>(Configuration);
-
             services.AddAccountHealthChecks(Configuration);
 
-            services.RegisterCoreDependencies();
+            services.AddAccountDataLayer(Configuration);
 
-            services.RegisterApplicationDependencies();
+            services.AddAccountApplicationLayer();
 
             services.AddEventBus(Configuration);
         }

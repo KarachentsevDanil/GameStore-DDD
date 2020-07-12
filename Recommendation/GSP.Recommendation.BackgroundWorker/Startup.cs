@@ -1,5 +1,6 @@
+using GSP.Recommendation.Application.Extensions;
 using GSP.Recommendation.BackgroundWorker.Extensions;
-using GSP.Recommendation.Data.Context;
+using GSP.Recommendation.Data.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -26,17 +27,15 @@ namespace GSP.Recommendation.BackgroundWorker
         {
             services.AddGspBackgroundWorker();
 
-            services.ConfigureDatabase<RecommendationDbContext>(Configuration);
+            services.AddRecommendationDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies(Configuration);
+            services.AddRecommendationApplicationLayer(Configuration);
 
             services.AddEventBus(Configuration);
 
             services.AddRecommendationHealthChecks(Configuration);
 
-            services.RegisterBackgroundWorkerDependencies();
+            services.AddRecommendationBackgroundWorker();
         }
     }
 }

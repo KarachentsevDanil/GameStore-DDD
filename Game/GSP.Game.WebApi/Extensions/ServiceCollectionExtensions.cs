@@ -28,23 +28,5 @@ namespace GSP.Game.WebApi.Extensions
 
             return serviceCollection;
         }
-
-        public static IServiceCollection RegisterCoreDependencies(this IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddScoped<IGameUnitOfWork, GameUnitOfWork>();
-            return serviceCollection;
-        }
-
-        public static IServiceCollection RegisterApplicationDependencies(this IServiceCollection serviceCollection)
-        {
-            serviceCollection.AddAutoMapper(typeof(ApplicationMapperProfile));
-            serviceCollection.AddScoped<IGenreService, GenreService>();
-            serviceCollection.AddScoped<IDeveloperStudioService, DeveloperStudioService>();
-            serviceCollection.AddScoped<IPublisherService, PublisherService>();
-            serviceCollection.AddScoped<IGameService, GameService>();
-            serviceCollection.AddGridTypeStore();
-            serviceCollection.AddGrid<GameBase, GameGrid>();
-            return serviceCollection;
-        }
     }
 }

@@ -1,6 +1,7 @@
 using GSP.Rate.Application.CQS.Handlers.Commands.Rates;
 using GSP.Rate.Application.CQS.Validations.Rates;
-using GSP.Rate.Data.Context;
+using GSP.Rate.Application.Extensions;
+using GSP.Rate.Data.Extensions;
 using GSP.Rate.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
@@ -28,11 +29,9 @@ namespace GSP.Rate.WebApi
         {
             services.AddGspWebApi<CreateRateValidator, CreateRateCommonHandler>(Configuration);
 
-            services.ConfigureDatabase<RateDbContext>(Configuration);
+            services.AddRateDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddRateApplicationLayer();
 
             services.AddRateHealthChecks(Configuration);
 

@@ -1,5 +1,7 @@
+using GSP.Order.Application.Extensions;
 using GSP.Order.BackgroundWorker.Extensions;
 using GSP.Order.Data.Context;
+using GSP.Order.Data.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -26,17 +28,15 @@ namespace GSP.Order.BackgroundWorker
         {
             services.AddGspBackgroundWorker();
 
-            services.ConfigureDatabase<OrderDbContext>(Configuration);
+            services.AddOrderDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies(Configuration);
+            services.AddOrderApplicationLayer(Configuration);
 
             services.AddEventBus(Configuration);
 
             services.AddOrderHealthChecks(Configuration);
 
-            services.RegisterBackgroundWorkerDependencies();
+            services.AddOrderBackgroundWorker();
         }
     }
 }

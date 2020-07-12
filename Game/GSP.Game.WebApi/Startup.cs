@@ -1,6 +1,7 @@
 using GSP.Game.Application.CQS.Handlers.Commands.Games;
 using GSP.Game.Application.CQS.Validations.Games;
-using GSP.Game.Data.Context;
+using GSP.Game.Application.Extensions;
+using GSP.Game.Data.Extensions;
 using GSP.Game.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
@@ -28,11 +29,9 @@ namespace GSP.Game.WebApi
         {
             services.AddGspWebApi<AddGameValidator, CreateGameCommandHandler>(Configuration);
 
-            services.ConfigureDatabase<GameDbContext>(Configuration);
+            services.AddGameDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddGameApplicationLayer();
 
             services.AddGameHealthChecks(Configuration);
 

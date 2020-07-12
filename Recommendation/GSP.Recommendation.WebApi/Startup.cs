@@ -1,6 +1,7 @@
 using GSP.Recommendation.Application.CQS.Commands.Games;
 using GSP.Recommendation.Application.CQS.Handlers.Commands.Games;
-using GSP.Recommendation.Data.Context;
+using GSP.Recommendation.Application.Extensions;
+using GSP.Recommendation.Data.Extensions;
 using GSP.Recommendation.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
@@ -28,11 +29,9 @@ namespace GSP.Recommendation.WebApi
         {
             services.AddGspWebApi<CreateGameCommand, CreateGameCommandHandler>(Configuration);
 
-            services.ConfigureDatabase<RecommendationDbContext>(Configuration);
+            services.AddRecommendationDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies(Configuration);
+            services.AddRecommendationApplicationLayer(Configuration);
 
             services.AddRecommendationHealthChecks(Configuration);
 

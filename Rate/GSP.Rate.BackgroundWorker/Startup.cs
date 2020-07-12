@@ -1,5 +1,6 @@
+using GSP.Rate.Application.Extensions;
 using GSP.Rate.BackgroundWorker.Extensions;
-using GSP.Rate.Data.Context;
+using GSP.Rate.Data.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -26,17 +27,15 @@ namespace GSP.Rate.BackgroundWorker
         {
             services.AddGspBackgroundWorker();
 
-            services.ConfigureDatabase<RateDbContext>(Configuration);
+            services.AddRateDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddRateApplicationLayer();
 
             services.AddEventBus(Configuration);
 
             services.AddRateHealthChecks(Configuration);
 
-            services.RegisterBackgroundWorkerDependencies();
+            services.AddRateBackgroundWorker();
         }
     }
 }

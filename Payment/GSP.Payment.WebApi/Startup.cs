@@ -1,6 +1,7 @@
 using GSP.Payment.Application.CQS.Commands.PaymentHistories;
 using GSP.Payment.Application.CQS.Validations.PaymentHistories;
-using GSP.Payment.Data.Context;
+using GSP.Payment.Application.Extensions;
+using GSP.Payment.Data.Extensions;
 using GSP.Payment.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
@@ -28,11 +29,9 @@ namespace GSP.Payment.WebApi
         {
             services.AddGspWebApi<CreatePaymentHistoryValidator, CreatePaymentHistoryCommand>(Configuration);
 
-            services.ConfigureDatabase<PaymentDbContext>(Configuration);
+            services.AddPaymentDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddPaymentApplicationLayer();
 
             services.AddPaymentHealthChecks(Configuration);
 
