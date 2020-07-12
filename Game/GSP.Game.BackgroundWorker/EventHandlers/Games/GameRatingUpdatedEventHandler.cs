@@ -1,6 +1,6 @@
 ﻿using GSP.Game.Application.CQS.Commands.Games;
 using GSP.Game.BackgroundWorker.Events.Games;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using MediatR;
 using System.Threading.Tasks;
 

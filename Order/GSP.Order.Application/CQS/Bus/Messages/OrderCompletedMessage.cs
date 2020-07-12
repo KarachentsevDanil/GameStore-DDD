@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+﻿using GSP.Shared.Utils.Common.EventBus.Base.Models;
 using System.Collections.Generic;
 
 namespace GSP.Order.Application.CQS.Bus.Messages

@@ -3,7 +3,7 @@ using GSP.Game.Application.CQS.Queries.Games;
 using GSP.Game.Application.UseCases.Services.Contracts;
 using GSP.Game.Domain.Grids;
 using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;

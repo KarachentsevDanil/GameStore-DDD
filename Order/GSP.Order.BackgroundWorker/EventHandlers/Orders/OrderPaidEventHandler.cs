@@ -1,6 +1,6 @@
 ﻿using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.BackgroundWorker.Events.Orders;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using MediatR;
 using System.Threading.Tasks;
 

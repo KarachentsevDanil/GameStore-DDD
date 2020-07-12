@@ -1,5 +1,5 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Configurations;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+﻿using GSP.Shared.Utils.Common.EventBus.Base.Configurations;
+using GSP.Shared.Utils.Common.EventBus.Base.Models;
 using GSP.Shared.Utils.Initialization.Constants;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.Attributes;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.Enums;

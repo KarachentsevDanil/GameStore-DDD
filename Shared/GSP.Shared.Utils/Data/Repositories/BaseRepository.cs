@@ -2,9 +2,10 @@
 using GSP.Shared.Grid.Grids;
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
-using GSP.Shared.Utils.Common.Models.Grids;
 using GSP.Shared.Utils.Data.Context;
 using GSP.Shared.Utils.Data.Extensions;
+using GSP.Shared.Utils.Data.Grid.Extensions;
+using GSP.Shared.Utils.Data.Grid.Models;
 using GSP.Shared.Utils.Domain.Base;
 using GSP.Shared.Utils.Domain.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;

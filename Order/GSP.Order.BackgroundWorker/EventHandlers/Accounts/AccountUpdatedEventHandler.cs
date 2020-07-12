@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using GSP.Order.BackgroundWorker.Events.Accounts;
 using GSP.Shared.Utils.Application.Account.CQS.Commands;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using MediatR;
 using System.Threading.Tasks;
 

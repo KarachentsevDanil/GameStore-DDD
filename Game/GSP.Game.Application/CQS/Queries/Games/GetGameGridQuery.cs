@@ -1,5 +1,5 @@
 ﻿using GSP.Game.Domain.Grids;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using MediatR;
 
 namespace GSP.Game.Application.CQS.Queries.Games

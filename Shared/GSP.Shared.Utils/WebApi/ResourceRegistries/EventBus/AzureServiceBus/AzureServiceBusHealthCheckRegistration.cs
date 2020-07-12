@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Configurations;
+﻿using GSP.Shared.Utils.Common.EventBus.Base.Configurations;
 using GSP.Shared.Utils.Initialization.Constants;
 using GSP.Shared.Utils.WebApi.HealthChecks.EventBus.AzureServiceBus;
 using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;

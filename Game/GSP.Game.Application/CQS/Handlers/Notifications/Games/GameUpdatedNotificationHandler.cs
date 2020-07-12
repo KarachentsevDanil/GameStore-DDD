@@ -4,7 +4,7 @@ using GSP.Game.Application.CQS.Bus.Messages;
 using GSP.Game.Application.UseCases.DTOs.Games;
 using GSP.Game.Domain.Events;
 using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;

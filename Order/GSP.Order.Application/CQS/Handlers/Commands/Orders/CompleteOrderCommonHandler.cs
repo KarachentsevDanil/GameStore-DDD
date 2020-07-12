@@ -5,7 +5,7 @@ using GSP.Order.Application.CQS.Commands.Orders;
 using GSP.Order.Application.UseCases.DTOs.Orders;
 using GSP.Order.Application.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading;

@@ -2,7 +2,7 @@
 using GSP.Shared.Grid.Grids;
 using GSP.Shared.Utils.Common.Models.Collections;
 using GSP.Shared.Utils.Common.Models.FilterParams;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using GSP.Shared.Utils.Domain.Base;
 using System.Collections.Generic;
 using System.Threading;

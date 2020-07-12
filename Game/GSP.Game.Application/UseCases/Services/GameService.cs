@@ -11,7 +11,7 @@ using GSP.Shared.Utils.Application.UseCases.DTOs;
 using GSP.Shared.Utils.Application.UseCases.Exceptions;
 using GSP.Shared.Utils.Application.UseCases.Services;
 using GSP.Shared.Utils.Common.Models.Collections;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;

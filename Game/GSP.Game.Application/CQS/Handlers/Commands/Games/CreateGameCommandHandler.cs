@@ -6,7 +6,7 @@ using GSP.Game.Application.CQS.Commands.Games;
 using GSP.Game.Application.UseCases.DTOs.Games;
 using GSP.Game.Application.UseCases.Services.Contracts;
 using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using Microsoft.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;

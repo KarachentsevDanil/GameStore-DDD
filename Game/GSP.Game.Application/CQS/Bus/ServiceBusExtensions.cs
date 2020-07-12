@@ -1,6 +1,6 @@
 ﻿using GSP.Game.Application.CQS.Bus.Constants;
 using GSP.Game.Application.CQS.Bus.Messages;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using System.Threading.Tasks;
 
 namespace GSP.Game.Application.CQS.Bus

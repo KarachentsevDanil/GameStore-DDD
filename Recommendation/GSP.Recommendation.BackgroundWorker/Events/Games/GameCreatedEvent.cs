@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+﻿using GSP.Shared.Utils.Common.EventBus.Base.Models;
 
 namespace GSP.Recommendation.BackgroundWorker.Events.Games
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using GSP.Game.Application.UseCases.DTOs.Games;
 using GSP.Game.Domain.Enums;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+using GSP.Shared.Utils.Common.EventBus.Base.Models;
 
 namespace GSP.Game.Application.CQS.Bus.Messages
 {

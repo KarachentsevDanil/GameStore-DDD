@@ -1,6 +1,6 @@
 ﻿using Dawn;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Configurations;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Models;
+using GSP.Shared.Utils.Common.EventBus.Base.Configurations;
+using GSP.Shared.Utils.Common.EventBus.Base.Models;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.Azure.ServiceBus.Management;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
