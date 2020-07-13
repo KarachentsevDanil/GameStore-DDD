@@ -1,7 +1,8 @@
 using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
+using GSP.Template.Application.Extensions;
 using GSP.Template.BackgroundWorker.Extensions;
-using GSP.Template.Data.Context;
+using GSP.Template.Data.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,17 +27,15 @@ namespace GSP.Template.BackgroundWorker
         {
             services.AddGspBackgroundWorker();
 
-            services.ConfigureDatabase<TemplateDbContext>(Configuration);
+            services.AddTemplateDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddTemplateApplicationLayer();
 
             services.AddTemplateHealthChecks(Configuration);
 
             services.AddEventBus(Configuration);
 
-            services.RegisterBackgroundWorkerDependencies();
+            services.AddTemplateBackgroundWorkerLayer();
         }
     }
 }

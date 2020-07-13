@@ -2,7 +2,8 @@ using GSP.Shared.Utils.WebApi.Extensions;
 using GSP.Shared.Utils.WebApi.ResourceRegistries.EventBus.Extensions;
 using GSP.Template.Application.CQS.Handlers.Commands.Templates;
 using GSP.Template.Application.CQS.Validations.Templates;
-using GSP.Template.Data.Context;
+using GSP.Template.Application.Extensions;
+using GSP.Template.Data.Extensions;
 using GSP.Template.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
@@ -28,11 +29,9 @@ namespace GSP.Template.WebApi
         {
             services.AddGspWebApi<AddTemplateValidator, AddTemplateCommandHandler>(Configuration);
 
-            services.ConfigureDatabase<TemplateDbContext>(Configuration);
+            services.AddTemplateDataLayer(Configuration);
 
-            services.RegisterCoreDependencies();
-
-            services.RegisterApplicationDependencies();
+            services.AddTemplateApplicationLayer();
 
             services.AddTemplateHealthChecks(Configuration);
 
