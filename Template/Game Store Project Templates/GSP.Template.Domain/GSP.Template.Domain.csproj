@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GSP.Ruleset" Version="1.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\GSP.Shared.Utils\GSP.Shared.Utils.csproj" />
+    <PackageReference Include="GSP.Ruleset" Version="1.0.7" />
+    <PackageReference Include="GSP.Shared.Utils" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

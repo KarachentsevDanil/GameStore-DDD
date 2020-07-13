@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.Models.Grids;
+﻿using GSP.Shared.Utils.Data.Grid.Models;
 using GSP.Template.Domain.Grids;
 using MediatR;
 

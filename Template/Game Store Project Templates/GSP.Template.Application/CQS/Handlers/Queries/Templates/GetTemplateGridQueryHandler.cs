@@ -1,5 +1,5 @@
 ﻿using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using GSP.Template.Application.CQS.Queries.Templates;
 using GSP.Template.Application.UseCases.Services.Contracts;
 using Microsoft.Extensions.Logging;

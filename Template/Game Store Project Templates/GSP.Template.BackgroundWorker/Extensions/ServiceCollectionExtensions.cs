@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using GSP.Shared.Grid.Extensions;
-using GSP.Shared.Utils.Common.ServiceBus.Base;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using GSP.Shared.Utils.WebApi.HealthChecks.Extensions;
 using GSP.Template.Application.Configurations.MapperProfiles;
 using GSP.Template.Application.CQS.Commands.Templates;

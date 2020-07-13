@@ -1,5 +1,5 @@
 ﻿using GSP.Shared.Utils.Application.CQS.Handlers.Abstracts;
-using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using GSP.Template.Application.CQS.Bus;
 using GSP.Template.Application.CQS.Bus.Messages;
 using GSP.Template.Domain.Events;

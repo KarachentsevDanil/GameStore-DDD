@@ -1,6 +1,6 @@
 ﻿using GSP.Shared.Grid.Grids;
 using GSP.Shared.Utils.Application.UseCases.Services.Contracts;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using GSP.Template.Application.UseCases.DTOs.Templates;
 using GSP.Template.Domain.Entities;
 using System.Threading;

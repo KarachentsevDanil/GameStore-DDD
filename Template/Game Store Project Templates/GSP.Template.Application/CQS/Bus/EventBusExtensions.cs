@@ -1,4 +1,4 @@
-﻿using GSP.Shared.Utils.Common.ServiceBus.Base.Contracts;
+﻿using GSP.Shared.Utils.Common.EventBus.Base.Contracts;
 using GSP.Template.Application.CQS.Bus.Messages;
 using System.Threading.Tasks;
 using static GSP.Template.Application.CQS.Bus.Constants.TemplateEventBusConstants;

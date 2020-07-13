@@ -2,7 +2,7 @@
 using GSP.Shared.Grid.Expressions.Contracts;
 using GSP.Shared.Grid.Grids;
 using GSP.Shared.Utils.Application.UseCases.Services;
-using GSP.Shared.Utils.Common.Models.Grids;
+using GSP.Shared.Utils.Data.Grid.Models;
 using GSP.Shared.Utils.Domain.Repositories.Contracts;
 using GSP.Template.Application.UseCases.DTOs.Templates;
 using GSP.Template.Application.UseCases.Services.Contracts;
