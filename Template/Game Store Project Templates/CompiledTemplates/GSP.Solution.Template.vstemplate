@@ -1,0 +1,42 @@
+﻿<VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>GSP Solution Template</Name>
+    <Description>GSP solution template</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>GSP Solution</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <ProjectCollection>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.Domain">
+        GSP.Template.Domain\GSP.Template.Domain.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.Data">
+        GSP.Template.Data\GSP.Template.Data.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.Data.Migrations">
+        GSP.Template.Data.Migrations\GSP.Template.Data.Migrations.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.Application">
+        GSP.Template.Application\GSP.Template.Application.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.BackgroundWorker">
+        GSP.Template.BackgroundWorker\GSP.Template.BackgroundWorker.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.WebApi">
+        GSP.Template.WebApi\GSP.Template.WebApi.vstemplate
+      </ProjectTemplateLink>
+      <ProjectTemplateLink ProjectName="GSP.$projectname$.Initialization">
+        GSP.Template.Initialization\GSP.Template.Initialization.vstemplate
+      </ProjectTemplateLink>
+    </ProjectCollection>
+  </TemplateContent>
+</VSTemplate>
