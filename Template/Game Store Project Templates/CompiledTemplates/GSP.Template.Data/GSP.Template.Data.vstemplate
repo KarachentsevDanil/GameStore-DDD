@@ -1,0 +1,44 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>GSP.Template.Data</Name>
+    <Description>Data project template.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>GSP.Template.Data</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="GSP.Template.Data.csproj" File="GSP.Template.Data.csproj" ReplaceParameters="true">
+      <Folder Name="Context" TargetFolderName="Context">
+        <Folder Name="Constants" TargetFolderName="Constants">
+          <ProjectItem ReplaceParameters="true" TargetFileName="DbColumnConstraintConstants.cs">DbColumnConstraintConstants.cs</ProjectItem>
+        </Folder>
+        <Folder Name="EntityTypeConfigurations" TargetFolderName="EntityTypeConfigurations">
+          <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$TypeConfiguration.cs">TemplateTypeConfiguration.cs</ProjectItem>
+        </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$DbContext.cs">TemplateDbContext.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Extensions" TargetFolderName="Extensions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.cs">ServiceCollectionExtensions.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Repositories" TargetFolderName="Repositories">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$Repository.cs">TemplateRepository.cs</ProjectItem>
+      </Folder>
+      <Folder Name="UnitOfWorks" TargetFolderName="UnitOfWorks">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$UnitOfWork.cs">TemplateUnitOfWork.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>  
+    <Assembly>GSP.Template.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ba7124200221dec2</Assembly>  
+    <FullClassName>GSP.Template.Wizard.Wizards.CommonProjectTemplateSettingWizard</FullClassName>  
+  </WizardExtension>
+</VSTemplate>

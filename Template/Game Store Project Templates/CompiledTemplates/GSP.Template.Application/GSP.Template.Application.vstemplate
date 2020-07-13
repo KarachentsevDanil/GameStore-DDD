@@ -1,0 +1,100 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>GSP.Template.Application</Name>
+    <Description>Application project template.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>GSP.Template.Application</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="GSP.Template.Application.csproj" File="GSP.Template.Application.csproj" ReplaceParameters="true">
+      <Folder Name="Configurations" TargetFolderName="Configurations">
+        <Folder Name="MapperProfiles" TargetFolderName="MapperProfiles">
+          <ProjectItem ReplaceParameters="true" TargetFileName="ApplicationMapperProfile.cs">ApplicationMapperProfile.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="CQS" TargetFolderName="CQS">
+        <Folder Name="Bus" TargetFolderName="Bus">
+          <Folder Name="Constants" TargetFolderName="Constants">
+            <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$EventBusConstants.cs">TemplateEventBusConstants.cs</ProjectItem>
+          </Folder>
+          <Folder Name="Messages" TargetFolderName="Messages">
+            <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$CreatedMessage.cs">TemplateCreatedMessage.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$UpdatedMessage.cs">TemplateUpdatedMessage.cs</ProjectItem>
+          </Folder>
+          <ProjectItem ReplaceParameters="true" TargetFileName="EventBusExtensions.cs">EventBusExtensions.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Commands" TargetFolderName="Commands">
+          <Folder Name="Templates" TargetFolderName="$domainName$s">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Add$domainName$Command.cs">AddTemplateCommand.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Update$domainName$Command.cs">UpdateTemplateCommand.cs</ProjectItem>
+          </Folder>
+        </Folder>
+        <Folder Name="Handlers" TargetFolderName="Handlers">
+          <Folder Name="Commands" TargetFolderName="Commands">
+            <Folder Name="Templates" TargetFolderName="$domainName$s">
+              <ProjectItem ReplaceParameters="true" TargetFileName="Add$domainName$CommandHandler.cs">AddTemplateCommandHandler.cs</ProjectItem>
+              <ProjectItem ReplaceParameters="true" TargetFileName="Update$domainName$CommandHandler.cs">UpdateTemplateCommandHandler.cs</ProjectItem>
+            </Folder>
+          </Folder>
+          <Folder Name="Notifications" TargetFolderName="Notifications">
+            <Folder Name="Templates" TargetFolderName="$domainName$s">
+              <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$UpdatedNotificationHandler.cs">TemplateUpdatedNotificationHandler.cs</ProjectItem>
+            </Folder>
+          </Folder>
+          <Folder Name="Queries" TargetFolderName="Queries">
+            <Folder Name="Templates" TargetFolderName="$domainName$s">
+              <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$ByIdQueryHandler.cs">GetTemplateByIdQueryHandler.cs</ProjectItem>
+              <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$GridQueryHandler.cs">GetTemplateGridQueryHandler.cs</ProjectItem>
+              <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$PagedQueryHandler.cs">GetTemplatePagedQueryHandler.cs</ProjectItem>
+            </Folder>
+          </Folder>
+        </Folder>
+        <Folder Name="Queries" TargetFolderName="Queries">
+          <Folder Name="Templates" TargetFolderName="$domainName$s">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$ByIdQuery.cs">GetTemplateByIdQuery.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$GridQuery.cs">GetTemplateGridQuery.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$PagedQuery.cs">GetTemplatePagedQuery.cs</ProjectItem>
+          </Folder>
+        </Folder>
+        <Folder Name="Validations" TargetFolderName="Validations">
+          <Folder Name="Templates" TargetFolderName="$domainName$s">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Add$domainName$Validator.cs">AddTemplateValidator.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Update$domainName$Validator.cs">UpdateTemplateValidator.cs</ProjectItem>
+          </Folder>
+        </Folder>
+      </Folder>
+      <Folder Name="Extensions" TargetFolderName="Extensions">
+        <ProjectItem ReplaceParameters="true" TargetFileName="ServiceCollectionExtensions.cs">ServiceCollectionExtensions.cs</ProjectItem>
+      </Folder>
+      <Folder Name="UseCases" TargetFolderName="UseCases">
+        <Folder Name="DTOs" TargetFolderName="DTOs">
+          <Folder Name="Templates" TargetFolderName="$domainName$s">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Add$domainName$Dto.cs">AddTemplateDto.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Get$domainName$Dto.cs">GetTemplateDto.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="Update$domainName$Dto.cs">UpdateTemplateDto.cs</ProjectItem>
+          </Folder>
+        </Folder>
+        <Folder Name="Services" TargetFolderName="Services">
+          <Folder Name="Contracts" TargetFolderName="Contracts">
+            <ProjectItem ReplaceParameters="true" TargetFileName="I$domainName$Service.cs">ITemplateService.cs</ProjectItem>
+          </Folder>
+          <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$Service.cs">TemplateService.cs</ProjectItem>
+        </Folder>
+      </Folder>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>  
+    <Assembly>GSP.Template.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ba7124200221dec2</Assembly>  
+    <FullClassName>GSP.Template.Wizard.Wizards.CommonProjectTemplateSettingWizard</FullClassName>  
+  </WizardExtension>
+</VSTemplate>

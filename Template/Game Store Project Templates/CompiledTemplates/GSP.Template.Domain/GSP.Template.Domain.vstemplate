@@ -1,0 +1,45 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>GSP.Template.Domain</Name>
+    <Description>Domain project template.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>GSP.Template.Domain</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="GSP.Template.Domain.csproj" File="GSP.Template.Domain.csproj" ReplaceParameters="true">
+      <Folder Name="Entities" TargetFolderName="Entities">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$Base.cs">TemplateBase.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Events" TargetFolderName="Events">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$UpdatedEvent.cs">TemplateUpdatedEvent.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Grids" TargetFolderName="Grids">
+        <ProjectItem ReplaceParameters="true" TargetFileName="$domainName$Grid.cs">TemplateGrid.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Repositories" TargetFolderName="Repositories">
+        <Folder Name="Contracts" TargetFolderName="Contracts">
+          <ProjectItem ReplaceParameters="true" TargetFileName="I$domainName$Repository.cs">ITemplateRepository.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="UnitOfWorks" TargetFolderName="UnitOfWorks">
+        <Folder Name="Contracts" TargetFolderName="Contracts">
+          <ProjectItem ReplaceParameters="true" TargetFileName="I$domainName$UnitOfWork.cs">ITemplateUnitOfWork.cs</ProjectItem>
+        </Folder>
+      </Folder>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>  
+    <Assembly>GSP.Template.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ba7124200221dec2</Assembly>  
+    <FullClassName>GSP.Template.Wizard.Wizards.DomainProjectTemplateSettingWizard</FullClassName>  
+  </WizardExtension>
+</VSTemplate>

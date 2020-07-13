@@ -1,0 +1,25 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>GSP.Template.Data.Migrations</Name>
+    <Description>Data migrations project template.</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>GSP.Template.Data.Migrations</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="GSP.Template.Data.Migrations.csproj" File="GSP.Template.Data.Migrations.csproj" ReplaceParameters="true" />
+  </TemplateContent>
+  <WizardExtension>  
+    <Assembly>GSP.Template.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ba7124200221dec2</Assembly>  
+    <FullClassName>GSP.Template.Wizard.Wizards.CommonProjectTemplateSettingWizard</FullClassName>  
+  </WizardExtension>
+</VSTemplate>
